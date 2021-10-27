@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login to Foot Forward</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static '/css/exercise.css' %}">        
+        <script src="{% static 'js/exercise.js' %}"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        </head>
+    
+    <body>
+        <div class="card">
+            <!-- Fill Data Table with actual data through json file -->
+            <table id="exercise-table" class="content-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Excersize</th>
+                        <th scope="col">sets</th>
+                        <th scope="col">reps</th>
+                        <th scope="col">load</th>
+                        <th scope="col">RIR</th>
+                        <th></th>
+                    </tr>
+                </thread>
+                <tbody></tbody>
+                <tfoot>    
+                    <tr>
+                        <td>EXERCISE NAME TEMP</td>
+                        <td><input type="text" id="set_value"></td>
+                        <td><input type="text" id="rep_value"></td>
+                        <td><input type="text" id="load_value"></td>
+                        <td><input type="text" id="RIR_value"></td>
+                        <td><input class="btn btn-primary" type="button" onclick="addButton()" value="+" /></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </body>
+</html>
