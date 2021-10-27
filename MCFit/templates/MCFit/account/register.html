@@ -1,0 +1,75 @@
+{% load static %}
+{% load socialaccount %}
+<!DOCTYPE html>
+<html> 
+    <head>
+        <title>Register to Footforward</title>
+        <link rel="stylesheet" href="{% static '/css/register.css'%}">
+        <script src="{% static 'js/register.js' %}"></script>
+    </head>
+
+    <body>
+        <div class="card">
+            <h1>Let's connect! Please complete your <p>information so we can get to know you</p></h1>
+            <form method="POST" action=" ">
+                {% csrf_token %}
+                <div class="user_text">
+                    {{form.first_name}}
+                    <span></span>
+                    <label>First Name</label>
+                </div>
+                
+                <div class="user_text">
+                    {{form.last_name}}
+                    <span></span>
+                    <label>Last Name</label>
+                </div>
+
+                <div class="user_text">
+                    {{form.username}}
+                    <span></span>
+                    <label>Username</label>
+                </div>
+
+                <div class="user_text">
+                    {{form.email}}
+                    <label>Email Address</label>
+                    <span></span>
+                </div>
+                    
+                <div class="user_text">
+                    {{form.password1}}
+                    <label>Enter Password</label>
+                    <span></span>
+                </div>
+
+                <div class="user_text">
+                    {{form.password2}}
+                    <label>Re-Enter Password</label>
+                    <span></span>
+                </div>
+
+                <div>
+                    <label class="checkbox" for="checkboxID">
+                        <input type="checkbox" name="myCheckbox" id="checkboxID">
+                        <div>I agree with terms and conditions</div>
+                    </label>
+
+                    <div class="login_link">
+                        <a href="{% url 'login' %}" class="nav__link">Already have an account? Sign in.</a>
+                    </div>      
+                </div>    
+
+                <input onclick="checkCheckbox()" type="submit" value="SIGN UP">
+            </form>
+
+            
+        </div>
+        {{form.errors}}
+
+        {% for message in messages %}
+            <p>{{messages}}</p>
+        {% endfor %}
+       
+    </body>
+</html>
