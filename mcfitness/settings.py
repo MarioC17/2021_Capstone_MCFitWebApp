@@ -103,7 +103,7 @@ DATABASES = {
 }
 '''
 
-INSTANCE_CONNECTION_NAME = os.environ.get("INSTANCE_CONNECTION_NAME")
+INSTANCE_CONNECTION_NAME = os.environ.get("GCLOUD_INSTANCE")
 DATABASES = {
         'default': {
         'ENGINE': 'django.db.backends.postgresql',
