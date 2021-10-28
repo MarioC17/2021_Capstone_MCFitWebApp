@@ -3,9 +3,8 @@ import os
 import io
 import environ
 import google.auth
-from google.cloud import secretmanager
-
-
+import google.cloud
+print (environ.__version__)
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env(DEBUG=(bool, False))
