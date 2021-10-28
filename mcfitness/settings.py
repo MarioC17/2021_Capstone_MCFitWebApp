@@ -90,12 +90,12 @@ DATABASES = {
         # https://console.cloud.google.com/sql/instances
         'HOST': '35.238.143.153',
         'PORT': '5432',
-        'OPTIONS': {
-            'sslmode': 'verify-ca', 
+        #'OPTIONS': {
+            #'sslmode': 'verify-ca', 
             #Change to your own local locations
-            'sslrootcert': 'F:\Capstone\certs\server-ca.pem',
-            "sslcert": "F:\Capstone\certs\client-cert.pem",
-            "sslkey": "F:\Capstone\certs\client-key.pem",
+            #'sslrootcert': 'F:\Capstone\certs\server-ca.pem',
+            #"sslcert": "F:\Capstone\certs\client-cert.pem",
+            #"sslkey": "F:\Capstone\certs\client-key.pem",
         }
     }
 }
