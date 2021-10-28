@@ -1,9 +1,7 @@
 from pathlib import Path
 import os
-import io
 import environ
-import google.auth
-import google.cloud
+
 print (environ.__version__)
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
