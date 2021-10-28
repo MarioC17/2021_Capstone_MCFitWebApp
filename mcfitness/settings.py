@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'mcfitness.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -91,17 +91,28 @@ DATABASES = {
         'HOST': '35.238.143.153',
         'PORT': '5432',
 
-        #'OPTIONS': {
-        #    'sslmode': 'verify-ca', 
-        #    #Change to your own local locations
-        #    'sslrootcert': 'F:\Capstone\certs\server-ca.pem',
-        #    "sslcert": "F:\Capstone\certs\client-cert.pem",
-        #    "sslkey": "F:\Capstone\certs\client-key.pem",
-        #}
+        'OPTIONS': {
+            'sslmode': 'verify-ca', 
+            #Change to your own local locations
+            'sslrootcert': 'F:\Capstone\certs\server-ca.pem',
+            "sslcert": "F:\Capstone\certs\client-cert.pem",
+            "sslkey": "F:\Capstone\certs\client-key.pem",
+        }
 
     }
 }
+'''
 
+INSTANCE_CONNECTION_NAME = os.environ("INSTANCE_CONNECTION_NAME")
+DATABASES = {
+        'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'Mario',
+        'PASSWORD': '4X#&82J#Sh4yn8k$T',
+        'HOST': f'/cloudsql/{INSTANCE_CONNECTION_NAME}'
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
