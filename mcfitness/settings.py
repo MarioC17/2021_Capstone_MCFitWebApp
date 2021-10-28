@@ -1,6 +1,6 @@
 from pathlib import Path
 import os
-
+import subprocess
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -103,14 +103,14 @@ DATABASES = {
 }
 '''
 
-INSTANCE_CONNECTION_NAME = os.environ.get("GCLOUD_INSTANCE")
+
 DATABASES = {
         'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
         'USER': 'Mario',
         'PASSWORD': '4X#&82J#Sh4yn8k$T',
-        'HOST': f'/cloudsql/{INSTANCE_CONNECTION_NAME}'
+        'HOST': '/cloudsql/mcfit-web-application:us-central1:mcfitdb=tcp:5432'
     }
 }
 
