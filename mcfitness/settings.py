@@ -1,9 +1,15 @@
 from pathlib import Path
 import os
-import subprocess
+import io
+import environ
+import google.auth
+from google.cloud import secretmanager
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+env = environ.Env(DEBUG=(bool, False))
+env_file = os.path.join(BASE_DIR, ".env")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -103,16 +109,13 @@ DATABASES = {
 }
 '''
 
+# Use django-environ to parse the connection string
+DATABASES = {"default": env.db()}
 
-DATABASES = {
-        'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'Mario',
-        'PASSWORD': '4X#&82J#Sh4yn8k$T',
-        'HOST': '/cloudsql/mcfit-web-application:us-central1:mcfitdb=tcp:5432'
-    }
-}
+# If the flag as been set, configure to use proxy
+if os.getenv("USE_CLOUD_SQL_AUTH_PROXY", None):
+    DATABASES["default"]["HOST"] = "127.0.0.1"
+    DATABASES["default"]["PORT"] = 5432
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
