@@ -103,12 +103,14 @@ DATABASES = {
 }
 '''
 
+INSTANCE_CONNECTION_NAME = os.environ.get("GCLOUD_INSTANCE")
 DATABASES = {
         'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
         'USER': 'Mario',
         'PASSWORD': '4X#&82J#Sh4yn8k$T',
+        'HOST': f'/cloudsql/{INSTANCE_CONNECTION_NAME}'
     }
 }
 
