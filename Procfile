@@ -1,1 +1,0 @@
-web: gunicorn mcfitness.wsgi --log-file -
