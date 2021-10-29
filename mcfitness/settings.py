@@ -43,10 +43,14 @@ else:
 SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
+<<<<<<< HEAD
 # Change this to "False" when you are ready for production
 DEBUG = env("DEBUG")
+=======
+DEBUG = True
+>>>>>>> 76aaf8cc7b9781aed0ca3f3a302051365673ce22
 
-ALLOWED_HOSTS = ['127.0.0.1', 'mcfitness.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'mcfit-web-application.uw.r.appspot.com']
 
 
 # Application definition
@@ -56,13 +60,24 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'django_static_jquery',
     'django.contrib.sites',
@@ -74,11 +89,10 @@ INSTALLED_APPS = [
     'MCFit.apps.McfitConfig',
 ]
 
-SITE_ID = 1
+SITE_ID = 2
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -115,6 +129,7 @@ WSGI_APPLICATION = 'mcfitness.wsgi.application'
 '''
 DATABASES = {
     'default': {
+<<<<<<< HEAD
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'postgres',
         'USER': 'Mario',
@@ -131,6 +146,10 @@ DATABASES = {
             "sslkey": "F:\Capstone\certs\client-key.pem",
         }
 
+=======
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+>>>>>>> 76aaf8cc7b9781aed0ca3f3a302051365673ce22
     }
 }
 '''
