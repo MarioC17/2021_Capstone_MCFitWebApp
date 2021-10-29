@@ -12,9 +12,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-nm+si-2pkf+q&lx2d&u@=i=w2ib@mkomq-a%$7eed8j)u(6o9#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'mcfitness.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'mcfit-web-application.uw.r.appspot.com']
 
 
 # Application definition
@@ -24,13 +24,24 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'django_static_jquery',
     'django.contrib.sites',
@@ -42,11 +53,10 @@ INSTALLED_APPS = [
     'MCFit.apps.McfitConfig',
 ]
 
-SITE_ID = 1
+SITE_ID = 2
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -83,20 +93,8 @@ WSGI_APPLICATION = 'mcfitness.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'Mario',
-        'PASSWORD': '4X#&82J#Sh4yn8k$T',
-        # https://console.cloud.google.com/sql/instances
-        'HOST': '35.238.143.153',
-        'PORT': '5432',
-        'OPTIONS': {
-            'sslmode': 'verify-ca', 
-            #Change to your own local locations
-            'sslrootcert': 'F:\Capstone\certs\server-ca.pem',
-            "sslcert": "F:\Capstone\certs\client-cert.pem",
-            "sslkey": "F:\Capstone\certs\client-key.pem",
-        }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
