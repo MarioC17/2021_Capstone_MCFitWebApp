@@ -1,5 +1,3 @@
-//Add exercise.json somehow
-
 var newExercise = new Array();
 
 function addButton() {

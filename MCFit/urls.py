@@ -1,5 +1,6 @@
 from django.contrib import admin
 from . import views
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path, include
 from django.views.generic import TemplateView
 
@@ -14,3 +15,5 @@ urlpatterns = [
     path('exercise/', views.exercise, name = 'exercise'),
     path('forms/', views.forms, name = 'forms'),
 ]
+
+urlpatterns += staticfiles_urlpatterns()
