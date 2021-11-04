@@ -8,15 +8,17 @@ First install Postgres 13.4
 https://www.postgresql.org/download/
 
 Then pip install the following in a venv or your environment:
+```
 pip install djangorestframework
 pip install coverage
 pip install django-cors-headers
-
+```
 Then inside the react_frontend\mcfitapi folder install the following npm packages:
 Note: these have to be installed while in the mcfitapi directory
+```
 npm install react-router-dom
 npm install @material-ui/core
-
+```
 To start the server you need 2 terminals:
 Terminal 1 
 in django_backend directory run the following command:
