@@ -22,8 +22,11 @@ npm install @material-ui/core
 To start the server you need 2 terminals:
 Terminal 1 
 in django_backend directory run the following command:
+```
 python3 manage.py runserver
-
+```
 Terminal 2
 and in react_frontend/mcfitapi directory run the following command:
+```
 npm start
+```
