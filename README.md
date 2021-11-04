@@ -5,8 +5,10 @@ Uses django rest framework api to handle adding items to database and retrieving
 Installation:
 
 First install Postgres 13.4 and NPM:
-\n
+
+
 https://www.postgresql.org/download/
+
 https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
 
 Then pip install the following in a venv or your environment:
