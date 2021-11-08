@@ -91,9 +91,9 @@ DATABASES = {
         'OPTIONS': {
             'sslmode': 'verify-ca', 
             #Change to your own local locations
-            'sslrootcert': 'E:\Documents\Homework\Certificates\server-ca.pem',
-            "sslcert": "E:\Documents\Homework\Certificates\client-cert.pem",
-            "sslkey": "E:\Documents\Homework\Certificates\client-key.pem",
+            'sslrootcert': 'F:\Capstone\certs\server-ca.pem',
+            "sslcert": "F:\Capstone\certs\client-cert.pem",
+            "sslkey": "F:\Capstone\certs\client-key.pem",
         }
     }
 }
