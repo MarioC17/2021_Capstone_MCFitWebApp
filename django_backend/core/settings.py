@@ -76,6 +76,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 
 # Database
+#Change this so your certs are 
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
@@ -90,9 +91,9 @@ DATABASES = {
         'OPTIONS': {
             'sslmode': 'verify-ca', 
             #Change to your own local locations
-            'sslrootcert': 'F:\Capstone\certs\server-ca.pem',
-            "sslcert": "F:\Capstone\certs\client-cert.pem",
-            "sslkey": "F:\Capstone\certs\client-key.pem",
+            'sslrootcert': 'E:\Documents\Homework\Certificates\server-ca.pem',
+            "sslcert": "E:\Documents\Homework\Certificates\client-cert.pem",
+            "sslkey": "E:\Documents\Homework\Certificates\client-key.pem",
         }
     }
 }
