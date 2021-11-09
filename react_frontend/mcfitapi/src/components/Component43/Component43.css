@@ -1,0 +1,30 @@
+.component-4-3 {
+  align-items: flex-start;
+  display: flex;
+  height: 811px;
+  justify-content: center;
+  left: 1px;
+  min-width: 1742px;
+  position: absolute;
+  top: 2px;
+}
+
+.overlap-group4 {
+  align-items: flex-start;
+  background-position: 50% 50%;
+  background-size: cover;
+  display: flex;
+  height: 829px;
+  margin-top: -6.0px;
+  min-width: 1760px;
+  padding: 20.0px 779.0px;
+}
+
+.typography-12 {
+  height: 59px;
+  letter-spacing: 0;
+  line-height: 25px;
+  text-align: center;
+  width: 180px;
+}
+
