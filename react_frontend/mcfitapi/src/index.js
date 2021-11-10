@@ -6,16 +6,9 @@ import App from './App';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
-const routing = (
-	<Router>
-		<React.StrictMode>
-			<Header />
-			<Switch>
-				<Route exact path="/" component={App} />
-			</Switch>
-			<Footer />
-		</React.StrictMode>
-	</Router>
+ReactDOM.render(
+	<React.StrictMode>
+	  <App />
+	</React.StrictMode>,
+	document.getElementById('root')
 );
-
-ReactDOM.render(routing, document.getElementById('root'));
