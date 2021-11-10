@@ -1,28 +1,36 @@
-import React from 'react';
-import GoogleLogin from 'react-google-login';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch, Link, Redirect} from "react-router-dom";
 
-class connectionExample extends React.Component {
-  componentDidMount() {
-    const apiUrl = 'http://localhost:8000/api';
-    fetch(apiUrl)
-          .then((response) => response.json())
-          .then((data) => console.log(data));
-  }
+//Components
+import Header from './components/Header'
+import Footer from './components/Footer'
 
-  responseGoogle = response => {
-    console.log(response);
-    console.log(response.profileObj);
-  };
+//Pages
+import HomePage from "./pages"
+import NotFoundPage from "./pages/404"
+import Login from "./pages/login"
+import Forms from "./pages/forms"
+import Exercise from "./pages/excercise"
+import Signup from "./pages/Signup/signup"
 
+class App extends Component {
   render(){
-    return <div><GoogleLogin
-    clientId="35091798775-ivbgfssrdghoicrgb8po3vk2a117d4nt.apps.googleusercontent.com"
-    buttonText="Login with Google"
-    onSuccess={this.responseGoogle}
-    onFailure={this.responseGoogle}
-    cookiePolicy="single_host_origin"
-  /></div>;
+    return (
+      <Router>
+        <Header/>
+        <Switch>
+          <Route exact={true} path="/" component={HomePage}/>
+          <Route exact path="/login" component={Login}/>
+          <Route exact path="/404" component={NotFoundPage}/>
+          <Route exact path="/forms" component={Forms}/>
+          <Route exact path="/exercise" component={Exercise}/>
+          <Route exact path="/signup" component={Signup}/>
+          <Redirect to="/404"/>
+        </Switch>
+        <Footer/>
+      </Router>
+    )  
   }
 }
 
-export default connectionExample;
+export default App;
