@@ -15,7 +15,7 @@ class connectionExample extends React.Component {
   };
 
   render(){
-    return <div><GoogleLogin
+    return <div style={{paddingTop: "20px", paddingBottom: "20px"}}><GoogleLogin
     clientId="35091798775-ivbgfssrdghoicrgb8po3vk2a117d4nt.apps.googleusercontent.com"
     buttonText="Login with Google"
     onSuccess={this.responseGoogle}

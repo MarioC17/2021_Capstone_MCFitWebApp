@@ -1,0 +1,45 @@
+@import '../styleguide.css';
+@import '../globals.css';
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 0.5fr 1.2fr 0.5fr 1fr;
+  gap: 0px 0px;
+  padding: 100px;
+  grid-template-areas:
+    "a a a"
+    "b c d"
+    ". . ."
+    "e f g";
+}
+
+.a { grid-area: a; }
+.b { grid-area: b; }
+.c { grid-area: c; }
+.d { grid-area: d; }
+.e { grid-area: e; }
+.f { grid-area: f; }
+.g { grid-area: g; }
+
+p {
+  margin-top: 1em ;
+  margin-bottom: 1em ;
+} 
+
+.text-1 {
+  color: var(--white);
+  font-family: var(--font-family-source_sans_pro);
+  font-size: var(--font-size-xl2);
+  font-weight: 600;
+  height: 109px;
+  letter-spacing: 0;
+  line-height: 35px;
+  width: 100px;
+}
+
+.arrow {
+    height: 60px;
+    object-fit: cover;
+    width: 60px;  
+}
