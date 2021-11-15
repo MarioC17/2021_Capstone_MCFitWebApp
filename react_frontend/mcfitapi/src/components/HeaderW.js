@@ -6,15 +6,15 @@ import Toolbar from '@mui/material/Toolbar';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { Link } from "react-router-dom";
-import img from "../static/img/Logo.png";
+import img from "../static/img/LogoB.png";
 
 //Search const is modified template from MUI
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  backgroundColor: alpha(theme.palette.common.black, 0.15),
   '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: alpha(theme.palette.common.black, 0.25),
   },
   marginLeft: 0,
   width: '100%',
@@ -53,12 +53,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function Header() {
   return (
-      <AppBar style={{ background: 'black' }} position="static">
+      <AppBar style={{ background: 'white' }} position="static">
 		<Toolbar>
 			<Box sx={{ flexGrow: 1 }}><Link to ="/"><img align='left' style={{ width: 50, height: 50 }} src={img} alt="" /></Link></Box>
-			<Link to="/memberships" style={{color: 'white'}}><Button color="inherit">Memberships</Button></Link>
-			<Link to="/aboutme" style={{color: 'white'}}><Button color="inherit">About Me</Button></Link>
-			<Link to="/policy" style={{color: 'white'}}><Button color="inherit">Policy</Button></Link>
+			<Link to="/memberships" style={{color: 'black'}}><Button color="inherit">Memberships</Button></Link>
+			<Link to="/aboutme" style={{color: 'black'}}><Button color="inherit">About Me</Button></Link>
+			<Link to="/policy" style={{color: 'black'}}><Button color="inherit">Policy</Button></Link>
 			<Search>
 			<SearchIconWrapper>
 				<SearchIcon />
