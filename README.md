@@ -22,6 +22,7 @@ Note: these have to be installed while in the mcfitapi directory
 ```
 npm install react-router-dom
 npm install @material-ui/core
+npm install @fullcalendar/react @fullcalendar/daygrid @fullcalendar/timegrid
 ```
 To start the server you need 2 terminals:
 Terminal 1 
