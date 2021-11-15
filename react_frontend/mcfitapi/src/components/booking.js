@@ -36,7 +36,7 @@ export async function verifyToken(token)
     };
     var response = await fetch("https://sagenda.net/api/v3/status/oauth", requestOptions);
     //console.log(response.status);
-    return (response.status == 200)
+    return (response.status === 200)
 }
 
 export async function getBookableTimes(startDate, endDate)
