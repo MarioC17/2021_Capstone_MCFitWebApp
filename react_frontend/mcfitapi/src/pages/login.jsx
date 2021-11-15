@@ -60,7 +60,7 @@ class Login extends Component {
             <img src={img} alt=""/>
           </div>
           <div className="some-text">
-            <span className="text-1">
+            <span className="custom-text">
               CUSTOMIZED<br />
               TRAINING <br />
               JUST FOR YOU
@@ -111,10 +111,8 @@ class Login extends Component {
                 </Link>
               </div>
             </form>
-
           </div>
         </div>
-        
       </div>
     );
   }
