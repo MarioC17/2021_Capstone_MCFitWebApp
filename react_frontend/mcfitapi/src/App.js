@@ -10,8 +10,9 @@ import HomePage from "./pages"
 import NotFoundPage from "./pages/404"
 import Login from "./pages/login"
 import Forms from "./pages/forms"
-import Exercise from "./pages/excercise"
+import Exercise from "./pages/exercise"
 import Signup from "./pages/Signup/signup"
+import Fitness from "./pages/fitness"
 
 class App extends Component {
   render(){
@@ -25,6 +26,7 @@ class App extends Component {
           <Route exact path="/forms" component={Forms}/>
           <Route exact path="/exercise" component={Exercise}/>
           <Route exact path="/signup" component={Signup}/>
+          <Route exact path="/fitness" component={Fitness}/>
           <Redirect to="/404"/>
         </Switch>
         <Footer/>
