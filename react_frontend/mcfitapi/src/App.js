@@ -5,8 +5,9 @@ import { BrowserRouter as Router, Route, Switch, Redirect} from "react-router-do
 import NotFoundPage from "./pages/404"
 import Login from "./pages/login"
 import Forms from "./pages/forms"
-import Exercise from "./pages/excercise"
+import Exercise from "./pages/exercise"
 import Signup from "./pages/Signup/signup"
+import Fitness from "./pages/fitness"
 import Signup2 from "./pages/Signup/signup2"
 import Signup3 from "./pages/Signup/signup3"
 import Signup4 from "./pages/Signup/signup4"
@@ -29,6 +30,7 @@ class App extends Component {
           <Route exact path="/forms" component={Forms}/>
           <Route exact path="/exercise" component={Exercise}/>
           <Route exact path="/signup" component={Signup}/>
+          <Route exact path="/fitness" component={Fitness}/>
           <Route exact path="/signup2" component={Signup2}/>
           <Route exact path="/signup3" component={Signup3}/>
           <Route exact path="/signup4" component={Signup4}/>
