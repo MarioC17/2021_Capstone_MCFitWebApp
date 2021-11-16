@@ -1,0 +1,46 @@
+@import '../styleguide.css';
+@import '../globals.css';
+
+.about-container {
+    display: grid;
+    margin-top: 3%;
+    margin-left: 3%;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 0.1fr 1fr;
+    grid-auto-columns: 1fr;
+    gap: 0px 3%;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "top-text . ."
+      "pic-area about-text about-text";
+  }
+  
+  .about-text { grid-area: about-text; }
+  
+  .pic-area { grid-area: pic-area; }
+  
+  .top-text { 
+      grid-area: top-text; 
+      color: var(--black);
+      font-family: var(--font-family-impact-regular);
+      font-size: 50px;
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+  
+.mike-text {
+    color: var(--black);
+    font-family: var(--font-family-source_sans_pro);
+    font-size: var(--font-size-xxl);
+    font-weight: 700;
+    letter-spacing: 0;
+    margin-bottom: 5%;
+}
+
+.par-text {
+    color: var(--black);
+    font-family: var(--font-family-source_sans_pro);
+    font-size: var(--font-size-xxl);
+    font-weight: 400;
+    letter-spacing: 0;
+  }

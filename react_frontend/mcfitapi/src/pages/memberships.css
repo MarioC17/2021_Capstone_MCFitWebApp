@@ -5,33 +5,33 @@ body {
   background-color: black;
 }
 
-.container {
+.membership-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 0.5fr 1.2fr 0.5fr 1fr;
   gap: 0px 0px;
   padding: 100px;
   grid-template-areas:
-    "a a a"
-    "b c d"
+    "section-1 section-1 section-1"
+    "section-2 section-3 section-4"
     ". . ."
-    "e f g";
+    "section-5 section-6 section-7";
 }
 
-.a { grid-area: a; }
-.b { grid-area: b; }
-.c { grid-area: c; }
-.d { grid-area: d; }
-.e { grid-area: e; }
-.f { grid-area: f; }
-.g { grid-area: g; }
+.section-1 { grid-area: section-1; }
+.section-2 { grid-area: section-2; }
+.section-3 { grid-area: section-3; }
+.section-4 { grid-area: section-4; }
+.section-5 { grid-area: section-5; }
+.section-6 { grid-area: section-6; }
+.section-7 { grid-area: section-7; }
 
 p {
   margin-top: 1em ;
   margin-bottom: 1em ;
 } 
 
-.text-1 {
+.fill-text {
   color: var(--white);
   font-family: var(--font-family-source_sans_pro);
   font-size: var(--font-size-xl2);
