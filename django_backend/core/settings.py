@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-
+import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -82,19 +82,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'mcfit',
-        'USER': 'Mario',
-        'PASSWORD': 'L6e8L43XE24jQvW98',
+        'NAME': 'dffm6pecas88ln',
+        'USER': 'oouywdkfdgxeju',
+        'PASSWORD': '182b0a740f826173e894b6d8a4912192ea48e84e547297bd29f98e8e257ce138',
         # https://console.cloud.google.com/sql/instances
-        'HOST': '35.238.143.153',
+        'HOST': 'ec2-23-23-133-10.compute-1.amazonaws.com',
         'PORT': '5432',
-        'OPTIONS': {
-            'sslmode': 'verify-ca', 
-            #Change to your own local locations
-            'sslrootcert': 'E:\Documents\Homework\Certificates\server-ca.pem',
-            "sslcert": "E:\Documents\Homework\Certificates\client-cert.pem",
-            "sslkey": "E:\Documents\Homework\Certificates\client-key.pem",
-        }
     }
 }
 
@@ -142,12 +135,7 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#I NEED TO CHANGE PERMISSIONS
-REST_FRAMEWORK = {
-    'Default_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
-    ]
-}
+
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
