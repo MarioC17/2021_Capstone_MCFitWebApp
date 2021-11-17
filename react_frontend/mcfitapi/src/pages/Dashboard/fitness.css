@@ -1,0 +1,87 @@
+@import '../../styleguide.css';
+@import '../../globals.css';
+
+.dashboard-box {
+    background: white;
+    position: absolute;
+    width:100%;
+    height:130%;
+}
+
+
+.dashboard-text {
+    color: var(--sea-green);
+    flex: 1;
+    font-family: var(--font-family-source_sans_pro);
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 80px;
+  }
+
+  .dashboard-name { grid-area: dashboard-name;
+    margin-top: 2%;
+    color: black; 
+    flex: 1;
+    font-family: var(--font-family-source_sans_pro);
+    font-size: 60px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 80px;}
+
+.dashboard-fitness-container {
+    display: grid;
+    margin: 5% 5% 5% 5%;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 0.4fr 1fr 1fr 1.3fr 1.3fr;
+    grid-auto-columns: 1fr;
+    gap: 8px 8px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "dashboard-name dashboard-name dashboard-name"
+      "goals entry-board entry-board"
+      "current-weight entry-board entry-board"
+      "calorie-target entry-board entry-board"
+      "entry-button entry-board entry-board";
+  }
+  
+  .goals { grid-area: goals; 
+    border: 1px solid #d3d3d3;
+    border-radius: .60rem;
+    background-color: black;
+    }
+  
+  .current-weight { 
+      grid-area: current-weight;
+      border: 1px solid #d3d3d3;
+      border-radius: .60rem; background-color: black}
+  
+  .calorie-target { 
+      grid-area: calorie-target;
+      border: 1px solid #d3d3d3;
+      border-radius: .60rem; 
+      background-color: black}
+  
+  .entry-button { 
+      grid-area: entry-button;
+      font-size: 200%;
+      }
+  
+  .entry-board { 
+      grid-area: entry-board; 
+      border: 1px solid #d3d3d3;
+      border-radius: .60rem;
+      background-color: black}
+
+.fitness-icons {
+    height: 60px;
+    object-fit: cover;
+    width: 60px;  
+}
+
+.fitness-text {
+    color: white;
+    margin-left: 10%;
+    margin-right: 10%;
+    font-family: var(--font-family-source_sans_pro);
+}

@@ -53,7 +53,7 @@ class Login extends Component {
     return (
       <div>
         <Header/>
-        <div className="container">
+        <div className="login-container">
           <div className="empty">
           </div>
           <div className="photo">
@@ -66,7 +66,7 @@ class Login extends Component {
               JUST FOR YOU
             </span>
           </div>
-          <div className="login">
+          <div className="login-form">
             <span className="sourcesanspro-bold-white-40px" >
               WELCOME BACK
             </span>
