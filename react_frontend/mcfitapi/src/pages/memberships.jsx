@@ -29,34 +29,36 @@ export class memberships extends Component {
 
           <div className="section-2">
             <p className="sourcesanspro-bold-white-45px">
-              Once/week
+             Basic
             </p>
             <span className="sourcesanspro-normal-white-35px">
-              Weekly check-ins<p/>
-              Nutritional guidance<p/>
-              Virtual/In-person meeting<p/>
+              Twice a week training<p/>
+              1 consultation per week<p/>
+              Personalized training regime<p/>
             </span>
           </div>
 
           <div className="section-3">
             <p className="sourcesanspro-bold-white-45px">
-              Twice/week
+              Premium
             </p>
             <span className="sourcesanspro-normal-white-35px">
-              Weekly check-ins<p/>
-              Nutritional guidance<p/>
-              Virtual/In-person meeting<p/>
+              3 times a week<p/>
+              2 consultations per week<p/>
+              Personalized training regime<p/>
+              Nutrition Plan<p/>
             </span>
           </div>
 
           <div className="section-4">
             <p className="sourcesanspro-bold-white-45px">
-              Thrice/week
+              Gold
             </p>
             <span className="sourcesanspro-normal-white-35px">
-              Weekly check-ins<p/>
-              Nutritional guidance<p/>
-              Virtual/In-person meeting<p/>
+              5 times a week<p/>
+              3 consultations per week<p/>
+              Personalized training regime<p/>
+              Nutrition Plan<p/>
             </span>
           </div>
 

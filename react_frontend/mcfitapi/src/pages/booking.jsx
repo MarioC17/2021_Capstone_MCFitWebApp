@@ -18,7 +18,6 @@ export default class Booking extends React.Component
   render() {
     
     return (
-      
       <div style={{backgroundColor: "white", minHeight: "100vh"}}>
       <FullCalendar
         plugins={[ timeGridPlugin ]}
