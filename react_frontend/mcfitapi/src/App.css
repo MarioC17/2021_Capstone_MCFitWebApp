@@ -36,3 +36,49 @@
     transform: rotate(360deg);
   }
 }
+
+.Sidebar {
+  height: 100%;
+  width: 100px;
+  background-color: black;
+  overflow: auto;
+  position: fixed;
+}
+
+.SidebarList {
+  height: auto;
+  padding: 0;
+  width: 100%;
+}
+
+.SidebarList .row {
+  width: 100%;
+  height: 100px;
+  list-style-type: none;
+  margin: 0%;
+  display: flex;
+  flex-direction: row;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  background-size: contain;
+}
+
+
+.SidebarList .row.active {
+  background-color: white;
+  color: black;
+}
+
+.SidebarList .row:hover {
+  cursor: pointer;
+  background-color:white;
+}
+
+.row #icon {
+  flex: 100%;
+  color:white;
+  display: grid;
+  place-items: center;
+  font-size: 110%;
+}
