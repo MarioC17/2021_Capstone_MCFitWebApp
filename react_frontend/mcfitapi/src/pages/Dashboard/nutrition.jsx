@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import SearchBar from '../../components/SearchBar';
+import Sidebar from '../../components/Sidebar';
 
 //Stylesheet
 import './nutrition.css';
@@ -41,6 +42,9 @@ export default function Fitness() {
     } 
 
     return (
+        <>
+        <Sidebar/>
+
         <div className="dashboard-box">
             <div style={{backgroundColor: "white", minHeight: "100vh"}} class="dashboard-fitness-container">
                 <div class="dashboard-name">
@@ -105,5 +109,6 @@ export default function Fitness() {
                 </div>
             </div>
         </div>
+        </>
     )
 }
