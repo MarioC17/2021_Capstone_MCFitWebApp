@@ -31,7 +31,7 @@ export class signup2 extends Component {
                     <div className="side-button">
                         <div className="formField">
                             <ThemeProvider theme={theme}>
-                            <Link to="/signup6">
+                            <Link to="/signup8">
                                     <Button color="neutral" 
                                         variant="contained"
                                         style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
@@ -40,7 +40,7 @@ export class signup2 extends Component {
                                     </Button>
                                 </Link>
 
-                                <Link to="/signup6">
+                                <Link to="/signup8">
                                     <Button color="neutral" 
                                         variant="contained"
                                         style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
@@ -51,7 +51,7 @@ export class signup2 extends Component {
 
                                 <br/><br/><br/>
 
-                                <Link to="/signup6">
+                                <Link to="/signup8">
                                     <Button color="neutral" 
                                         variant="contained"
                                         style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
@@ -60,7 +60,7 @@ export class signup2 extends Component {
                                     </Button>
                                 </Link>
 
-                                <Link to="/signup6">
+                                <Link to="/signup8">
                                     <Button color="neutral" 
                                         variant="contained"
                                         style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
