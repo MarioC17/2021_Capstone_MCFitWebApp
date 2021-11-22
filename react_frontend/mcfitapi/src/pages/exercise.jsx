@@ -16,9 +16,8 @@ import React, { Fragment, useEffect, useState } from 'react';
 import AddExercise from '../components/addExercise'
 import ReadOnlyRow from "../components/ReadOnlyRow";
 import EditableRow from '../components/EditableRow';
-const api = axios.create({
-  baseURL:"http://localhost:8000/api"
-})
+import { useHistory } from 'react-router';
+
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -137,7 +136,7 @@ export default function EnhancedTable() {
   const getexerciseData = async () => {
     try {
       const data = await axios.get(
-        "http://localhost:8000/api"
+        "http://localhost:8000/api/exercises"
       );
       setexercise(data.data);
     } catch (e) {
@@ -168,9 +167,17 @@ export default function EnhancedTable() {
     setEditExerciseId(exercise.exercise_id)
   };
 
-  const handleDeleteClick = (event,exercise) => {
-    console.log(exercise.exercise_id);
-  };
+  const handleDeleteClick = async (event,row) => {
+    event.preventDefault()
+    
+    await axios({
+        method: 'Delete',
+        url: `http://localhost:8000/api/exercise/delete/${row.exercise_id}/`,
+    }).then(response => {
+        console.log(response.data)
+        row = null;
+    })
+}
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
