@@ -29,11 +29,10 @@ const AddExercise = () => {
 
         await axios({
           method: 'post',
-          url:'http://localhost:8000/api/',
+          url:'http://localhost:8000/api/exercises',
           data: formField
         }).then(response=>{
           console.log(response.data);
-          history.push('/')
         })
     }
    
@@ -58,7 +57,7 @@ const AddExercise = () => {
             <input
               type="text"
               className="form-control form-control-lg"
-              placeholder="Enter Your muscl"
+              placeholder="Enter Your muscle"
               name="muscle"
               value={muscle}
               onChange={(e) => setMuscle(e.target.value)}

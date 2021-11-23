@@ -1,0 +1,15 @@
+@import '../styleguide.css';
+@import '../globals.css';
+
+.profile-container {
+    margin-left: 100px; /*REQUIRED WHEN USING SIDEBAR*/
+    padding-left: 50px;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    grid-template-rows: 0.3fr 0.65fr 1.45fr;
+    grid-auto-columns: 1fr;
+    gap: 0px 8px;
+    grid-auto-flow: row;
+  }
+  
+

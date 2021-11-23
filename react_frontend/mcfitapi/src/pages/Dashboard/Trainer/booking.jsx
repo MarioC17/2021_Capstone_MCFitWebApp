@@ -2,11 +2,11 @@ import React from 'react'
 import FullCalendar from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import timeGridPlugin from '@fullcalendar/timegrid'
-import { generateSagendaToken } from '../components/booking'
-import { getBookableTimes } from '../components/booking'
-import { bookEvent } from '../components/booking'
-import { generateBackendToken } from '../components/booking'
-import { getBookings } from '../components/booking'
+import { generateSagendaToken } from '../../../components/booking'
+import { getBookableTimes } from '../../../components/booking'
+import { bookEvent } from '../../../components/booking'
+import { generateBackendToken } from '../../../components/booking'
+import { getBookings } from '../../../components/booking'
 
 var myToken;
     
@@ -20,12 +20,8 @@ export default class Booking extends React.Component
   render() {
     
     return (
-<<<<<<< HEAD
-      <div style={{background:"white"}}><FullCalendar
-=======
       <div style={{backgroundColor: "white", minHeight: "100vh"}}>
       <FullCalendar
->>>>>>> 7b51fa62d6f836bb982356764bbf873c66bd5e4a
         plugins={[ timeGridPlugin ]}
         initialView="timeGridWeek"
         slotMinTime="09:00:00"
@@ -33,12 +29,7 @@ export default class Booking extends React.Component
         weekends={this.state.weekend}
         events={this.state.events}
         eventClick={this.handleEventClick}
-<<<<<<< HEAD
       /></div>
-=======
-      />
-      </div>
->>>>>>> 7b51fa62d6f836bb982356764bbf873c66bd5e4a
     )
   }
   
