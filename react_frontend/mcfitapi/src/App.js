@@ -21,7 +21,8 @@ import Signup9 from "./pages/Signup/signup9"
 import Memberships from "./pages/memberships"
 import AboutMe from "./pages/aboutme"
 import Policy from "./pages/policy"
-import Booking from "./pages/booking"
+import Booking from "./pages/Dashboard/booking"
+import TrainerBooking from "./pages/Dashboard/Trainer/booking"
 import Profile from "./pages/clientPage"
 
 class App extends Component {
@@ -50,6 +51,7 @@ class App extends Component {
           <Route exact path="/aboutme" component={AboutMe}/>
           <Route exact path="/policy" component={Policy}/>
           <Route exact path="/booking" component={Booking}/>
+          <Route exact path="/trainer/booking" component={TrainerBooking}/>
           <Route exact path="/profile" component={Profile}/>
           <Redirect to="/404"/>
         </Switch>

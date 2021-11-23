@@ -73,6 +73,7 @@
 .SidebarList .row:hover {
   cursor: pointer;
   background-color:white;
+  color: black;
 }
 
 .row #icon {
