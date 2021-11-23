@@ -1,9 +1,10 @@
-import React, { Component, useState} from 'react'
+import React, { Component, useState} from 'react';
+import { render } from 'react-dom';
 import { Link } from "react-router-dom";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Avatar, Button, IconButton } from '@mui/material/';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Sidebar from '../../components/Sidebar';
-
 
 //Stylesheet
 import './fitness.css';
@@ -13,6 +14,7 @@ import running from '../../static/img/running.png'
 import steps from '../../static/img/steps.png'
 import wakeup from '../../static/img/wakeup.png'
 import weights from '../../static/img/weights.png'
+
 const theme = createTheme({
     palette: {
       neutral: {
@@ -27,6 +29,13 @@ const theme = createTheme({
   });
 
 export default function Fitness() {
+    let monthNumber = (new Date().getMonth()+1);
+    let monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    let monthName = monthNames[monthNumber];    
+
+    const current = new Date();
+    const date = `${monthName}. ${current.getDate()} ${current.getFullYear()}`;
+
     return (
         <>
         <Sidebar/> 
@@ -35,56 +44,51 @@ export default function Fitness() {
             <div className="dashboard-title">
                 Fitness
             </div>
-            <div className="fitness-goals">
-                <span className="small-title">Goals</span>
-                <div className="fitness-goals-box" >
-                    stuff
-                </div>
-                
+            <div className="analytics">
+                <span className="small-title">Analytics</span>
+                <div className="analytic-container">
+                    <div className="analytic-card" >
+                        <span className="analytic-title">Goals</span>
+                        <span className="analytic-content">Weightloss, Strength, Toning ADD REAL DATA LATER</span>
+                    </div>
+                    <div className="analytic-card" >
+                        <span className="analytic-title">Weight</span>
+                        <div className="weight-content">
+                            <span className="analytic-content">Target: WEIGHTlbs</span>
+                            <span className="analytic-content">Starting: WEIGHTlbs</span>
+                            <span className="analytic-content">Current: WEIGHTlbs</span>
+                        </div>
+                    </div>
+                    <div className="analytic-card" >
+                        <span style={{alignContent: 'center'}} className="analytic-title">Workout Library</span>
+                        <ThemeProvider theme={theme}>
+                            <Button variant="contained" color="neutral" startIcon={<ArrowForwardIosIcon />}>
+                            </Button>
+                        </ThemeProvider>
+                    </div>      
+                </div>      
             </div>
             
-            <div className="performance-chart">
-                <span className="small-title">Performance</span>
-                <div className="performance-box">
-                    add chart
-                </div>
-                
-            </div>
-            <div className="task-buttons">
-                <span className="small-title">Tasks</span>
-                <div className="task-container">
-                    <ThemeProvider theme={theme}>
-                        <Button variant="contained" style={{minWidth: '250px', minHeight: '200px', borderRadius: '25px', margin: '5px'}} color="reverse" startIcon={
-                        <Avatar sx={{ width: 80, height: 80 }} variant="square" src={running} />}/>
-                    </ThemeProvider>
-                    <ThemeProvider theme={theme}>
-                        <Button variant="contained" style={{minWidth: '250px', minHeight: '200px', borderRadius: '25px', margin: '5px'}} color="reverse" startIcon={
-                        <Avatar sx={{ width: 80, height: 80 }} variant="square" src={weights} />}/>   
-                    </ThemeProvider><br/>
-                    <ThemeProvider theme={theme}>
-                        <Button variant="contained" style={{minWidth: '250px', minHeight: '200px', borderRadius: '25px', margin: '5px'}} color="reverse" startIcon={
-                        <Avatar sx={{ width: 80, height: 80 }} variant="square" src={wakeup} />}/>
-                    </ThemeProvider>
-                    <ThemeProvider theme={theme}>
-                        <Button variant="contained" style={{minWidth: '250px', minHeight: '200px', borderRadius: '25px', margin: '5px'}} color="reverse" startIcon={
-                        <Avatar sx={{ width: 80, height: 80 }} variant="square" src={steps} />}/>
-                    </ThemeProvider>
-                </div>
-            </div>
             <div className="workouts">
-                <span className="small-title">Workouts</span>
+                <span className="small-title">Exercises</span><br/><br/>
+                <span className="sub-title">{date}</span>
                 <div className="workout-container">
                     <div className="workout-card">
-                        <span className="workout-content">Warm ups</span>
-                    </div>
-                    <div className="workout-card">
-                        <span className="workout-content">Low intensity</span>
-                    </div>
-                    <div className="workout-card">
-                        <span className="workout-content">Insert workout</span>
-                    </div>
-                    <div className="workout-card">
-                        <span className="workout-content">Insert workout</span>
+                        {/*add in database info*/}
+                        <span className="workout-content">Exercise name</span>
+                        <div>
+                            <span className="workout-mini">
+                                Reps: NUMBER<br/>
+                                Sets: NUMBER<br/>
+                                Rests: NUMBER<br/>
+                            </span>
+                        </div>
+                        <span className="workout-mini">Duration: DURATION mins</span>
+                        <ThemeProvider theme={theme}>
+                            <Button className="workout-button" variant="contained" color="neutral">
+                                View
+                            </Button>
+                        </ThemeProvider>
                     </div>
                 </div>
             </div>

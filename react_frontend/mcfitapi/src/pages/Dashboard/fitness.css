@@ -5,15 +5,15 @@
     margin-left: 100px; /*REQUIRED WHEN USING SIDEBAR*/
     padding-left: 50px;
     display: grid;
-    grid-template-columns: 1fr 1.5fr;
+    grid-template-columns: 1.5fr 0.8fr;
     grid-template-rows: 0.3fr 0.65fr 1.45fr;
     grid-auto-columns: 1fr;
     gap: 0px 8px;
     grid-auto-flow: row;
     grid-template-areas:
       "dashboard-title dashboard-title"
-      "workouts fitness-goals"
-      "performance-chart task-buttons";
+      "workouts analytics"
+      "workouts analytics";
   }
   
   .dashboard-title { grid-area: dashboard-title; 
@@ -25,69 +25,78 @@
     letter-spacing: 0;
     line-height: 80px;}
   
-  .fitness-goals { grid-area: fitness-goals; 
+  .analytics { grid-area: analytics; 
     }
-
-  .fitness-goals-box {
-    border: 1px solid #d3d3d3;
-    border-radius: .60rem;
+  
+  .analytic-container {
     display: flex;
     flex-direction: column;
-    background-color: var(--white);
-    border-radius: 13px;
-    margin-top: 25px;
-    box-shadow: 3px 4px 10px #00000029;
-    height: 340px;
-    width: 525px;
+    padding-top: 20px;
+    justify-content: space-around;
+    margin-top: 5%;
+    margin-right: 5%;
   }
-  
-  .performance-chart { grid-area: performance-chart;
-    margin-top: -5%;
-    }
 
-  .performance-box {
+  .analytic-card {
+    display: flex;
+    flex-direction: column;
     border: 1px solid #d3d3d3;
     border-radius: .60rem; 
-    background-color: var(--white);
-    box-shadow: 3px 4px 10px #00000029;
-    height: 562px;
-    width: 1170px;
-    margin-top: 20px;
+    background-color: var(--quill-gray);
+    box-shadow: 3px 4px 5px #00000029;
+    min-height: 155px;  
+    border-radius: 25px;
+    padding-top: 25px;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-bottom: 10px;
+    display: flex;
   }
-  
-  .task-buttons { grid-area: task-buttons;
-    font-family: var(--font-family-source_sans_pro);
-    font-size: 60px;
-    font-weight: 600;
-    letter-spacing: 0;}
 
-  .task-container {
+  .analytic-title {
+    font-family: var(--font-family-source_sans_pro);
+    font-size: 35px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .analytic-content {
+    font-family: var(--font-family-source_sans_pro);
+    font-size: 20px;
+    font-weight: 400;
+  }
+
+  .weight-content {
     display: flex;
     flex-direction: row;
-    padding-top: 20px;
-    flex-wrap: wrap;
+    justify-content: space-between;
   }
-  
+
   .workouts { grid-area: workouts; }
 
   .workout-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     padding-top: 20px;
-    justify-content: space-between;
+    justify-content: space-around;
+    overflow-y: scroll;
   }
 
   .workout-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     border: 1px solid #d3d3d3;
     border-radius: .60rem; 
-    background-color: var(--white);
-    box-shadow: 3px 4px 10px #00000029;
-    min-width: 270px;
-    min-height: 240px;
+    background-color: var(--quill-gray);
+    box-shadow: 3px 4px 5px #00000029;
+    min-height: 105px;
     border-radius: 25px;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-bottom: 10px;
     display: flex;
-  justify-content: center;
-  align-items: center;
+    align-items: center;
   }
 
   .workout-content {
@@ -96,8 +105,26 @@
     font-weight: 600;
   }
 
+  .workout-mini {
+    font-family: var(--font-family-source_sans_pro);
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .workout-button {
+    min-width: 200px; 
+    min-height: 50px;
+    border-radius: 30px; 
+  }
+
   .small-title {
     font-family: var(--font-family-source_sans_pro);
     font-size: 30px;
+    font-weight: 600;
+  }
+
+  .sub-title {
+    font-family: var(--font-family-source_sans_pro);
+    font-size: 20px;
     font-weight: 600;
   }
