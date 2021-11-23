@@ -1,0 +1,32 @@
+.booking-container {
+    display: grid;
+    margin-left: 100px; /*REQUIRED WHEN USING SIDEBAR*/
+    padding-left: 50px;
+    grid-template-columns: 0.8fr 1.2fr 1fr;
+    grid-template-rows: 1.22fr 1.23fr;
+    grid-auto-columns: 1fr;
+    gap: 0px 20px;
+    grid-auto-flow: row;
+    font-family: var(--font-family-source_sans_pro);
+    grid-template-areas:
+      "mini-calendar main-calendar main-calendar"
+      "reminders main-calendar main-calendar";
+  }
+  
+  .calendar-header { grid-area: calendar-header; }
+  
+  .mini-calendar { grid-area: mini-calendar; }
+  
+  .reminders { grid-area: reminders; }
+  
+  .main-calendar { grid-area: main-calendar; }
+  
+  .small-title {
+    font-size: 30px;
+    font-weight: 600;
+  }
+
+  .sub-title {
+    font-size: 20px;
+    font-weight: 600;
+  }
