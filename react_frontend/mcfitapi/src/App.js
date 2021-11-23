@@ -8,6 +8,7 @@ import Forms from "./pages/forms"
 import Exercise from "./pages/exercise"
 import Signup from "./pages/Signup/signup"
 import Fitness from "./pages/Dashboard/fitness"
+import TrainerFitness from "./pages/Dashboard/Trainer/fitness"
 import Nutrition from "./pages/Dashboard/nutrition"
 import Signup2 from "./pages/Signup/signup2"
 import Signup3 from "./pages/Signup/signup3"
@@ -33,6 +34,7 @@ class App extends Component {
           <Route exact path="/exercise" component={Exercise}/>
           <Route exact path="/signup" component={Signup}/>
           <Route exact path="/fitness" component={Fitness}/>
+          <Route exact path="/trainer/fitness" component={TrainerFitness}/>
           <Route exact path="/nutrition" component={Nutrition}/>
           <Route exact path="/signup2" component={Signup2}/>
           <Route exact path="/signup3" component={Signup3}/>
