@@ -26,7 +26,7 @@ export const SidebarData = [
     },
     {
         icon: <Payment/>,
-        link: "/",
+        link: "/memberships",
     },
     {
         icon: <Settings/>,
