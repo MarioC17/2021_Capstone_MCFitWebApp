@@ -26,5 +26,9 @@ class ExerciseDetail(generics.RetrieveDestroyAPIView):
 class ExerciseUpdate(generics.UpdateAPIView):
     queryset = Exercisetable.objects.all()   
     serializer_class = ExercisetableSerializer
+
+class ExerciseDelete(generics.DestroyAPIView):
+    queryset = Exercisetable.objects.all()   
+    serializer_class = ExercisetableSerializer
 #view classes docs    
 #https://www.django-rest-framework.org/api-guide/generic-views/#concrete-view-classes

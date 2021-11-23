@@ -13,11 +13,11 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import axios from "axios";
 import PropTypes from 'prop-types';
 import React, { Fragment, useEffect, useState } from 'react';
-import AddExercise from '../components/addExercise'
 import ReadOnlyRow from "../components/ReadOnlyRow";
 import EditableRow from '../components/EditableRow';
-import { useHistory } from 'react-router';
-
+const api = axios.create({
+  baseURL:"http://localhost:8000/api"
+})
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -46,14 +46,13 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'Exercise Name'},
-  { id: 'muscle', numeric: false, disablePadding: false, label: 'Muscle' },
-  { id: 'equipment', numeric: false, disablePadding: false, label: 'Equipment' },
-  { id: 'description', numeric: false, disablePadding: false, label: 'Description' },
-  { id: 'benefits', numeric: false, disablePadding: false, label: 'Benefits' },
-  { id: 'instructions', numeric: false, disablePadding: false, label: 'Instructions' },
-  { id: 'video', numeric: false, disablePadding: false, label: 'Video' },
-  { id: 'actions', numeric: false, disablePadding: false, label: 'Actions' },
+  { id: 'name', numeric: false, disablePadding: true, label: 'Exercise'},
+  { id: 'reps', numeric: false, disablePadding: false, label: 'Reps' },
+  { id: 'sets', numeric: false, disablePadding: false, label: 'Sets' },
+  { id: 'rest', numeric: false, disablePadding: false, label: 'Rest' },
+  { id: 'RIR', numeric: false, disablePadding: false, label: 'RIR' },
+  { id: 'Load', numeric: false, disablePadding: false, label: 'Load' },
+  { id: 'Notes', numeric: false, disablePadding: false, label: 'Notes' },
 ];
 
 function EnhancedTableHead(props) {
@@ -136,7 +135,7 @@ export default function EnhancedTable() {
   const getexerciseData = async () => {
     try {
       const data = await axios.get(
-        "http://localhost:8000/api/exercises"
+        "http://localhost:8000/api"
       );
       setexercise(data.data);
     } catch (e) {
@@ -150,7 +149,7 @@ export default function EnhancedTable() {
 
 
   const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('muscle');
+  const [orderBy, setOrderBy] = React.useState('name');
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -167,17 +166,9 @@ export default function EnhancedTable() {
     setEditExerciseId(exercise.exercise_id)
   };
 
-  const handleDeleteClick = async (event,row) => {
-    event.preventDefault()
-    
-    await axios({
-        method: 'Delete',
-        url: `http://localhost:8000/api/exercise/delete/${row.exercise_id}/`,
-    }).then(response => {
-        console.log(response.data)
-        row = null;
-    })
-}
+  const handleDeleteClick = (event,exercise) => {
+    console.log(exercise.exercise_id);
+  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -267,7 +258,6 @@ export default function EnhancedTable() {
         label="Dense padding"
       />
       </form>
-      <AddExercise/>
     </div>
   );
 }
