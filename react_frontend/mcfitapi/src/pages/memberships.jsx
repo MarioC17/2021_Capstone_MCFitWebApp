@@ -11,13 +11,13 @@ export class memberships extends Component {
     return (
       <div>
         <Header/> 
-        <div className="container">
-          <div className="a">
+        <div className="membership-container">
+          <div className="section-1">
             <span className="impact-regular-normal-white-50px">
               PRICING
             </span>
             <p/>
-            <span className="text-1">
+            <span className="fill-text">
               <span className="sourcesanspro-normal-white-30px">
                 We have an in-person or on-line option depending on your needs.  
               </span>&nbsp;&nbsp;
@@ -27,40 +27,42 @@ export class memberships extends Component {
             </span>
           </div>
 
-          <div className="b">
+          <div className="section-2">
             <p className="sourcesanspro-bold-white-45px">
-              Once/week
+             Basic
             </p>
             <span className="sourcesanspro-normal-white-35px">
-              Weekly check-ins<p/>
-              Nutritional guidance<p/>
-              Virtual/In-person meeting<p/>
+              Twice a week training<p/>
+              1 consultation per week<p/>
+              Personalized training regime<p/>
             </span>
           </div>
 
-          <div className="c">
+          <div className="section-3">
             <p className="sourcesanspro-bold-white-45px">
-              Twice/week
+              Premium
             </p>
             <span className="sourcesanspro-normal-white-35px">
-              Weekly check-ins<p/>
-              Nutritional guidance<p/>
-              Virtual/In-person meeting<p/>
+              3 times a week<p/>
+              2 consultations per week<p/>
+              Personalized training regime<p/>
+              Nutrition Plan<p/>
             </span>
           </div>
 
-          <div className="d">
+          <div className="section-4">
             <p className="sourcesanspro-bold-white-45px">
-              Thrice/week
+              Gold
             </p>
             <span className="sourcesanspro-normal-white-35px">
-              Weekly check-ins<p/>
-              Nutritional guidance<p/>
-              Virtual/In-person meeting<p/>
+              5 times a week<p/>
+              3 consultations per week<p/>
+              Personalized training regime<p/>
+              Nutrition Plan<p/>
             </span>
           </div>
 
-          <div className="e">
+          <div className="section-5">
             <span className="sourcesanspro-bold-sea-green-35px">
               $80/session
             </span>
@@ -70,7 +72,7 @@ export class memberships extends Component {
             <img className="arrow" src={Arrow} alt=""/>
           </div>
 
-          <div className="f">
+          <div className="section-6">
             <span className="sourcesanspro-bold-sea-green-35px">
               $70/session
             </span>
@@ -80,7 +82,7 @@ export class memberships extends Component {
             <img className="arrow" src={Arrow} alt=""/>
           </div>
 
-          <div className="g">
+          <div className="section-7">
             <span className="sourcesanspro-bold-sea-green-35px">
               $60/session
             </span>

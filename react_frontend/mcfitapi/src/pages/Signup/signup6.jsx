@@ -5,6 +5,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import { Avatar, Button } from '@mui/material';
+import { Link } from "react-router-dom";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 //Components
 import Header from '../../components/HeaderW'
@@ -104,14 +105,15 @@ class signup2 extends Component {
                             />
                             <FormHelperText id="outlined-weight-helper-text">Age</FormHelperText>
                         </FormControl>
+                        <ThemeProvider theme={theme}><Link to="/signup7">
                         
-                        <ThemeProvider theme={theme}>
-                            <Button color="neutral" 
-                             variant="contained"
-                             startIcon={<Avatar src={Arrow}/>}
-                             onClick={this.handleSubmit}>
-                            </Button>
-                        </ThemeProvider>
+                            
+                                <Button color="neutral" 
+                                variant="contained"
+                                startIcon={<Avatar src={Arrow}/>}>
+                                </Button>
+                            
+                        </Link></ThemeProvider>
                             
                         </div>
                     </div>

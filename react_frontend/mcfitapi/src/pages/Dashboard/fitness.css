@@ -1,0 +1,103 @@
+@import '../../styleguide.css';
+@import '../../globals.css';
+
+.fitness-container {
+    margin-left: 100px; /*REQUIRED WHEN USING SIDEBAR*/
+    padding-left: 50px;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    grid-template-rows: 0.3fr 0.65fr 1.45fr;
+    grid-auto-columns: 1fr;
+    gap: 0px 8px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "dashboard-title dashboard-title"
+      "workouts fitness-goals"
+      "performance-chart task-buttons";
+  }
+  
+  .dashboard-title { grid-area: dashboard-title; 
+    margin-top: 2%;
+    flex: 1;
+    font-family: var(--font-family-source_sans_pro);
+    font-size: 60px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 80px;}
+  
+  .fitness-goals { grid-area: fitness-goals; 
+    }
+
+  .fitness-goals-box {
+    border: 1px solid #d3d3d3;
+    border-radius: .60rem;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white);
+    border-radius: 13px;
+    margin-top: 25px;
+    box-shadow: 3px 4px 10px #00000029;
+    height: 340px;
+    width: 525px;
+  }
+  
+  .performance-chart { grid-area: performance-chart;
+    margin-top: -5%;
+    }
+
+  .performance-box {
+    border: 1px solid #d3d3d3;
+    border-radius: .60rem; 
+    background-color: var(--white);
+    box-shadow: 3px 4px 10px #00000029;
+    height: 562px;
+    width: 1170px;
+    margin-top: 20px;
+  }
+  
+  .task-buttons { grid-area: task-buttons;
+    font-family: var(--font-family-source_sans_pro);
+    font-size: 60px;
+    font-weight: 600;
+    letter-spacing: 0;}
+
+  .task-container {
+    display: flex;
+    flex-direction: row;
+    padding-top: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .workouts { grid-area: workouts; }
+
+  .workout-container {
+    display: flex;
+    flex-direction: row;
+    padding-top: 20px;
+    justify-content: space-between;
+  }
+
+  .workout-card {
+    border: 1px solid #d3d3d3;
+    border-radius: .60rem; 
+    background-color: var(--white);
+    box-shadow: 3px 4px 10px #00000029;
+    min-width: 270px;
+    min-height: 240px;
+    border-radius: 25px;
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+
+  .workout-content {
+    font-family: var(--font-family-source_sans_pro);
+    font-size: 30px;
+    font-weight: 600;
+  }
+
+  .small-title {
+    font-family: var(--font-family-source_sans_pro);
+    font-size: 30px;
+    font-weight: 600;
+  }
