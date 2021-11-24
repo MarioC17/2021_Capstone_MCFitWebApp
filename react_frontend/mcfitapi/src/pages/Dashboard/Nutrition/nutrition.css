@@ -1,0 +1,78 @@
+@import '../../../styleguide.css';
+@import '../../../globals.css';
+
+.nutrition-container {
+    display: grid;
+    font-family: var(--font-family-source_sans_pro);
+    margin-left: 100px; /*REQUIRED WHEN USING SIDEBAR*/
+    padding-left: 30px;
+    padding-right: 30px;
+    grid-template-columns: 1fr 1fr 0.7fr;
+    grid-template-rows: 0.33fr 0.3fr 0.4fr 2.9fr;
+    grid-auto-columns: 1fr;
+    gap: 30px 50px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "nutrition-title . ."
+      ". food-entry-button ."
+      "nutrition-date-navigator nutrition-date-picker progress-text"
+      "meal-breakdown nutritional-breakdown progress-breakdown";
+  }
+
+  .nutrition-title { grid-area: nutrition-title;
+    margin-top: 10%;
+    flex: 1;
+    font-size: 50px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 80px; }
+  
+  .food-entry-button { grid-area: food-entry-button; 
+    text-align: right;
+    }
+  
+  .nutrition-date-navigator { grid-area: nutrition-date-navigator; }
+  
+  .nutrition-date-picker { grid-area: nutrition-date-picker; 
+    text-align: right;
+}
+  
+  .progress-text { grid-area: progress-text; 
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 50px;
+}
+  
+  .meal-breakdown { grid-area: meal-breakdown; 
+    border-radius: .60rem; 
+    background-color: var(--quill-gray);
+    padding: 10%;}
+  
+  .nutritional-breakdown { grid-area: nutritional-breakdown;
+    border-radius: .60rem; 
+    background-color: var(--quill-gray);
+    padding: 10%; }
+  
+  .progress-breakdown { grid-area: progress-breakdown; 
+    }
+
+  .progress-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #d3d3d3;
+    border-radius: .60rem; 
+    background-color: var(--quill-gray);
+    box-shadow: 3px 4px 5px #00000029;
+    min-height: 110px;  
+    border-radius: 25px;
+    padding-top: 25px;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-bottom: 30px;
+  }
+
+  .small-title {
+    font-family: var(--font-family-source_sans_pro);
+    font-size: 30px;
+    font-weight: 600;
+  }
