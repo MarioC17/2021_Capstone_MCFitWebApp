@@ -22,43 +22,8 @@ const theme = createTheme({
     },
   },
 });
-/*
-class Login extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      username: "",
-      password: ""
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event) {
-    let target = event.target;
-    let value = target.type === "checkbox" ? target.checked : target.value;
-    let name = target.name;
-
-    this.setState({
-      [name]: value
-    });
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    login(this.state.username,this.state.password);
-
-  }
-
-  render() {
-
-  }
-}
 
 
-*/
 
 const Login = ({login}) => {
   const [formData, setFormData] = useState({
@@ -102,7 +67,7 @@ return (
             <input
               type="email"
               id="email"
-              className="formFieldInput"
+              className="loginformFieldInput"
               placeholder="Enter your email"
               name="email"
               value={email}
@@ -115,7 +80,7 @@ return (
             <input
               type="password"
               id="password"
-              className="formFieldInput"
+              className="loginformFieldInput"
               placeholder="Enter your password"
               name="password"
               value={password}
