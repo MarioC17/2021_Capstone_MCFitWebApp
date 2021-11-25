@@ -1,3 +1,6 @@
+@import '../../../styleguide.css';
+@import '../../../globals.css';
+
 .entry-container {
     display: grid;
     margin-left: 100px; /*REQUIRED WHEN USING SIDEBAR*/

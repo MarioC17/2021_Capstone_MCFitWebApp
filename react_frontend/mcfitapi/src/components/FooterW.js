@@ -9,7 +9,6 @@ import { Avatar, Button } from '@mui/material/';
 import img from "../static/img/LogoB.png";
 import socialIconLinkedIn from "../static/img/linkedin.png"
 import socialIconInstagram from "../static/img/instagram.png"
-import { height, width } from '@mui/system';
 
 const useStyles = makeStyles((theme) => ({
 	footer: {
