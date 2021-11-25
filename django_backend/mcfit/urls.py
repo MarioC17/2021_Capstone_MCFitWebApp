@@ -1,8 +1,6 @@
-from django.urls import path
+from django.urls import re_path
 from django.views.generic import TemplateView
 
 app_name='mcfit'
 
-urlpatterns = [
-    path('',TemplateView.as_view(template_name="mcfit/index.html")),
-]
+urlpatterns = [re_path(r'^.*', TemplateView.as_view(template_name='index.html'))]
