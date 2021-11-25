@@ -52,26 +52,157 @@ export default function Nutrition() {
             <div className="progress-text">Overall Progress</div>
             <div className="meal-breakdown">
                 <span className="small-title">Meal Breakdown</span><br/><br/><br/>
+                <div class="breakdown-container">
+                    <div class="meal-name">Breakfast</div>
+                    <div class="food-name">Eggs, Large, White**</div>
+                    <div class="food-count">2 counts**</div>
+                    <div class="hr"><hr/></div>
+                    <div class="nutrition-stat-name">
+                        <div style={{display: 'flex', flexDirection: 'row'}}>
+                            Calories<br/>
+                            Carbs<br/>
+                            Total Fats<br/>
+                            Protiens<br/>
+                        </div>
+                    </div>
+                    <div class="nutrition-stat-detail">
+                        <div style={{display: 'flex', flexDirection: 'row'}}>
+                            {/* ADD VALUES HERE */}
+                            {}*cal<br/>
+                            {}*g<br/>
+                            {}*g<br/>
+                            {}*g<br/>
+                        </div>
+                    </div>
+                </div>
 
-                <div style={{display: 'flex', flexDirection: 'row'}}>
-                    <span>Breakfast</span>
+                <div class="breakdown-container">
+                    <div class="meal-name">Snack</div>
+                    <div class="food-name">Eggs, Large, White**</div>
+                    <div class="food-count">2 counts**</div>
+                    <div class="hr"><hr/></div>
+                    <div class="nutrition-stat-name">
+                        <div style={{display: 'flex', flexDirection: 'row'}}>
+                            Calories<br/>
+                            Carbs<br/>
+                            Total Fats<br/>
+                            Protiens<br/>
+                        </div>
+                    </div>
+                    <div class="nutrition-stat-detail">
+                        <div style={{display: 'flex', flexDirection: 'row'}}>
+                            {/* ADD VALUES HERE */}
+                            {}*cal<br/>
+                            {}*g<br/>
+                            {}*g<br/>
+                            {}*g<br/>
+                        </div>
+                    </div>
                 </div>
-                <hr/>
-                <div style={{display: 'flex', flexDirection: 'row'}}>
-                    Lunch
+
+                <div class="breakdown-container">
+                    <div class="meal-name">Lunch</div>
+                    <div class="food-name">Eggs, Large, White**</div>
+                    <div class="food-count">2 counts**</div>
+                    <div class="hr"><hr/></div>
+                    <div class="nutrition-stat-name">
+                        <div style={{display: 'flex', flexDirection: 'row'}}>
+                            Calories<br/>
+                            Carbs<br/>
+                            Total Fats<br/>
+                            Protiens<br/>
+                        </div>
+                    </div>
+                    <div class="nutrition-stat-detail">
+                        <div style={{display: 'flex', flexDirection: 'row'}}>
+                            {/* ADD VALUES HERE */}
+                            {}*cal<br/>
+                            {}*g<br/>
+                            {}*g<br/>
+                            {}*g<br/>
+                        </div>
+                    </div>
                 </div>
-                <hr/>
-                <div style={{display: 'flex', flexDirection: 'row'}}>
-                    Dinner
+
+                <div class="breakdown-container">
+                    <div class="meal-name">Dinner</div>
+                    <div class="food-name">Eggs, Large, White**</div>
+                    <div class="food-count">2 counts**</div>
+                    <div class="hr"><hr/></div>
+                    <div class="nutrition-stat-name">
+                        <div style={{display: 'flex', flexDirection: 'row'}}>
+                            Calories<br/>
+                            Carbs<br/>
+                            Total Fats<br/>
+                            Protiens<br/>
+                        </div>
+                    </div>
+                    <div class="nutrition-stat-detail">
+                        <div style={{display: 'flex', flexDirection: 'row'}}>
+                            {/* ADD VALUES HERE */}
+                            {}*cal<br/>
+                            {}*g<br/>
+                            {}*g<br/>
+                            {}*g<br/>
+                        </div>
+                    </div>
                 </div>
-                <hr/>
+
+                <div>
+                    Calories Consumed:&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span>{}*out of {}* cal</span>
+                </div>
             </div>
             <div className="nutritional-breakdown">
                 <span className="small-title">Nutritional Breakdown</span><br/><br/><br/>
+                <div class="second-container">
+                    <div class="nutrition-breakdown-name">Consumed</div>
+                    <div class="hr"><hr/></div>
+                    <div class="nutrition-stat-name">
+                        Calories<br/>
+                        Carbohydrates<br/>
+                        Protien<br/>
+                        Fats<br/>
+                    </div>
+                    <div class="nutrition-stat-detail">
+                        {}*cal<br/>
+                        {}cur*g / total*cal<br/>
+                        {}cur*g / total*cal<br/>
+                        {}cur*g / total*cal<br/>
+                    </div>
+                </div>
+
+                <div class="second-container">
+                    <div class="nutrition-breakdown-name">Target</div>
+                    <div class="hr"><hr/></div>
+                    <div class="nutrition-stat-name">
+                        Calories<br/>
+                        Carbohydrates<br/>
+                        Protien<br/>
+                        Fats<br/>
+                    </div>
+                    <div class="nutrition-stat-detail">
+                        {}*cal<br/>
+                        {}cur*g / total*cal<br/>
+                        {}cur*g / total*cal<br/>
+                        {}cur*g / total*cal<br/>
+                    </div>
+                </div>
             </div>
-            <div className="progress-breakdown">
-                <div className="progress-card">Goals</div>
-                <div className="progress-card">Weight</div>
+            <div className="overall-breakdown">
+                <div className="overall-progress-card">
+                    <span className='sub-title'>Goals</span><br/><br/>
+                    {/* change value */}
+                    Weightloss, Strength, Toning
+                </div>
+                <div className="overall-progress-card">
+                    <span className='sub-title'>Weight</span><br/><br/>
+                    <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+                        <span>Target {}140lbs</span> 
+                        <span>Starting {}190 lbs </span> 
+                        <span>Current {}160lbs</span> 
+                    </div>
+                </div>
             </div>
         </div>
         

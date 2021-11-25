@@ -8,9 +8,9 @@
     padding-left: 30px;
     padding-right: 30px;
     grid-template-columns: 1fr 1fr 0.7fr;
-    grid-template-rows: 0.33fr 0.3fr 0.4fr 2.9fr;
+    grid-template-rows: 0.33fr 0.3fr 0.2fr 2.9fr;
     grid-auto-columns: 1fr;
-    gap: 30px 50px;
+    gap: 30px 20px;
     grid-auto-flow: row;
     grid-template-areas:
       "nutrition-title . ."
@@ -53,21 +53,17 @@
     background-color: var(--quill-gray);
     padding: 10%; }
   
-  .progress-breakdown { grid-area: progress-breakdown; 
-    }
-
-  .progress-card {
+  .overall-breakdown { grid-area: progress-breakdown; 
     display: flex;
     flex-direction: column;
+    }
+
+  .overall-progress-card {
     border: 1px solid #d3d3d3;
-    border-radius: .60rem; 
+    border-radius: 10px; 
     background-color: var(--quill-gray);
     box-shadow: 3px 4px 5px #00000029;
-    min-height: 110px;  
-    border-radius: 25px;
-    padding-top: 25px;
-    padding-left: 25px;
-    padding-right: 25px;
+    padding: 25px;
     margin-bottom: 30px;
   }
 
@@ -76,3 +72,51 @@
     font-size: 30px;
     font-weight: 600;
   }
+
+  .breakdown-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.5fr;
+    grid-template-rows: 0.5fr 0.1fr 3.3fr;
+    grid-auto-columns: 1fr;
+    margin: 5%;
+    gap: 0px 8px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "meal-name food-name meal-count"
+      "hr hr hr"
+      ". nutrition-stat-name nutrition-stat-detail";
+  }
+  
+  .meal-name { grid-area: meal-name; }
+  
+  .food-name { grid-area: food-name; }
+  
+  .food-count { grid-area: meal-count; }
+  
+  .hr { grid-area: hr; }
+  
+  .nutrition-stat-name { grid-area: nutrition-stat-name; }
+  
+  .nutrition-stat-detail { grid-area: nutrition-stat-detail; }
+
+  .second-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 0.5fr 0.1fr 2fr;
+    grid-auto-columns: 1fr;
+    gap: 0px 8px;
+    margin-bottom: 5%;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "nutrition-breakdown-name . ."
+      "hr hr hr"
+      "nutrition-stat-name . nutrition-stat-detail";
+  }
+  
+  .nutrition-breakdown-name { grid-area: nutrition-breakdown-name; }
+    
+  .nutrition-stat-name { grid-area: nutrition-stat-name; }
+  
+  .nutrition-stat-detail { grid-area: nutrition-stat-detail; }
+  
+  
