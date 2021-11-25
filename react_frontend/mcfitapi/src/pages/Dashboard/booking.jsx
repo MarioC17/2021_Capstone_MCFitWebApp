@@ -5,15 +5,12 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import listPlugin from '@fullcalendar/list'
 import { Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { generateSagendaToken } from '../../components/booking'
-import { getBookableTimes } from '../../components/booking'
-import { bookEvent } from '../../components/booking'
-import { generateBackendToken } from '../../components/booking'
-import { getBookings } from '../../components/booking'
+import { getBookableTimes, bookEvent, getBookings, cancelBooking } from '../../components/booking'
 import Sidebar from '../../components/Sidebar';
 import Sagenda from '../../static/img/sagenda.png';
 import MiniCalendar from '../../components/MiniCalendar';
 import './booking.css'
+import interactionPlugin from '@fullcalendar/interaction'
 var myToken;
     
 const theme = createTheme({
@@ -60,10 +57,14 @@ export default class UserBookings extends React.Component
         </div>
         <div class="main-calendar">
           <FullCalendar
-          plugins={[ dayGridPlugin ]}
+          plugins={[ dayGridPlugin, interactionPlugin ]}
+          selectable={true}
+          selectMirror={true}
           initialView="dayGridMonth"
           weekends={this.state.weekend}
           events={this.state.events}
+          eventClick={this.handleEventClick}
+          dateClick={this.handleDateSelect}
         />
         </div>
       </div>
@@ -73,37 +74,32 @@ export default class UserBookings extends React.Component
   
   async componentDidMount()
   {
-    ////console.log("Rendered!")
-    var backendToken = await generateBackendToken();
-    //console.log("Backend Token: " + backendToken);
-    var bookings = await getBookings('2021-11-10','2021-11-30');
-    //console.log("Bookings: " + bookings[0]['eventIdentifier'])
-    var times = await getBookings('2021-11-22','2021-12-31');
-    //console.log(times)
-    for(let i = 0;i < times.length;i++){
-        times[i]['title'] = 'Appointment';
-        times[i]['start'] = times[i]['from'].substring(0,times[i]['from'].length-1)+":00";
-        times[i]['end'] = times[i]['to'].substring(0,times[i]['to'].length-1)+":00";
-        times[i]['backgroundColor'] = '#a0a0a0';
-        times[i]['borderColor'] = '#888888';
-        times[i]['textColor'] = '#101010'
+    var times = await getBookings('2021-11-22','2021-12-31'); //Will select dates automatically later
+    for(let i = 0;i < times.length;i++)
+    {
+      times[i]['title'] = 'Appointment';
+      times[i]['start'] = times[i]['from'].substring(0,times[i]['from'].length-1)+":00";
+      times[i]['end'] = times[i]['to'].substring(0,times[i]['to'].length-1)+":00";
+      times[i]['backgroundColor'] = '#a0a0a0';
+      times[i]['borderColor'] = '#888888';
+      times[i]['textColor'] = '#101010' //Placeholders due to CSS issues
     }
-    //console.log(times[0])
     this.setState({weekend: true})
     this.setState({events: times})
   }
   
-  handleEventClick = (clickInfo) => {
-      //console.log("Event clicked: " +clickInfo.event._def.extendedProps.identifier);
-      //console.log(clickInfo.event)
-      //console.log("Date: " + clickInfo.event._instance.range.start)
-      var date = clickInfo.event._instance.range.start;
-      if(window.confirm("Are you sure you'd like to book an appointment for " + date + "?"))
-      {
-      var eventID = clickInfo.event._def.extendedProps.identifier;
-      //console.log('ID: ' + eventID)
-      var success = bookEvent(eventID,'John','Doe','ckpy6@hotmail.com');
-      //console.log("result" + success);
+  handleEventClick = (clickInfo) => 
+  {
+    var date = clickInfo.event._instance.range.start;
+    if(window.confirm("Are you sure you'd like to cancel your appointment for " + date + "?"))
+    {
+      var eventID = clickInfo.event._def.extendedProps.eventIdentifier;
+      cancelBooking(eventID)
     }
+  }
+  
+  handleDateSelect = (selectInfo) =>
+  {
+    console.log("Date: " + selectInfo.dateStr)
   }
 }

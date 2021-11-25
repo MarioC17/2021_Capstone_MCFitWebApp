@@ -169,3 +169,18 @@ export async function getBookings(startDate, endDate)
     //console.log(bookings);
     return bookings;
 }  
+
+export async function cancelBooking(eventID)
+{
+    var token = await generateBackendToken();
+    var myHeaders = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+    };
+    var requestOptions = {
+        method: 'DELETE',
+        redirect: 'follow',
+        headers: myHeaders
+    };
+    var response = await fetch("https://sagenda.net/api/v3/bookings/" + eventID + "/members", requestOptions).then(reply => reply.text).then(reply => console.log(reply));
+}
