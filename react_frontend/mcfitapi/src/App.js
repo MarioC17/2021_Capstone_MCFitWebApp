@@ -11,6 +11,7 @@ import Exercise from "./pages/exercise"
 import Signup from "./pages/Signup/signup"
 import Fitness from "./pages/Dashboard/fitness"
 import TrainerFitness from "./pages/Dashboard/Trainer/fitness"
+import TrainerClients from "./pages/Dashboard/Trainer/clients"
 import Nutrition from "./pages/Dashboard/Nutrition/nutrition"
 import Entry from "./pages/Dashboard/Nutrition/entry"
 import Signup2 from "./pages/Signup/signup2"
@@ -42,6 +43,7 @@ class App extends Component {
           <Route exact path="/signup" component={Signup}/>
           <Route exact path="/fitness" component={Fitness}/>
           <Route exact path="/trainer/fitness" component={TrainerFitness}/>
+          <Route exact path="/trainer/clients" component={TrainerClients}/>
           <Route exact path="/nutrition" component={Nutrition}/>
           <Route exact path="/nutrition/entry" component={Entry}/>
           <Route exact path="/signup2" component={Signup2}/>
