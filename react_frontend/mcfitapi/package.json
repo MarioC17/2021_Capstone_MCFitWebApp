@@ -19,6 +19,7 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.24.0",
     "classnames": "^2.3.1",
+    "cors": "^2.8.5",
     "fullcalendar": "^5.10.1",
     "material-table": "^1.69.3",
     "mui-editable-table": "^0.3.3",
@@ -36,7 +37,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "rm -rf ../../django_backend/build && react-scripts build && cp -r build ../../django_backend/build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -57,7 +58,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
   }
 }

@@ -6,7 +6,7 @@ import { Avatar, Button, IconButton } from '@mui/material/';
 import Sidebar from '../../../components/Sidebar';
 import CircleIcon from '@mui/icons-material/Circle';
 
-import ExerciseTable from '../../../components/ExerciseTable';
+
 import BlankProfile from '../../../static/img/blankprofile.jpg';
 //Stylesheet
 import './fitness.css';
@@ -24,7 +24,7 @@ const theme = createTheme({
     },
   });
 
-export default function Fitness() { 
+export default function TrainerFitness() { 
     return (
         <>
         <Sidebar/> 
@@ -66,7 +66,7 @@ export default function Fitness() {
             
             <div className="assign">
                 <span className="small-title">Assign Exercise</span><br/><br/><br/><br/>
-                <ExerciseTable/>
+                <h1>TABLE HERE</h1>
             </div>
     </div>
     </>

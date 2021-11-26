@@ -26,7 +26,11 @@ import AboutMe from "./pages/aboutme"
 import Policy from "./pages/policy"
 import Booking from "./pages/Dashboard/booking"
 import TrainerBooking from "./pages/Dashboard/Trainer/booking"
-import Profile from "./pages/clientPage"
+import Activate from './containers/Activate';
+import ResetPassword from './containers/ResetPassword';
+import ResetPasswordConfirm from './containers/ResetPasswordConfirm';
+import Google from './containers/Google';
+import Layout from './layout/layout';
 
 class App extends Component {
 
@@ -34,33 +38,38 @@ class App extends Component {
     return (
       <Provider store ={store}>
       <Router>
-        <Switch>
-          <Route exact={true} path="/" component={Login}/>
-          <Route exact path="/404" component={NotFoundPage}/>
-          <Route exact path="/forms" component={Forms}/>
-          <Route exact path="/exercise" component={Exercise}/>
-          <Route exact path="/signup" component={Signup}/>
-          <Route exact path="/fitness" component={Fitness}/>
-          <Route exact path="/trainer/fitness" component={TrainerFitness}/>
-          <Route exact path="/nutrition" component={Nutrition}/>
-          <Route exact path="/nutrition/entry" component={Entry}/>
-          <Route exact path="/signup2" component={Signup2}/>
-          <Route exact path="/signup3" component={Signup3}/>
-          <Route exact path="/signup4" component={Signup4}/>
-          <Route exact path="/signup5" component={Signup5}/>
-          <Route exact path="/signup6" component={Signup6}/>
-          <Route exact path="/signup7" component={Signup7}/>
-          <Route exact path="/signup8" component={Signup8}/>
-          <Route exact path="/signup9" component={Signup9}/>
-          <Route exact path="/signup8" component={Booking}/>
-          <Route exact path="/memberships" component={Memberships}/>
-          <Route exact path="/aboutme" component={AboutMe}/>
-          <Route exact path="/policy" component={Policy}/>
-          <Route exact path="/booking" component={Booking}/>
-          <Route exact path="/trainer/booking" component={TrainerBooking}/>
-          <Route exact path="/profile" component={Profile}/>
-          <Redirect to="/404"/>
-        </Switch>
+        <Layout>
+          <Switch>
+            <Route exact={true} path="/" component={Login}/>
+            <Route exact path="/404" component={NotFoundPage}/>
+            <Route exact path="/forms" component={Forms}/>
+            <Route exact path="/exercise" component={Exercise}/>
+            <Route exact path="/signup" component={Signup}/>
+            <Route exact path="/fitness" component={Fitness}/>
+            <Route exact path="/trainer/fitness" component={TrainerFitness}/>
+            <Route exact path="/nutrition" component={Nutrition}/>
+            <Route exact path="/nutrition/entry" component={Entry}/>
+            <Route exact path="/signup2" component={Signup2}/>
+            <Route exact path="/signup3" component={Signup3}/>
+            <Route exact path="/signup4" component={Signup4}/>
+            <Route exact path="/signup5" component={Signup5}/>
+            <Route exact path="/signup6" component={Signup6}/>
+            <Route exact path="/signup7" component={Signup7}/>
+            <Route exact path="/signup8" component={Signup8}/>
+            <Route exact path="/signup9" component={Signup9}/>
+            <Route exact path="/signup8" component={Booking}/>
+            <Route exact path="/memberships" component={Memberships}/>
+            <Route exact path="/aboutme" component={AboutMe}/>
+            <Route exact path="/policy" component={Policy}/>
+            <Route exact path="/booking" component={Booking}/>
+            <Route exact path="/trainer/booking" component={TrainerBooking}/>
+            <Route exact path='/google' component={Google} />
+            <Route exact path='/reset-password' component={ResetPassword} />
+            <Route exact path='/password/reset/confirm/:uid/:token' component={ResetPasswordConfirm} />
+            <Route exact path='/activate/:uid/:token' component={Activate} />
+            <Redirect to="/404"/>
+          </Switch>
+        </Layout>
       </Router>
       </Provider>
     )  

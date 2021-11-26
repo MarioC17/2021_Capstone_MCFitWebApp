@@ -34,6 +34,7 @@ export const SidebarData = [
         link: "/",
     },
     {
+        title: 'logout',
         icon: <LogoutIcon/>,
         link: "/"
     }

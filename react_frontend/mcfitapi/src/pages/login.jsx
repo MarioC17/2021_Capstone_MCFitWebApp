@@ -25,7 +25,7 @@ const theme = createTheme({
 
 
 
-const Login = ({login}) => {
+const Login = ({login,isAuthenticated}) => {
   const [formData, setFormData] = useState({
     email:'',
     password:''
@@ -40,6 +40,9 @@ const Login = ({login}) => {
     login(email,password);
   };
 
+  if (isAuthenticated) {
+    return <Redirect to='/fitness' />
+  }
 
 return (
   <div>
@@ -98,8 +101,7 @@ return (
                 Sign In
               </Button>
             </ThemeProvider>
-            
-            <GoogleOAuth/>
+            <br/>
             <Link to="/signup" className="formFieldLink">
               <span className="sourcesanspro-normal-white-17px">Don't have an account? <b>Sign Up Now</b></span>
             </Link>
@@ -115,4 +117,8 @@ return (
   </div>
 );}
 
-export default connect(null,{login}) (Login);
+const mapStatetoProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStatetoProps,{login}) (Login);
