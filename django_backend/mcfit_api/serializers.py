@@ -8,7 +8,7 @@ User = get_user_model()
 class UserCreateSerializer(UserCreateSerializer):
     class Meta:
         model = User
-        fields = ('id','email','first_name','last_name','phone_number','password')
+        fields = ('id','email','first_name','last_name','phone_number','emergency_contact','password','dob')
 
 class ExercisetableSerializer(serializers.ModelSerializer):
     class Meta:

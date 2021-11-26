@@ -1,9 +1,12 @@
 import React from "react";
 import {SidebarData} from './SidebarData'
 import "../App.css"
-import { NavLink } from 'react-router-dom'
+import {connect} from 'react-redux'
+import {logout} from '../actions/auth'
 
-function Sidebar() {
+
+const Sidebar = ({logout}) => {
+
   return (
     <div className="Sidebar">
       <ul className="SidebarList">
@@ -14,6 +17,9 @@ function Sidebar() {
             className="row"
             onClick={()=> {
               window.location.pathname = val.link;
+              if (val.title === 'logout'){
+                logout();
+              }
             }}
           >
             <div id="icon">{val.icon}</div>
@@ -25,4 +31,4 @@ function Sidebar() {
   )
 }
 
-export default Sidebar
+export default connect(null,{logout})(Sidebar)

@@ -2,14 +2,6 @@ import React from 'react';
 import GoogleLogin from 'react-google-login';
 
 class connectionExample extends React.Component {
-/*
-componentDidMount() {
-    const apiUrl = 'http://localhost:8000/api';
-    fetch(apiUrl)
-          .then((response) => response.json())
-          .then((data) => console.log(data));
-  }
-*/
 
   responseGoogle = response => {
     console.log(response);
