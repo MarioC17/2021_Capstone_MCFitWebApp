@@ -40,7 +40,7 @@ const Login = () => {
   const responseGoogle = async(response) => {
     let googleResponse  = await googleLogin(response.accessToken)
     console.log(googleResponse);
-    console.log(response);
+    console.log(response.profileObj.googleId); //gets google id of person logging in
   }
 return (
   <div>
