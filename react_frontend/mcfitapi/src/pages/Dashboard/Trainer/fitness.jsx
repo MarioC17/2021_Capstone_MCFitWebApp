@@ -2,12 +2,14 @@ import React from 'react';
 import { createTheme } from '@mui/material/styles';
 import Sidebar from '../../../components/Sidebar';
 import CircleIcon from '@mui/icons-material/Circle';
-
-
 import BlankProfile from '../../../static/img/blankprofile.jpg';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DatePicker from '@mui/lab/DatePicker';
+import { Box, TextField } from '@mui/material/';
+//import { TableHead, TableRow, TableCell, TableSortLabel } from '@material-ui/core/'
 //Stylesheet
 import './fitness.css';
-
 const theme = createTheme({
     palette: {
       neutral: {
@@ -21,11 +23,21 @@ const theme = createTheme({
     },
   });
 
-<<<<<<< HEAD
-export default function TrainerFitness() { 
-=======
+const headCells = [
+{ id: 'name', numeric: false, disablePadding: true, label: 'Exercise'},
+{ id: 'reps', numeric: false, disablePadding: false, label: 'Reps' },
+{ id: 'sets', numeric: false, disablePadding: false, label: 'Sets' },
+{ id: 'rest', numeric: false, disablePadding: false, label: 'Rest' },
+{ id: 'RIR', numeric: false, disablePadding: false, label: 'RIR' },
+{ id: 'Load', numeric: false, disablePadding: false, label: 'Load' },
+{ id: 'Notes', numeric: false, disablePadding: false, label: 'Notes' },
+];
+
 export default function Fitness(props) { 
->>>>>>> 559742ada193a84d651a0b498e6060cc6b926e40
+    const [value, setValue] = React.useState(null);
+    
+
+export default function Fitness(props) { 
     return (
         <>
         <Sidebar/> 
@@ -67,6 +79,24 @@ export default function Fitness(props) {
             
             <div className="assign">
                 <span className="small-title">Assign Exercise</span><br/><br/><br/><br/>
+                <span style={{display: 'flex', alignItems: 'center', justifyContent: 'flex-end', paddingRight: '1%'}}>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <DatePicker
+                            label="Select Date"
+                            value={value}
+                            onChange={(newValue) => {
+                            setValue(newValue);
+                            }}
+                            renderInput={(params) => <TextField {...params} />}
+                        />
+                    </LocalizationProvider>
+                </span>
+                
+                <hr/>
+                <span className="small-title">Exercises Summary</span><br/><br/>
+                <span>Oct. 20, 2021
+                    
+                </span> 
                 <h1>TABLE HERE</h1>
             </div>
     </div>

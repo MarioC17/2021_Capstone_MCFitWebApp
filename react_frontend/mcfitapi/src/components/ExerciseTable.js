@@ -100,8 +100,6 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-
-
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -190,7 +188,7 @@ export default function EnhancedTable() {
     <form>
       <input
         type="text"
-        placeholder="Search here"
+        placeholder="Type exercise name"
         onChange={(e) => {
           setSearch(e.target.value);
         }}
