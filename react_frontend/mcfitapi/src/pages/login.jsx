@@ -1,12 +1,14 @@
 import { Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import React, { useState } from "react";
+import React, { Fragment, useEffect, useState } from 'react';
+import GoogleLogin from 'react-google-login';
 import { Link } from 'react-router-dom';
 //Components
 import Header from '../components/Header';
 import img from "../static/img/login-image.png";
 //style
 import "./login.css";
+import googleLogin from "../services/googleLogin";
 
 
 const theme = createTheme({
@@ -35,6 +37,11 @@ const Login = () => {
 
   };
 
+  const responseGoogle = async(response) => {
+    let googleResponse  = await googleLogin(response.accessToken)
+    console.log(googleResponse);
+    console.log(response);
+  }
 return (
   <div>
     <Header/>
@@ -83,7 +90,12 @@ return (
               required
             />
           </div>
-
+            <GoogleLogin
+            clientId="35091798775-4a59pnnbajjnmrmh3s06lqr22oqkkgtc.apps.googleusercontent.com"
+            buttonText="LOGIN WITH GOOGLE"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+          />
           <div className="formField">
             <ThemeProvider theme={theme}>
               <Button color="neutral" 
