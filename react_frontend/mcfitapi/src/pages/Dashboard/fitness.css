@@ -53,8 +53,26 @@
     display: flex;
   }
 
+  .analytic-card-library {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px solid #d3d3d3;
+    border-radius: .60rem; 
+    background-color: var(--black);
+    align-items: center;
+    box-shadow: 3px 4px 5px #00000029;
+    min-height: 100px;  
+    border-radius: 25px;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-bottom: 10px;
+    display: flex;
+  }
+
   .analytic-title {
     font-family: var(--font-family-source_sans_pro);
+    color: var(--black);
     font-size: 35px;
     font-weight: 600;
     margin-bottom: 10px;

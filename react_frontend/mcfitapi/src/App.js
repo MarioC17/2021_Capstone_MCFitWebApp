@@ -7,6 +7,7 @@ import store from './store'
 import NotFoundPage from "./pages/404"
 import Login from "./pages/login"
 import Forms from "./pages/forms"
+import Home from "./pages/Dashboard/home"
 import Exercise from "./pages/exercise"
 import Signup from "./pages/Signup/signup"
 import Fitness from "./pages/Dashboard/fitness"
@@ -42,6 +43,7 @@ class App extends Component {
           <Route exact path="/exercise" component={Exercise}/>
           <Route exact path="/signup" component={Signup}/>
           <Route exact path="/fitness" component={Fitness}/>
+          <Route exact path="/home" component={Home}/>
           <Route exact path="/trainer/fitness" component={TrainerFitness}/>
           <Route exact path="/trainer/clients" component={TrainerClients}/>
           <Route exact path="/nutrition" component={Nutrition}/>

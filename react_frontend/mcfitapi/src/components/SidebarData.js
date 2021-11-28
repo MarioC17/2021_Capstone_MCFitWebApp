@@ -11,7 +11,7 @@ export const SidebarData = [
     },
     {
         icon: <Home/>,
-        link: "/",
+        link: "/home",
     },
     {
         icon: <EventAvailable/>,

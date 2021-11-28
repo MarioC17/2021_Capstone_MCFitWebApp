@@ -45,7 +45,7 @@ export default function Fitness() {
                 Fitness
             </div>
             <div className="analytics">
-                <span className="small-title">Analytics</span>
+                <span className="small-title">Overall Progress</span>
                 <div className="analytic-container">
                     <div className="analytic-card" >
                         <span className="analytic-title">Goals</span>
@@ -59,12 +59,11 @@ export default function Fitness() {
                             <span className="analytic-content">Current: WEIGHTlbs</span>
                         </div>
                     </div>
-                    <div className="analytic-card" >
-                        <span style={{alignContent: 'center'}} className="analytic-title">Workout Library</span>
-                        <ThemeProvider theme={theme}>
-                            <Button variant="contained" color="neutral" startIcon={<ArrowForwardIosIcon />}>
-                            </Button>
-                        </ThemeProvider>
+                    <div className="analytic-card-library" >
+                        <span style={{color: 'white'}} className="analytic-title">Workout Library</span>
+                        <IconButton style={{color: 'white'}}>
+                            <ArrowForwardIosIcon />
+                        </IconButton>
                     </div>      
                 </div>      
             </div>
