@@ -1,10 +1,15 @@
-import { createTheme } from '@mui/material/styles';
-import React, { useState } from "react";
-//Stylesheet
-import './signup.css';
+import React, { Component,useState} from "react";
+import { Link, Redirect } from 'react-router-dom';
+import { Button } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { signup } from '../../actions/auth';
+
+//Components
+import Header from '../../components/HeaderW'
 import Signup1 from './signup1';
 import Signup2 from './signup2';
-
+//Stylesheet
+import './signup.css';
 
 
 const theme = createTheme({
@@ -16,7 +21,7 @@ const theme = createTheme({
     },
   });
 
-const Signup = () => {
+const Signup = ({signup, isAuthenticated }) => {
 
   const [step, setStep] = useState(1);
 
@@ -32,7 +37,7 @@ const Signup = () => {
     case 1:
       return(
         <div>
-        <Signup1 nextStep = {nextStep} />
+        <Signup1 nextStep = {nextStep} signup = {signup} isAuthenticated = {isAuthenticated} />
         </div>
     )
     case 2:

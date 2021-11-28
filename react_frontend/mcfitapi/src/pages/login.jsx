@@ -1,13 +1,18 @@
+import React, { Component,useState} from "react";
+import GoogleOAuth from "../components/GoogleLogin";
+import img from "../static/img/login-image.png";
 import { Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import axios from 'axios';
+import {login} from '../actions/auth';
 //Components
-import Header from '../components/Header';
-import img from "../static/img/login-image.png";
+import Header from '../components/Header'
+
 //style
 import "./login.css";
-
+import connectionExample from "../components/GoogleLogin";
 
 const theme = createTheme({
   palette: {
@@ -20,7 +25,7 @@ const theme = createTheme({
 
 
 
-const Login = () => {
+const Login = ({login,isAuthenticated}) => {
   const [formData, setFormData] = useState({
     email:'',
     password:''
@@ -32,8 +37,12 @@ const Login = () => {
 
   const onSubmit = e => {
     e.preventDefault();
-
+    login(email,password);
   };
+
+  if (isAuthenticated) {
+    return <Redirect to='/fitness' />
+  }
 
 return (
   <div>
@@ -108,5 +117,8 @@ return (
   </div>
 );}
 
+const mapStatetoProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
 
-export default Login;
+export default connect(mapStatetoProps,{login}) (Login);

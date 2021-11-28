@@ -1,9 +1,11 @@
 import React from "react";
-import "../App.css";
-import { SidebarData } from './SidebarData';
+import {SidebarData} from './SidebarData'
+import "../App.css"
+import {connect} from 'react-redux'
+import {logout} from '../actions/auth'
 
 
-const Sidebar = () => {
+const Sidebar = ({logout}) => {
 
   return (
     <div className="Sidebar">
@@ -16,8 +18,7 @@ const Sidebar = () => {
             onClick={()=> {
               window.location.pathname = val.link;
               if (val.title === 'logout'){
-                //logout();
-                console.log("logout")
+                logout();
               }
             }}
           >
@@ -30,4 +31,4 @@ const Sidebar = () => {
   )
 }
 
-export default Sidebar
+export default connect(null,{logout})(Sidebar)

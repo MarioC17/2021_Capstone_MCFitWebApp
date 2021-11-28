@@ -1,8 +1,11 @@
 
 import { Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import React, { useState } from "react";
 import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import axios from 'axios';
+import React, { Component,useState} from "react";
+import { signup } from '../../actions/auth';
 //Components
 import Header from '../../components/HeaderW';
 //Stylesheet
@@ -20,6 +23,7 @@ const theme = createTheme({
 
 
 const Signup1 = (props) => {
+    const [accountCreated, setAccountCreated] = useState(false);
 
     const [formData, setFormData] = useState({
         email:'',
@@ -36,10 +40,26 @@ const Signup1 = (props) => {
     
       const onSubmit = e => {
         e.preventDefault();
-        props.nextStep();
+        //check if all fields are filled and valid here
+        if (password === re_password) {
+            props.signup(email,password,re_password,first_name,last_name,phone_number);
+            setAccountCreated(true);
+            props.nextStep();
         }
+    
+        else {
+            //change this to something better to tell user to fill out fields
+            alert("Please fill all form fields")
+        }
+      };
 
-
+    if (props.isAuthenticated) {
+    return <Redirect to='/' />
+    }
+    
+    if (accountCreated) {
+        return <Redirect to='/' />
+    }
 
     return(
         <div style={{backgroundColor: "white", minHeight: "100vh"}}>
@@ -156,5 +176,9 @@ const Signup1 = (props) => {
 
 
 )};
+
+const mapStatetoProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+  });
   
-export default Signup1;
+export default connect(mapStatetoProps,{signup}) (Signup1);
