@@ -1,8 +1,5 @@
-import React, { Component, useState} from 'react';
-import { render } from 'react-dom';
-import { Link } from "react-router-dom";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Avatar, Button, IconButton } from '@mui/material/';
+import React from 'react';
+import { createTheme } from '@mui/material/styles';
 import Sidebar from '../../../components/Sidebar';
 import CircleIcon from '@mui/icons-material/Circle';
 
@@ -24,7 +21,11 @@ const theme = createTheme({
     },
   });
 
+<<<<<<< HEAD
 export default function TrainerFitness() { 
+=======
+export default function Fitness(props) { 
+>>>>>>> 559742ada193a84d651a0b498e6060cc6b926e40
     return (
         <>
         <Sidebar/> 
@@ -34,17 +35,17 @@ export default function TrainerFitness() {
                 Fitness
             </div>
             <div className="profile">   
-                <span className="small-title">Emma Brooks INPUTNAME</span><br/><br/><br/><br/>
+                <span className="small-title">{props.location.clientProp.name}</span><br/><br/><br/><br/>
                 <img className="profile-pic" src={BlankProfile} alt="default image"/><br/><br/>
                 <div className="profile-card">
                     <span className="small-title">Info.</span>
                     <div className="profile-info">
                         <div style={{display: 'flex', flexDirection: 'row', alignContent: 'space-between'}}>
-                            <span>Birthday: Month. Day, Year</span> 
-                            <span>Sex: Female</span>
+                            <span>Birthday: databasestuff</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span>Sex: {props.location.clientProp.gender}</span>
                         </div>
-                        <span>Address: </span> 
-                        <span>Program: </span>
+                        <span>Address: {props.location.clientProp.location}</span> 
+                        <span>Program: databasestuff</span>
                     </div>
                 </div>
                 <div className="profile-card">

@@ -3,7 +3,7 @@ import FullCalendar from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import timeGridPlugin from '@fullcalendar/timegrid'
 import listPlugin from '@fullcalendar/list'
-import { Button } from '@mui/material';
+import { Button, Modal, Box, Typography } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { getBookableTimes, bookEvent, getBookings, cancelBooking } from '../../components/booking'
 import Sidebar from '../../components/Sidebar';
@@ -11,6 +11,8 @@ import Sagenda from '../../static/img/sagenda.png';
 import MiniCalendar from '../../components/MiniCalendar';
 import './booking.css'
 import interactionPlugin from '@fullcalendar/interaction'
+import { AccessTimeFilled, Description, Event, LocationOn } from '@mui/icons-material/';
+
 var myToken;
     
 const theme = createTheme({
@@ -22,15 +24,50 @@ const theme = createTheme({
   },
 });
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 500,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
 export default class UserBookings extends React.Component
 {
   state = {
   weekend: true,
   events: []
 }
+
+constructor(props) {
+  super(props)
+  this.state = {
+    open: false
+  }
+  this.handleOpen = this.handleOpen.bind(this);
+  this.handleClose = this.handleClose.bind(this);
+}
+
+handleOpen() {
+   this.setState({ open: true})
+}
+handleClose() {
+  this.setState({ open: false})
+}
     
   render() {
-    
+    const theme = createTheme({
+      palette: {
+        neutral: {
+          main: '#000000',
+          contrastText: '#ffffff',
+        },
+      },
+    });
     return (
       <>
       <Sidebar/>
@@ -63,10 +100,43 @@ export default class UserBookings extends React.Component
           initialView="dayGridMonth"
           weekends={this.state.weekend}
           events={this.state.events}
-          eventClick={this.handleEventClick}
+          eventClick={this.handleOpen}
           dateClick={this.handleDateSelect}
         />
         </div>
+        <Modal
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+          >
+          <Box sx={style}>
+            <div class="booking-popup-container">
+              <div class="book-popup-ico1"><img style={{height: '65px'}} src={Sagenda}/></div>
+              <div class="book-popup-ico2"><AccessTimeFilled/></div>
+              <div class="book-popup-ico3"><LocationOn/></div>
+              <div class="book-popup-ico4"><Description/></div>
+              <div class="book-popup-ico5"><Event/></div>
+              <div class="book-popup-title">
+                  Book Appointment
+              </div>
+              {/* add content here curt */}
+              <div class="book-popup-date">date time*****</div>
+              <div class="book-popup-desc">Add description or attachments</div>
+              <div class="book-popup-location">******</div>
+              <div class="book-popup-event">Notify *****</div>
+            </div>
+            <div style={{textAlign: 'right'}}>
+              <ThemeProvider theme={theme}>
+                <Button variant="contained" 
+                color="neutral" 
+                style={{marginBotton: '5%', minWidth: '150px', fontSize: '20px'}}>
+                Save
+                </Button>
+              </ThemeProvider>
+            </div>
+          </Box>
+        </Modal>
       </div>
       </>
     )
@@ -87,6 +157,7 @@ export default class UserBookings extends React.Component
     this.setState({weekend: true})
     this.setState({events: times})
   }
+  
   
   handleEventClick = (clickInfo) => 
   {
