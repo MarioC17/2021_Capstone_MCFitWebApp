@@ -1,9 +1,10 @@
 import React from "react";
-import {SidebarData} from './SidebarData'
-import "../App.css"
-import { NavLink } from 'react-router-dom'
+import "../App.css";
+import { SidebarData } from './SidebarData';
 
-function Sidebar() {
+
+const Sidebar = () => {
+
   return (
     <div className="Sidebar">
       <ul className="SidebarList">
@@ -14,6 +15,10 @@ function Sidebar() {
             className="row"
             onClick={()=> {
               window.location.pathname = val.link;
+              if (val.title === 'logout'){
+                //logout();
+                console.log("logout")
+              }
             }}
           >
             <div id="icon">{val.icon}</div>

@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
-import { Provider } from 'react-redux';
-import store from './store'
-
+import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 //Pages
 import NotFoundPage from "./pages/404"
 import Login from "./pages/login"
@@ -34,7 +31,6 @@ class App extends Component {
 
   render(){
     return (
-      <Provider store ={store}>
       <Router>
         <Switch>
           <Route exact={true} path="/" component={Login}/>
@@ -66,7 +62,6 @@ class App extends Component {
           <Redirect to="/404"/>
         </Switch>
       </Router>
-      </Provider>
     )  
   }
 }
