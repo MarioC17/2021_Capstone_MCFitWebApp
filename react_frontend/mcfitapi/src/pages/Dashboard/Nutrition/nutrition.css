@@ -10,6 +10,7 @@
     grid-template-columns: 1fr 1fr 0.7fr;
     grid-template-rows: 0.33fr 0.3fr 0.2fr 2.9fr;
     grid-auto-columns: 1fr;
+    padding-bottom: 20px;
     gap: 30px 20px;
     grid-auto-flow: row;
     grid-template-areas:
