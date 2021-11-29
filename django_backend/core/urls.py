@@ -9,7 +9,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('mcfit.urls',namespace='mcfit')),
     path('api/',include('mcfit_api.urls',namespace='mcfit_api')),
-    path('rest-auth/', include('rest_auth.urls')),
-    path('rest-auth/registration/', include('rest_auth.registration.urls')),
-    path('rest-auth/google/', GoogleLogin.as_view(), name='google_login')
+    path('dj-rest-auth/', include('dj_rest_auth.urls')),
+    path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
+    path('dj-rest-auth/google/', GoogleLogin.as_view(), name='google_login'),
+    path('api-auth/', include('rest_framework.urls')),
 ]

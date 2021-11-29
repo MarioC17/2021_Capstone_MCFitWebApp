@@ -20,7 +20,7 @@ class ExerciseList(generics.ListCreateAPIView):
     serializer_class = ExercisetableSerializer
 
 class ExerciseDetail(generics.RetrieveDestroyAPIView):
-    queryset = Exercisetable.objects.all()   
+    queryset = Exercisetable.objects.all()  
     serializer_class = ExercisetableSerializer
 
 class ExerciseUpdate(generics.UpdateAPIView):
@@ -31,19 +31,19 @@ class ExerciseDelete(generics.DestroyAPIView):
     queryset = Exercisetable.objects.all()   
     serializer_class = ExercisetableSerializer
 
-class UserList(generics.ListCreateAPIView):
+class ProfileList(generics.ListCreateAPIView):
     queryset = Profiles.objects.all()
     serializer_class = ProfilesSerializer
 
-class UserDetail(generics.RetrieveDestroyAPIView):
+class ProfileDetail(generics.RetrieveDestroyAPIView):
     queryset = Profiles.objects.all()   
     serializer_class = ProfilesSerializer
 
-class UserUpdate(generics.UpdateAPIView):
+class ProfileUpdate(generics.UpdateAPIView):
     queryset = Profiles.objects.all()   
     serializer_class = ProfilesSerializer
 
-class UserDelete(generics.DestroyAPIView):
+class ProfileDelete(generics.DestroyAPIView):
     queryset = Profiles.objects.all()   
     serializer_class = ProfilesSerializer 
 
@@ -63,5 +63,9 @@ class WorkoutDelete(generics.DestroyAPIView):
     queryset = Workouts.objects.all()   
     serializer_class = WorkoutsSerializer 
 
+
+class UserDetail(generics.RetrieveDestroyAPIView):
+    queryset = Workouts.objects.all()   
+    serializer_class = WorkoutsSerializer
 #view classes docs    
 #https://www.django-rest-framework.org/api-guide/generic-views/#concrete-view-classes

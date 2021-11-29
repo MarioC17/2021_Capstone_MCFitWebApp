@@ -59,16 +59,16 @@ export default function Fitness(props) {
                 Fitness
             </div>
             <div className="profile">   
-                <span className="small-title">{props.location.clientProp.name}</span><br/><br/><br/><br/>
+                <span className="small-title">{props.name}</span><br/><br/><br/><br/>
                 <img className="profile-pic" src={BlankProfile} alt="default image"/><br/><br/>
                 <div className="profile-card">
                     <span className="small-title">Info.</span>
                     <div className="profile-info">
                         <div style={{display: 'flex', flexDirection: 'row', alignContent: 'space-between'}}>
                             <span>Birthday: databasestuff</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span>Sex: {props.location.clientProp.gender}</span>
+                            <span>Sex: {props.gender}</span>
                         </div>
-                        <span>Address: {props.location.clientProp.location}</span> 
+                        <span>Address: {props.location}</span> 
                         <span>Program: databasestuff</span>
                     </div>
                 </div>
