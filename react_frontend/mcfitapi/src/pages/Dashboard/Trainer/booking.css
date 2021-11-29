@@ -1,0 +1,94 @@
+@import '../../../styleguide.css';
+@import '../../../globals.css';
+
+
+.booking-container {
+    display: grid;
+    margin-left: 100px; /*REQUIRED WHEN USING SIDEBAR*/
+    padding-left: 50px;
+    grid-template-columns: 0.8fr 1.2fr 1fr;
+    grid-template-rows: 1.22fr 1.23fr;
+    grid-auto-columns: 1fr;
+    gap: 0px 20px;
+    grid-auto-flow: row;
+    font-family: var(--font-family-source_sans_pro);
+    grid-template-areas:
+      "mini-calendar main-calendar main-calendar"
+      "reminders main-calendar main-calendar";
+  }
+  
+  .calendar-header { grid-area: calendar-header; }
+  
+  .mini-calendar { grid-area: mini-calendar; }
+  
+  .reminders { grid-area: reminders; }
+  
+  .main-calendar { grid-area: main-calendar; }
+  
+  .small-title {
+    font-size: 30px;
+    font-weight: 600;
+  }
+
+  .sub-title {
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .booking-popup-container {
+    display: grid;
+    grid-template-columns: 0.3fr 1.7fr;
+    grid-template-rows: 0.9fr 1.1fr 1fr 1fr 1fr;
+    grid-auto-columns: 1fr;
+    margin-bottom: 20px;
+    font-family: var(--font-family-source_sans_pro);
+    gap: 0px 30px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "book-popup-ico1 book-popup-title"
+      "book-popup-ico2 book-popup-date"
+      "book-popup-ico3 book-popup-location"
+      "book-popup-ico4 book-popup-desc"
+      "book-popup-ico5 book-popup-event";
+  }
+  
+  .book-popup-ico1 { grid-area: book-popup-ico1; }
+  
+  .book-popup-ico2 { grid-area: book-popup-ico2; display: flex;
+    justify-content: center;
+    align-items: center;}
+  
+  .book-popup-ico3 { grid-area: book-popup-ico3; display: flex;
+    justify-content: center;
+    align-items: center;}
+  
+  .book-popup-ico4 { grid-area: book-popup-ico4; display: flex;
+    justify-content: center;
+    align-items: center;}
+  
+  .book-popup-ico5 { grid-area: book-popup-ico5; display: flex;
+    justify-content: center;
+    align-items: center;}
+  
+  .book-popup-title { grid-area: book-popup-title;
+  font-weight: 600;
+font-size: 30px; 
+margin-top: 10px;
+color: #5c5c5c;}
+  
+  .book-popup-date { grid-area: book-popup-date; 
+    display: flex;
+    align-items: center;}
+  
+  .book-popup-desc { grid-area: book-popup-desc; 
+    display: flex;
+    align-items: center;}
+  
+  .book-popup-location { grid-area: book-popup-location; 
+    display: flex;
+    align-items: center;}
+  
+  .book-popup-event { grid-area: book-popup-event; 
+    display: flex;
+    align-items: center;}
+  

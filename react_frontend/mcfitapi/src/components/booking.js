@@ -92,24 +92,24 @@ async function getEventLock(eventID, token)
     'Authorization': 'Bearer ' + token
     };
     
-var raw = JSON.stringify({
-  "eventIdentifier": eventID,
-  "participants": 1
-});
-
-var requestOptions = {
-  method: 'POST',
-  headers: myHeaders,
-  body: raw,
-  redirect: 'follow'
-};
+    var raw = JSON.stringify({
+      "eventIdentifier": eventID,
+      "participants": 1
+    });
+    
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
     
     var response = await fetch("https://sagenda.net/api/v3/eventLocks", requestOptions).then(reply => reply.json());
     //console.log("Lock: " + response['identifier']);
     return response;
 }
 
-export async function bookEvent(eventID, firstName, lastName, email)
+export async function bookEvent(eventID, firstName, lastName, email, description)
 {
     var token = await generateSagendaToken();
     var lock = await getEventLock(eventID, token);
@@ -123,15 +123,18 @@ export async function bookEvent(eventID, firstName, lastName, email)
         'Authorization': 'Bearer ' + token
     };
     //console.log(myHeaders);
-
+    if(description === "")
+        description = "No description provided";
     var raw = JSON.stringify({
       "eventIdentifier": eventID,
       "lockIdentifier": lockID,
       "member": {
-        "email": "ckpy6@hotmail.com",
-       "firstName": firstName,
-       "lastName": lastName,
-       "participants": 1
+        "email": email,
+        "firstName": firstName,
+        "lastName": lastName,
+        "participants": 1,
+        "description": description
+        
       }
     });
 
@@ -143,10 +146,10 @@ export async function bookEvent(eventID, firstName, lastName, email)
       crossDomain: true
     };
     
-    var response = await fetch('https://sagenda.net/api/v3/events', requestOptions).then(reply => reply.text()).then(reply => console.log(reply));
-    //console.log(response);
-    //console.log(response.status);
-    return response.status;
+    var response = await fetch('https://sagenda.net/api/v3/events', requestOptions);
+    console.log(response);
+    console.log(response.status);
+    return (response.status === 201);
     
 }
 
@@ -170,6 +173,21 @@ export async function getBookings(startDate, endDate)
     return bookings;
 }  
 
+export async function getBookingsByUser(startDate, endDate, firstName, lastName)
+{
+    var bookings = await getBookings(startDate, endDate);
+    console.log(bookings);
+    //return bookings;
+    var userBookings = [];
+    for(let i = 0;i < bookings.length;i++)
+    {
+        if(bookings[i]['members'][0]['firstName'] === firstName && bookings[i]['members'][0]['lastName'] === lastName)
+            userBookings.push(bookings[i]);
+    }
+    console.log(userBookings);
+    return userBookings;
+}
+
 export async function cancelBooking(eventID)
 {
     var token = await generateBackendToken();
@@ -184,3 +202,25 @@ export async function cancelBooking(eventID)
     };
     var response = await fetch("https://sagenda.net/api/v3/bookings/" + eventID + "/members", requestOptions).then(reply => reply.text).then(reply => console.log(reply));
 }
+
+export async function blockTimeSlot(eventID)
+{
+
+    var token = await generateBackendToken();
+    var myHeaders = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+    };
+    
+    var requestOptions = 
+    {
+        method: 'PUT',
+        redirect: 'follow',
+        headers: myHeaders
+    };
+
+    var response = await fetch("https://sagenda.net/api/v3/bookings/" + eventID + "/block", requestOptions).catch(error => console.log('error', error));
+    console.log(response)
+    console.log(response.json())
+}
+
