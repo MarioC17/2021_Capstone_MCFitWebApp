@@ -50,8 +50,6 @@ export default function Fitness(props) {
     
     const [value, setValue] = React.useState(null);
     
-
-export default function Fitness(props) { 
     return (
         <>
         <Sidebar/> 
@@ -111,7 +109,6 @@ export default function Fitness(props) {
                 <span>Oct. 20, 2021
                     
                 </span> 
-                <h1>TABLE HERE</h1>
             </div>
     </div>
     </>
