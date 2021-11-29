@@ -34,6 +34,20 @@ const headCells = [
 ];
 
 export default function Fitness(props) { 
+    if (props.location.clientProp == undefined) {
+        console.log("No profile selected")
+        props.location.clientProp = {
+            'profilepic': <img style={{height: '60px', width: '60px', borderRadius: '50%'}} src={BlankProfile}/>,
+            'name': '',
+            'age': '',
+            'gender': '', 
+            'location': ''
+        };
+    }
+    else {
+        console.log("Profile selected")
+    }
+    
     const [value, setValue] = React.useState(null);
     
     return (

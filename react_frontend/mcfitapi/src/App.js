@@ -31,7 +31,6 @@ import TrainerBooking from "./pages/Dashboard/Trainer/booking"
 import Profile from "./pages/clientPage"
 
 class App extends Component {
-
   render(){
     return (
       <Provider store ={store}>
