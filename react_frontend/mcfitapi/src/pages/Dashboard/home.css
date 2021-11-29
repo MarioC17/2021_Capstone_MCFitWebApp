@@ -1,0 +1,71 @@
+@import '../../styleguide.css';
+@import '../../globals.css';
+
+.home-container {
+    display: grid;
+    margin-left: 100px; /*REQUIRED WHEN USING SIDEBAR*/
+    grid-template-columns: 1fr 1fr 0.7fr;
+    grid-template-rows: 0.2fr 1.8fr;
+    padding: 2%;
+    grid-auto-columns: 1fr;
+    gap: 0px 8px;
+    font-family: var(--font-family-source_sans_pro);
+    grid-auto-flow: row;
+    grid-template-areas:
+      "header-bar header-bar header-bar"
+      "exercise-overview nutrition-overview program-overview";
+  }
+  
+  .exercise-overview { grid-area: exercise-overview; 
+    border-radius: .60rem; 
+    background-color: var(--quill-gray);
+    padding: 10%; 
+    display: flex;
+    flex-direction: column;
+    gap: 3%;
+}
+  
+  .nutrition-overview { grid-area: nutrition-overview; 
+    color: white;
+    border-radius: .60rem; 
+    background-color: var(--black);
+    padding: 10%; 
+    display: flex;
+    flex-direction: column;
+    gap: 3%;
+}
+  
+  .program-overview { grid-area: program-overview;  
+
+    color: white}
+  
+  .header-bar { grid-area: header-bar; 
+}
+  
+  .home-title {
+    font-size: 35px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .program-overview-card {
+    border-radius: .60rem; 
+    background-color: var(--black);
+    padding: 8%;
+    height: 120px;
+    margin-bottom: 2%;
+    margin-right: 2%;
+  }
+
+  .home-exercise-cell {
+      background-color: #6D6D6D;
+      padding: 5%;
+      border-radius: .60rem;
+      margin-bottom: 3%;
+  }
+
+  .home-meal-nav-button {
+    position: absolute;
+    right:    0;
+    bottom:   0;
+  }
