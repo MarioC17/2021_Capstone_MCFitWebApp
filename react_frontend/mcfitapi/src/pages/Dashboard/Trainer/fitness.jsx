@@ -34,10 +34,22 @@ const headCells = [
 ];
 
 export default function Fitness(props) { 
+    if (props.location.clientProp == undefined) {
+        console.log("No profile selected")
+        props.location.clientProp = {
+            'profilepic': <img style={{height: '60px', width: '60px', borderRadius: '50%'}} src={BlankProfile}/>,
+            'name': '',
+            'age': '',
+            'gender': '', 
+            'location': ''
+        };
+    }
+    else {
+        console.log("Profile selected")
+    }
+    
     const [value, setValue] = React.useState(null);
     
-
-export default function Fitness(props) { 
     return (
         <>
         <Sidebar/> 
@@ -97,7 +109,6 @@ export default function Fitness(props) {
                 <span>Oct. 20, 2021
                     
                 </span> 
-                <h1>TABLE HERE</h1>
             </div>
     </div>
     </>
