@@ -1,58 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
+from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
-
-
-
-#User accounts
-
-class UserAccountManager(BaseUserManager):
-    def create_user(self,email,first_name,last_name,phone_number,password=None):
-        if not email:
-            raise ValueError('Users must have an email address')
-
-        email = self.normalize_email(email)
-        user = self.model(email=email,first_name=first_name,last_name=last_name,phone_number=phone_number)
-
-        user.set_password(password)
-        user.save()
-
-        return user
-class UserAccount(AbstractBaseUser,PermissionsMixin):
-    email = models.EmailField(max_length=255,unique=True)
-    first_name = models.CharField(max_length=150)
-    last_name = models.CharField(max_length=150)
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
-    phone_number = PhoneNumberField(null=False, blank=False, unique=True)
-
-    objects = UserAccountManager()
-    '''
-    fitness_goal = models.CharField(max_length=254, blank=True, null=True)
-    gender = models.CharField(max_length=50, blank=True, null=True)
-    body_type = models.CharField(max_length=100, blank=True, null=True)
-    weight = models.IntegerField(blank=True, null=True)
-    height = models.IntegerField(blank=True, null=True)
-    physical_activity = models.CharField(max_length=100, blank=True, null=True)
-    diet = models.CharField(max_length=100, blank=True, null=True)
-    '''
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name','last_name','phone_number']
-
-    def get_full_name(self):
-        return (self.first_name + ' ' + self.last_name)
-
-    def get_short_name(self):
-        return (self.first_name + ' ' + self.last_name)
-
-    def __str__(self):
-        return self.email
-        
-
-
-
-
-
 
 class Exercisetable(models.Model):
 
@@ -72,3 +20,53 @@ class Exercisetable(models.Model):
     def __str__(self):
         return self.name
 
+
+class AuthUser(models.Model):
+    password = models.CharField(max_length=128)
+    last_login = models.DateTimeField(blank=True, null=True)
+    is_superuser = models.BooleanField()
+    username = models.CharField(unique=True, max_length=150)
+    first_name = models.CharField(max_length=150)
+    last_name = models.CharField(max_length=150)
+    email = models.CharField(max_length=254)
+    is_staff = models.BooleanField()
+    is_active = models.BooleanField()
+    date_joined = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user'
+
+class Profiles(models.Model):
+    profile_id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    emergency_contact = models.TextField(blank=True, null=True)
+    fitness_goal = models.TextField(blank=True, null=True)
+    gender = models.TextField(blank=True, null=True)
+    body_type = models.TextField(blank=True, null=True)
+    weight = models.IntegerField(blank=True, null=True)
+    dob = models.DateField(blank=True, null=True)
+    height = models.IntegerField(blank=True, null=True)
+    physical_activity = models.TextField(blank=True, null=True)
+    diet = models.TextField(blank=True, null=True)
+    photo = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'profiles'
+
+class Workouts(models.Model):
+    workout_id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING, blank=True, null=True)
+    exercise = models.ForeignKey(Exercisetable, models.DO_NOTHING, blank=True, null=True)
+    reps = models.IntegerField(blank=True, null=True)
+    sets = models.IntegerField(blank=True, null=True)
+    rest = models.TextField(blank=True, null=True)
+    rir = models.IntegerField(blank=True, null=True)
+    load = models.IntegerField(blank=True, null=True)
+    date = models.DateField(blank=True, null=True)
+    notes = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'workouts'

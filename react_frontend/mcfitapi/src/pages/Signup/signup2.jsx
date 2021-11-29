@@ -15,8 +15,7 @@ const theme = createTheme({
     },
   });
 
-export class signup2 extends Component {
-    render() {
+const Signup2 = (props) => {
         return (
             <div style={{backgroundColor: "white", minHeight: "100vh"}}>
                 <Header/>
@@ -34,21 +33,18 @@ export class signup2 extends Component {
                     <div className="good-button">
                         <div className="formField">
                             <ThemeProvider theme={theme}>
-                                <Link to="/signup3">
                                     <Button color="neutral" 
+                                        onClick={e => props.nextStep(e)}
                                         variant="contained"
                                         style={{maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}>
                                         Sounds Good!
                                     </Button>
-                                </Link>
                             </ThemeProvider>
                         </div>
                     </div>
                 </div>
                 
             </div>
-        )
-    }
-}
+)};
 
-export default signup2
+export default Signup2;

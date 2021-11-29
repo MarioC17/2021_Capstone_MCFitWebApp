@@ -1,18 +1,15 @@
-import React, { Component,useState} from "react";
-import GoogleOAuth from "../components/GoogleLogin";
-import img from "../static/img/login-image.png";
 import { Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import axios from 'axios';
-import {login} from '../actions/auth';
+import React, { Fragment, useEffect, useState } from 'react';
+import GoogleLogin from 'react-google-login';
+import { Link } from 'react-router-dom';
 //Components
-import Header from '../components/Header'
-
+import Header from '../components/Header';
+import img from "../static/img/login-image.png";
 //style
 import "./login.css";
-import connectionExample from "../components/GoogleLogin";
+import googleLogin from "../services/googleLogin";
+
 
 const theme = createTheme({
   palette: {
@@ -25,7 +22,7 @@ const theme = createTheme({
 
 
 
-const Login = ({login}) => {
+const Login = () => {
   const [formData, setFormData] = useState({
     email:'',
     password:''
@@ -37,10 +34,14 @@ const Login = ({login}) => {
 
   const onSubmit = e => {
     e.preventDefault();
-    login(email,password);
+
   };
 
-
+  const responseGoogle = async(response) => {
+    let googleResponse  = await googleLogin(response.accessToken)
+    console.log(googleResponse);
+    console.log(response); //gets google id of person logging in
+  }
 return (
   <div>
     <Header/>
@@ -89,7 +90,12 @@ return (
               required
             />
           </div>
-
+            <GoogleLogin
+            clientId="35091798775-4a59pnnbajjnmrmh3s06lqr22oqkkgtc.apps.googleusercontent.com"
+            buttonText="LOGIN WITH GOOGLE"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+          />
           <div className="formField">
             <ThemeProvider theme={theme}>
               <Button color="neutral" 
@@ -98,8 +104,7 @@ return (
                 Sign In
               </Button>
             </ThemeProvider>
-            
-            <GoogleOAuth/>
+            <br/>
             <Link to="/signup" className="formFieldLink">
               <span className="sourcesanspro-normal-white-17px">Don't have an account? <b>Sign Up Now</b></span>
             </Link>
@@ -115,4 +120,5 @@ return (
   </div>
 );}
 
-export default connect(null,{login}) (Login);
+
+export default Login;

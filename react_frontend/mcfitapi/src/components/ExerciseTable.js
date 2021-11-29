@@ -15,9 +15,9 @@ import PropTypes from 'prop-types';
 import React, { Fragment, useEffect, useState } from 'react';
 import ReadOnlyRow from "../components/ReadOnlyRow";
 import EditableRow from '../components/EditableRow';
-const api = axios.create({
-  baseURL:"http://localhost:8000/api"
-})
+
+
+
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
