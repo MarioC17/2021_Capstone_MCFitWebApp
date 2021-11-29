@@ -5,10 +5,11 @@
     margin-left: 100px; /*REQUIRED WHEN USING SIDEBAR*/
     padding-left: 50px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 0.5fr 1fr;
     grid-template-rows: 0.3fr 0.65fr 1.45fr;
     grid-auto-columns: 1fr;
     gap: 0px 8px;
+    font-family: var(--font-family-source_sans_pro);
     grid-auto-flow: row;
     grid-template-areas:
       "dashboard-title dashboard-title"
@@ -19,7 +20,6 @@
   .dashboard-title { grid-area: dashboard-title; 
     margin-top: 2%;
     flex: 1;
-    font-family: var(--font-family-source_sans_pro);
     font-size: 60px;
     font-weight: 600;
     letter-spacing: 0;
