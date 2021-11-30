@@ -32,7 +32,13 @@ const createLoginCookies = async (profile) => {
     url: `http://localhost:8000/api/user/${profile.googleId}/`,
 }).then(response => {
   cookies.set('user_id', response.data.user, { path: '/' });
+  cookies.set('first_name', profile.givenName, { path: '/' });
+  cookies.set('last_name', profile.familyName, { path: '/' });
+  cookies.set('email', profile.email, { path: '/' });
   console.log(cookies.get('user_id')); 
+  console.log(response)
+  console.log(profile)
+  console.log(document.cookies)
 })
 
 
@@ -44,9 +50,7 @@ const Login = () => {
   const responseGoogle = async(response) => {
     let googleResponse  = await googleLogin(response.accessToken)
     //Storing required information in cookies
-    cookies.set('first_name', response.data.givenName, { path: '/' });
-    cookies.set('last_name', response.data.familyName, { path: '/' });
-    cookies.set('email', response.data.email, { path: '/' });
+    console.log(response)
     createLoginCookies(response.profileObj); //Stores user info in cookie
     let user_id = cookies.get('user_id')
     await checkProfile(user_id).then(await has_profile())
