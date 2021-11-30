@@ -15,6 +15,7 @@ const theme = createTheme({
     },
   });
 
+
 export class signup2 extends Component {
     render() {
         return (
@@ -31,61 +32,57 @@ export class signup2 extends Component {
                     <div className="side-button">
                         <div className="formField">
                             <ThemeProvider theme={theme}>
-                                <Link to="/signup4">
                                     <Button color="neutral" 
                                         variant="contained"
                                         style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >
                                         Weightloss
                                     </Button>
-                                </Link>
+                         
 
-                                <Link to="/signup4">
+                                
                                     <Button color="neutral" 
                                         variant="contained"
                                         style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >
                                         Bodybuilding
                                     </Button>
-                                </Link>
 
-                                <Link to="/signup4">
+
+               
                                     <Button color="neutral" 
                                         variant="contained"
                                         style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >
                                         Strength
                                     </Button>
-                                </Link>
+
 
                                 <br/><br/><br/>
 
-                                <Link to="/signup4">
                                     <Button color="neutral" 
                                         variant="contained"
                                         style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >
                                         General Fitness
                                     </Button>
-                                </Link>
 
-                                <Link to="/signup4">
+
                                     <Button color="neutral" 
                                         variant="contained"
                                         style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >
                                         Muscle Tone
                                     </Button>
-                                </Link>
 
-                                <Link to="/signup4">
+
+                
                                     <Button color="neutral" 
                                         variant="contained"
                                         style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >
                                         Power lifting
                                     </Button>
-                                </Link>
                             </ThemeProvider>
                         </div>
                     </div>

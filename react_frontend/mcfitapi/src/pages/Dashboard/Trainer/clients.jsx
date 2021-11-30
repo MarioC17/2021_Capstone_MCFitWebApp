@@ -14,6 +14,26 @@ import { style } from '@mui/system';
 
 function Clients() {
     const [value, setValue] = React.useState(null);
+    //enter client data from api here
+    /*
+    const getexerciseData = async () => {
+    try {
+      const data = await axios.get(
+        "http://localhost:8000/api/exercises"
+      );
+      setexercise(data.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    getexerciseData();
+  }, []);
+*/
+
+
+
     const clients = [
         {
           'id': 1, 
@@ -80,6 +100,7 @@ function Clients() {
         'location': '9720 Crimson Dr.'
         },
       ];
+      
     return (
         <>
             <Sidebar/>
