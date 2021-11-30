@@ -206,10 +206,6 @@ handleClose() {
   async componentDidMount()
   {
     console.log(this.state)
-    const api = axios.create({baseURL:"http://localhost:8000/api/user"})
-    var user = await axios.get("http://localhost:8000/api/user")
-    console.log(user)
-    console.log(api)
     var times = await getBookings('2021-11-22','2021-12-31'); //Will select dates automatically later
     for(let i = 0;i < times.length;i++)
     {

@@ -12,6 +12,7 @@ import MiniCalendar from '../../components/MiniCalendar';
 import './booking.css'
 import interactionPlugin from '@fullcalendar/interaction'
 import { AccessTimeFilled, Description, Event, LocationOn } from '@mui/icons-material/';
+import Cookies from 'universal-cookie';
 
 var myToken;
     
@@ -56,7 +57,10 @@ constructor(props) {
     dateDisplay: {},
     bookingOptions: [],
     selectedEvent: null,
-    description: {}
+    description: {},
+    email: "",
+    firstName: "",
+    lastName: ""
   }
   this.handleOpen = this.handleOpen.bind(this);
   this.handleClose = this.handleClose.bind(this);
@@ -165,7 +169,7 @@ handleClose() {
                 onClick={()=>{
                   if(this.state.selectedEvent != null)
                   {
-                    bookEvent(this.state.selectedEvent,"John","Doe","yaremchukc3@mymacewan.ca",this.state.description); //Placeholder, will integrate with logins later
+                    bookEvent(this.state.selectedEvent,this.state.firstName,this.state.lastName,this.state.email,this.state.description)
                   }
                 }}
                 >
@@ -182,8 +186,18 @@ handleClose() {
   
   async componentDidMount()
   {
-    console.log(this.state)
-    var times = await getBookingsByUser('2021-11-22','2021-12-31','John','Doe'); //Will select dates automatically later
+    var cookies = new Cookies();
+    var fName = cookies.get('first_name')
+    var lName = cookies.get('last_name')
+    var userEmail = cookies.get('email')
+    console.log(fName);
+    await this.setState({
+      email: userEmail,
+      firstName: fName,
+      lastName: lName
+    });
+    console.log(this.state);
+    var times = await getBookingsByUser('2021-11-22','2021-12-31',this.state.firstName,this.state.lastName); //Will select dates automatically later
     for(let i = 0;i < times.length;i++)
     {
       times[i]['title'] = 'Appointment';
@@ -195,7 +209,6 @@ handleClose() {
     }
     this.setState({weekend: true})
     this.setState({events: times})
-    this.state.bookingOptions = ["Test 1","Test 2","Test 3"];
   }
   
   
