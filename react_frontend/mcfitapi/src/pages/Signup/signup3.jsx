@@ -15,10 +15,15 @@ const theme = createTheme({
     },
   });
 
+  const Signup3 = (props) => {
 
-export class signup2 extends Component {
-    render() {
-        return (
+    const onChange = e => props.setFormData({...props.formData,[e.target.name]: e.target.value});
+    const onSubmit = e => {
+        e.preventDefault();
+
+        props.nextStep();
+        }
+    return (
             <div style={{backgroundColor: "white", minHeight: "100vh"}}>
                 <Header/>
                 <div className="container2">
@@ -43,6 +48,7 @@ export class signup2 extends Component {
                                 
                                     <Button color="neutral" 
                                         variant="contained"
+                                        name='Bodybuilding'
                                         style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >
                                         Bodybuilding
@@ -83,6 +89,17 @@ export class signup2 extends Component {
                                         >
                                         Power lifting
                                     </Button>
+
+
+                                    <Button color="neutral" 
+                                        onClick={e => props.previousStep(e)}
+                                        variant="contained"
+                                        style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
+                                        >
+                                        Go back
+                                    </Button>
+
+
                             </ThemeProvider>
                         </div>
                     </div>
@@ -91,6 +108,5 @@ export class signup2 extends Component {
             </div>
         )
     }
-}
 
-export default signup2
+export default Signup3

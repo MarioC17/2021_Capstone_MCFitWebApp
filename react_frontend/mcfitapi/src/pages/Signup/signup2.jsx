@@ -39,6 +39,12 @@ const Signup2 = (props) => {
                                         style={{maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}>
                                         Sounds Good!
                                     </Button>
+                                    <Button color="neutral" 
+                                        onClick={e => props.nextStep(e)}
+                                        variant="contained"
+                                        style={{maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}>
+                                        Go back
+                                    </Button>
                             </ThemeProvider>
                         </div>
                     </div>

@@ -24,8 +24,27 @@ const theme = createTheme({
     },
   });
 
+
+
 const Signup = () => {
 
+  //create profile after all done
+const createProfile = async (user_id) => {
+  let formField = new FormData()
+  formField.append('phone_num',phone_num)
+  formField.append('address',address)
+  formField.append('emergency_contact',emergency_contact)
+  //add user id from cookie or local storage????
+  formField.append('user_id',user_id)
+
+  await axios({
+    method: 'post',
+    url:'http://localhost:8000/api/profile',
+    data: formField
+  }).then(response=>{
+    console.log(response.data);
+  })
+  }
   const [step, setStep] = useState(1);
 
   const nextStep = () => {
@@ -36,23 +55,40 @@ const Signup = () => {
     setStep(step - 1)
   }
 
+  const [formData, setFormData] = useState({
+    phone_num:'',
+    address:'',
+    emergency_contact:'',
+    fitness_goal:'',
+    gender:'',
+    weight:'',
+    dob:'',
+    height:'',
+    physical_activity:'',
+    diet:'',
+  });
+
+  const {phone_num,address,emergency_contact,fitness_goal,gender,weight,dob,height,physical_activity,diet} = formData;
+
+  
+
   switch(step) {
     case 1:
       return(
         <div>
-        <Signup1 nextStep = {nextStep}/>
+        <Signup1 nextStep = {nextStep} setFormData = {setFormData} formData = {formData} phone_num={phone_num} address={address} emergency_contact = {emergency_contact}/>
         </div>
     )
     case 2:
       return(
         <div>
-        <Signup2 nextStep = {nextStep}/>
+        <Signup2 nextStep = {nextStep} setFormData = {setFormData} formData = {formData} fitness_goal={fitness_goal}/>
         </div>
     )
     case 3:
       return(
         <div>
-        <Signup3 nextStep = {nextStep} prevStep = {[previousStep]}/>
+        <Signup3 nextStep = {nextStep} prevStep = {[previousStep]} fitness_goal={fitness_goal}/>
         </div>
     )
     case 4:
