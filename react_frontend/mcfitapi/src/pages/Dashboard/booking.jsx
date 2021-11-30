@@ -3,9 +3,9 @@ import FullCalendar from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import timeGridPlugin from '@fullcalendar/timegrid'
 import listPlugin from '@fullcalendar/list'
-import { Button, Modal, Box, Typography } from '@mui/material';
+import { Button, Modal, Box, Typography, Select, MenuItem, TextField } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { getBookableTimes, bookEvent, getBookings, cancelBooking } from '../../components/booking'
+import { getBookableTimes, bookEvent, getBookings, cancelBooking, getBookingsByUser } from '../../components/booking'
 import Sidebar from '../../components/Sidebar';
 import Sagenda from '../../static/img/sagenda.png';
 import MiniCalendar from '../../components/MiniCalendar';
@@ -40,23 +40,40 @@ export default class UserBookings extends React.Component
 {
   state = {
   weekend: true,
-  events: []
+  events: [],
+  date: {},
+  dateDisplay: {},
+  bookingOptions: []
 }
 
 constructor(props) {
   super(props)
   this.state = {
-    open: false
+    open: false,
+    weekend: true,
+    events: [],
+    date: {},
+    dateDisplay: {},
+    bookingOptions: [],
+    selectedEvent: null,
+    description: {}
   }
   this.handleOpen = this.handleOpen.bind(this);
   this.handleClose = this.handleClose.bind(this);
 }
 
-handleOpen() {
-   this.setState({ open: true})
+async handleOpen(eventInfo) {
+//  this.state.bookingOptions = ["Test 1","Test 2","Test 3",eventInfo.dateStr];
+  this.state.dateDisplay = eventInfo.date.toString().substring(0,15); //Used for user facing popup
+  this.state.date = eventInfo.dateStr //Used for API call, YYYY-MM-DD format
+  this.state.bookingOptions = await getBookableTimes(this.state.date,this.state.date);
+  console.log(this.state.date)
+  console.log(this.state.bookingOptions)
+  this.setState({ open: true})
 }
 handleClose() {
   this.setState({ open: false})
+  this.setState({selectedEvent: null})
 }
     
   render() {
@@ -87,7 +104,7 @@ handleClose() {
           <FullCalendar
           headerToolbar='false'
           plugins={[listPlugin]}
-          initialView="listWeek"
+          initialView="listYear"
           weekends={this.state.weekend}
           events={this.state.events}
         />
@@ -100,8 +117,8 @@ handleClose() {
           initialView="dayGridMonth"
           weekends={this.state.weekend}
           events={this.state.events}
-          eventClick={this.handleOpen}
-          dateClick={this.handleDateSelect}
+          eventClick={this.handleEventClick}
+          dateClick={this.handleOpen}
         />
         </div>
         <Modal
@@ -121,16 +138,37 @@ handleClose() {
                   Book Appointment
               </div>
               {/* add content here curt */}
-              <div class="book-popup-date">date time*****</div>
-              <div class="book-popup-desc">Add description or attachments</div>
-              <div class="book-popup-location">******</div>
-              <div class="book-popup-event">Notify *****</div>
+              <div class="book-popup-date">{this.state.dateDisplay}
+              <Select 
+                id="time" 
+                onChange={
+                  (selection)=>(this.setState({selectedEvent:selection.target.value}))}>
+              {this.state.bookingOptions.map(
+                (item) => (<MenuItem name={item.identifier} value={item.identifier}>{item.from.substring(11,16)}</MenuItem>)
+              )}
+              </Select></div>
+              <div class="book-popup-desc"><TextField label="Add description" onChange={
+              (entered)=>(this.setState({description:entered.target.value}))
+              }/></div>
+              <div class="book-popup-location"><TextField label="Location"/></div>
+              <div class="book-popup-event"><Select>
+                <MenuItem value="1">1 day before</MenuItem>
+                <MenuItem value="2">2 days before</MenuItem>
+                <MenuItem value="3">3 days before</MenuItem>
+                </Select></div>
             </div>
             <div style={{textAlign: 'right'}}>
               <ThemeProvider theme={theme}>
                 <Button variant="contained" 
                 color="neutral" 
-                style={{marginBotton: '5%', minWidth: '150px', fontSize: '20px'}}>
+                style={{marginBotton: '5%', minWidth: '150px', fontSize: '20px'}}
+                onClick={()=>{
+                  if(this.state.selectedEvent != null)
+                  {
+                    bookEvent(this.state.selectedEvent,"John","Doe","yaremchukc3@mymacewan.ca",this.state.description); //Placeholder, will integrate with logins later
+                  }
+                }}
+                >
                 Save
                 </Button>
               </ThemeProvider>
@@ -144,7 +182,8 @@ handleClose() {
   
   async componentDidMount()
   {
-    var times = await getBookings('2021-11-22','2021-12-31'); //Will select dates automatically later
+    console.log(this.state)
+    var times = await getBookingsByUser('2021-11-22','2021-12-31','John','Doe'); //Will select dates automatically later
     for(let i = 0;i < times.length;i++)
     {
       times[i]['title'] = 'Appointment';
@@ -156,6 +195,7 @@ handleClose() {
     }
     this.setState({weekend: true})
     this.setState({events: times})
+    this.state.bookingOptions = ["Test 1","Test 2","Test 3"];
   }
   
   
@@ -171,6 +211,7 @@ handleClose() {
   
   handleDateSelect = (selectInfo) =>
   {
+    
     console.log("Date: " + selectInfo.dateStr)
   }
 }
