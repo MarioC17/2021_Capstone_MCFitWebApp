@@ -32,7 +32,7 @@ const createLoginCookies = async (profile) => {
     url: `http://localhost:8000/api/user/${profile.googleId}/`,
 }).then(response => {
   cookies.set('user_id', response.data.user, { path: '/' });
-  console.log(cookies.get('user_id')); // Pacman
+  console.log(cookies.get('user_id')); 
 })
 
 
@@ -43,6 +43,10 @@ const Login = () => {
 
   const responseGoogle = async(response) => {
     let googleResponse  = await googleLogin(response.accessToken)
+    //Storing required information in cookies
+    cookies.set('first_name', response.data.givenName, { path: '/' });
+    cookies.set('last_name', response.data.familyName, { path: '/' });
+    cookies.set('email', response.data.email, { path: '/' });
     createLoginCookies(response.profileObj); //Stores user info in cookie
     let user_id = cookies.get('user_id')
     await checkProfile(user_id).then(await has_profile())

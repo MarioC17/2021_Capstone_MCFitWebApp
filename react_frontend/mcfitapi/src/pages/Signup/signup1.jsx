@@ -21,63 +21,6 @@ const theme = createTheme({
 
 
 const Signup1 = (props) => {
-
-    const [formData, setFormData] = useState({
-        phone_num:'',
-        address:'',
-        emergency_contact:'',
-      });
-    
-      const {phone_num,address,emergency_contact} = formData;
-    
-      const onChange = e => setFormData({...formData,[e.target.name]: e.target.value});
-
-      //create profile
-      const createProfile = async (user_id) => {
-        let formField = new FormData()
-        formField.append('phone_num',phone_num)
-        formField.append('address',address)
-        formField.append('emergency_contact',emergency_contact)
-        //add user id from cookie or local storage????
-        formField.append('user_id',user_id)
-
-        await axios({
-          method: 'post',
-          url:'http://localhost:8000/api/profile',
-          data: formField
-        }).then(response=>{
-          console.log(response.data);
-        })
-        }
-
-        //edit profile
-        const updateProfile = async (user_id) => {
-            let formField = new FormData()
-            formField.append('phone_num',phone_num)
-            formField.append('address',address)
-            formField.append('emergency_contact',emergency_contact)
-            //add user id from cookie or local storage????
-            formField.append('user_id',user_id)
-    
-            await axios({
-                method: 'Put',
-                url: `http://localhost:8000/api/profile/edit/${user_id}/`,
-                data: formField
-            }).then(response => {
-                console.log(response.data)
-            })
-        }
-        
-        //check if profile already exists
-        const checkProfile = async (user_id) => {
-            await axios({
-                method: 'GET',
-                url: `http://localhost:8000/api/profile/${user_id}/`,
-            }).then(response => {
-                console.log(response.data)
-                //if exists return true
-            })
-        }
       const onSubmit = e => {
 
         //checkProfile(user_id);
@@ -85,7 +28,7 @@ const Signup1 = (props) => {
         props.nextStep();
         }
 
-
+        const onChange = e => props.setFormData({...props.formData,[e.target.name]: e.target.value});
 
     return(
         <div style={{backgroundColor: "white", minHeight: "100vh"}}>
@@ -108,7 +51,7 @@ const Signup1 = (props) => {
                         className="formFieldInput"
                         placeholder="Phone Number"
                         name="phone_num"
-                        value={phone_num}
+                        value={props.phone_num}
                         onChange={e => onChange(e)}
                         required
                         />
@@ -121,7 +64,7 @@ const Signup1 = (props) => {
                         className="formFieldInput"
                         placeholder="Address"
                         name="address"
-                        value={address}
+                        value={props.address}
                         onChange={e => onChange(e)}
                         required
                         />
@@ -134,7 +77,7 @@ const Signup1 = (props) => {
                         className="formFieldInput"
                         placeholder="Emergency Contact"
                         name="emergency_contact"
-                        value={emergency_contact}
+                        value={props.emergency_contact}
                         onChange={e => onChange(e)}
                         required
                         />
