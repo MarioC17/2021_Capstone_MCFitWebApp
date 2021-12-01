@@ -123,7 +123,7 @@ export async function bookEvent(eventID, firstName, lastName, email, description
         'Authorization': 'Bearer ' + token
     };
     //console.log(myHeaders);
-    if(description === "")
+    if(description === "" || description.length == undefined)
         description = "No description provided";
     var raw = JSON.stringify({
       "eventIdentifier": eventID,

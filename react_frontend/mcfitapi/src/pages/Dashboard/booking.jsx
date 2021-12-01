@@ -57,7 +57,7 @@ constructor(props) {
     dateDisplay: {},
     bookingOptions: [],
     selectedEvent: null,
-    description: {},
+    description: "No description provided",
     email: "",
     firstName: "",
     lastName: ""
@@ -71,6 +71,7 @@ async handleOpen(eventInfo) {
   this.state.dateDisplay = eventInfo.date.toString().substring(0,15); //Used for user facing popup
   this.state.date = eventInfo.dateStr //Used for API call, YYYY-MM-DD format
   this.state.bookingOptions = await getBookableTimes(this.state.date,this.state.date);
+  this.state.description = "No description provided"
   console.log(this.state.date)
   console.log(this.state.bookingOptions)
   this.setState({ open: true})
@@ -78,6 +79,7 @@ async handleOpen(eventInfo) {
 handleClose() {
   this.setState({ open: false})
   this.setState({selectedEvent: null})
+  this.state.description = "No description provided"
 }
     
   render() {
