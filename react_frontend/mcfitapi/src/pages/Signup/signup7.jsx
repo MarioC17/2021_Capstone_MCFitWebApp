@@ -15,15 +15,20 @@ const theme = createTheme({
     },
   });
 
-export class signup2 extends Component {
-    render() {
-        return (
+  const Signup7 = (props) => {
+    const onSubmit = e => {
+        e.preventDefault();
+        props.setFormData({...props.formData,[e.target.name]: e.target.textContent});
+        props.nextStep();
+        }
+
+    return (
             <div style={{backgroundColor: "white", minHeight: "100vh"}}>
                 <Header/>
                 <div className="container2">
                     <div className="welcome-text">
                         <span className="welcome-style">
-                            What is your level of physical activity?
+                            What is your diet like?
                         </span>
                         <p className="bottom-padding"/>
                     </div>
@@ -31,43 +36,66 @@ export class signup2 extends Component {
                     <div className="side-button">
                         <div className="formField">
                             <ThemeProvider theme={theme}>
-                            <Link to="/signup8">
                                     <Button color="neutral" 
+                                        name='diet'                   
+                                        onClick={e => onSubmit(e)}
                                         variant="contained"
                                         style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >
-                                        Very Active, I workout daily
+                                        I eat anything
                                     </Button>
-                                </Link>
 
-                                <Link to="/signup8">
+
+
                                     <Button color="neutral" 
+                                        name='diet'                   
+                                        onClick={e => onSubmit(e)}
                                         variant="contained"
                                         style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >
-                                        I workout sometimes
+                                        I am vegetarian
                                     </Button>
-                                </Link>
+
+
+
+                                    <Button color="neutral" 
+                                        name='diet'                   
+                                        onClick={e => onSubmit(e)}
+                                        variant="contained"
+                                        style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
+                                        >
+                                        I am vegan
+                                    </Button>
+
 
                                 <br/><br/><br/>
 
-                                <Link to="/signup8">
                                     <Button color="neutral" 
+                                        name='diet'                   
+                                        onClick={e => onSubmit(e)}
                                         variant="contained"
                                         style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >
-                                        I walk everyday, that's it
+                                        I am pescatarian
                                     </Button>
-                                </Link>
 
-                                <Link to="/signup8">
                                     <Button color="neutral" 
+                                        name='diet'                   
+                                        onClick={e => onSubmit(e)}
                                         variant="contained"
                                         style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >
-                                        I don't like to exercise
+                                        Something else
                                     </Button>
-                                </Link>
+
+                                    <Button color="neutral" 
+                                        onClick={e => props.previousStep(e)}
+                                        variant="contained"
+                                        style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
+                                        >
+                                        Go back
+                                    </Button>
+                                    
                             </ThemeProvider>
                         </div>
                     </div>
@@ -76,6 +104,6 @@ export class signup2 extends Component {
             </div>
         )
     }
-}
 
-export default signup2
+
+export default Signup7
