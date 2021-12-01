@@ -146,7 +146,7 @@ const Signup1 = (props) => {
                         />
                     </div>
 
-                    <Link to="/" className="formFieldLink">
+                    <Link to="/singup2" className="formFieldLink">
                         <span className="sourcesanspro-normal-black-15px"><u>Already have an account? Sign In.</u></span>
                     </Link>
                 </form>
