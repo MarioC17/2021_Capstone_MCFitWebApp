@@ -16,11 +16,9 @@ const theme = createTheme({
   });
 
   const Signup3 = (props) => {
-
-    const onChange = e => props.setFormData({...props.formData,[e.target.name]: e.target.value});
     const onSubmit = e => {
         e.preventDefault();
-
+        props.setFormData({...props.formData,[e.target.name]: e.target.textContent});
         props.nextStep();
         }
     return (
@@ -37,7 +35,10 @@ const theme = createTheme({
                     <div className="side-button">
                         <div className="formField">
                             <ThemeProvider theme={theme}>
-                                    <Button color="neutral" 
+                                    <Button color="neutral"
+                                        name='fitness_goal'
+                                        
+                                        onClick={e => onSubmit(e)}
                                         variant="contained"
                                         style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >
@@ -47,8 +48,9 @@ const theme = createTheme({
 
                                 
                                     <Button color="neutral" 
+                                        name='fitness_goal'
+                                        onClick={e => onSubmit(e)}
                                         variant="contained"
-                                        name='Bodybuilding'
                                         style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >
                                         Bodybuilding
@@ -56,7 +58,10 @@ const theme = createTheme({
 
 
                
-                                    <Button color="neutral" 
+                                    <Button color="neutral"
+                                        name='fitness_goal'
+                                        
+                                        onClick={e => onSubmit(e)}
                                         variant="contained"
                                         style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >
@@ -67,6 +72,9 @@ const theme = createTheme({
                                 <br/><br/><br/>
 
                                     <Button color="neutral" 
+                                        name='fitness_goal'
+                                        
+                                        onClick={e => onSubmit(e)}
                                         variant="contained"
                                         style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >
@@ -75,6 +83,9 @@ const theme = createTheme({
 
 
                                     <Button color="neutral" 
+                                        name='fitness_goal'
+                                        
+                                        onClick={e => onSubmit(e)}
                                         variant="contained"
                                         style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >
@@ -84,6 +95,9 @@ const theme = createTheme({
 
                 
                                     <Button color="neutral" 
+                                        name='fitness_goal'
+                                        
+                                        onClick={e => onSubmit(e)}
                                         variant="contained"
                                         style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >

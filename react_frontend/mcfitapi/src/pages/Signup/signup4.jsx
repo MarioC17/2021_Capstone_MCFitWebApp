@@ -15,8 +15,13 @@ const theme = createTheme({
     },
   });
 
-export class signup2 extends Component {
-    render() {
+  const Signup4 = (props) => {
+
+    const onSubmit = e => {
+        e.preventDefault();
+        props.setFormData({...props.formData,[e.target.name]: e.target.textContent});
+        props.nextStep();
+        }
         return (
             <div style={{backgroundColor: "white", minHeight: "100vh"}}>
                 <Header/>
@@ -34,32 +39,49 @@ export class signup2 extends Component {
                     <div className="side-button">
                         <div className="formField">
                             <ThemeProvider theme={theme}>
-                            <Link to="/signup5">
                                     <Button color="neutral" 
+                                        name='gender'
+                                        onClick={e => onSubmit(e)}
                                         variant="contained"
                                         style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >
                                         Male
-                                    </Button>
-                                </Link>
-
-                                <Link to="/signup5">
+                                        </Button>
                                     <Button color="neutral" 
+                                        name='gender'
+                                        onClick={e => onSubmit(e)}
                                         variant="contained"
                                         style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >
                                         Female
                                     </Button>
-                                </Link>
 
-                                <Link to="/signup5">
                                     <Button color="neutral" 
+                                        name='gender'
+                                        onClick={e => onSubmit(e)}
+                                        variant="contained"
+                                        style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
+                                        >
+                                        Non-Binary
+                                    </Button>
+                                    
+                                    <Button color="neutral" 
+                                        name='gender'
+                                        onClick={e => onSubmit(e)}
                                         variant="contained"
                                         style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >
                                         Prefer not to say
                                     </Button>
-                                </Link>
+                                    
+                                    <Button color="neutral" 
+                                        onClick={e => props.previousStep(e)}
+                                        variant="contained"
+                                        style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
+                                        >
+                                        Go Back
+                                    </Button>
+
                             </ThemeProvider>
                         </div>
                     </div>
@@ -68,6 +90,6 @@ export class signup2 extends Component {
             </div>
         )
     }
-}
 
-export default signup2
+
+export default Signup4

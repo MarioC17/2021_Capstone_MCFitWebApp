@@ -8,7 +8,7 @@ import axios from 'axios';
 import Header from '../../components/HeaderW';
 //Stylesheet
 import './signup.css';
-
+import Cookies from 'universal-cookie'
 
 const theme = createTheme({
     palette: {
@@ -19,14 +19,16 @@ const theme = createTheme({
     },
   });
 
+const cookies = new Cookies();
 
 const Signup1 = (props) => {
       const onSubmit = e => {
-
-    //checkProfile(user_id);
-    e.preventDefault();
-    props.nextStep();
-    }
+        let user = cookies.get('user_id')
+        props.setFormData({...props.formData,['user']: user});
+        //checkProfile(user_id);
+        e.preventDefault();
+        props.nextStep();
+        }
 
     const onChange = e => props.setFormData({...props.formData,[e.target.name]: e.target.value});
 

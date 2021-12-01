@@ -21,6 +21,7 @@
     "axios": "^0.24.0",
     "classnames": "^2.3.1",
     "cors": "^2.8.5",
+    "date-fns": "^2.27.0",
     "fullcalendar": "^5.10.1",
     "material-table": "^1.69.3",
     "mui-editable-table": "^0.3.3",

@@ -1,16 +1,10 @@
-import React, { Component } from "react";
+import React, { Component } from 'react'
 import './signup.css'
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputAdornment from '@mui/material/InputAdornment';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormControl from '@mui/material/FormControl';
-import { Avatar, Button } from '@mui/material';
 import { Link } from "react-router-dom";
+import { Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 //Components
 import Header from '../../components/HeaderW'
-import Arrow from "../../static/img/icon-awesome-arrow-alt-circle-right-1@1x.png";
-
 
 const theme = createTheme({
     palette: {
@@ -21,107 +15,87 @@ const theme = createTheme({
     },
   });
 
-class signup2 extends Component {
-    constructor() {
-        super();
-    
-        this.state = {
-            age: '',
-            weight: '',
-            height: '',
-        };
-    
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
+  const Signup6 = (props) => {
+    const onSubmit = e => {
+        e.preventDefault();
+        props.setFormData({...props.formData,[e.target.name]: e.target.textContent});
+        props.nextStep();
+        }
 
-    handleChange (event) {
-        let target = event.target;
-        let value = target.type === target.value;
-        let name = target.name;
-
-        this.setState({
-            [name]: value
-        });
-    }
-
-    handleSubmit(event) {
-        event.preventDefault();
-        console.log("The form was submitted with the following data:");
-        console.log(this.state);
-    }
-
-    render() {
-        return (
-            <div style={{backgroundColor: "white", minHeight: "100vh"}}>
-                <Header/>
-                <div className="container2">
-                    <div className="welcome-text">
-                        <span className="welcome-style">
-                            What is your age, weight, and height?
-                        </span>
-                        <p className="bottom-padding"/>
-                    </div>
-                    
-                    <div className="good-button">
-                        <div className="formField">
-                        <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                            <OutlinedInput
-                                id="outlined-adornment-weight"
-                                name = "weight"
-                                value = {this.state.weight}
-                                onChange={this.handleChange}
-                                endAdornment={<InputAdornment position="end">lbs</InputAdornment>}
-                                aria-describedby="outlined-weight-helper-text"
-                                inputProps={{
-                                'aria-label': 'weight',
-                                }}
-                            />
-                            <FormHelperText id="outlined-weight-helper-text">Weight</FormHelperText>
-
-                            <OutlinedInput
-                                id="outlined-adornment-weight"
-                                name = "weight"
-                                value = {this.state.weight}
-                                onChange={this.handleChange}
-                                endAdornment={<InputAdornment position="end">cm</InputAdornment>}
-                                aria-describedby="outlined-weight-helper-text"
-                                inputProps={{
-                                'aria-label': 'weight',
-                                }}
-                            />
-                            <FormHelperText id="outlined-weight-helper-text">Height</FormHelperText>
-
-                            <OutlinedInput
-                                id="outlined-adornment-weight"
-                                name = "weight"
-                                value = {this.state.weight}
-                                onChange={this.handleChange}
-                                endAdornment={<InputAdornment position="end">yrs</InputAdornment>}
-                                aria-describedby="outlined-weight-helper-text"
-                                inputProps={{
-                                'aria-label': 'weight',
-                                }}
-                            />
-                            <FormHelperText id="outlined-weight-helper-text">Age</FormHelperText>
-                        </FormControl>
-                        <ThemeProvider theme={theme}><Link to="/signup7">
-                        
-                            
-                                <Button color="neutral" 
-                                variant="contained"
-                                startIcon={<Avatar src={Arrow}/>}>
-                                </Button>
-                            
-                        </Link></ThemeProvider>
-                            
-                        </div>
-                    </div>
+    return (
+        <div style={{backgroundColor: "white", minHeight: "100vh"}}>
+            <Header/>
+            <div className="container2">
+                <div className="welcome-text">
+                    <span className="welcome-style">
+                        What is your level of physical activity?
+                    </span>
+                    <p className="bottom-padding"/>
                 </div>
                 
+                <div className="side-button">
+                    <div className="formField">
+                        <ThemeProvider theme={theme}>
+                                <Button color="neutral" 
+                                    name='physical_activity'
+                                        
+                                    onClick={e => onSubmit(e)}
+                                    variant="contained"
+                                    style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
+                                    >
+                                    Not Active
+                                </Button>
+
+
+
+                                <Button color="neutral" 
+                                    name='physical_activity'
+                                            
+                                    onClick={e => onSubmit(e)}
+                                    variant="contained"
+                                    style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
+                                    >
+                                    Somewhat Active
+                                </Button>
+
+
+                            <br/><br/><br/>
+                                <Button color="neutral" 
+                                    name='physical_activity'
+                                            
+                                    onClick={e => onSubmit(e)}
+                                    variant="contained"
+                                    style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
+                                    >
+                                    Highly Active
+                                </Button>
+
+                                <Button color="neutral" 
+                                    name='physical_activity'
+                                            
+                                    onClick={e => onSubmit(e)}
+                                    variant="contained"
+                                    style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
+                                    >
+                                    Extremely Active
+                                </Button>
+
+                                <Button color="neutral" 
+                                    onClick={e => props.previousStep(e)}
+                                    variant="contained"
+                                    style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
+                                    >
+                                    Go back
+                                </Button>
+
+                        </ThemeProvider>
+                    </div>
+                </div>
             </div>
-        )
-    }
+            
+        </div>
+    )
 }
 
-export default signup2
+
+export default Signup6

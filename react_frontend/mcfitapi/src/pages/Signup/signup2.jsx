@@ -40,7 +40,7 @@ const Signup2 = (props) => {
                                         Sounds Good!
                                     </Button>
                                     <Button color="neutral" 
-                                        onClick={e => props.nextStep(e)}
+                                        onClick={e => props.previousStep(e)}
                                         variant="contained"
                                         style={{maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}>
                                         Go back
