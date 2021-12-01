@@ -2,13 +2,17 @@ import { Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import React, { Fragment, useEffect, useState } from 'react';
 import GoogleLogin from 'react-google-login';
-import { Link } from 'react-router-dom';
+import { Link,Redirect } from 'react-router-dom';
+import axios from 'axios';
+import Cookies from 'universal-cookie'
+
 //Components
 import Header from '../components/Header';
 import img from "../static/img/login-image.png";
 //style
 import "./login.css";
 import googleLogin from "../services/googleLogin";
+
 
 
 const theme = createTheme({
@@ -20,29 +24,61 @@ const theme = createTheme({
   },
 });
 
+const cookies = new Cookies();
+
+const createLoginCookies = async (profile) => {
+  await axios({
+    method: 'Get',
+    url: `http://localhost:8000/api/user/${profile.googleId}/`,
+}).then(response => {
+  cookies.set('user_id', response.data.user, { path: '/' });
+  cookies.set('first_name', profile.givenName, { path: '/' });
+  cookies.set('last_name', profile.familyName, { path: '/' });
+  cookies.set('email', profile.email, { path: '/' });
+  console.log(cookies.get('user_id')); 
+  console.log(response)
+  console.log(profile)
+  console.log(document.cookies)
+})
 
 
+
+}
 const Login = () => {
-  const [formData, setFormData] = useState({
-    email:'',
-    password:''
-  });
-
-  const {email,password} = formData;
-
-  const onChange = e => setFormData({...formData,[e.target.name]: e.target.value});
-
-  const onSubmit = e => {
-    e.preventDefault();
-
-  };
+  const [Profile, setProfile] = useState(null);
 
   const responseGoogle = async(response) => {
     let googleResponse  = await googleLogin(response.accessToken)
-    console.log(googleResponse);
-    localStorage.setItem('userInfo', JSON.stringify(response.profileObj)); //Stores user info in cookie
+    //Storing required information in cookies
+    console.log(response)
+    createLoginCookies(response.profileObj); //Stores user info in cookie
+    let user_id = cookies.get('user_id')
+    await checkProfile(user_id).then(await has_profile())
   }
 
+  const has_profile = () => {
+    console.log(Profile)
+    if (Profile){
+      <Redirect to="/fitness" />
+    }
+    else{
+      <Redirect to="/signup" />
+    }
+  }
+
+  //check if profile already exists
+  const checkProfile = async (user_id) => {
+    await axios({
+        method: 'GET',
+        url: `http://localhost:8000/api/profile/1/`,
+    }).then(response => {
+      setProfile(true);
+      console.log(response);
+    }).catch(e => {
+      setProfile(false);
+      console.log(e);
+    });
+        }
 
 
 return (
@@ -66,32 +102,6 @@ return (
           WELCOME BACK
         </span>
         <p className="bottom-padding"/>
-        <form className="formFields" onSubmit={e => onSubmit(e)}>
-          <div className="formField">
-            <input
-              type="email"
-              id="email"
-              className="loginformFieldInput"
-              placeholder="Enter your email"
-              name="email"
-              value={email}
-              onChange={e => onChange(e)}
-              required
-            />
-          </div>
-
-          <div className="formField">
-            <input
-              type="password"
-              id="password"
-              className="loginformFieldInput"
-              placeholder="Enter your password"
-              name="password"
-              value={password}
-              onChange={e => onChange(e)}
-              minLength='6'
-              required
-            />
           </div>
             <GoogleLogin
             clientId="35091798775-4a59pnnbajjnmrmh3s06lqr22oqkkgtc.apps.googleusercontent.com"
@@ -99,28 +109,9 @@ return (
             onSuccess={responseGoogle}
             onFailure={responseGoogle}
           />
-          <div className="formField">
-            <ThemeProvider theme={theme}>
-              <Button color="neutral" 
-              variant="contained"
-              onClick={e => onSubmit(e)}>
-                Sign In
-              </Button>
-            </ThemeProvider>
-            <br/>
-            <Link to="/signup" className="formFieldLink">
-              <span className="sourcesanspro-normal-white-17px">Don't have an account? <b>Sign Up Now</b></span>
-            </Link>
-            <br/>
-            <Link to="/reset-password">
-              <span className="sourcesanspro-normal-white-17px">Forgot your password? <b>Reset Password</b></span>
-            </Link>
-            
-          </div>
-        </form>
       </div>
     </div>
-  </div>
+
 );}
 
 

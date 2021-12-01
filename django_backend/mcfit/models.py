@@ -40,10 +40,11 @@ class AuthUser(models.Model):
 class Profiles(models.Model):
     profile_id = models.AutoField(primary_key=True)
     user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    address = models.TextField(blank=True, null=True)
     emergency_contact = models.TextField(blank=True, null=True)
     fitness_goal = models.TextField(blank=True, null=True)
+    phone_num = models.TextField(blank=True, null=True)
     gender = models.TextField(blank=True, null=True)
-    body_type = models.TextField(blank=True, null=True)
     weight = models.IntegerField(blank=True, null=True)
     dob = models.DateField(blank=True, null=True)
     height = models.IntegerField(blank=True, null=True)
@@ -57,8 +58,8 @@ class Profiles(models.Model):
 
 class Workouts(models.Model):
     workout_id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING, blank=True, null=True)
-    exercise = models.ForeignKey(Exercisetable, models.DO_NOTHING, blank=True, null=True)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING, blank=True, null=False)
+    exercise = models.ForeignKey(Exercisetable, models.DO_NOTHING, blank=True, null=False)
     reps = models.IntegerField(blank=True, null=True)
     sets = models.IntegerField(blank=True, null=True)
     rest = models.TextField(blank=True, null=True)
@@ -70,3 +71,16 @@ class Workouts(models.Model):
     class Meta:
         managed = False
         db_table = 'workouts'
+
+class SocialaccountSocialaccount(models.Model):
+    provider = models.CharField(max_length=30)
+    uid = models.CharField(max_length=191)
+    last_login = models.DateTimeField()
+    date_joined = models.DateTimeField()
+    extra_data = models.TextField()
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'socialaccount_socialaccount'
+        unique_together = (('provider', 'uid'),)

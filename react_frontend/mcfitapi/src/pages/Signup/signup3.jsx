@@ -15,9 +15,15 @@ const theme = createTheme({
     },
   });
 
-export class signup2 extends Component {
-    render() {
-        return (
+  const Signup3 = (props) => {
+
+    const onChange = e => props.setFormData({...props.formData,[e.target.name]: e.target.value});
+    const onSubmit = e => {
+        e.preventDefault();
+
+        props.nextStep();
+        }
+    return (
             <div style={{backgroundColor: "white", minHeight: "100vh"}}>
                 <Header/>
                 <div className="container2">
@@ -31,61 +37,69 @@ export class signup2 extends Component {
                     <div className="side-button">
                         <div className="formField">
                             <ThemeProvider theme={theme}>
-                                <Link to="/signup4">
                                     <Button color="neutral" 
                                         variant="contained"
                                         style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >
                                         Weightloss
                                     </Button>
-                                </Link>
+                         
 
-                                <Link to="/signup4">
+                                
                                     <Button color="neutral" 
                                         variant="contained"
+                                        name='Bodybuilding'
                                         style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >
                                         Bodybuilding
                                     </Button>
-                                </Link>
 
-                                <Link to="/signup4">
+
+               
                                     <Button color="neutral" 
                                         variant="contained"
                                         style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >
                                         Strength
                                     </Button>
-                                </Link>
+
 
                                 <br/><br/><br/>
 
-                                <Link to="/signup4">
                                     <Button color="neutral" 
                                         variant="contained"
                                         style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >
                                         General Fitness
                                     </Button>
-                                </Link>
 
-                                <Link to="/signup4">
+
                                     <Button color="neutral" 
                                         variant="contained"
                                         style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >
                                         Muscle Tone
                                     </Button>
-                                </Link>
 
-                                <Link to="/signup4">
+
+                
                                     <Button color="neutral" 
                                         variant="contained"
                                         style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >
                                         Power lifting
                                     </Button>
-                                </Link>
+
+
+                                    <Button color="neutral" 
+                                        onClick={e => props.previousStep(e)}
+                                        variant="contained"
+                                        style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
+                                        >
+                                        Go back
+                                    </Button>
+
+
                             </ThemeProvider>
                         </div>
                     </div>
@@ -94,6 +108,5 @@ export class signup2 extends Component {
             </div>
         )
     }
-}
 
-export default signup2
+export default Signup3

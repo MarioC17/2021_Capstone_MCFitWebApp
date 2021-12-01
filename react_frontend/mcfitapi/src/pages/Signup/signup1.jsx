@@ -3,6 +3,7 @@ import { Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import React, { useState } from "react";
 import { Link, Redirect } from 'react-router-dom';
+import axios from 'axios';
 //Components
 import Header from '../../components/HeaderW';
 //Stylesheet
@@ -20,26 +21,14 @@ const theme = createTheme({
 
 
 const Signup1 = (props) => {
-
-    const [formData, setFormData] = useState({
-        email:'',
-        password:'',
-        first_name:'',
-        last_name:'',
-        phone_number:'',
-        re_password:''
-      });
-    
-      const {email,password,re_password,first_name,last_name,phone_number} = formData;
-    
-      const onChange = e => setFormData({...formData,[e.target.name]: e.target.value});
-    
       const onSubmit = e => {
-        e.preventDefault();
-        props.nextStep();
-        }
 
+    //checkProfile(user_id);
+    e.preventDefault();
+    props.nextStep();
+    }
 
+    const onChange = e => props.setFormData({...props.formData,[e.target.name]: e.target.value});
 
     return(
         <div style={{backgroundColor: "white", minHeight: "100vh"}}>
@@ -55,14 +44,14 @@ const Signup1 = (props) => {
             <div className="b">
                 <form className="formFields">
                     
-                    <div className="formField">
+                <div className="formField">
                         <input
-                        type="firstname"
-                        id="firstname"
+                        type="tel"
+                        id="phone_num"
                         className="formFieldInput"
-                        placeholder="First name"
-                        name="first_name"
-                        value={first_name}
+                        placeholder="Phone Number"
+                        name="phone_num"
+                        value={props.phone_num}
                         onChange={e => onChange(e)}
                         required
                         />
@@ -70,12 +59,12 @@ const Signup1 = (props) => {
 
                     <div className="formField">
                         <input
-                        type="email"
-                        id="email"
+                        type="address"
+                        id="address"
                         className="formFieldInput"
-                        placeholder="Email"
-                        name="email"
-                        value={email}
+                        placeholder="Address"
+                        name="address"
+                        value={props.address}
                         onChange={e => onChange(e)}
                         required
                         />
@@ -83,12 +72,12 @@ const Signup1 = (props) => {
 
                     <div className="formField">
                         <input
-                        type="password"
-                        id="password"
+                        type="tel"
+                        id="emergency_contact"
                         className="formFieldInput"
-                        placeholder="Password"
-                        name="password"
-                        value={password}
+                        placeholder="Emergency Contact"
+                        name="emergency_contact"
+                        value={props.emergency_contact}
                         onChange={e => onChange(e)}
                         required
                         />
@@ -153,7 +142,6 @@ const Signup1 = (props) => {
             </div>
         </div>
     </div>
-
 
 )};
   
