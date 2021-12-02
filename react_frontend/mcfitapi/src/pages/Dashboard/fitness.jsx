@@ -29,7 +29,7 @@ const theme = createTheme({
   });
 
 export default function Fitness() {
-    let monthNumber = (new Date().getMonth()+1);
+    let monthNumber = (new Date().getMonth());
     let monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     let monthName = monthNames[monthNumber];    
 
@@ -69,8 +69,7 @@ export default function Fitness() {
             </div>
             
             <div className="workouts">
-                <span className="small-title">Exercises</span><br/><br/>
-                <span className="sub-title">{date}</span>
+                <span className="small-title">Exercises {date}</span><br/><br/>
                 <div className="workout-container">
                     <div className="workout-card">
                         {/*add in database info*/}
