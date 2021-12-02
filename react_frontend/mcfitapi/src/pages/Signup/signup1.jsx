@@ -109,9 +109,7 @@ const Signup1 = (props) => {
                     </Box>
                 </ThemeProvider>
             </div>
-            
-        </div>
-
+    </div>
 
 )};
   
