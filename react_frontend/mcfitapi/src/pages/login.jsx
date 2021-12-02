@@ -8,7 +8,6 @@ import Cookies from 'universal-cookie'
 
 //Components
 import Header from '../components/Header';
-import img from "../static/img/login-image.png";
 //style
 import "./login.css";
 import googleLogin from "../services/googleLogin";
@@ -85,32 +84,30 @@ return (
   <div>
     <Header/>
     <div className="login-container">
-      <div className="empty">
-      </div>
-      <div className="photo">
-        <img src={img} alt=""/>
-      </div>
-      <div className="some-text">
-        <span className="custom-text">
-          CUSTOMIZED<br />
-          TRAINING <br />
-          JUST FOR YOU
-        </span>
-      </div>
-      <div className="login-form">
-        <span className="sourcesanspro-bold-white-40px" >
+      <div class="login-side" style={{textAlign: 'center'}}>
+        <span className="welcome-text" >
           WELCOME BACK
         </span>
         <p className="bottom-padding"/>
-          </div>
-            <GoogleLogin
+        <div style={{textAlign: 'center'}}>
+          <GoogleLogin
             clientId="35091798775-4a59pnnbajjnmrmh3s06lqr22oqkkgtc.apps.googleusercontent.com"
             buttonText="LOGIN WITH GOOGLE"
             onSuccess={responseGoogle}
             onFailure={responseGoogle}
           />
+        </div>  
+      </div>
+      <div class="image-side">
+        <span className="custom-text">
+          CUSTOMIZED<br />
+          TRAINING <br />
+          TO MEET YOUR <br/>
+          GOALS
+        </span>
       </div>
     </div>
+  </div>
 
 );}
 

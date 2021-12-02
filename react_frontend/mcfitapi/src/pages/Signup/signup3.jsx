@@ -3,15 +3,24 @@ import './signup.css'
 import { Link } from "react-router-dom";
 import { Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import LinearProgress from "@mui/material/LinearProgress";
 //Components
 import Header from '../../components/HeaderW'
 
 const theme = createTheme({
     palette: {
       neutral: {
-        main: 'black',
-        contrastText: 'white',
+        main: '#000000',
+        contrastText: '#ffffff',
       },
+      reversed: {
+        main: '#ffffff',
+        contrastText: '#000000',
+      },
+      progress: {
+        main: '#6220F7',
+    }
     },
   });
 
@@ -27,20 +36,30 @@ const theme = createTheme({
                 <div className="container2">
                     <div className="welcome-text">
                         <span className="welcome-style">
-                            What are your fitness goals?
+                            What are your <span style={{fontWeight: '700'}}>fitness</span> goals?
                         </span>
                         <p className="bottom-padding"/>
                     </div>
-                    <div className="good-button"></div>
+                    <div className="good-button">
+                        <ThemeProvider theme={theme}>
+                            <Button color="reversed" 
+                                onClick={e => props.previousStep(e)}
+                                variant="contained"
+                                style={{maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
+                                >
+                                Go back
+                            </Button>
+                        </ThemeProvider>
+                    </div>
                     <div className="side-button">
-                        <div className="formField">
+                        <div className="formField3">
                             <ThemeProvider theme={theme}>
                                     <Button color="neutral"
                                         name='fitness_goal'
                                         
                                         onClick={e => onSubmit(e)}
                                         variant="contained"
-                                        style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
+                                        style={{maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >
                                         Weightloss
                                     </Button>
@@ -51,7 +70,7 @@ const theme = createTheme({
                                         name='fitness_goal'
                                         onClick={e => onSubmit(e)}
                                         variant="contained"
-                                        style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
+                                        style={{maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >
                                         Bodybuilding
                                     </Button>
@@ -63,7 +82,7 @@ const theme = createTheme({
                                         
                                         onClick={e => onSubmit(e)}
                                         variant="contained"
-                                        style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
+                                        style={{maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >
                                         Strength
                                     </Button>
@@ -76,7 +95,7 @@ const theme = createTheme({
                                         
                                         onClick={e => onSubmit(e)}
                                         variant="contained"
-                                        style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
+                                        style={{maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >
                                         General Fitness
                                     </Button>
@@ -87,7 +106,7 @@ const theme = createTheme({
                                         
                                         onClick={e => onSubmit(e)}
                                         variant="contained"
-                                        style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
+                                        style={{maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >
                                         Muscle Tone
                                     </Button>
@@ -99,26 +118,21 @@ const theme = createTheme({
                                         
                                         onClick={e => onSubmit(e)}
                                         variant="contained"
-                                        style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
+                                        style={{maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
                                         >
                                         Power lifting
                                     </Button>
-
-
-                                    <Button color="neutral" 
-                                        onClick={e => props.previousStep(e)}
-                                        variant="contained"
-                                        style={{marginLeft: '15px', maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
-                                        >
-                                        Go back
-                                    </Button>
-
-
                             </ThemeProvider>
                         </div>
                     </div>
                 </div>
-                
+                <div style={{position: 'fixed', bottom: '0px', height: '30px', width: '100%'}}>
+                <ThemeProvider theme={theme}>
+                    <Box  sx={{ ml: "9%", width: "80%"}}>
+                        <LinearProgress variant="determinate" value={37.5} color='progress'/>
+                    </Box>
+                </ThemeProvider>
+                </div>
             </div>
         )
     }
