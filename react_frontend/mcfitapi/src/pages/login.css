@@ -3,58 +3,36 @@
 
 body {
   background-color: black;
+  color: white;
 }
+
 .login-container {
-  
-  margin-top: 3%;
-  margin-bottom: 3%;
   display: grid;
-  grid-template-columns: 1.2fr 1.2fr 0.6fr 1fr;
-  grid-template-rows: 0.6fr 1.4fr 1fr;
-  grid-auto-columns: 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-}
-
-.empty { grid-area: 1 / 1 / 2 / 2; }
-
-.photo { grid-area: 1 / 2 / 4 / 5; }
-
-.some-text {
-  display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 0.6fr 1.4fr;
   grid-template-rows: 1fr;
-  gap: 0px 0px;
+  gap: 0px 8px;
   grid-auto-flow: row;
   grid-template-areas:
-    ". . .";
-  grid-area: 1 / 2 / 2 ;
+    "login-side image-side";
 }
 
-.login-form { 
-  grid-area: 2 / 1 / 4 / 2; 
-}
+.login-side { grid-area: login-side; 
+margin-top: 50%;}
+
+.image-side { grid-area: image-side;
+background-image: url("../static/img/login-image.png");
+background-repeat: no-repeat;
+height: 100vh; }
 
 .custom-text {
   color: var(--white);
-  flex: 1;
   font-family: var(--font-family-impact-regular);
   font-size: 80px;
   font-weight: 400;
+  top: -1%;
+  left: -1%;
   letter-spacing: 0;
   position: relative;
-  top: -30px;
-  left: -30px;
-  line-height: 80px;
-  margin-bottom: -2px;
-  margin-right: -2px;
-  width: 557px;
-}
-
-.formCenter {
-  margin-bottom: 100px;
-  width: 20%;
-  float:left;
 }
 
 .formTitle {
@@ -85,7 +63,6 @@ body {
   width: 85%;
   background-color: transparent;
   border: none;
-  color: white;
   outline: none;
   border-bottom: 1px solid #445366;
   font-size: 1em;
@@ -143,4 +120,11 @@ body {
 
 .bottom-padding {
   margin-bottom: 2cm;
+}
+
+.welcome-text {
+  text-align: center;
+  font-size: 40px;
+  font-family: var(--font-family-source_sans_pro);
+  font-weight: 700;
 }
