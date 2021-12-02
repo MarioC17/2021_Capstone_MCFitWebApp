@@ -1,8 +1,9 @@
 import React from 'react'
 import Sidebar from '../../components/Sidebar';
 import './home.css'
-import {Button } from '@mui/material/';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { IconButton } from '@mui/material/';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 function home() {
     let monthNumber = (new Date().getMonth()+1);
@@ -49,65 +50,57 @@ function home() {
     });
     
     return (
-        <div>
+        <div style={{backgroundColor: "#ffffff", minHeight: "100vh" }} >
         <Sidebar/>
-        <div style={{backgroundColor: "#f4f4f4", minHeight: "100vh" }} className="home-container">
+        <div className="home-container">
+            <div className="home-title">
+                Welcome back, Jane!
+            </div>
+            <div class="progress-overall">
+                <div className="home-sub-title">
+                    Progress Overall
+                </div>
+                <div className="graph-card">
 
-            <div className="exercise-overview">
-                <span>EXERCISES</span>
-                <span>{date}</span>
-                <div>
-                    {exercises.map(exercise => (
-                        <div className="home-exercise-cell">
-                            {exercise.name}
-                        </div>
-                    ))}
                 </div>
             </div>
-            <div className="nutrition-overview">
-                <span>NUTRITION OVERVIEW</span>
-                <span>{date}</span>
-                <div>
-                    {nutritionData.map(data => (
-                        <span style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginBottom: '3%'}}>
-                            <span>{data.name}</span>
-                            <span>{data.value}{data.measurement}</span>
-                        </span>
-                    ))}
+            <div className="information">
+                <div className="home-sub-title">
+                    Information
                 </div>
-                <div>
-                    {nutritionalSummary.map(data => (
-                        <span style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginBottom: '3%'}}>
-                        <span style={{fontWeight: '700'}}>{data.name}</span>
-                        <span>{data.value}{data.measurement}</span>
-                    </span>
-                    ))}
+                <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '20px'}}>
+                    <div className='home-card'>
+                        <span style={{fontWeight: '700'}}>PROGRAM</span><br/>
+                        Weeks completed
+                        <span style={{position: 'fixed', right: '5%', fontSize: '40px', fontWeight: '700'}}>0/12</span>
+                    </div>
+                    <div className='home-card'>
+                        <span style={{fontWeight: '700'}}>FITNESS GOALS</span><br/>
+                    </div>
+                    <div className='home-card'>
+                        <span style={{fontWeight: '700'}}>UPCOMING APPOINTMENTS</span><br/>
+                        No upcoming appointment
+                    </div>
+                    <div className='home-card'>
+                        <span style={{fontWeight: '700'}}>UPCOMING PAYMENTS</span>
+                        <div>
+                            <span style={{float: 'left', width: '50%'}}>Due date</span>
+                            <span style={{float: 'center', width: '50%'}}>Amount</span>
+                        </div> 
+                        <div>
+                            <span style={{float: 'left', width: '50%'}}>N/A</span>
+                            <span style={{float: 'center', width: '50%'}}> $0.00</span>
+                        </div>  
+                                 
+                        <span style={{fontWeight: '700', textAlign: 'right'}}>Pay Now</span>
+                    </div>
+                    <div className='home-library-card'>
+                        <span style={{color: 'white'}} className="analytic-title">Workout Library</span>
+                        <IconButton style={{color: 'white'}}>
+                            <ArrowForwardIosIcon />
+                        </IconButton>
+                    </div>
                 </div>
-                <ThemeProvider className="home-meal-nav-button" theme={theme}>
-                    <Button variant="contained" color="reversed">
-                        ADD A MEAL
-                    </Button>
-                </ThemeProvider>
-            </div>
-            <div className="program-overview">
-                <div className="program-overview-card">
-                    <span>PROGRAM</span><br/><br/>
-                    <span>7/12 Weeks Completed</span>
-                </div>
-                <div className="program-overview-card">
-                    <span>UPCOMING PAYMENTS</span>
-                </div>
-                <div className="program-overview-card">
-                    <span>UPCOMING APPOINTMENTS</span>
-                </div>
-                <div className="program-overview-card">
-                    <span>FITNESS GOALS</span><br/><br/>
-                    <span>Strength, Weight-loss, Toning </span>
-                </div>
-                
-            </div>
-            <div className="header-bar">
-                <span className="home-title">Welcome back, NAME!</span>
             </div>
         </div>
         </div>
