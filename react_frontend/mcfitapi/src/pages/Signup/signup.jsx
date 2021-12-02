@@ -97,7 +97,7 @@ const Signup = () => {
     case 7:
       return(
         <div>
-        <Signup7 nextStep = {nextStep} previousStep = {previousStep} setFormData = {setFormData} formData = {formData} fitness_goal={fitness_goal}/>
+        <Signup7 nextStep = {nextStep} previousStep = {previousStep} setFormData = {setFormData} formData = {formData}/>
         </div>
     )
     case 8:
