@@ -57,7 +57,7 @@ constructor(props) {
     bookingOptions: [],
     selectedEvent: null,
     selectedUser: null,
-    description: {}
+    description: "No description provided"
   }
   this.handleOpen = this.handleOpen.bind(this);
   this.handleClose = this.handleClose.bind(this);

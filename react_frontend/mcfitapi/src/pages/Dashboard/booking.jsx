@@ -14,6 +14,7 @@ import interactionPlugin from '@fullcalendar/interaction'
 import { AccessTimeFilled, Description, Event, LocationOn } from '@mui/icons-material/';
 import Cookies from 'universal-cookie';
 
+
 var myToken;
     
 const theme = createTheme({
@@ -51,19 +52,30 @@ constructor(props) {
   super(props)
   this.state = {
     open: false,
+    openSuccess: false,
+    openError: false,
+    openEventView: false,
     weekend: true,
     events: [],
     date: {},
     dateDisplay: {},
     bookingOptions: [],
     selectedEvent: null,
-    description: {},
+    selectedTime: null,
+    description: "No description provided",
+    location: "Online",
     email: "",
     firstName: "",
     lastName: ""
   }
   this.handleOpen = this.handleOpen.bind(this);
   this.handleClose = this.handleClose.bind(this);
+  this.handleOpenSuccess = this.handleOpenSuccess.bind(this);
+  this.handleCloseSuccess = this.handleCloseSuccess.bind(this);
+  this.handleOpenError = this.handleOpenError.bind(this);
+  this.handleCloseError = this.handleCloseError.bind(this);
+  this.handleOpenEventView = this.handleOpenEventView.bind(this);
+  this.handleCloseEventView = this.handleCloseEventView.bind(this);
 }
 
 async handleOpen(eventInfo) {
@@ -71,13 +83,46 @@ async handleOpen(eventInfo) {
   this.state.dateDisplay = eventInfo.date.toString().substring(0,15); //Used for user facing popup
   this.state.date = eventInfo.dateStr //Used for API call, YYYY-MM-DD format
   this.state.bookingOptions = await getBookableTimes(this.state.date,this.state.date);
+  this.state.description = "No description provided"
   console.log(this.state.date)
   console.log(this.state.bookingOptions)
   this.setState({ open: true})
 }
 handleClose() {
   this.setState({ open: false})
+  //this.setState({selectedEvent: null})
+  this.state.description = "No description provided"
+}
+
+handleOpenSuccess()
+{
+  this.setState({openSuccess: true})
+}
+
+handleCloseSuccess()
+{
+  this.setState({openSuccess: false})
   this.setState({selectedEvent: null})
+}
+
+handleOpenError()
+{
+  this.setState({openError: true})
+}
+
+handleCloseError()
+{
+  this.setState({openError: false})
+}
+
+handleOpenEventView()
+{
+  this.setState({openEventView: true});
+}
+
+handleCloseEventView()
+{
+  this.setState({openEventView: false});
 }
     
   render() {
@@ -146,15 +191,22 @@ handleClose() {
               <Select 
                 id="time" 
                 onChange={
-                  (selection)=>(this.setState({selectedEvent:selection.target.value}))}>
+                  async(selection)=>{
+                    await this.setState({selectedEvent:selection.target.value});
+                    var booking = this.state.bookingOptions.find(element => (element['identifier'] === this.state.selectedEvent))
+                    var time = booking.from.substring(11,16)
+                    await this.setState({selectedTime:time})
+                  }}>
               {this.state.bookingOptions.map(
-                (item) => (<MenuItem name={item.identifier} value={item.identifier}>{item.from.substring(11,16)}</MenuItem>)
+                (item) => (<MenuItem name={item.from.substring(11,16)} value={item.identifier}>{item.from.substring(11,16)}</MenuItem>)
               )}
               </Select></div>
               <div class="book-popup-desc"><TextField label="Add description" onChange={
               (entered)=>(this.setState({description:entered.target.value}))
               }/></div>
-              <div class="book-popup-location"><TextField label="Location"/></div>
+              <div class="book-popup-location"><TextField label="Location" onChange={
+              (entered)=>(this.setState({location:entered.target.value}))
+              }/></div>
               <div class="book-popup-event"><Select>
                 <MenuItem value="1">1 day before</MenuItem>
                 <MenuItem value="2">2 days before</MenuItem>
@@ -166,14 +218,93 @@ handleClose() {
                 <Button variant="contained" 
                 color="neutral" 
                 style={{marginBotton: '5%', minWidth: '150px', fontSize: '20px'}}
-                onClick={()=>{
+                onClick={async()=>{
                   if(this.state.selectedEvent != null)
                   {
-                    bookEvent(this.state.selectedEvent,this.state.firstName,this.state.lastName,this.state.email,this.state.description)
+                    var apiDescription = `${this.state.location}\n${this.state.description}` //API doesn't track location separately, including in description field
+                    console.log(apiDescription)
+                    var success = await bookEvent(this.state.selectedEvent,this.state.firstName,this.state.lastName,this.state.email,apiDescription)
+                    console.log(success)
+                    if(success)
+                    {
+                      this.handleClose();
+                      this.handleOpenSuccess();
+                    }
+                    else
+                    {
+                      this.handleClose();
+                      this.handleOpenError();
+                    }
                   }
                 }}
                 >
                 Save
+                </Button>
+              </ThemeProvider>
+            </div>
+          </Box>
+        </Modal>
+        <Modal
+          open={this.state.openSuccess}
+          onClose={this.handleCloseSuccess}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+          >
+          <Box sx={style}>
+            <h1>Thank you</h1>
+            <p>Your request has been approved.  You will receive a booking confirmation via email.</p>
+            <p>Appointment</p>
+            <p>{this.state.dateDisplay} {this.state.selectedTime}</p>
+          </Box>
+        </Modal>
+        <Modal
+          open={this.state.openError}
+          onClose={this.handleCloseError}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+          >
+          <Box sx={style}>
+            There was an error booking your appointment.  Please refresh the page and try again.
+          </Box>
+        </Modal>
+        <Modal
+          open={this.state.openEventView}
+          onClose={this.handleCloseEventView}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+          >
+          <Box sx={style}>
+            <div class="booking-popup-container">
+              <div class="book-popup-ico1"><img style={{height: '65px'}} src={Sagenda}/></div>
+              <div class="book-popup-ico2"><AccessTimeFilled/></div>
+              <div class="book-popup-ico3"><LocationOn/></div>
+              <div class="book-popup-ico4"><Description/></div>
+              <div class="book-popup-ico5"><Event/></div>
+              <div class="book-popup-title">
+                  Appointment Details
+              </div>
+              {/* add content here curt */}
+              <div class="book-popup-date">{this.state.dateDisplay} {this.state.selectedTime}
+              </div>
+              <div class="book-popup-desc">{this.state.description}</div>
+              <div class="book-popup-location">{this.state.location}</div>
+              <div class="book-popup-event"></div>
+            </div>
+            <div style={{textAlign: 'right'}}>
+              <ThemeProvider theme={theme}>
+                <Button variant="contained" 
+                color="neutral" 
+                style={{marginBotton: '5%', minWidth: '150px', fontSize: '20px'}}
+                onClick={async()=>{
+                  if(window.confirm("Are you sure you'd like to cancel your appointment for " + this.state.dateDisplay + " at " + this.state.selectedTime + "?"))
+                  {
+                    cancelBooking(this.state.selectedEvent)
+                    this.handleCloseEventView();
+                  }
+                  
+                }}
+                >
+                Cancel
                 </Button>
               </ThemeProvider>
             </div>
@@ -197,10 +328,35 @@ handleClose() {
       lastName: lName
     });
     console.log(this.state);
-    var times = await getBookingsByUser('2021-11-22','2021-12-31',this.state.firstName,this.state.lastName); //Will select dates automatically later
+    const d = new Date();
+    var year = d.getFullYear();
+    var month = d.getMonth() + 1;
+    var day = d.getDate();
+    if(day < 10)
+      day = "0" + day;
+    if(month < 10)
+      month = "0" + month;
+    var currentDate = `${year}-${month}-${day}`
+    
+    month = Number(month) + 3; //Assume nobody is booking more than 3 months out, so should be fine with this
+    if (month > 12)
+    {
+      year++;
+      month -= 12;
+      month = "0" + month;
+    }
+    if (day > 28)
+      day = 28; //Handles varying month lengths.  Don't need exactly 3 months, so this should work
+      
+    var futureDate = `${year}-${month}-${day}`
+    console.log(futureDate)
+    
+    console.log(currentDate)
+    var times = await getBookingsByUser(currentDate,futureDate,this.state.firstName,this.state.lastName);
     for(let i = 0;i < times.length;i++)
     {
-      times[i]['title'] = 'Appointment';
+      times[i]['title'] = times[i]['members'][0]['description'].split('\n')[1];
+      times[i]['location'] = times[i]['members'][0]['description'].split('\n')[0];
       times[i]['start'] = times[i]['from'].substring(0,times[i]['from'].length-1)+":00";
       times[i]['end'] = times[i]['to'].substring(0,times[i]['to'].length-1)+":00";
       times[i]['backgroundColor'] = '#a0a0a0';
@@ -214,12 +370,19 @@ handleClose() {
   
   handleEventClick = (clickInfo) => 
   {
-    var date = clickInfo.event._instance.range.start;
-    if(window.confirm("Are you sure you'd like to cancel your appointment for " + date + "?"))
-    {
-      var eventID = clickInfo.event._def.extendedProps.eventIdentifier;
-      cancelBooking(eventID)
-    }
+    console.log(clickInfo.event._def.extendedProps.location)
+    var dateSplit = clickInfo.event._def.extendedProps.from.substring(0,10).split('-');
+    var year = dateSplit[0];
+    var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    var month = months[dateSplit[1] - 1];
+    var day = dateSplit[2];
+    this.state.dateDisplay = `${month} ${day}, ${year}`;
+    this.state.selectedTime = clickInfo.event._def.extendedProps.from.substring(11,16)
+    var eventID = clickInfo.event._def.extendedProps.eventIdentifier;
+    this.state.description = clickInfo.event._def.title;
+    this.state.location = clickInfo.event._def.extendedProps.location;
+    this.state.selectedEvent = clickInfo.event._def.extendedProps.eventIdentifier;
+    this.handleOpenEventView();
   }
   
   handleDateSelect = (selectInfo) =>
