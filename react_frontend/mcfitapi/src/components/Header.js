@@ -10,7 +10,7 @@ export default function Header() {
   return (
       <AppBar style={{ background: 'black' }} position="static">
 		<Toolbar>
-			<Box sx={{ flexGrow: 1 }}><Link to ="/"><img align='left' style={{ width: 50, height: 50 }} src={img} alt="" /></Link></Box>
+			<Box sx={{ flexGrow: 1 }}><Link to ="/"><img align='left' style={{ width: 50, height: 50, marginTop: '10px', marginBottom: '10px' }} src={img} alt="" /></Link></Box>
 			<Link to="/memberships" style={{color: 'white'}}><Button color="inherit">Memberships</Button></Link>
 			<Link to="/aboutme" style={{color: 'white'}}><Button color="inherit">About Me</Button></Link>
 			<Link to="/policy" style={{color: 'white'}}><Button color="inherit">Policy</Button></Link>
