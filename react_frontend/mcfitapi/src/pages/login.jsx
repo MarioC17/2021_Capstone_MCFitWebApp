@@ -31,10 +31,10 @@ const createLoginCookies = async (profile) => {
     method: 'Get',
     url: `http://localhost:8000/api/user/${profile.googleId}/`,
 }).then(response => {
-  cookies.set('user_id', response.data.user, { path: '/' });
-  cookies.set('first_name', profile.givenName, { path: '/' });
-  cookies.set('last_name', profile.familyName, { path: '/' });
-  cookies.set('email', profile.email, { path: '/' });
+  cookies.set('user_id', response.data.user, { path: '/' ,maxAge:10800});
+  cookies.set('first_name', profile.givenName, { path: '/' ,maxAge:10800});
+  cookies.set('last_name', profile.familyName, { path: '/' ,maxAge:10800});
+  cookies.set('email', profile.email, { path: '/' ,maxAge:10800});
   console.log(cookies.get('user_id')); 
   console.log(response)
   console.log(profile)

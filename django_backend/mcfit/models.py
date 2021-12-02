@@ -39,7 +39,7 @@ class AuthUser(models.Model):
 
 class Profiles(models.Model):
     profile_id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    user = models.OneToOneField(AuthUser, models.DO_NOTHING, blank=True, null=True)
     address = models.TextField(blank=True, null=True)
     emergency_contact = models.TextField(blank=True, null=True)
     fitness_goal = models.TextField(blank=True, null=True)

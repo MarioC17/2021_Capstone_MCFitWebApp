@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Sidebar from '../../../components/Sidebar';
 import './clients.css'
@@ -11,26 +11,89 @@ import { FilterList, MoreVert } from '@mui/icons-material/';
 import BlankProfile from '../../../static/img/blankprofile.jpg'
 import { IconButton } from '@material-ui/core';
 import { style } from '@mui/system';
+import axios from "axios";
 
 function Clients() {
     const [value, setValue] = React.useState(null);
-    //enter client data from api here
-    /*
-    const getexerciseData = async () => {
+    const [profiles,setProfiles] = useState([]);
+    const [clientList,setClients] = useState([]);
+    //const fullProfiles = new Map()
+    const [fullProfiles,setfullProfiles] = useState(new Map());
+    function prof() {
+      this.first_Name = null;
+      this.last_name = null;
+      this.dob = null;
+      this.email = null;
+      this.gender = null;
+      this.address = null;
+      this.fitness_goal = null;
+      this.emergency_contact = null;
+      this.phone_num = null;
+      this.height = null;
+      this.weight = null;
+    }
+
+    const getProfileData = async () => {
     try {
-      const data = await axios.get(
-        "http://localhost:8000/api/exercises"
+      const profiles = await axios.get(
+        "http://localhost:8000/api/profile"
       );
-      setexercise(data.data);
+      setProfiles(profiles.data)
     } catch (e) {
       console.log(e);
     }
   };
 
-  useEffect(() => {
-    getexerciseData();
-  }, []);
-*/
+
+    useEffect(() => {
+      getProfileData();
+    }, []);
+
+    const getClientData = async () => {
+      try {
+        const client = await axios.get(
+          "http://localhost:8000/api/clients"
+        );
+        setClients(client.data)
+      } catch (e) {
+        console.log(e);
+      }
+    };
+  
+  
+      useEffect(() => {
+        getClientData();
+      }, []);
+
+    //Puts full profile data into a dictionary of profile objects. Using the user_id as the key  
+    const getfullProfileData = () => {
+      clientList.forEach(client => {
+        let current_client = JSON.parse(client.extra_data);
+        let fullProf = new prof();
+        fullProf.first_Name = current_client.given_name;
+        fullProf.last_name = current_client.family_name;
+        fullProf.email = current_client.email;
+        fullProfiles.set(client.user,fullProf);
+      //setClients(clientList)
+      })
+
+      profiles.forEach(item => {
+        let current_profile = fullProfiles.get(item.user)
+        current_profile.gender = item.gender;
+        current_profile.address = item.address;
+        current_profile.fitness_goal = item.fitness_goal;
+        current_profile.emergency_contact = item.emergency_contact;
+        current_profile.phone_num = item.phone_num;
+        current_profile.height = item.height;
+        current_profile.weight = item.weight;
+        current_profile.dob = item.dob;
+      })
+    }
+  
+  
+    useEffect(() => {
+      getfullProfileData();
+    }, []);
 
 
 
@@ -100,7 +163,7 @@ function Clients() {
         'location': '9720 Crimson Dr.'
         },
       ];
-      
+
     return (
         <>
             <Sidebar/>

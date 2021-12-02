@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ExerciseList,ExerciseDetail,ExerciseUpdate,ExerciseDelete,ProfileList,ProfileDetail,ProfileUpdate,ProfileDelete,WorkoutUserList,WorkoutDetail,WorkoutUpdate,WorkoutDelete,UserDetail,WorkoutList
+from .views import ExerciseList,ExerciseDetail,ExerciseUpdate,ExerciseDelete,ProfileList,ProfileDetail,ProfileUpdate,ProfileDelete,WorkoutUserList,WorkoutDetail,WorkoutUpdate,WorkoutDelete,UserDetail,WorkoutList,UserList
 
 app_name = 'mcfit_api'
 
@@ -11,6 +11,7 @@ urlpatterns = [
     path('profile/<int:user_id>/',ProfileDetail.as_view(), name='profiledetailcreate'),
 
     path('user/<int:uid>/',UserDetail.as_view(), name='userdetailcreate'),
+    path('clients',UserList.as_view(), name='userlistcreate'),
 
     path('profile', ProfileList.as_view(), name='profilelistcreate'),
     path('profile/edit/<int:user_id>/',ProfileUpdate.as_view(), name='profileupdate'),
