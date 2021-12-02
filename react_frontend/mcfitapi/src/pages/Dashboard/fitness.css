@@ -9,6 +9,7 @@
     grid-template-rows: 0.3fr 0.65fr 1.45fr;
     grid-auto-columns: 1fr;
     gap: 0px 8px;
+    color: black;
     grid-auto-flow: row;
     grid-template-areas:
       "dashboard-title dashboard-title"

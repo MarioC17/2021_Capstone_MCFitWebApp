@@ -93,5 +93,9 @@ class UserDetail(generics.RetrieveDestroyAPIView):
     lookup_field = 'uid'
     lookup_url_kwarg = 'uid'
 
+class UserList(generics.ListCreateAPIView):
+    queryset = SocialaccountSocialaccount.objects.all()
+    serializer_class = SocialAccountSerializer
+
 #view classes docs    
 #https://www.django-rest-framework.org/api-guide/generic-views/#concrete-view-classes

@@ -8,7 +8,6 @@ import Cookies from 'universal-cookie'
 
 //Components
 import Header from '../components/Header';
-import img from "../static/img/login-image.png";
 //style
 import "./login.css";
 import googleLogin from "../services/googleLogin";
@@ -31,10 +30,10 @@ const createLoginCookies = async (profile) => {
     method: 'Get',
     url: `http://localhost:8000/api/user/${profile.googleId}/`,
 }).then(response => {
-  cookies.set('user_id', response.data.user, { path: '/' });
-  cookies.set('first_name', profile.givenName, { path: '/' });
-  cookies.set('last_name', profile.familyName, { path: '/' });
-  cookies.set('email', profile.email, { path: '/' });
+  cookies.set('user_id', response.data.user, { path: '/' ,maxAge:10800});
+  cookies.set('first_name', profile.givenName, { path: '/' ,maxAge:10800});
+  cookies.set('last_name', profile.familyName, { path: '/' ,maxAge:10800});
+  cookies.set('email', profile.email, { path: '/' ,maxAge:10800});
   console.log(cookies.get('user_id')); 
   console.log(response)
   console.log(profile)
@@ -85,32 +84,30 @@ return (
   <div>
     <Header/>
     <div className="login-container">
-      <div className="empty">
-      </div>
-      <div className="photo">
-        <img src={img} alt=""/>
-      </div>
-      <div className="some-text">
-        <span className="custom-text">
-          CUSTOMIZED<br />
-          TRAINING <br />
-          JUST FOR YOU
-        </span>
-      </div>
-      <div className="login-form">
-        <span className="sourcesanspro-bold-white-40px" >
+      <div class="login-side" style={{textAlign: 'center'}}>
+        <span className="welcome-text" >
           WELCOME BACK
         </span>
         <p className="bottom-padding"/>
-          </div>
-            <GoogleLogin
+        <div style={{textAlign: 'center'}}>
+          <GoogleLogin
             clientId="35091798775-4a59pnnbajjnmrmh3s06lqr22oqkkgtc.apps.googleusercontent.com"
             buttonText="LOGIN WITH GOOGLE"
             onSuccess={responseGoogle}
             onFailure={responseGoogle}
           />
+        </div>  
+      </div>
+      <div class="image-side">
+        <span className="custom-text">
+          CUSTOMIZED<br />
+          TRAINING <br />
+          TO MEET YOUR <br/>
+          GOALS
+        </span>
       </div>
     </div>
+  </div>
 
 );}
 

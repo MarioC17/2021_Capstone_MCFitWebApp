@@ -11,7 +11,8 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import { Link } from "react-router-dom";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
+import Box from "@mui/material/Box";
+import LinearProgress from "@mui/material/LinearProgress";
 
 //Components
 import Header from '../../components/HeaderW'
@@ -24,6 +25,13 @@ const theme = createTheme({
         main: 'black',
         contrastText: 'white',
       },
+      reversed: {
+        main: '#ffffff',
+        contrastText: '#000000',
+      },
+      progress: {
+        main: '#6220F7',
+    }
     },
   });
 
@@ -55,42 +63,49 @@ const theme = createTheme({
                         </span>
                         <p className="bottom-padding"/>
                     </div>
-                    
                     <div className="good-button">
-                        <div className="formField">
+                        <ThemeProvider theme={theme}>
+                            <Button color="reversed" 
+                            variant="contained"
+                            style={{maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
+                            onClick={e => props.previousStep(e)}>
+                                Go Back    
+                            </Button>
+                        </ThemeProvider>
+                    </div>
+                    <div className="side-button">
                         <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                        <FormHelperText id="outlined-weight-helper-text">Weight</FormHelperText>
-                            <OutlinedInput
-                                id="outlined-adornment-weight"
-                                name = "weight"
-                                value = {props.weight}
-                                onChange={e => onChange(e)}
-                                endAdornment={<InputAdornment position="end">lbs</InputAdornment>}
-                                aria-describedby="outlined-weight-helper-text"
-                                inputProps={{
-                                'aria-label': 'weight',
-                                }}
-                            />
-                            
+                            <FormHelperText id="outlined-weight-helper-text">Weight</FormHelperText>
+                                <OutlinedInput
+                                    id="outlined-adornment-weight"
+                                    name = "weight"
+                                    value = {props.weight}
+                                    onChange={e => onChange(e)}
+                                    endAdornment={<InputAdornment position="end">lbs</InputAdornment>}
+                                    aria-describedby="outlined-weight-helper-text"
+                                    inputProps={{
+                                    'aria-label': 'weight',
+                                    }}
+                                />
                         </FormControl>
-                        <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                        <FormHelperText id="outlined-weight-helper-text">Height</FormHelperText>
-                            <OutlinedInput
-                                id="outlined-adornment-weight"
-                                name = "height"
-                                value = {props.height}
-                                onChange={e => onChange(e)}
-                                endAdornment={<InputAdornment position="end">cm</InputAdornment>}
-                                aria-describedby="outlined-weight-helper-text"
-                                inputProps={{
-                                'aria-label': 'weight',
-                                }}
-                            />
-                        </FormControl>
-                        <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
 
+                        <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                            <FormHelperText id="outlined-weight-helper-text">Height</FormHelperText>
+                                <OutlinedInput
+                                    id="outlined-adornment-weight"
+                                    name = "height"
+                                    value = {props.height}
+                                    onChange={e => onChange(e)}
+                                    endAdornment={<InputAdornment position="end">cm</InputAdornment>}
+                                    aria-describedby="outlined-weight-helper-text"
+                                    inputProps={{
+                                    'aria-label': 'weight',
+                                    }}
+                                />
+                        </FormControl>
+
+                        <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined" style={{marginTop: '30px'}}>
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
-
                                 <DesktopDatePicker
                                         autoOk
                                         label="Date of birth"
@@ -99,32 +114,29 @@ const theme = createTheme({
                                         onChange={date => handleDateChange(date)}
                                         renderInput={props => <TextField {...props} />}
                                     />
-
                             </LocalizationProvider>
                         </FormControl>
-                        <ThemeProvider theme={theme}>
                         
-                            
+                        <div>
+                            <ThemeProvider theme={theme}>
                                 <Button color="neutral" 
                                 variant="contained"
-                                startIcon={<Avatar src={Arrow}/>}
+                                style={{minWidth: '150px', minHeight: '50px', marginLeft: '8px', marginTop: '10px'}}
                                 onClick={e => onSubmit(e)}
                                 >    
+                                Enter
                                 </Button>
-
-                                <Button color="neutral" 
-                                variant="contained"
-                                onClick={e => props.previousStep(e)}
-                                >
-                                    Go Back    
-                                </Button>
-                            
-                        </ThemeProvider>
-                            
+                            </ThemeProvider> 
                         </div>
                     </div>
                 </div>
-                
+                <div style={{position: 'fixed', bottom: '0px', height: '30px', width: '100%'}}>
+                <ThemeProvider theme={theme}>
+                    <Box  sx={{ ml: "9%", width: "80%"}}>
+                        <LinearProgress variant="determinate" value={62.5} color='progress'/>
+                    </Box>
+                </ThemeProvider>
+                </div>
             </div>
         )
     }

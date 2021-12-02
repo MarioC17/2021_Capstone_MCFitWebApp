@@ -4,9 +4,10 @@
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 0.5fr 0.5fr 2fr;
+    grid-template-rows: 0.7fr 0.5fr 2fr;
     grid-auto-columns: 1fr;
     gap: 0px 0px;
+    margin-left: 3%;
     grid-auto-flow: row;
     grid-template-areas:
       ". . ."
@@ -16,7 +17,8 @@
 
 .b { grid-area: b; }
 .c { grid-area: c; }
-.a { grid-area: a; }  
+.a { grid-area: a; 
+  margin-bottom: 20px;}  
 
 .head-text-style {
   color: var(--black);
@@ -55,9 +57,13 @@
   margin-left: 0;
 }
 
-.formField {
+.formField2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   margin-bottom: 40px;
   align-items: center;
+
 }
 
 .formFieldInput {
@@ -132,8 +138,8 @@
 .welcome-style {
   color: var(--black);
   font-family: var(--font-family-source_sans_pro);
-  font-size: var(--font-size-xxxxl);
-  font-weight: 600px;
+  font-size: 40px;
+  font-weight: 600;
   letter-spacing: 10;
   line-height: 20px;
 }
@@ -142,8 +148,8 @@
 .container2 {
   display: grid;
   margin-left: 5%;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  grid-template-rows: 0.7fr 1fr 1fr 1fr;
   grid-auto-columns: 1fr;
   gap: 0px 0px;
   grid-auto-flow: row;
@@ -154,7 +160,8 @@
     ". . .";
 }
 
-.welcome-text { grid-area: welcome-text; }
+.welcome-text { grid-area: welcome-text;
+text-align: left; }
 
 .good-button { grid-area: good-button; }
 
@@ -164,4 +171,10 @@
   height: 20px;
   object-fit: cover;
   width: 20px;  
+}
+
+.formField3 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }

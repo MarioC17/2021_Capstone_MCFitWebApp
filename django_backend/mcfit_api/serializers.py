@@ -9,7 +9,7 @@ class ExercisetableSerializer(serializers.ModelSerializer):
 class ProfilesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profiles
-        fields = ('profile_id','user','emergency_contact','fitness_goal','gender','weight','dob','height','physical_activity','diet','photo')
+        fields = ('profile_id','user','emergency_contact','fitness_goal','gender','weight','dob','address','phone_num','height','physical_activity','diet','photo')
 
 class WorkoutsSerializer(serializers.ModelSerializer):
     class Meta:
@@ -19,4 +19,4 @@ class WorkoutsSerializer(serializers.ModelSerializer):
 class SocialAccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = SocialaccountSocialaccount
-        fields = ('provider','user','uid')
+        fields = ('provider','user','uid','extra_data')
