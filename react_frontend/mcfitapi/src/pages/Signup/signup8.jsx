@@ -40,7 +40,7 @@ const theme = createTheme({
           data: props.formData
         }).then(response=>{
           console.log(response.data);
-          return history.push("/fitness")//Change to dashboard
+          return history.push("/home")//Change to dashboard
         })
         .catch((err) => {
         console.log(props.formData) });

@@ -5,7 +5,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Avatar, Button, IconButton } from '@mui/material/';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Sidebar from '../../components/Sidebar';
-import axios from "axios";
+import axios from 'axios';
+import Cookies from 'universal-cookie';
 
 //Stylesheet
 import './fitness.css';
@@ -28,14 +29,14 @@ const theme = createTheme({
       }
     },
   });
-
+const cookie = new Cookies()
 export default function Fitness() {
     
     const [workoutName, setWorkoutName] = useState([]);
     const getWorkoutName = async (exercise) => {
         try {
         const data = await axios.get(
-            `http://127.0.0.1:8000/api/exercise/${exercise}` //"http://127.0.0.1:8000/api/workout/user/${user}/     use 1 for testing because it already has workouts"
+            `http://127.0.0.1:8000/api/exercise/${exercise}`
         );
         setWorkoutName(data.data.name);
         console.log(data.data.name)
@@ -47,9 +48,13 @@ export default function Fitness() {
     const [workouts, setWorkouts] = useState([]);
 
     const getWorkoutData = async () => {
+
+
+        let user = cookie.get("user_id")
+
         try {
         const data = await axios.get(
-            "http://127.0.0.1:8000/api/workout/user/1/" //"http://127.0.0.1:8000/api/workout/user/${user}/     use 1 for testing because it already has workouts"
+            `http://127.0.0.1:8000/api/workout/user/${user}/`
         );
         setWorkouts(data.data);
         } catch (e) {

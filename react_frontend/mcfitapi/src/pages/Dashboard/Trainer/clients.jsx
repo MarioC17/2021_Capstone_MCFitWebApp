@@ -13,7 +13,8 @@ import { IconButton } from '@material-ui/core';
 import { style } from '@mui/system';
 import axios from "axios";
 
-function Clients() {
+
+const Clients = () => {
     const [value, setValue] = React.useState(null);
     const [profiles,setProfiles] = useState([]);
     const [clientList,setClients] = useState([]);
@@ -49,6 +50,7 @@ function Clients() {
       getProfileData();
     }, []);
 
+    
     const getClientData = async () => {
       try {
         const client = await axios.get(
@@ -77,7 +79,7 @@ function Clients() {
       return yearGap;
   }
     //Puts full profile data into a dictionary of profile objects. Using the user_id as the key  
-    const getfullProfileData = () => {
+    const getfullProfileData = (async) => {
       clientList.forEach(client => {
         let current_client = JSON.parse(client.extra_data);
         let fullProf = new prof();
@@ -106,9 +108,8 @@ function Clients() {
       getfullProfileData();
     }, []);
     
-
     return (
-        <>
+      <div>
             <Sidebar/>
             <div className="client-area">
                 <div className="client-title">
@@ -140,42 +141,17 @@ function Clients() {
                 </div>
 
                 <div className="client-grid">
-                {Array.from(fullProfiles).map((client, index) => (
-                  <Box sx={{
-                    width: 242,
-                      height: 200,
-                      borderRadius: '10px',
-                      padding: '1%',
-                      backgroundColor: '#D6D6D6',
-                      '&:hover': {
-                        backgroundColor: '#D6D6D6',
-                        opacity: [0.9, 0.8, 0.7],
-                      },
-                    }}
-                    data-index={index}>
-                  <Link to = {
-                      {
-                          pathname: "/trainer/fitness",
-                          clientProp: client[1]
-                      }
-                  }
-                  style={{textDecoration:'none'}}>
-                      <IconButton style={{float: 'right', margin: '-5%'}} color="black" aria-label="View Profile" component="span">
-                          <MoreVert/>
-                      </IconButton>
-                  </Link>
-                  <div className="client-info">
-                      <span><img style={{height: '60px', width: '60px', borderRadius: '50%'}} src={BlankProfile}/></span>
-                      <span>{client[1].first_name} {client[1].last_name}</span>
-                      <span>{client[1].gender} {client[1].dob}</span>
-                      <span>{client[1].address}</span>
-                  </div>
-                  
-                  </Box>
-                ))}
+                {Object.keys(fullProfiles).map((key, index) => {
+                  return fullProfiles[key]["value"].map(iter => {
+                    return(
+
+                      <h1>sdfd</h1>
+                      );
+                    });
+                  })}
                 </div>
             </div>
-        </>
+            </div>
     )
 }
 
