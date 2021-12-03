@@ -1,10 +1,11 @@
-import React, { Component, useState} from 'react';
+import React, { Component, useState,useEffect} from 'react';
 import { render } from 'react-dom';
 import { Link } from "react-router-dom";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Avatar, Button, IconButton } from '@mui/material/';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Sidebar from '../../components/Sidebar';
+import axios from 'axios';
 
 //Stylesheet
 import './fitness.css';
