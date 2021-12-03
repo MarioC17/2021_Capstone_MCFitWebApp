@@ -4,9 +4,14 @@ import './home.css'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { IconButton } from '@mui/material/';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import Cookies from 'universal-cookie';
+
+
 
 function home() {
-    
+    let cookies = new Cookies();
+    let fName = cookies.get('first_name');
+
     let monthNumber = (new Date().getMonth()+1);
     let monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     let monthName = monthNames[monthNumber];    
@@ -55,7 +60,7 @@ function home() {
         <Sidebar/>
         <div className="home-container">
             <div className="home-title">
-                Welcome back, Jane!
+                Welcome back, {fName}!
             </div>
             <div className="progress-overall">
                 <div className="home-sub-title">

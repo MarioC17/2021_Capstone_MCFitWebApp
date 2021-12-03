@@ -13,8 +13,6 @@ import Signup6 from './signup6';
 import Signup7 from './signup7';
 import Signup8 from './signup8';
 
-
-
 const theme = createTheme({
     palette: {
       neutral: {
@@ -23,8 +21,6 @@ const theme = createTheme({
       },
     },
   });
-
-
 
 const Signup = () => {
 
@@ -40,17 +36,18 @@ const Signup = () => {
   }
 
   const [formData, setFormData] = useState({
-    phone_num:'',
-    address:'',
+    user:'',
     emergency_contact:'',
     fitness_goal:'',
     gender:'',
     weight:'',
-    dob:'',
+    dob: '',
+    address:'',
+    phone_num:'',
     height:'',
     physical_activity:'',
     diet:'',
-    user:'',
+    photo: '',
   });
 
   const {phone_num,address,emergency_contact,fitness_goal,gender,weight,dob,height,physical_activity,diet} = formData;
@@ -73,31 +70,31 @@ const Signup = () => {
     case 3:
       return(
         <div>
-        <Signup3 nextStep = {nextStep} previousStep = {previousStep} setFormData = {setFormData} formData = {formData}/>
+        <Signup3 nextStep = {nextStep} previousStep = {previousStep} setFormData = {setFormData} formData = {formData} fitness_goal = {fitness_goal}/>
         </div>
     )
     case 4:
       return(
         <div>
-        <Signup4 nextStep = {nextStep} previousStep = {previousStep} setFormData = {setFormData} formData = {formData}/>
+        <Signup4 nextStep = {nextStep} previousStep = {previousStep} setFormData = {setFormData} formData = {formData} gender = {gender}/>
         </div>
     )
     case 5:
       return(
         <div>
-        <Signup5 nextStep = {nextStep} previousStep = {previousStep} setFormData = {setFormData} formData = {formData}/>
+        <Signup5 nextStep = {nextStep} previousStep = {previousStep} setFormData = {setFormData} formData = {formData} weight = {weight} dob = {dob} height = {height}/>
         </div>
     )
     case 6:
       return(
         <div>
-        <Signup6 nextStep = {nextStep} previousStep = {previousStep} setFormData = {setFormData} formData = {formData}/>
+        <Signup6 nextStep = {nextStep} previousStep = {previousStep} setFormData = {setFormData} formData = {formData} physical_activity = {physical_activity}/>
         </div>
     )
     case 7:
       return(
         <div>
-        <Signup7 nextStep = {nextStep} previousStep = {previousStep} setFormData = {setFormData} formData = {formData}/>
+        <Signup7 nextStep = {nextStep} previousStep = {previousStep} setFormData = {setFormData} formData = {formData} diet = {diet}/>
         </div>
     )
     case 8:

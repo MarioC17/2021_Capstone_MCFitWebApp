@@ -56,7 +56,7 @@ const theme = createTheme({
                             <ThemeProvider theme={theme}>
                                     <Button color="neutral"
                                         name='fitness_goal'
-                                        
+                                        value={props.fitness_goal}
                                         onClick={e => onSubmit(e)}
                                         variant="contained"
                                         style={{maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
@@ -68,6 +68,7 @@ const theme = createTheme({
                                 
                                     <Button color="neutral" 
                                         name='fitness_goal'
+                                        value={props.fitness_goal}
                                         onClick={e => onSubmit(e)}
                                         variant="contained"
                                         style={{maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
@@ -79,7 +80,7 @@ const theme = createTheme({
                
                                     <Button color="neutral"
                                         name='fitness_goal'
-                                        
+                                        value={props.fitness_goal}
                                         onClick={e => onSubmit(e)}
                                         variant="contained"
                                         style={{maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
@@ -92,7 +93,7 @@ const theme = createTheme({
 
                                     <Button color="neutral" 
                                         name='fitness_goal'
-                                        
+                                        value={props.fitness_goal}
                                         onClick={e => onSubmit(e)}
                                         variant="contained"
                                         style={{maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
@@ -103,7 +104,7 @@ const theme = createTheme({
 
                                     <Button color="neutral" 
                                         name='fitness_goal'
-                                        
+                                        value={props.fitness_goal}
                                         onClick={e => onSubmit(e)}
                                         variant="contained"
                                         style={{maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
@@ -115,7 +116,7 @@ const theme = createTheme({
                 
                                     <Button color="neutral" 
                                         name='fitness_goal'
-                                        
+                                        value={props.fitness_goal}
                                         onClick={e => onSubmit(e)}
                                         variant="contained"
                                         style={{maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}

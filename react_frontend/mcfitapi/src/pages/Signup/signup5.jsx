@@ -79,7 +79,6 @@ const theme = createTheme({
                                 <OutlinedInput
                                     id="outlined-adornment-weight"
                                     name = "weight"
-                                    value = {props.weight}
                                     onChange={e => onChange(e)}
                                     endAdornment={<InputAdornment position="end">lbs</InputAdornment>}
                                     aria-describedby="outlined-weight-helper-text"
@@ -94,7 +93,6 @@ const theme = createTheme({
                                 <OutlinedInput
                                     id="outlined-adornment-weight"
                                     name = "height"
-                                    value = {props.height}
                                     onChange={e => onChange(e)}
                                     endAdornment={<InputAdornment position="end">cm</InputAdornment>}
                                     aria-describedby="outlined-weight-helper-text"

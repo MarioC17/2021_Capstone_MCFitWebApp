@@ -28,7 +28,7 @@ const cookies = new Cookies();
 
 const Signup1 = (props) => {
       const onSubmit = e => {
-        let user = cookies.get('user_id')
+        let user = parseInt(cookies.get('user_id'))
         props.setFormData({...props.formData,['user']: user});
         //checkProfile(user_id);
         e.preventDefault();

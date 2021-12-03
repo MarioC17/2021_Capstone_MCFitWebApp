@@ -9,7 +9,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 import Header from '../../components/HeaderW'
 import Cookies from 'universal-cookie'
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 
 const theme = createTheme({
     palette: {
@@ -35,13 +35,15 @@ const theme = createTheme({
     const createProfile = async (e) => {
         e.preventDefault()
         await axios({
-          method: 'post',
+          method: 'POST',
           url:'http://localhost:8000/api/profile',
           data: props.formData
         }).then(response=>{
           console.log(response.data);
-          history.push("/fitness")//Change to dashboard
+          return history.push("/fitness")//Change to dashboard
         })
+        .catch((err) => {
+        console.log(props.formData) });
         }
 
     return (
@@ -84,55 +86,7 @@ const theme = createTheme({
             </div>
         </div>
     )
-
-
-
-
-
-
-      /*
-      OLD
-        return (
-            <div style={{backgroundColor: "white", minHeight: "100vh"}}>
-                <Header/>
-                <div style={{marginLeft: '5%'}}>
-                    <p className="bottom-padding"/>
-                    <div className="welcome-text">
-                        <span className="head-style">
-                            Thank you for signing up and answering our questions.
-                            <br/><br/><br/>
-                        </span>
-                        
-                        <span className="welcome-style">
-                            We will contact you within 24 hours using the <br/><br/>
-                            information you've provided. Talk soon!
-                            <br/><br/><br/>
-                            In the meantime, check out our pricing options.
-                        </span>
-                        
-                        <p className="bottom-padding"/>
-                    </div>
-                    
-                    <div className="good-button">
-                        <div className="formField">
-                            <ThemeProvider theme={theme}>
-                                <Link to="/memberships">
-                                    <Button color="neutral" 
-                                        variant="contained"
-                                        style={{maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
-                                        >
-                                        See pricing
-                                    </Button>
-                                </Link>
-                            </ThemeProvider>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-        )
-    */
-    }
+}
 
 
 export default Signup7
