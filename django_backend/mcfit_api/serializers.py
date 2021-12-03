@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from mcfit.models import Exercisetable,Profiles,Workouts,SocialaccountSocialaccount, Nutritions
+from mcfit.models import Exercisetable,Profiles,Workouts,SocialaccountSocialaccount, Nutritions,AuthUser
 
 class ExercisetableSerializer(serializers.ModelSerializer):
     class Meta:
@@ -25,3 +25,8 @@ class NutritionsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Nutritions
         fields = ('nutrition_id','user','food_id','food_name','food_type','count','calories','carbs','fats','proteins')
+
+class AuthUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AuthUser
+        fields = ('email','is_staff')
