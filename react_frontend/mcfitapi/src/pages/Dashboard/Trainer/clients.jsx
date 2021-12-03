@@ -169,7 +169,7 @@ function Clients() {
                   <div className="client-info">
                       <span><img style={{height: '60px', width: '60px', borderRadius: '50%'}} src={BlankProfile}/></span>
                       <span>{client[1].first_name} {client[1].last_name}</span>
-                      <span>{client[1].gender} {(client[1].dob != null) ? client[1].dob : 'N/A'}</span>
+                      <span>{client[1].gender} {client[1].dob}</span>
                       <span>{client[1].address}</span>
                   </div>
                   

@@ -41,7 +41,7 @@ const style = {
     }
 
     const [formData, setFormData] = useState({
-        user:1,
+        user:props.user,
         exercise:'',
         reps:'',
         sets:'',
