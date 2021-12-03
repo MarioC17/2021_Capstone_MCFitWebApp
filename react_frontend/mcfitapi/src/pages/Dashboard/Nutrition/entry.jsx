@@ -1,5 +1,5 @@
-import React, { Component, useState} from 'react'
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react'
+import { Link, useHistory } from "react-router-dom";
 import { Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import NutritionBar from '../../../components/NutritionBar';
@@ -9,6 +9,8 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 import CheckIcon from '@mui/icons-material/Check';
+import { connect } from 'react-redux';
+import { load_token, foodSave, fetchFood, updateBreakfast, updateSnackData, updateLunchData, updateDinnerData, updateMacroNutrients } from '../../../actions/fat-secret'; 
 //Stylesheet
 import './entry.css';
 
@@ -24,8 +26,82 @@ const style = {
     p: 4,
   };
 
-export default function Entry() {
+  const Entry = (props) => {
+
+    const history = useHistory();
+
     const [value, setValue] = React.useState(null);
+
+    useEffect(() => {
+        props.load_token();
+        props.fetchFood();
+    }, []);
+
+    useEffect(() => {
+        props.updateMacroNutrients([...props.breakfastData, ...props.snackData, ...props.lunchData, ...props.dinnerData]);
+    }, [props.breakfastData, props.snackData, props.lunchData, props.dinnerData]);
+
+    const updateBreakfastData = (data) => { 
+        let breakfastData = {
+            ...data,
+            foodType: "breakfast",
+        };
+        const index = props.breakfastData.findIndex((e) => e.foodId === breakfastData.foodId);
+        if (index === -1) {
+            props.updateBreakfast([...props.breakfastData, breakfastData]);
+        } else {
+            const updatedData = [...props.breakfastData];
+            updatedData[index] = breakfastData;
+            props.updateBreakfast(updatedData);
+        }
+    }
+
+    const updateSnackData = (data) => { 
+        let snackData = {
+            ...data,
+            foodType: "snack",
+        };
+        const index = props.snackData.findIndex((e) => e.foodId === snackData.foodId);
+        if (index === -1) {
+            props.updateSnackData([...props.snackData, snackData]);
+        } else {
+            const updatedData = [...props.snackData];
+            updatedData[index] = snackData;
+            props.updateSnackData(updatedData);
+        }
+    }
+
+    const updateLunchData = (data) => { 
+        let lunchData = {
+            ...data,
+            foodType: "snack",
+        };
+        const index = props.lunchData.findIndex((e) => e.foodId === lunchData.foodId);
+        if (index === -1) {
+            props.updateLunchData([...props.lunchData, lunchData]);
+        } else {
+            const updatedData = [...props.lunchData];
+            updatedData[index] = lunchData;
+            props.updateLunchData(updatedData);
+        }
+    }
+    
+    const updateDinnerData = (data) => { 
+        let dinnerData = {
+            ...data,
+            foodType: "snack",
+        };
+        const index = props.dinnerData.findIndex((e) => e.foodId === dinnerData.foodId);
+        if (index === -1) {
+            props.updateDinnerData([...props.dinnerData, dinnerData]);
+        } else {
+            const updatedData = [...props.dinnerData];
+            updatedData[index] = dinnerData;
+            props.updateDinnerData(updatedData);
+        }
+    }
+
+
     const theme = createTheme({
         palette: {
           neutral: {
@@ -34,7 +110,7 @@ export default function Entry() {
           },
         },
       });
-
+      
       const [Bcomponents, setBComponents] = useState(["Breakfast Component"]);  
       function addSearchBreakfast() { 
         setBComponents([...Bcomponents, "Breakfast Component"])  
@@ -57,8 +133,27 @@ export default function Entry() {
 
       //saved modal
       const [open, setOpen] = React.useState(false);
-      const handleOpen = () => setOpen(true);
+      const handleOpen = () => { 
+            setOpen(true);
+            props.foodSave({
+                breakfastData: props.breakfastData, 
+                snackData: props.snackData, 
+                lunchData: props.lunchData, 
+                dinnerData: props.dinnerData, 
+                caloriesData: props.caloriesData, 
+                carbsData: props.carbsData, 
+                fatsData: props.fatsData,
+                proteinsData: props.proteinsData
+            });
+        };
       const handleClose = () => setOpen(false);
+
+      useEffect(() => {
+        if (!props.adding && open) {
+            history.push('/nutrition')
+            setOpen(false)
+        }
+      }, [props.adding]);
 
     return (
         <>
@@ -70,22 +165,22 @@ export default function Entry() {
                     <span style={{marginBottom: '10px'}}>Current</span>
                     <div className="breakdown-box">
                         Calories<br/>
-                        #<br/>
-                        cal
+                        {props.caloriesData}<br/>
+                        kcal
                     </div>
                     <div className="breakdown-box">
                         Carbs<br/>
-                        #<br/>
+                        {props.carbsData}<br/>
                         gr
                     </div>
                     <div className="breakdown-box">
                         Fats<br/>
-                        #<br/>
+                        {props.fatsData}<br/>
                         gr
                     </div>
                     <div className="breakdown-box">
-                        Protiens<br/>
-                        #<br/>
+                        Proteins<br/>
+                        {props.proteinsData}<br/>
                         gr
                     </div>
                 </div>
@@ -107,7 +202,7 @@ export default function Entry() {
                         gr
                     </div>
                     <div className="breakdown-box">
-                        Protiens<br/>
+                        Proteins<br/>
                         #<br/>
                         gr
                     </div>
@@ -171,11 +266,11 @@ export default function Entry() {
                                 <span className="meal-text">Calories</span>
                                 <span className="meal-text">Carbs</span>
                                 <span className="meal-text">Fats</span>
-                                <span className="meal-text">Protiens</span>
+                                <span className="meal-text">Proteins</span>
                             </div>
                         </div>
                     </div>
-                    {Bcomponents.map((item, i) => ( <NutritionBar/>))} 
+                    {Bcomponents.map((item, i) => ( <NutritionBar passNutritionBarData={(data) => updateBreakfastData(data)} />))} 
                 </div> 
                 <div>
                     <div className="meal-row">
@@ -197,11 +292,11 @@ export default function Entry() {
                                 <span className="meal-text">Calories</span>
                                 <span className="meal-text">Carbs</span>
                                 <span className="meal-text">Fats</span>
-                                <span className="meal-text">Protiens</span>
+                                <span className="meal-text">Proteins</span>
                             </div>
                         </div>
                     </div>
-                    {Scomponents.map((item, i) => ( <NutritionBar/>))} 
+                    {Scomponents.map((item, i) => ( <NutritionBar passNutritionBarData={(data) => updateSnackData(data)} />))} 
                 </div> 
                 <div>
                     <div className="meal-row">
@@ -223,11 +318,11 @@ export default function Entry() {
                                 <span className="meal-text">Calories</span>
                                 <span className="meal-text">Carbs</span>
                                 <span className="meal-text">Fats</span>
-                                <span className="meal-text">Protiens</span>
+                                <span className="meal-text">Proteins</span>
                             </div>
                         </div>
                     </div>
-                    {Lcomponents.map((item, i) => ( <NutritionBar/>))} 
+                    {Lcomponents.map((item, i) => ( <NutritionBar passNutritionBarData={(data) => updateLunchData(data)} />))} 
                 </div>  
                 <div>
                     <div className="meal-row">
@@ -249,14 +344,30 @@ export default function Entry() {
                                 <span className="meal-text">Calories</span>
                                 <span className="meal-text">Carbs</span>
                                 <span className="meal-text">Fats</span>
-                                <span className="meal-text">Protiens</span>
+                                <span className="meal-text">Proteins</span>
                             </div>
                         </div>
                     </div>
-                    {Dcomponents.map((item, i) => ( <NutritionBar/>))} 
+                    {Dcomponents.map((item, i) => ( <NutritionBar passNutritionBarData={(data) => updateDinnerData(data)} />))} 
                 </div>  
             </div>
         </div>
         </>
     )
 }
+
+const mapStateToProps = (state) => {
+    return {
+        adding: state.fatSecret.adding,
+        nutritionsLoading: state.fatSecret.nutritionsLoading,
+        breakfastData: state.fatSecret.breakfastData,
+        snackData: state.fatSecret.snackData,
+        lunchData: state.fatSecret.lunchData,
+        dinnerData: state.fatSecret.dinnerData,
+        caloriesData: state.fatSecret.caloriesData,
+        carbsData: state.fatSecret.carbsData,
+        fatsData: state.fatSecret.fatsData,
+        proteinsData: state.fatSecret.proteinsData,
+    };
+};
+export default connect(mapStateToProps,{load_token, foodSave, fetchFood, updateBreakfast, updateSnackData, updateLunchData, updateDinnerData, updateMacroNutrients}) (Entry); 
