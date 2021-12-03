@@ -29,16 +29,8 @@ const theme = createTheme({
   });
 
 export default function Fitness() {
-    function workout(){
-        this.user_id = user,
-        this.reps = null,
-        this.sets = null,
-        this.rest = null,
-        this.rir = null,
-        this.load = null,
-        this.date = null,
-        this.notes = null
-    }
+    const [workouts, setWorkouts] = useState([]);
+
     const getWorkoutData = async () => {
 
 
