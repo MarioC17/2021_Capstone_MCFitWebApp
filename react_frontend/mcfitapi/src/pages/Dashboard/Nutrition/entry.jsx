@@ -32,6 +32,50 @@ const style = {
 
     const [value, setValue] = React.useState(null);
 
+    const breakfastComponent = {
+        calories: 0,
+        carbs: 0,
+        count: 0,
+        fats: 0,
+        foodId: 0,
+        foodType: "breakfast",
+        input: "",
+        proteins: 0,
+    };
+
+    const snackComponent = {
+        calories: 0,
+        carbs: 0,
+        count: 0,
+        fats: 0,
+        foodId: 0,
+        foodType: "snack",
+        input: "",
+        proteins: 0,
+    };
+
+    const lunchComponent = {
+        calories: 0,
+        carbs: 0,
+        count: 0,
+        fats: 0,
+        foodId: 0,
+        foodType: "lunch",
+        input: "",
+        proteins: 0,
+    };
+
+    const dinnerComponent = {
+        calories: 0,
+        carbs: 0,
+        count: 0,
+        fats: 0,
+        foodId: 0,
+        foodType: "dinner",
+        input: "",
+        proteins: 0,
+    };
+
     useEffect(() => {
         props.load_token();
         props.fetchFood();
@@ -111,26 +155,43 @@ const style = {
         },
       });
       
-      const [Bcomponents, setBComponents] = useState(["Breakfast Component"]);  
+      const [Bcomponents, setBComponents] = useState([breakfastComponent]);   
       function addSearchBreakfast() { 
-        setBComponents([...Bcomponents, "Breakfast Component"])  
+        setBComponents([...Bcomponents, breakfastComponent]) 
       } 
   
-      const [Scomponents, setSComponents] = useState(["Snack Component"]);
+      const [Scomponents, setSComponents] = useState([snackComponent]);
       function addSearchSnack() { 
-        setSComponents([...Dcomponents, "Snack Component"])  
+        setSComponents([...Scomponents, snackComponent])  
       } 
 
-      const [Lcomponents, setLComponents] = useState(["Lunch Component"]); 
+      const [Lcomponents, setLComponents] = useState([lunchComponent]); 
       function addSearchLunch() { 
-        setLComponents([...Lcomponents, "Lunch Component"])  
+        setLComponents([...Lcomponents, lunchComponent])  
       } 
   
-      const [Dcomponents, setDComponents] = useState(["Dinner Component"]);
+      const [Dcomponents, setDComponents] = useState([dinnerComponent]);
       function addSearchDinner() { 
-        setDComponents([...Dcomponents, "Dinner Component"])  
+        setDComponents([...Dcomponents, dinnerComponent])  
       } 
 
+      useEffect(() => {
+        if(!props.nutritionsLoading) {
+            if(props.breakfastData.length > 0) {
+                setBComponents([...props.breakfastData, breakfastComponent]);
+            }
+            if(props.snackData.length > 0) {
+                setSComponents([...props.snackData, snackComponent]); 
+            }
+            if(props.lunchData.length > 0) {
+                setLComponents([...props.lunchData, lunchComponent]);
+            }
+            if(props.dinnerData.length > 0) {
+                setDComponents([...props.dinnerData, dinnerComponent]);
+            }
+        }
+    }, [props.nutritionsLoading]);
+    
       //saved modal
       const [open, setOpen] = React.useState(false);
       const handleOpen = () => { 
@@ -270,7 +331,7 @@ const style = {
                             </div>
                         </div>
                     </div>
-                    {Bcomponents.map((item, i) => ( <NutritionBar passNutritionBarData={(data) => updateBreakfastData(data)} />))} 
+                    {Bcomponents.map((item, i) => ( <NutritionBar key={item.foodId} passNutritionBarData={(data) => updateBreakfastData(data)} itemData={item}  />))} 
                 </div> 
                 <div>
                     <div className="meal-row">
@@ -296,7 +357,7 @@ const style = {
                             </div>
                         </div>
                     </div>
-                    {Scomponents.map((item, i) => ( <NutritionBar passNutritionBarData={(data) => updateSnackData(data)} />))} 
+                    {Scomponents.map((item, i) => ( <NutritionBar key={item.foodId} passNutritionBarData={(data) => updateSnackData(data)} itemData={item} />))} 
                 </div> 
                 <div>
                     <div className="meal-row">
@@ -322,7 +383,7 @@ const style = {
                             </div>
                         </div>
                     </div>
-                    {Lcomponents.map((item, i) => ( <NutritionBar passNutritionBarData={(data) => updateLunchData(data)} />))} 
+                    {Lcomponents.map((item, i) => ( <NutritionBar key={item.foodId} passNutritionBarData={(data) => updateLunchData(data)} itemData={item} />))} 
                 </div>  
                 <div>
                     <div className="meal-row">
@@ -348,7 +409,7 @@ const style = {
                             </div>
                         </div>
                     </div>
-                    {Dcomponents.map((item, i) => ( <NutritionBar passNutritionBarData={(data) => updateDinnerData(data)} />))} 
+                    {Dcomponents.map((item, i) => ( <NutritionBar key={item.foodId} passNutritionBarData={(data) => updateDinnerData(data)} itemData={item} />))} 
                 </div>  
             </div>
         </div>

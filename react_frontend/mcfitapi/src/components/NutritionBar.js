@@ -78,6 +78,16 @@ const NutritionSearchBar = (props) => {
     }
   };
 
+  useEffect(() => {
+    setCalories(setFixedValue(props.itemData.calories));
+    setCarbs(setFixedValue(props.itemData.carbs));
+    setFats(setFixedValue(props.itemData.fats));
+    setProteins(setFixedValue(props.itemData.proteins));
+    setInput(props.itemData.input);
+    setCount(props.itemData.count);
+    setFoodId(props.itemData.foodId);
+  }, [props.nutritionsLoading]);
+
   // start searching
   useEffect(() => {
     setFilteredSuggestions([]);
@@ -127,10 +137,17 @@ const NutritionSearchBar = (props) => {
   // update values on count change
   const updateNutritionalValues = (value) => {
     if (foodId && input) {
-      let nutritionalValues = getNutritionalValues(
-        props.searchResult.food[activeSuggestionIndex].food_description
-      );
-      if (value >= 0) {
+      let nutritionalValues;
+
+      if (props.itemData.foodId != 0) {
+        nutritionalValues = getNutritionalItemValues();
+      } else if (props.searchResult) {
+        nutritionalValues = getNutritionalValues(
+          props.searchResult.food[activeSuggestionIndex].food_description
+        );
+      }
+
+      if (value >= 0 && nutritionalValues) {
         setCount(value);
         setCalories(setFixedValue(value * nutritionalValues.calories));
         setCarbs(setFixedValue(value * nutritionalValues.carbs));
@@ -138,6 +155,15 @@ const NutritionSearchBar = (props) => {
         setProteins(setFixedValue(value * nutritionalValues.proteins));
       }
     }
+  };
+
+  const getNutritionalItemValues = () => {
+    return {
+      calories: setFixedValue(props.itemData.calories / props.itemData.count),
+      carbs: setFixedValue(props.itemData.carbs / props.itemData.count),
+      fats: setFixedValue(props.itemData.fats / props.itemData.count),
+      proteins: setFixedValue(props.itemData.proteins / props.itemData.count),
+    };
   };
 
   // get values from description
@@ -307,6 +333,7 @@ const mapStateToProps = (state) => {
   return {
     searchResult: state.fatSecret.searchResult,
     loading: state.fatSecret.loading,
+    nutritionsLoading: state.fatSecret.nutritionsLoading,
   };
 };
 export default connect(mapStateToProps, { foodSearch })(NutritionSearchBar);
