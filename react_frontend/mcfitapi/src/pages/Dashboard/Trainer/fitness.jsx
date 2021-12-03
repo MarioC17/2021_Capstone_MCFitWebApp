@@ -37,6 +37,7 @@ const headCells = [
 ];
 
 export default function Fitness(props) { 
+    
     function getAge(dateString) {
         var today = new Date();
         var birthDate = new Date(dateString);
@@ -81,7 +82,6 @@ export default function Fitness(props) {
     
     
     const [value, setValue] = React.useState(null);
-    
     return (
         <>
         <Sidebar/> 
@@ -109,16 +109,7 @@ export default function Fitness(props) {
                         <span>{props.location.clientProp.fitness_goal}</span>
                     </div>
                 </div>
-                <div className="profile-card">
-                    <span className="small-title">Upcoming Payments</span>
-                    <div className="profile-info">
-                        <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
-                            <span>Oct. 30, 2021 </span>
-                            <span style={{alignItems: 'center'}}><CircleIcon style={{fill: "orange"}}/>$150.00</span>
-                        </div>
-                    </div>
                 </div>
-            </div>
             
             <div className="assign">
                 <Entry user={props.location.clientProp.id}/>

@@ -26,7 +26,7 @@ const style = {
     p: 4,
   };
 
-  export default function Entry() {
+  export default function Entry(props) {
     const addNewWorkout = async (formData) => {
         
         await axios({
@@ -55,6 +55,7 @@ const style = {
     const {user,exercise,reps,sets,rest,rir,load,date,notes} = formData;
     const [exercises, setexercise] = useState([]);
     const [selectedDate, handleDateChange] = useState(new Date());
+    
 
     const onAdd = e => {
         e.preventDefault();
@@ -103,7 +104,7 @@ const style = {
         <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DesktopDatePicker
                     autoOk
-                    label="Date of birth"
+                    label="Date"
                     minDate={new Date("2000-01-01")}
                     value={selectedDate}
                     onChange={date => onDateChange(date)}
