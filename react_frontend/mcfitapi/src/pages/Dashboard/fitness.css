@@ -10,6 +10,7 @@
     grid-auto-columns: 1fr;
     gap: 0px 8px;
     color: black;
+    font-family: var(--font-family-source_sans_pro);
     grid-auto-flow: row;
     grid-template-areas:
       "dashboard-title dashboard-title"
@@ -72,7 +73,6 @@
   }
 
   .analytic-title {
-    font-family: var(--font-family-source_sans_pro);
     color: var(--black);
     font-size: 35px;
     font-weight: 600;
@@ -80,7 +80,6 @@
   }
 
   .analytic-content {
-    font-family: var(--font-family-source_sans_pro);
     font-size: 20px;
     font-weight: 400;
   }
@@ -105,9 +104,8 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border: 1px solid #d3d3d3;
     border-radius: .60rem; 
-    background-color: var(--quill-gray);
+    background-color: #F2F2F2;
     box-shadow: 3px 4px 5px #00000029;
     min-height: 105px;
     border-radius: 25px;
@@ -119,13 +117,14 @@
   }
 
   .workout-content {
-    font-family: var(--font-family-source_sans_pro);
     font-size: 30px;
     font-weight: 600;
   }
 
   .workout-mini {
-    font-family: var(--font-family-source_sans_pro);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     font-size: 15px;
     font-weight: 700;
   }
@@ -133,17 +132,15 @@
   .workout-button {
     min-width: 200px; 
     min-height: 50px;
-    border-radius: 30px; 
+    border-radius: 15px; 
   }
 
   .small-title {
-    font-family: var(--font-family-source_sans_pro);
     font-size: 30px;
     font-weight: 600;
   }
 
   .sub-title {
-    font-family: var(--font-family-source_sans_pro);
     font-size: 20px;
     font-weight: 600;
   }
