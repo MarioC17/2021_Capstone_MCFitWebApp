@@ -107,7 +107,6 @@ function Clients() {
       getfullProfileData();
     }, []);
     
-
     return (
         <>
             <Sidebar/>
