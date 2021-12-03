@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Sidebar from '../../../components/Sidebar';
+import Sidebar from '../../../components/TrainerSidebar';
 import './clients.css'
 import ClientSearch from '../../../components/ClientSearch';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
@@ -20,7 +20,7 @@ function Clients() {
     //const fullProfiles = new Map()
     const [fullProfiles,setfullProfiles] = useState(new Map());
     function prof() {
-      this.first_Name = null;
+      this.first_name = null;
       this.last_name = null;
       this.dob = null;
       this.email = null;
@@ -34,16 +34,15 @@ function Clients() {
     }
 
     const getProfileData = async () => {
-    try {
-      const profiles = await axios.get(
-        "http://localhost:8000/api/profile"
-      );
-      setProfiles(profiles.data)
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
+      try {
+        const profiles = await axios.get(
+          "http://localhost:8000/api/profile"
+        );
+        setProfiles(profiles.data)
+      } catch (e) {
+        console.log(e);
+      }
+    };
 
     useEffect(() => {
       getProfileData();
@@ -70,7 +69,7 @@ function Clients() {
       clientList.forEach(client => {
         let current_client = JSON.parse(client.extra_data);
         let fullProf = new prof();
-        fullProf.first_Name = current_client.given_name;
+        fullProf.first_name = current_client.given_name;
         fullProf.last_name = current_client.family_name;
         fullProf.email = current_client.email;
         fullProfiles.set(client.user,fullProf);
@@ -90,79 +89,23 @@ function Clients() {
       })
     }
   
-  
     useEffect(() => {
       getfullProfileData();
     }, []);
+    
+    function getAge(dateString) {
+      var today = new Date();
+      var birthDate = new Date(dateString);
+      var yearGap = today.getFullYear() - birthDate.getFullYear();
+      var monthGap = today.getMonth() - birthDate.getMonth();
+      var dayGap = today.getDate() < birthDate.getDate();
+      if (monthGap < 0 || (monthGap == 0 && dayGap == true)) {
+          yearGap--;
+      }
 
-
-
-    const clients = [
-        {
-          'id': 1, 
-          'profilepic': <img style={{height: '60px', width: '60px', borderRadius: '50%'}} src={BlankProfile}/>,
-          'name': 'Tina Goulding',
-          'age': 23,
-          'gender': 'Female', 
-          'location': '321 Another Tr.'
-        },
-        {
-          'id': 2, 
-          'profilepic': <img style={{height: '60px', width: '60px', borderRadius: '50%'}} src={BlankProfile}/>,
-          'name': 'Alex Gabriel',
-          'age': 23,
-          'gender': 'Male', 
-          'location': '123 Someplace Dr.'
-        },
-        {
-          'id': 3, 
-          'profilepic': <img style={{height: '60px', width: '60px', borderRadius: '50%'}} src={BlankProfile}/>,
-          'name': 'Emma Brooks',
-          'age': 28,
-          'gender': 'Female', 
-          'location': '9720 Crimson Dr.'
-        },
-    {
-        'id': 4, 
-        'profilepic': <img style={{height: '60px', width: '60px', borderRadius: '50%'}} src={BlankProfile}/>,
-        'name': 'Emma Brooks',
-        'age': 28,
-        'gender': 'Female', 
-        'location': '9720 Crimson Dr.'
-        },
-        {
-        'id': 5, 
-        'profilepic': <img style={{height: '60px', width: '60px', borderRadius: '50%'}} src={BlankProfile}/>,
-        'name': 'Emma Brooks',
-        'age': 28,
-        'gender': 'Female', 
-        'location': '9720 Crimson Dr.'
-        },
-        {
-        'id': 6, 
-        'profilepic': <img style={{height: '60px', width: '60px', borderRadius: '50%'}} src={BlankProfile}/>,
-        'name': 'Emma Brooks',
-        'age': 28,
-        'gender': 'Female', 
-        'location': '9720 Crimson Dr.'
-        },
-        {
-        'id': 7, 
-        'profilepic': <img style={{height: '60px', width: '60px', borderRadius: '50%'}} src={BlankProfile}/>,
-        'name': 'Emma Brooks',
-        'age': 28,
-        'gender': 'Female', 
-        'location': '9720 Crimson Dr.'
-        },
-        {
-        'id': 8, 
-        'profilepic': <img style={{height: '60px', width: '60px', borderRadius: '50%'}} src={BlankProfile}/>,
-        'name': 'Emma Brooks',
-        'age': 28,
-        'gender': 'Female', 
-        'location': '9720 Crimson Dr.'
-        },
-      ];
+      return yearGap;
+  }
+  let birthday = ''
 
     return (
         <>
@@ -197,39 +140,39 @@ function Clients() {
                 </div>
 
                 <div className="client-grid">
-                    {clients.map((client, index) => (
-                        <Box sx={{
-                            width: 242,
-                            height: 200,
-                            borderRadius: '10px',
-                            padding: '1%',
-                            backgroundColor: '#D6D6D6',
-                            '&:hover': {
-                              backgroundColor: '#D6D6D6',
-                              opacity: [0.9, 0.8, 0.7],
-                            },
-                          }}
-                          data-index={index}>
-                        <Link to = {
-                            {
-                                pathname: "/trainer/fitness",
-                                clientProp: client
-                            }
-                        }
-                        style={{textDecoration:'none'}}>
-                            <IconButton style={{float: 'right', margin: '-5%'}} color="black" aria-label="View Profile" component="span">
-                                <MoreVert/>
-                            </IconButton>
-                        </Link>
-                        <div className="client-info">
-                            <span>{client.profilepic}</span>
-                            <span>{client.name}</span>
-                            <span> {client.age} {client.gender}</span>
-                            <span>{client.location}</span>
-                        </div>
-                        
-                        </Box>
-                    ))}
+                {Array.from(fullProfiles).map((client, index) => (
+                  <Box sx={{
+                    width: 242,
+                      height: 200,
+                      borderRadius: '10px',
+                      padding: '1%',
+                      backgroundColor: '#D6D6D6',
+                      '&:hover': {
+                        backgroundColor: '#D6D6D6',
+                        opacity: [0.9, 0.8, 0.7],
+                      },
+                    }}
+                    data-index={index}>
+                  <Link to = {
+                      {
+                          pathname: "/trainer/fitness",
+                          clientProp: client[1]
+                      }
+                  }
+                  style={{textDecoration:'none'}}>
+                      <IconButton style={{float: 'right', margin: '-5%'}} color="black" aria-label="View Profile" component="span">
+                          <MoreVert/>
+                      </IconButton>
+                  </Link>
+                  <div className="client-info">
+                      <span><img style={{height: '60px', width: '60px', borderRadius: '50%'}} src={BlankProfile}/></span>
+                      <span>{client[1].first_name} {client[1].last_name}</span>
+                      <span>{client[1].gender} {birthday = (client[1].dob != null) ? getAge(client[1].dob) : 'N/A'}</span>
+                      <span>{client[1].address}</span>
+                  </div>
+                  
+                  </Box>
+                ))}
                 </div>
             </div>
         </>

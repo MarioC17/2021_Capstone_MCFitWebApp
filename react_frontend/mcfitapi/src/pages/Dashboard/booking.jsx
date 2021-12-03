@@ -137,8 +137,8 @@ handleCloseEventView()
     return (
       <>
       <Sidebar/>
-      <div style={{backgroundColor: "white", minHeight: "100vh"}} class="booking-container">
-        <div class="mini-calendar">
+      <div style={{backgroundColor: "white", minHeight: "100vh"}} className="booking-container">
+        <div className="mini-calendar">
           <img style={{height: '65px'}} src={Sagenda}/>
           <ThemeProvider theme={theme}>
             <Button variant="contained" color="neutral" style={{ display: 'flex',
@@ -148,7 +148,7 @@ handleCloseEventView()
           </ThemeProvider>
           <MiniCalendar/>
         </div>
-        <div class="reminders">
+        <div className="reminders">
           <span className="small-title">Reminders</span>
           <FullCalendar
           headerToolbar='false'
@@ -158,7 +158,7 @@ handleCloseEventView()
           events={this.state.events}
         />
         </div>
-        <div class="main-calendar">
+        <div className="main-calendar">
           <FullCalendar
           plugins={[ dayGridPlugin, interactionPlugin ]}
           selectable={true}
@@ -177,17 +177,17 @@ handleCloseEventView()
           aria-describedby="modal-modal-description"
           >
           <Box sx={style}>
-            <div class="booking-popup-container">
-              <div class="book-popup-ico1"><img style={{height: '65px'}} src={Sagenda}/></div>
-              <div class="book-popup-ico2"><AccessTimeFilled/></div>
-              <div class="book-popup-ico3"><LocationOn/></div>
-              <div class="book-popup-ico4"><Description/></div>
-              <div class="book-popup-ico5"><Event/></div>
-              <div class="book-popup-title">
+            <div className="booking-popup-container">
+              <div className="book-popup-ico1"><img style={{height: '65px'}} src={Sagenda}/></div>
+              <div className="book-popup-ico2"><AccessTimeFilled/></div>
+              <div className="book-popup-ico3"><LocationOn/></div>
+              <div className="book-popup-ico4"><Description/></div>
+              <div className="book-popup-ico5"><Event/></div>
+              <div className="book-popup-title">
                   Book Appointment
               </div>
               {/* add content here curt */}
-              <div class="book-popup-date">{this.state.dateDisplay}
+              <div className="book-popup-date">{this.state.dateDisplay}
               <Select 
                 id="time" 
                 onChange={
@@ -201,13 +201,13 @@ handleCloseEventView()
                 (item) => (<MenuItem name={item.from.substring(11,16)} value={item.identifier}>{item.from.substring(11,16)}</MenuItem>)
               )}
               </Select></div>
-              <div class="book-popup-desc"><TextField label="Add description" onChange={
+              <div className="book-popup-desc"><TextField label="Add description" onChange={
               (entered)=>(this.setState({description:entered.target.value}))
               }/></div>
-              <div class="book-popup-location"><TextField label="Location" onChange={
+              <div className="book-popup-location"><TextField label="Location" onChange={
               (entered)=>(this.setState({location:entered.target.value}))
               }/></div>
-              <div class="book-popup-event"><Select>
+              <div className="book-popup-event"><Select>
                 <MenuItem value="1">1 day before</MenuItem>
                 <MenuItem value="2">2 days before</MenuItem>
                 <MenuItem value="3">3 days before</MenuItem>
@@ -274,21 +274,21 @@ handleCloseEventView()
           aria-describedby="modal-modal-description"
           >
           <Box sx={style}>
-            <div class="booking-popup-container">
-              <div class="book-popup-ico1"><img style={{height: '65px'}} src={Sagenda}/></div>
-              <div class="book-popup-ico2"><AccessTimeFilled/></div>
-              <div class="book-popup-ico3"><LocationOn/></div>
-              <div class="book-popup-ico4"><Description/></div>
-              <div class="book-popup-ico5"><Event/></div>
-              <div class="book-popup-title">
+            <div className="booking-popup-container">
+              <div className="book-popup-ico1"><img style={{height: '65px'}} src={Sagenda}/></div>
+              <div className="book-popup-ico2"><AccessTimeFilled/></div>
+              <div className="book-popup-ico3"><LocationOn/></div>
+              <div className="book-popup-ico4"><Description/></div>
+              <div className="book-popup-ico5"><Event/></div>
+              <div className="book-popup-title">
                   Appointment Details
               </div>
               {/* add content here curt */}
-              <div class="book-popup-date">{this.state.dateDisplay} {this.state.selectedTime}
+              <div className="book-popup-date">{this.state.dateDisplay} {this.state.selectedTime}
               </div>
-              <div class="book-popup-desc">{this.state.description}</div>
-              <div class="book-popup-location">{this.state.location}</div>
-              <div class="book-popup-event"></div>
+              <div className="book-popup-desc">{this.state.description}</div>
+              <div className="book-popup-location">{this.state.location}</div>
+              <div className="book-popup-event"></div>
             </div>
             <div style={{textAlign: 'right'}}>
               <ThemeProvider theme={theme}>

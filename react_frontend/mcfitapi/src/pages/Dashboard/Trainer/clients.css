@@ -5,6 +5,7 @@
     font-family: var(--font-family-source_sans_pro);
     margin-left: 100px; /*sidebar requirement*/
     background-color: #f4f4f4;
+    color: black;
     min-height: 100vh; 
 }
 

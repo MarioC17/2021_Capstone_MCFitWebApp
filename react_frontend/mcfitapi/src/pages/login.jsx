@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import React, { Fragment, useEffect, useState } from 'react';
 import GoogleLogin from 'react-google-login';
-import { Link,Redirect } from 'react-router-dom';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'universal-cookie'
 
@@ -12,8 +12,6 @@ import Header from '../components/Header';
 import "./login.css";
 import googleLogin from "../services/googleLogin";
 
-
-
 const theme = createTheme({
   palette: {
     neutral: {
@@ -22,6 +20,10 @@ const theme = createTheme({
     },
   },
 });
+
+const onSignoutSuccess = () => {
+  alert("You have been logged out successfully");
+}
 
 const cookies = new Cookies();
 
@@ -40,8 +42,6 @@ const createLoginCookies = async (profile) => {
   console.log(document.cookies)
 })
 
-
-
 }
 const Login = () => {
   const [Profile, setProfile] = useState(null);
@@ -55,13 +55,19 @@ const Login = () => {
     await checkProfile(user_id).then(await has_profile())
   }
 
+
+  const history = useHistory();
+  let isLoggedIn = useState(false);
+
   const has_profile = () => {
-    console.log(Profile)
+    console.log('Profile: ', Profile)
     if (Profile){
-      <Redirect to="/fitness" />
+      console.log("Already has profile");
+      return history.push("/home");
     }
     else{
-      <Redirect to="/signup" />
+      console.log("Has to signup");
+      return history.push("/signup");
     }
   }
 
@@ -84,7 +90,7 @@ return (
   <div>
     <Header/>
     <div className="login-container">
-      <div class="login-side" style={{textAlign: 'center'}}>
+      <div className="login-side" style={{textAlign: 'center'}}>
         <span className="welcome-text" >
           WELCOME BACK
         </span>
@@ -98,7 +104,7 @@ return (
           />
         </div>  
       </div>
-      <div class="image-side">
+      <div className="image-side">
         <span className="custom-text">
           CUSTOMIZED<br />
           TRAINING <br />

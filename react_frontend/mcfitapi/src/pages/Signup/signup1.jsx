@@ -40,7 +40,7 @@ const Signup1 = (props) => {
     return(
         <div style={{backgroundColor: "white", minHeight: "100vh"}}>
             <Header/>
-            <div class="container">
+            <div className="container">
                 <div className="a">
                     <span className="head-text-style">
                         Let’s connect! Please complete your <br />

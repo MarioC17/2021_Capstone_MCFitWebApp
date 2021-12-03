@@ -3,7 +3,6 @@
 
 body {
   background-color: black;
-  color: white;
 }
 
 .login-container {
@@ -125,6 +124,7 @@ height: 100vh; }
 .welcome-text {
   text-align: center;
   font-size: 40px;
+  color: white;
   font-family: var(--font-family-source_sans_pro);
   font-weight: 700;
 }
