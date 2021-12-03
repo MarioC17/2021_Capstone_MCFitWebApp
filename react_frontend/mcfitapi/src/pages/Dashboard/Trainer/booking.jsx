@@ -6,7 +6,7 @@ import listPlugin from '@fullcalendar/list'
 import { Button, Modal, Box, Typography, Select, MenuItem, TextField } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { getBookableTimes, bookEvent, getBookings, cancelBooking, getBookingsByUser, blockTimeSlot } from '../../../components/booking'
-import Sidebar from '../../../components/Sidebar';
+import Sidebar from '../../../components/TrainerSidebar';
 import Sagenda from '../../../static/img/sagenda.png';
 import MiniCalendar from '../../../components/MiniCalendar';
 import './booking.css'
@@ -92,8 +92,8 @@ handleClose() {
     return (
       <>
       <Sidebar/>
-      <div style={{backgroundColor: "white", minHeight: "100vh"}} class="booking-container">
-        <div class="mini-calendar">
+      <div style={{backgroundColor: "white", minHeight: "100vh"}} className="booking-container">
+        <div className="mini-calendar">
           <img style={{height: '65px'}} src={Sagenda}/>
           <ThemeProvider theme={theme}>
             <Button variant="contained" color="neutral" style={{ display: 'flex',
@@ -103,7 +103,7 @@ handleClose() {
           </ThemeProvider>
           <MiniCalendar/>
         </div>
-        <div class="reminders">
+        <div className="reminders">
           <span className="small-title">Reminders</span>
           <FullCalendar
           headerToolbar='false'
@@ -113,7 +113,7 @@ handleClose() {
           events={this.state.events}
         />
         </div>
-        <div class="main-calendar">
+        <div className="main-calendar">
           <FullCalendar
           plugins={[ dayGridPlugin, interactionPlugin, timeGridPlugin ]}
           selectable={true}
@@ -132,17 +132,17 @@ handleClose() {
           aria-describedby="modal-modal-description"
           >
           <Box sx={style}>
-            <div class="booking-popup-container">
-              <div class="book-popup-ico1"><img style={{height: '65px'}} src={Sagenda}/></div>
-              <div class="book-popup-ico2"><AccessTimeFilled/></div>
-              <div class="book-popup-ico3"><Person/></div>
-              <div class="book-popup-ico4"><Description/></div>
-              <div class="book-popup-ico5"><Event/></div>
-              <div class="book-popup-title">
+            <div className="booking-popup-container">
+              <div className="book-popup-ico1"><img style={{height: '65px'}} src={Sagenda}/></div>
+              <div className="book-popup-ico2"><AccessTimeFilled/></div>
+              <div className="book-popup-ico3"><Person/></div>
+              <div className="book-popup-ico4"><Description/></div>
+              <div className="book-popup-ico5"><Event/></div>
+              <div className="book-popup-title">
                   Book Appointment
               </div>
               {/* add content here curt */}
-              <div class="book-popup-date">{this.state.dateDisplay}
+              <div className="book-popup-date">{this.state.dateDisplay}
               <Select 
                 id="time" 
                 onChange={
@@ -151,16 +151,16 @@ handleClose() {
                 (item) => (<MenuItem name={item.identifier} value={item.identifier}>{item.from.substring(11,16)}</MenuItem>)
               )}
               </Select></div>
-              <div class="book-popup-desc"><TextField label="Add description" onChange={
+              <div className="book-popup-desc"><TextField label="Add description" onChange={
               (entered)=>(this.setState({description:entered.target.value}))
               }/></div>
-              <div class="book-popup-location"><Select id="user" onChange={
+              <div className="book-popup-location"><Select id="user" onChange={
                 (selection)=>(this.setState({selectedUser:selection.target.value}))}>
                 <MenuItem value="John Doe">John Doe</MenuItem>
                 <MenuItem value="Curtis Yaremchuk">Curtis Yaremchuk</MenuItem>
                 </Select>
               </div>
-              <div class="book-popup-event"><Select>
+              <div className="book-popup-event"><Select>
                 <MenuItem value="1">1 day before</MenuItem>
                 <MenuItem value="2">2 days before</MenuItem>
                 <MenuItem value="3">3 days before</MenuItem>

@@ -46,7 +46,7 @@ margin-right: 3%; }
     border-radius: .60rem; 
     box-shadow: 3px 4px 5px #00000029;
     min-height: 155px;  
-    border-radius: 25px;
+    border-radius: 15px;
     padding: 25px;
     margin-bottom: 10px;
     height: 100%;
@@ -61,7 +61,7 @@ margin-right: 3%; }
   border-radius: .60rem; 
   background-color: var(--quill-gray);
   box-shadow: 3px 4px 5px #00000029;
-  border-radius: 25px;
+  border-radius: 15px;
   padding: 25px;
   min-height: 100px; 
   display: flex;
@@ -76,7 +76,7 @@ margin-right: 3%; }
   align-items: center;
   box-shadow: 3px 4px 5px #00000029;
   min-height: 100px;  
-  border-radius: 25px;
+  border-radius: 15px;
   padding-left: 25px;
   padding-right: 25px;
   display: flex;

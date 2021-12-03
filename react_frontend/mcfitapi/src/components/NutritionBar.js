@@ -55,8 +55,8 @@ export class NutritionSearchBar extends Component {
     render() {
       
         return (
-          <div class="meal-row">
-            <div class="meal-input"><Search>
+          <div className="meal-row">
+            <div className="meal-input"><Search>
                   <SearchIconWrapper>
                     <SearchIcon />
                   </SearchIconWrapper>
@@ -65,7 +65,7 @@ export class NutritionSearchBar extends Component {
                     inputProps={{ 'aria-label': 'search' }}
                   />
                 </Search></div>
-            <div class="meal-count">
+            <div className="meal-count">
               <TextField
                 id="outlined-number"
                 label="Count"
@@ -75,7 +75,7 @@ export class NutritionSearchBar extends Component {
                 }}
               />
             </div>
-            <div class="meal-stats">
+            <div className="meal-stats">
               <FilledInput
                 id="calories"
                 sx={{ m: 1, width: '15ch' }}

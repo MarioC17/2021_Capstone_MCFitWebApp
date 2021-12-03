@@ -9,6 +9,7 @@
     grid-template-columns: 0.8fr 1.2fr 1fr;
     grid-template-rows: 1.22fr 1.23fr;
     grid-auto-columns: 1fr;
+    color: black;
     gap: 0px 20px;
     grid-auto-flow: row;
     font-family: var(--font-family-source_sans_pro);

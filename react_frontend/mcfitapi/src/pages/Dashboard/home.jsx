@@ -6,6 +6,7 @@ import { IconButton } from '@mui/material/';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 function home() {
+    
     let monthNumber = (new Date().getMonth()+1);
     let monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     let monthName = monthNames[monthNumber];    
@@ -56,7 +57,7 @@ function home() {
             <div className="home-title">
                 Welcome back, Jane!
             </div>
-            <div class="progress-overall">
+            <div className="progress-overall">
                 <div className="home-sub-title">
                     Progress Overall
                 </div>

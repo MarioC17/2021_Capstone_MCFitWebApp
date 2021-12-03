@@ -52,12 +52,12 @@ export default function Nutrition() {
             <div className="progress-text">Overall Progress</div>
             <div className="meal-breakdown">
                 <span className="small-title">Meal Breakdown</span><br/><br/><br/>
-                <div class="breakdown-container">
-                    <div class="meal-name">Breakfast</div>
-                    <div class="food-name">Eggs, Large, White**</div>
-                    <div class="food-count">2 counts**</div>
-                    <div class="hr"><hr/></div>
-                    <div class="nutrition-stat-name">
+                <div className="breakdown-container">
+                    <div className="meal-name">Breakfast</div>
+                    <div className="food-name">Eggs, Large, White**</div>
+                    <div className="food-count">2 counts**</div>
+                    <div className="hr"><hr/></div>
+                    <div className="nutrition-stat-name">
                         <div style={{display: 'flex', flexDirection: 'row'}}>
                             Calories<br/>
                             Carbs<br/>
@@ -65,7 +65,7 @@ export default function Nutrition() {
                             Protiens<br/>
                         </div>
                     </div>
-                    <div class="nutrition-stat-detail">
+                    <div className="nutrition-stat-detail">
                         <div style={{display: 'flex', flexDirection: 'row'}}>
                             {/* ADD VALUES HERE */}
                             {}*cal<br/>
@@ -76,12 +76,12 @@ export default function Nutrition() {
                     </div>
                 </div>
 
-                <div class="breakdown-container">
-                    <div class="meal-name">Snack</div>
-                    <div class="food-name">Eggs, Large, White**</div>
-                    <div class="food-count">2 counts**</div>
-                    <div class="hr"><hr/></div>
-                    <div class="nutrition-stat-name">
+                <div className="breakdown-container">
+                    <div className="meal-name">Snack</div>
+                    <div className="food-name">Eggs, Large, White**</div>
+                    <div className="food-count">2 counts**</div>
+                    <div className="hr"><hr/></div>
+                    <div className="nutrition-stat-name">
                         <div style={{display: 'flex', flexDirection: 'row'}}>
                             Calories<br/>
                             Carbs<br/>
@@ -89,7 +89,7 @@ export default function Nutrition() {
                             Protiens<br/>
                         </div>
                     </div>
-                    <div class="nutrition-stat-detail">
+                    <div className="nutrition-stat-detail">
                         <div style={{display: 'flex', flexDirection: 'row'}}>
                             {/* ADD VALUES HERE */}
                             {}*cal<br/>
@@ -100,12 +100,12 @@ export default function Nutrition() {
                     </div>
                 </div>
 
-                <div class="breakdown-container">
-                    <div class="meal-name">Lunch</div>
-                    <div class="food-name">Eggs, Large, White**</div>
-                    <div class="food-count">2 counts**</div>
-                    <div class="hr"><hr/></div>
-                    <div class="nutrition-stat-name">
+                <div className="breakdown-container">
+                    <div className="meal-name">Lunch</div>
+                    <div className="food-name">Eggs, Large, White**</div>
+                    <div className="food-count">2 counts**</div>
+                    <div className="hr"><hr/></div>
+                    <div className="nutrition-stat-name">
                         <div style={{display: 'flex', flexDirection: 'row'}}>
                             Calories<br/>
                             Carbs<br/>
@@ -113,7 +113,7 @@ export default function Nutrition() {
                             Protiens<br/>
                         </div>
                     </div>
-                    <div class="nutrition-stat-detail">
+                    <div className="nutrition-stat-detail">
                         <div style={{display: 'flex', flexDirection: 'row'}}>
                             {/* ADD VALUES HERE */}
                             {}*cal<br/>
@@ -124,12 +124,12 @@ export default function Nutrition() {
                     </div>
                 </div>
 
-                <div class="breakdown-container">
-                    <div class="meal-name">Dinner</div>
-                    <div class="food-name">Eggs, Large, White**</div>
-                    <div class="food-count">2 counts**</div>
-                    <div class="hr"><hr/></div>
-                    <div class="nutrition-stat-name">
+                <div className="breakdown-container">
+                    <div className="meal-name">Dinner</div>
+                    <div className="food-name">Eggs, Large, White**</div>
+                    <div className="food-count">2 counts**</div>
+                    <div className="hr"><hr/></div>
+                    <div className="nutrition-stat-name">
                         <div style={{display: 'flex', flexDirection: 'row'}}>
                             Calories<br/>
                             Carbs<br/>
@@ -137,7 +137,7 @@ export default function Nutrition() {
                             Protiens<br/>
                         </div>
                     </div>
-                    <div class="nutrition-stat-detail">
+                    <div className="nutrition-stat-detail">
                         <div style={{display: 'flex', flexDirection: 'row'}}>
                             {/* ADD VALUES HERE */}
                             {}*cal<br/>
@@ -155,16 +155,16 @@ export default function Nutrition() {
             </div>
             <div className="nutritional-breakdown">
                 <span className="small-title">Nutritional Breakdown</span><br/><br/><br/>
-                <div class="second-container">
-                    <div class="nutrition-breakdown-name">Consumed</div>
-                    <div class="hr"><hr/></div>
-                    <div class="nutrition-stat-name">
+                <div className="second-container">
+                    <div className="nutrition-breakdown-name">Consumed</div>
+                    <div className="hr"><hr/></div>
+                    <div className="nutrition-stat-name">
                         Calories<br/>
                         Carbohydrates<br/>
                         Protien<br/>
                         Fats<br/>
                     </div>
-                    <div class="nutrition-stat-detail">
+                    <div className="nutrition-stat-detail">
                         {}*cal<br/>
                         {}cur*g / total*cal<br/>
                         {}cur*g / total*cal<br/>
@@ -172,16 +172,16 @@ export default function Nutrition() {
                     </div>
                 </div>
 
-                <div class="second-container">
-                    <div class="nutrition-breakdown-name">Target</div>
-                    <div class="hr"><hr/></div>
-                    <div class="nutrition-stat-name">
+                <div className="second-container">
+                    <div className="nutrition-breakdown-name">Target</div>
+                    <div className="hr"><hr/></div>
+                    <div className="nutrition-stat-name">
                         Calories<br/>
                         Carbohydrates<br/>
                         Protien<br/>
                         Fats<br/>
                     </div>
-                    <div class="nutrition-stat-detail">
+                    <div className="nutrition-stat-detail">
                         {}*cal<br/>
                         {}cur*g / total*cal<br/>
                         {}cur*g / total*cal<br/>
