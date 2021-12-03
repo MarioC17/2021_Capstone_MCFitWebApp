@@ -213,12 +213,13 @@ export const foodSave = (data) => async (dispatch) => {
       type: FAT_SECRET_FOOD_DATA_ADDING,
     });
     let formattedData = formatDataToDB(data);
+    // let user = cookies.get("user_id");
     const response = await axios.post(
       // `${process.env.REACT_APP_API_URL}/nutritions/add`,
       "http://localhost:8000/api/nutritions/add",
       {
-        user_id: 2,
-        // user_id: cookies.get("user_id"),
+        // user_id: 1,
+        user_id: cookies.get("user_id"),
         nutritions: formattedData,
       }
     );
@@ -238,8 +239,9 @@ export const fetchFood = () => async (dispatch) => {
     dispatch({
       type: NUTRITIONS_DATA_LOADING,
     });
-    // let user_id = cookies.get("user_id");
-    let user_id = 2;
+    let user_id = cookies.get("user_id");
+    // user_id: user;
+    // let user_id = 1;
     const response = await axios.get(
       // `${process.env.REACT_APP_API_URL}/nutritions/${user_id}`
       `http://localhost:8000/api/nutritions/${user_id}`
