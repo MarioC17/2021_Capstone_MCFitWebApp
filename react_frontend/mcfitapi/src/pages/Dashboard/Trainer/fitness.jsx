@@ -80,8 +80,7 @@ export default function Fitness(props) {
     }
 
     
-    
-    const [value, setValue] = React.useState(null);
+
     return (
         <>
         <Sidebar/> 
@@ -97,7 +96,7 @@ export default function Fitness(props) {
                     <span className="small-title">Info.</span>
                     <div className="profile-info">
                         <div style={{display: 'flex', flexDirection: 'row', alignContent: 'space-between'}}>
-                            <span>Birthday: {birthday}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span>Age: {birthday}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <span>Sex: {props.location.clientProp.gender}</span>
                         </div>
                         <span>Address: {props.location.clientProp.address}</span> 

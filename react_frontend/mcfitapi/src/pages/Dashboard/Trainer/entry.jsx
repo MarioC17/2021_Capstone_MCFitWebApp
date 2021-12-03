@@ -54,7 +54,7 @@ const style = {
 
     const {user,exercise,reps,sets,rest,rir,load,date,notes} = formData;
     const [exercises, setexercise] = useState([]);
-    const [selectedDate, handleDateChange] = useState(new Date());
+    const [selectedDate, handleDateChange] = useState(null);
     
 
     const onAdd = e => {
@@ -105,7 +105,6 @@ const style = {
             <DesktopDatePicker
                     autoOk
                     label="Date"
-                    minDate={new Date("2000-01-01")}
                     value={selectedDate}
                     onChange={date => onDateChange(date)}
                     renderInput={props => <TextField {...props} />}

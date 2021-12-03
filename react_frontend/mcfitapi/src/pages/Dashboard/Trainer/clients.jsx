@@ -107,7 +107,6 @@ function Clients() {
       getfullProfileData();
     }, []);
     
-  let birthday = ''
 
     return (
         <>
