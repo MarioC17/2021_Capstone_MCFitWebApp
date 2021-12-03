@@ -17,6 +17,9 @@ import {
   NUTRITIONS_DINNER_DATA_UPDATE,
   MACRO_NUTRITIONS_DATA_UPDATE,
 } from "./types";
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
 
 const calculateRemainingTime = (expirationTime) => {
   const currentTime = new Date().getTime();
@@ -214,11 +217,11 @@ export const foodSave = (data) => async (dispatch) => {
       // `${process.env.REACT_APP_API_URL}/nutritions/add`,
       "http://localhost:8000/api/nutritions/add",
       {
-        user_id: 5,
+        user_id: 2,
+        // user_id: cookies.get("user_id"),
         nutritions: formattedData,
       }
     );
-    console.log(response);
     dispatch({
       type: FAT_SECRET_FOOD_DATA_SUCCESS,
       payload: data,
@@ -235,9 +238,11 @@ export const fetchFood = () => async (dispatch) => {
     dispatch({
       type: NUTRITIONS_DATA_LOADING,
     });
+    // let user_id = cookies.get("user_id");
+    let user_id = 2;
     const response = await axios.get(
-      // `${process.env.REACT_APP_API_URL}/nutritions/2`,
-      "http://localhost:8000/api/nutritions/5"
+      // `${process.env.REACT_APP_API_URL}/nutritions/${user_id}`
+      `http://localhost:8000/api/nutritions/${user_id}`
     );
     dispatch({
       type: NUTRITIONS_DATA_SUCCESS,

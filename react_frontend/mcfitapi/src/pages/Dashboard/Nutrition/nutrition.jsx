@@ -217,8 +217,8 @@ const Nutrition = (props) => {
                     <div class="nutrition-stat-detail">
                         {props.caloriesData} kcal<br/>
                         {props.carbsData} g / total*cal<br/>
-                        {props.fatsData} g / total*cal<br/>
                         {props.proteinsData} g / total*cal<br/>
+                        {props.fatsData} g / total*cal<br/>
                     </div>
                 </div>
 
