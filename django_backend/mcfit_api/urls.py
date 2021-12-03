@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ExerciseList,ExerciseDetail,ExerciseUpdate,ExerciseDelete,ProfileList,ProfileDetail,ProfileUpdate,ProfileDelete,WorkoutUserList,WorkoutDetail,WorkoutUpdate,WorkoutDelete,UserDetail,WorkoutList,UserList
+from .views import ExerciseList,ExerciseDetail,ExerciseUpdate,ExerciseDelete,ProfileList,ProfileDetail,ProfileUpdate,ProfileDelete,WorkoutUserList,WorkoutDetail,WorkoutUpdate,WorkoutDelete,UserDetail,WorkoutList,UserList,FatSecretAPIToken,FatSecretAPIFoodSearch,NutritionList, NutritionListCreate
 
 app_name = 'mcfit_api'
 
@@ -9,7 +9,6 @@ urlpatterns = [
     path('exercise/edit/<int:pk>/',ExerciseUpdate.as_view(), name='update'),
     path('exercise/delete/<int:pk>/',ExerciseDelete.as_view(), name='delete'),
     path('profile/<int:user_id>/',ProfileDetail.as_view(), name='profiledetailcreate'),
-
     path('user/<int:uid>/',UserDetail.as_view(), name='userdetailcreate'),
     path('clients',UserList.as_view(), name='userlistcreate'),
 
@@ -22,4 +21,10 @@ urlpatterns = [
     path('workout', WorkoutList.as_view(), name='Workoutlistcreate'),
     path('workout/edit/<int:pk>/',WorkoutUpdate.as_view(), name='workoutupdate'),
     path('workout/delete/<int:pk>/',WorkoutDelete.as_view(), name='workoutdelete'),
+    # FAT SECRET API
+    path('fatsecret/token', FatSecretAPIToken.as_view()),
+    path('fatsecret/food/search/<str:search_exp>/', FatSecretAPIFoodSearch.as_view()),
+    # Nutrition
+    path('nutritions/<int:user_id>', NutritionList.as_view(), name='nutritionlist'),
+    path('nutritions/add', NutritionListCreate.as_view(), name='nutritionlistcreate'),
 ]

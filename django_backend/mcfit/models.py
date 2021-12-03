@@ -84,3 +84,19 @@ class SocialaccountSocialaccount(models.Model):
         managed = False
         db_table = 'socialaccount_socialaccount'
         unique_together = (('provider', 'uid'),)
+
+class Nutritions(models.Model):
+    nutrition_id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    food_id = models.IntegerField(blank=True, null=True)
+    food_name = models.TextField(blank=True, null=True)
+    food_type = models.TextField(blank=True, null=True)
+    count = models.IntegerField(blank=True, null=True)
+    calories = models.FloatField(blank=True, null=True)
+    carbs = models.FloatField(blank=True, null=True)
+    fats = models.FloatField(blank=True, null=True)
+    proteins = models.FloatField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'nutritions'
