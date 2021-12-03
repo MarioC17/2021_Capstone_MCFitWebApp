@@ -40,19 +40,15 @@ const theme = createTheme({
     const [selectedDate, handleDateChange] = useState(new Date());
     const onSubmit = e => {
         e.preventDefault();
-        const [month, day, year] = [
-            selectedDate.getMonth(),
-            selectedDate.getDate(),
-            selectedDate.getFullYear()
-          ];
-        let birthday = year + "-" + month + "-" + day;
-        props.setFormData({...props.formData,['dob']: birthday});
         props.nextStep();
-        
         }
 
     const onChange = e => props.setFormData({...props.formData,[e.target.name]: e.target.value});
-
+    
+    const onDateChange = e => {
+        props.setFormData({...props.formData,['dob']: e.toISOString().split('T')[0]});
+        handleDateChange(e)
+    }
     return (
             <div style={{backgroundColor: "white", minHeight: "100vh"}}>
                 <Header/>
@@ -109,7 +105,7 @@ const theme = createTheme({
                                         label="Date of birth"
                                         minDate={new Date("2000-01-01")}
                                         value={selectedDate}
-                                        onChange={date => handleDateChange(date)}
+                                        onChange={date => onDateChange(date)}
                                         renderInput={props => <TextField {...props} />}
                                     />
                             </LocalizationProvider>

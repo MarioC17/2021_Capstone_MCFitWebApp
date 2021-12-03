@@ -21,6 +21,7 @@ function Clients() {
     const [fullProfiles,setfullProfiles] = useState(new Map());
     function prof() {
       this.first_name = null;
+      this.id = null;
       this.last_name = null;
       this.dob = null;
       this.email = null;
@@ -86,6 +87,7 @@ function Clients() {
         current_profile.height = item.height;
         current_profile.weight = item.weight;
         current_profile.dob = item.dob;
+        current_profile.id = item.user;
       })
     }
   

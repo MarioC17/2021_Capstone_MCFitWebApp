@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { createTheme } from '@mui/material/styles';
-import Sidebar from '../../../components/TrainerSidebar';
+import Sidebar from '../../../components/Sidebar';
 import CircleIcon from '@mui/icons-material/Circle';
 import BlankProfile from '../../../static/img/blankprofile.jpg';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 import { Box, TextField } from '@mui/material/';
+import Entry from './entry';
+import axios from "axios";
+import ShowWorkouts from "../../../components/ShowWorkouts"
 //import { TableHead, TableRow, TableCell, TableSortLabel } from '@material-ui/core/'
 //Stylesheet
 import './fitness.css';
@@ -118,25 +121,8 @@ export default function Fitness(props) {
             </div>
             
             <div className="assign">
-                <span className="small-title">Assign Exercise</span><br/><br/><br/><br/>
-                <span style={{display: 'flex', alignItems: 'center', justifyContent: 'flex-end', paddingRight: '1%'}}>
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                        <DatePicker
-                            label="Select Date"
-                            value={value}
-                            onChange={(newValue) => {
-                            setValue(newValue);
-                            }}
-                            renderInput={(params) => <TextField {...params} />}
-                        />
-                    </LocalizationProvider>
-                </span>
-                
-                <hr/>
-                <span className="small-title">Exercises Summary</span><br/><br/>
-                <span>Oct. 20, 2021
-                    
-                </span> 
+                <Entry user={props.location.clientProp.id}/>
+                <ShowWorkouts/>
             </div>
     </div>
     </>
