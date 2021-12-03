@@ -149,51 +149,6 @@ export default function EnhancedTable() {
   }, []);
 
 
-  const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('muscle');
-  const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [editExerciseId,setEditExerciseId] = useState(null);
-
-  const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
-    setOrderBy(property);
-  };
-
-  const handleEditClick = (event,exercise) => {
-    event.preventDefault();
-    setEditExerciseId(exercise.exercise_id)
-  };
-
-  const handleDeleteClick = async (event,row) => {
-    event.preventDefault()
-    
-    await axios({
-        method: 'Delete',
-        url: `http://localhost:8000/api/exercise/delete/${row.exercise_id}/`,
-    }).then(response => {
-        console.log(response.data)
-        row = null;
-    })
-}
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
-  const handleChangeDense = (event) => {
-    setDense(event.target.checked);
-  };
-
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
-
   return (
   <div className={classes.root}>
     <form>
@@ -204,70 +159,7 @@ export default function EnhancedTable() {
           setSearch(e.target.value);
         }}
       />
-      <Paper className={classes.paper}>
-        <TableContainer>
-          <Table
-            className={classes.table}
-            aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
-            aria-label="enhanced table"
-          >
-            <EnhancedTableHead 
-              classes={classes}
-              order={order}
-              orderBy={orderBy}
-              onRequestSort={handleRequestSort}
-              rowCount={rows.length}
-            />
-            <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
-                .filter((row) => {
-                  if (search == "") {
-                    return row;
-                  }
-                  else if (String(row.name).trim().toLowerCase().includes(search.trim().toLowerCase()))
-                    {
-                    return row;
-                    }
-                })
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => {
-                  return (
-                    <Fragment>
-                      {editExerciseId === row.exercise_id ? <EditableRow row={row}/> : (
-                        <ReadOnlyRow
-                        row={row}
-                        handleEditClick={handleEditClick}
-                        handleDeleteClick={handleDeleteClick}
-                        />
-                      )}
-                    </Fragment>
-                  );
-                })}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
-      </form>
-      <AddExercise/>
+    </form>
     </div>
   );
 }

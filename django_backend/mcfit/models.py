@@ -57,16 +57,16 @@ class Profiles(models.Model):
         db_table = 'profiles'
 
 class Workouts(models.Model):
-    workout_id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING, blank=True, null=False)
-    exercise = models.ForeignKey(Exercisetable, models.DO_NOTHING, blank=True, null=False)
-    reps = models.IntegerField(blank=True, null=True)
-    sets = models.IntegerField(blank=True, null=True)
-    rest = models.TextField(blank=True, null=True)
-    rir = models.IntegerField(blank=True, null=True)
-    load = models.IntegerField(blank=True, null=True)
-    date = models.DateField(blank=True, null=True)
-    notes = models.TextField(blank=True, null=True)
+    workout_id = models.AutoField(primary_key=True)     
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    exercise = models.ForeignKey(Exercisetable, models.DO_NOTHING)
+    reps = models.IntegerField(blank=True, null=True)   
+    sets = models.IntegerField(blank=True, null=True)   
+    rest = models.TextField(blank=True, null=True)      
+    rir = models.IntegerField(blank=True, null=True)    
+    load = models.IntegerField(blank=True, null=True)   
+    date = models.DateField(blank=True, null=True)      
+    notes = models.TextField(blank=True, null=True)     
 
     class Meta:
         managed = False

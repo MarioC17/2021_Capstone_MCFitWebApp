@@ -78,13 +78,11 @@ export default function (state = initialState, action) {
         loading: false,
       };
     case FAT_SECRET_FOOD_DATA_ADDING:
-      console.log("FAT_SECRET_FOOD_DATA_ADDING");
       return {
         ...state,
         adding: true,
       };
     case FAT_SECRET_FOOD_DATA_SUCCESS:
-      console.log("FAT_SECRET_FOOD_DATA_SUCCESS");
       return {
         ...state,
         breakfastData: payload.breakfastData,
@@ -98,7 +96,6 @@ export default function (state = initialState, action) {
         adding: false,
       };
     case FAT_SECRET_FOOD_DATA_FAILED:
-      console.log("FAT_SECRET_FOOD_DATA_FAILED");
       return {
         ...state,
         adding: false,
@@ -134,17 +131,17 @@ export default function (state = initialState, action) {
     case NUTRITIONS_SNACK_DATA_UPDATE:
       return {
         ...state,
-        breakfastData: payload,
+        snackData: payload,
       };
     case NUTRITIONS_LUNCH_DATA_UPDATE:
       return {
         ...state,
-        breakfastData: payload,
+        lunchData: payload,
       };
     case NUTRITIONS_DINNER_DATA_UPDATE:
       return {
         ...state,
-        breakfastData: payload,
+        dinnerData: payload,
       };
     case MACRO_NUTRITIONS_DATA_UPDATE:
       return {

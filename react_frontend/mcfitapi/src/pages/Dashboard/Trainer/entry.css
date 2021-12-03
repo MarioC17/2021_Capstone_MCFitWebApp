@@ -1,0 +1,130 @@
+.entry-container {
+    display: grid;
+    margin-left: 100px; /*REQUIRED WHEN USING SIDEBAR*/
+    font-family: var(--font-family-source_sans_pro);
+    font-weight: 700;
+    padding-left: 30px;
+    padding-right: 30px;
+    grid-template-columns: 1fr 1fr .5fr;
+    grid-template-rows: 0.33fr 0.3fr 0.44fr 3.4fr 0.4fr;
+    grid-auto-columns: 1fr;
+    gap: 0px 50px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "nutrition-title . ."
+      ". . ."
+      "entry-title mini-calendar macro-title"
+      "meal-entry meal-entry progress-breakdown"
+      ". . nutrition-save";
+  }
+  
+  .nutrition-title { grid-area: nutrition-title;
+    margin-top: 10%;
+    flex: 1;
+    color: black;
+    font-size: 50px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 80px; }
+
+  .progress-breakdown { grid-area: progress-breakdown; 
+display: flex;
+flex-direction: row;
+justify-content: space-between;}
+  
+  .entry-title { grid-area: entry-title; 
+    font-size: 30px;
+    font-weight: 700;
+    color: black;}
+  
+  .mini-calendar { grid-area: mini-calendar; 
+    text-align: right;}
+  
+  .macro-title { grid-area: macro-title; 
+    font-size: 30px;
+    font-weight: 700;
+    color: black;}
+  
+  .nutrition-save { grid-area: nutrition-save; 
+text-align: right;}
+  
+  .meal-entry { grid-area: meal-entry; 
+    overflow-y: scroll;
+    color: black;
+}
+
+  .breakdown-current {
+    display: flex;
+    flex-direction: column;
+    
+    min-width: 45%;
+  }
+
+  .breakdown-target {
+    display: flex;
+    flex-direction: column;
+    min-width: 45%;
+  }
+
+  .breakdown-box {
+      color: white;
+      background-color: black;
+      text-align: center;
+      border-radius: 0.6em;
+      margin-bottom: 10%;
+      min-height: 20%; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+
+  .entry {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+  }
+
+.meal-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+}
+
+.nutrient-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.nutrient-stats {
+    border: 1px solid #d3d3d3;
+    background-color: var(--quill-gray);
+    box-shadow: 3px 4px 5px #00000029;
+    border-radius: 5px;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-bottom: 30px;
+    width: 700px;
+    height: 50px;
+}
+
+.meal-row {
+    display: grid;
+    grid-template-columns: 1.2fr 0.4fr 1.4fr;
+    grid-template-rows: 0.4fr;
+    grid-auto-columns: 1fr;
+    gap: 0px 8px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "meal-input meal-count meal-stats";
+  }
+  
+  .meal-input { grid-area: meal-input; }
+  
+  .meal-count { grid-area: meal-count; 
+margin-top: 20px;}
+  
+  .meal-stats { grid-area: meal-stats; }
+  
