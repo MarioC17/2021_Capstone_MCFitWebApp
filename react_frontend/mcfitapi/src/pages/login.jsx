@@ -44,7 +44,7 @@ const Login = () => {
     let googleResponse  = await googleLogin(response.accessToken)
     //Storing required information in cookies
     //console.log(response)
-    createLoginCookies(response.profileObj); //Stores user info in cookie
+    await createLoginCookies(response.profileObj); //Stores user info in cookie
     let user_id = cookies.get('user_id')
     await checkProfile(user_id)
   }
@@ -64,6 +64,7 @@ const Login = () => {
     }).catch(e => {
       console.log("PROFILE NOT FOUND");
       console.log(e);
+      
       return history.push("/signup");
     });
         }
