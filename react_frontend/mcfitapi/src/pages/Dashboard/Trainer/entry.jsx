@@ -26,7 +26,7 @@ const style = {
     p: 4,
   };
 
-  export default function Entry() {
+  export default function Entry(props) {
     const addNewWorkout = async (formData) => {
         
         await axios({
@@ -41,7 +41,7 @@ const style = {
     }
 
     const [formData, setFormData] = useState({
-        user:1,
+        user:props.user,
         exercise:'',
         reps:'',
         sets:'',
@@ -54,7 +54,8 @@ const style = {
 
     const {user,exercise,reps,sets,rest,rir,load,date,notes} = formData;
     const [exercises, setexercise] = useState([]);
-    const [selectedDate, handleDateChange] = useState(new Date());
+    const [selectedDate, handleDateChange] = useState(null);
+    
 
     const onAdd = e => {
         e.preventDefault();
@@ -103,8 +104,7 @@ const style = {
         <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DesktopDatePicker
                     autoOk
-                    label="Date of birth"
-                    minDate={new Date("2000-01-01")}
+                    label="Date"
                     value={selectedDate}
                     onChange={date => onDateChange(date)}
                     renderInput={props => <TextField {...props} />}
