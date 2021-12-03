@@ -29,6 +29,39 @@ const theme = createTheme({
   });
 
 export default function Fitness() {
+    function workout(){
+        this.user_id = user,
+        this.reps = null,
+        this.sets = null,
+        this.rest = null,
+        this.rir = null,
+        this.load = null,
+        this.date = null,
+        this.notes = null
+    }
+    const getWorkoutData = async () => {
+
+
+
+
+        try {
+        const data = await axios.get(
+            "http://127.0.0.1:8000/api/workout/user/1/" //"http://127.0.0.1:8000/api/workout/user/${user}/     use 1 for testing because it already has workouts"
+        );
+        setWorkouts(data.data);
+        } catch (e) {
+        console.log(e);
+        }
+    };
+
+    useEffect(() => {
+        getWorkoutData();
+    }, []);  
+
+    //The list of workouts for a given user is stored in an array of workouts sorted by date
+
+
+
     let monthNumber = (new Date().getMonth());
     let monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     let monthName = monthNames[monthNumber];    
