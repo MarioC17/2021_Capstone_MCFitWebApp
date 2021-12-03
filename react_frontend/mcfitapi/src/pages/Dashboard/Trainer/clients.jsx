@@ -59,7 +59,6 @@ function Clients() {
       }
     };
   
-  
       useEffect(() => {
         getClientData();
       }, []);
