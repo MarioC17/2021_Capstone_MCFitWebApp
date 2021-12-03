@@ -1,10 +1,11 @@
-import React, { Component, useState} from 'react';
+import React, { Component, useState,useEffect} from 'react';
 import { render } from 'react-dom';
 import { Link } from "react-router-dom";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Avatar, Button, IconButton } from '@mui/material/';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Sidebar from '../../components/Sidebar';
+import axios from 'axios';
 
 //Stylesheet
 import './fitness.css';
@@ -29,6 +30,31 @@ const theme = createTheme({
   });
 
 export default function Fitness() {
+    const [workouts, setWorkouts] = useState([]);
+
+    const getWorkoutData = async () => {
+
+
+
+
+        try {
+        const data = await axios.get(
+            "http://127.0.0.1:8000/api/workout/user/1/" //"http://127.0.0.1:8000/api/workout/user/${user}/     use 1 for testing because it already has workouts"
+        );
+        setWorkouts(data.data);
+        } catch (e) {
+        console.log(e);
+        }
+    };
+
+    useEffect(() => {
+        getWorkoutData();
+    }, []);  
+
+    //The list of workouts for a given user is stored in an array of workouts sorted by date
+
+
+
     let monthNumber = (new Date().getMonth());
     let monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     let monthName = monthNames[monthNumber];    
