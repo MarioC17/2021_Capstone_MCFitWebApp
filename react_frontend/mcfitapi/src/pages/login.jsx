@@ -21,10 +21,6 @@ const theme = createTheme({
   },
 });
 
-const onSignoutSuccess = () => {
-  alert("You have been logged out successfully");
-}
-
 const cookies = new Cookies();
 
 const createLoginCookies = async (profile) => {
@@ -36,55 +32,41 @@ const createLoginCookies = async (profile) => {
   cookies.set('first_name', profile.givenName, { path: '/' ,maxAge:10800});
   cookies.set('last_name', profile.familyName, { path: '/' ,maxAge:10800});
   cookies.set('email', profile.email, { path: '/' ,maxAge:10800});
-  console.log(cookies.get('user_id')); 
-  console.log(response)
-  console.log(profile)
-  console.log(document.cookies)
+  // console.log(cookies.get('user_id')); 
+  // console.log(response)
+  // console.log(profile)
+  // console.log(document.cookies)
 })
 
 }
 const Login = () => {
-  const [Profile, setProfile] = useState(null);
-
   const responseGoogle = async(response) => {
     let googleResponse  = await googleLogin(response.accessToken)
     //Storing required information in cookies
-    console.log(response)
+    //console.log(response)
     createLoginCookies(response.profileObj); //Stores user info in cookie
     let user_id = cookies.get('user_id')
-    await checkProfile(user_id).then(await has_profile())
+    await checkProfile(user_id)
   }
-
 
   const history = useHistory();
   let isLoggedIn = useState(false);
-
-  const has_profile = () => {
-    console.log('Profile: ', Profile)
-    if (Profile){
-      console.log("Already has profile");
-      return history.push("/home");
-    }
-    else{
-      console.log("Has to signup");
-      return history.push("/signup");
-    }
-  }
 
   //check if profile already exists
   const checkProfile = async (user_id) => {
     await axios({
         method: 'GET',
-        url: `http://localhost:8000/api/profile/1/`,
+        url: `http://localhost:8000/api/profile/${user_id}/`,
     }).then(response => {
-      setProfile(true);
+      console.log("PROFILE FOUND");
       console.log(response);
+      return history.push("/home");
     }).catch(e => {
-      setProfile(false);
+      console.log("PROFILE NOT FOUND");
       console.log(e);
+      return history.push("/signup");
     });
         }
-
 
 return (
   <div>

@@ -60,6 +60,7 @@ const theme = createTheme({
                             <ThemeProvider theme={theme}>
                                     <Button color="neutral" 
                                         name='gender'
+                                        value={props.gender}
                                         onClick={e => onSubmit(e)}
                                         variant="contained"
                                         style={{maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
@@ -68,6 +69,7 @@ const theme = createTheme({
                                         </Button>
                                     <Button color="neutral" 
                                         name='gender'
+                                        value={props.gender}
                                         onClick={e => onSubmit(e)}
                                         variant="contained"
                                         style={{maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
@@ -76,6 +78,7 @@ const theme = createTheme({
                                     </Button>
                                     <Button color="neutral" 
                                         name='gender'
+                                        value={props.gender}
                                         onClick={e => onSubmit(e)}
                                         variant="contained"
                                         style={{maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}
@@ -84,6 +87,7 @@ const theme = createTheme({
                                     </Button>
                                     <Button color="neutral" 
                                         name='gender'
+                                        value={props.gender}
                                         onClick={e => onSubmit(e)}
                                         variant="contained"
                                         style={{maxWidth: '250px', maxHeight: '110px', minWidth: '250px', minHeight: '110px', fontSize: '20px'}}

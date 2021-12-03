@@ -1,13 +1,20 @@
 import React from "react";
 import "../App.css";
 import { SidebarData } from './SidebarData';
-
-
-function handleLogout() {
-  
-};
+import { useHistory } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
 const Sidebar = () => {
+  const history = useHistory();
+
+  function handleLogout() {
+    var cookies = new Cookies();
+    cookies.remove('user_id');
+    cookies.remove('first_name');
+    cookies.remove('last_name');
+    cookies.remove('email');
+    return history.push("/");
+  };
 
   return (
     <div className="Sidebar">
@@ -20,6 +27,7 @@ const Sidebar = () => {
             onClick={()=> {
               window.location.pathname = val.link;
               if (val.title === 'logout'){
+                console.log("parsing?");
                 handleLogout();
                 console.log("logout")
               }
