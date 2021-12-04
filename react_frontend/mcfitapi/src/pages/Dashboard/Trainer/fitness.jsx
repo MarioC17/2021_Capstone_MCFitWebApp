@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { createTheme } from '@mui/material/styles';
-import Sidebar from '../../../components/Sidebar';
+import Sidebar from '../../../components/TrainerSidebar';
 import CircleIcon from '@mui/icons-material/Circle';
 import BlankProfile from '../../../static/img/blankprofile.jpg';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
@@ -78,8 +78,6 @@ export default function Fitness(props) {
         }
         
     }
-
-    
 
     return (
         <>
