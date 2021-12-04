@@ -10,24 +10,12 @@ export const SidebarData = [
 
     },
     {
-        icon: <Home/>,
-        link: "/home",
-    },
-    {
         icon: <EventAvailable/>,
         link: "/trainer/booking",
     },
     {
-        icon: <Fastfood/>,
-        link: "/nutrition",
-    },
-    {
         icon: <FitnessCenter/>,
-        link: "/trainer/fitness",
-    },
-    {
-        icon: <Payment/>,
-        link: "/memberships",
+        link: "/trainer/clients",
     },
     {
         icon: <Settings/>,
