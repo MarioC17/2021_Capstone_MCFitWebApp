@@ -109,7 +109,8 @@ const Clients = () => {
     }
     //Puts full profile data into a dictionary of profile objects. Using the user_id as the key  
     const getfullProfileData = async () => {
-      await loadClientInfo().then(loadProfileInfo())
+      await loadClientInfo()
+      await loadProfileInfo()
       setLoading(false);
       console.log(loading)
     }

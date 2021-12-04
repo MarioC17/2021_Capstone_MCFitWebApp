@@ -37,18 +37,29 @@ const cookie = new Cookies()
 export default function Fitness() {
     const [value, setValue] = React.useState(new Date());
     const [stringValue, setStringValue] = React.useState([]);
-    const [workoutName, setWorkoutName] = useState([]);
-    const getWorkoutName = async (exercise) => {
-        try {
+    const [exerciseNames, setExerciseNames] = useState(new Map());
+  
+    const getexerciseData = async () => {
+      try {
         const data = await axios.get(
-            `http://127.0.0.1:8000/api/exercise/${exercise}`
+          "http://localhost:8000/api/exercises"
         );
-        setWorkoutName(data.data.name);
-        console.log(data.data.name)
-        } catch (e) {
+        var result = data.data.reduce(function(map, obj) {
+            map[obj.exercise_id] = obj.name;
+            return map;
+        }, {});
+        await setExerciseNames(result)
+        
+      } catch (e) {
         console.log(e);
-        }
+      }
     };
+  
+    useEffect(() => {
+      getexerciseData();
+    }, []);
+
+  
 
     const [workouts, setWorkouts] = useState([]);
 
@@ -67,9 +78,10 @@ export default function Fitness() {
         }
     };
 
-    useEffect(() => {
-        getWorkoutData();
+    useEffect(async () => {
+        await getWorkoutData();
     }, []);  
+
 
     //The list of workouts for a given user is stored in an array of workouts sorted by date
 
@@ -131,7 +143,7 @@ export default function Fitness() {
                         if (exercise.date === `${value.getFullYear()}-${('0'+(value.getMonth()+1)).slice(-2)}-${('0'+value.getDate()).slice(-2)}`) {
                             return [
                                 <div className="workout-card">
-                                    <span className='workout-content'>{exercise.workout_id}</span>
+                                    <span className='workout-content'>{exerciseNames[exercise.exercise]}</span>
                                     <span style={{position: 'absolute', marginLeft: '15%'}}>{exercise.reps}</span>
                                     <span style={{position: 'absolute', marginLeft: '25%'}}>{exercise.sets}</span>
                                     <span style={{position: 'absolute', marginLeft: '35%'}}>{exercise.rest}</span>
