@@ -57,7 +57,7 @@ const Login = () => {
       method: 'GET',
       url: `http://127.0.0.1:8000/api/Auth/${user}/`,
     }).then(response => {
-      console.log("Is Client")
+      console.log("Is Staff")
       console.log(response);
       return history.push("/trainer/clients");
     }).catch(e => {
@@ -74,6 +74,7 @@ const Login = () => {
     }).then(response => {
       console.log("PROFILE FOUND");
       console.log(response);
+      
       return checkStaff(user_id)
     }).catch(e => {
       console.log("PROFILE NOT FOUND");
