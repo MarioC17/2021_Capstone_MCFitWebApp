@@ -7,6 +7,10 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Sidebar from '../../components/Sidebar';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import DatePicker from '@mui/lab/DesktopDatePicker';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import TextField from '@mui/material/TextField';
 
 //Stylesheet
 import './fitness.css';
@@ -31,7 +35,8 @@ const theme = createTheme({
   });
 const cookie = new Cookies()
 export default function Fitness() {
-    
+    const [value, setValue] = React.useState(new Date());
+    const [stringValue, setStringValue] = React.useState([]);
     const [workoutName, setWorkoutName] = useState([]);
     const getWorkoutName = async (exercise) => {
         try {
@@ -68,13 +73,6 @@ export default function Fitness() {
 
     //The list of workouts for a given user is stored in an array of workouts sorted by date
 
-    let monthNumber = (new Date().getMonth());
-    let monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    let monthName = monthNames[monthNumber];    
-
-    const current = new Date();
-    const date = `${monthName}. ${current.getDate()} ${current.getFullYear()}`;
-
     return (
         <>
         <Sidebar/> 
@@ -108,29 +106,43 @@ export default function Fitness() {
             </div>
             
             <div className="workouts">
-                <span className="small-title">Exercises {date}</span><br/><br/>
+                <span className="small-title">
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <DatePicker
+                        views={['day', 'month', 'year']}
+                        minDate={new Date('2021-01-01')}
+                        maxDate={new Date('2031-12-31')}
+                        value={value}
+                        onChange={(newValue) => {
+                            setValue(newValue);
+                            setStringValue(`${value.getFullYear()}-${('0'+(value.getMonth()+1)).slice(-2)}-${('0'+value.getDate()).slice(-2)}`)
+                        }}
+                        renderInput={(params) => <TextField {...params} helperText={null} />}
+                        />
+                    </LocalizationProvider>
+                </span><br/><br/>
                 <div className="workout-container">
                     <div>
                         <span style={{position: 'absolute', marginLeft: '16%', fontWeight: '700'}}>Reps</span>
                         <span style={{position: 'absolute', marginLeft: '26%', fontWeight: '700'}}>Sets</span>
                         <span style={{position: 'absolute', marginLeft: '36%', fontWeight: '700'}}>Rests</span>
                     </div>
-                    
-                    {workouts.map((exercise, index) => (
-                      <div className="workout-card">
-                      {/*add in database info*/}
-                      {/* {console.log(getExercise(exercise.workout_id))} */}
-                        <span id="exerciseData" className="workout-content">{exercise.workout_id}</span>
-                        <span style={{position: 'absolute', marginLeft: '15%'}}>{exercise.reps}</span>
-                        <span style={{position: 'absolute', marginLeft: '25%'}}>{exercise.sets}</span>
-                        <span style={{position: 'absolute', marginLeft: '35%'}}>{exercise.rest}</span>
-                      <ThemeProvider theme={theme}>
-                          <Button className="workout-button" variant="contained" color="neutral" style={{width: '150px'}}>
-                              View
-                          </Button>
-                      </ThemeProvider>
-                      </div>  
-                    ))}
+                    {workouts.map((exercise) => {
+                        if (exercise.date === `${value.getFullYear()}-${('0'+(value.getMonth()+1)).slice(-2)}-${('0'+value.getDate()).slice(-2)}`) {
+                            return [
+                                <div className="workout-card">
+                                    <span className='workout-content'>{exercise.workout_id}</span>
+                                    <span style={{position: 'absolute', marginLeft: '15%'}}>{exercise.reps}</span>
+                                    <span style={{position: 'absolute', marginLeft: '25%'}}>{exercise.sets}</span>
+                                    <span style={{position: 'absolute', marginLeft: '35%'}}>{exercise.rest}</span>
+                                    <ThemeProvider theme={theme}>
+                                    <Button className="workout-button" variant="contained" color="neutral" style={{width: '150px'}}>
+                                        View
+                                    </Button>
+                                </ThemeProvider>
+                                </div>]
+                        }
+                    })}
                 </div>
             </div>
     </div>
