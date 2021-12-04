@@ -1,6 +1,6 @@
 import React from "react";
 import "../App.css";
-import { SidebarData } from './SidebarData';
+import { SidebarData } from './TrainerSidebarData';
 import { useHistory } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
