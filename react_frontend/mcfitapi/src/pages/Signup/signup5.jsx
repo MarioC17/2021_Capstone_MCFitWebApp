@@ -103,7 +103,6 @@ const theme = createTheme({
                                 <DesktopDatePicker
                                         autoOk
                                         label="Date of birth"
-                                        minDate={new Date("2000-01-01")}
                                         value={selectedDate}
                                         onChange={date => onDateChange(date)}
                                         renderInput={props => <TextField {...props} />}

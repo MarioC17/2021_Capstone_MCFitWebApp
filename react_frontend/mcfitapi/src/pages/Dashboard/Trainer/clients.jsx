@@ -12,27 +12,28 @@ import BlankProfile from '../../../static/img/blankprofile.jpg'
 import { IconButton } from '@material-ui/core';
 import { style } from '@mui/system';
 import axios from "axios";
-
+import Loading from '../../../components/loading';
 
 const Clients = () => {
     const [value, setValue] = React.useState(null);
+    const [loading, setLoading] = useState(true);
     const [profiles,setProfiles] = useState([]);
     const [clientList,setClients] = useState([]);
     //const fullProfiles = new Map()
     const [fullProfiles,setfullProfiles] = useState(new Map());
     function prof() {
-      this.first_name = null;
-      this.id = null;
-      this.last_name = null;
-      this.dob = null;
-      this.email = null;
-      this.gender = null;
-      this.address = null;
-      this.fitness_goal = null;
-      this.emergency_contact = null;
-      this.phone_num = null;
-      this.height = null;
-      this.weight = null;
+      this.first_name = 'N/A';
+      this.id = 'N/A';
+      this.last_name = 'N/A';
+      this.dob = 'N/A';
+      this.email = 'N/A';
+      this.gender = 'N/A';
+      this.address = 'N/A';
+      this.fitness_goal = 'N/A';
+      this.emergency_contact = 'N/A';
+      this.phone_num = 'N/A';
+      this.height = 'N/A';
+      this.weight = 'N/A';
     }
 
     const getProfileData = async () => {
@@ -78,8 +79,8 @@ const Clients = () => {
 
       return yearGap;
   }
-    //Puts full profile data into a dictionary of profile objects. Using the user_id as the key  
-    const getfullProfileData = (async) => {
+
+    const loadClientInfo = () => {
       clientList.forEach(client => {
         let current_client = JSON.parse(client.extra_data);
         let fullProf = new prof();
@@ -89,9 +90,12 @@ const Clients = () => {
         fullProfiles.set(client.user,fullProf);
       //setClients(clientList)
       })
+    }
 
+    const loadProfileInfo = () => {
       profiles.forEach(item => {
         let current_profile = fullProfiles.get(item.user)
+        let age = getAge(item.dob)
         current_profile.gender = item.gender;
         current_profile.address = item.address;
         current_profile.fitness_goal = item.fitness_goal;
@@ -99,60 +103,96 @@ const Clients = () => {
         current_profile.phone_num = item.phone_num;
         current_profile.height = item.height;
         current_profile.weight = item.weight;
-        current_profile.dob = getAge(item.dob);
+        current_profile.dob = age;
         current_profile.id = item.user;
       })
+    }
+    //Puts full profile data into a dictionary of profile objects. Using the user_id as the key  
+    const getfullProfileData = async () => {
+      await loadClientInfo().then(loadProfileInfo())
+      setLoading(false);
+      console.log(loading)
     }
   
     useEffect(() => {
       getfullProfileData();
-    }, []);
-    
-    return (
-      <div>
-            <Sidebar/>
-            <div className="client-area">
-                <div className="client-title">
-                    Fitness
-                </div>
-                <div className="client-sub">
-                    Clients
-                </div>
-                
-                <div style={{display: 'flex', flexDirection: 'row', paddingLeft: '3%'}}>
-                    <ClientSearch/>
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <DatePicker
-                        label="Select Date"
-                        value={value}
-                        onChange={(newValue) => {
-                        setValue(newValue);
-                        }}
-                        renderInput={(params) => <TextField {...params} />}
-                    />
-                    </LocalizationProvider>
-                </div>
-                
-                <div style={{display: 'flex', alignItems: 'center', justifyContent: 'flex-end', paddingRight: '1%'}}>
-                    <span>Sort by Recent</span>
-                    <IconButton style={{float: 'right'}} color="black" aria-label="View Profile" component="span">
-                        <FilterList/>
-                    </IconButton>
-                </div>
+    });
+      
+    switch(loading) {
+      case loading===true:
+          return <Loading></Loading>
+        case loading===false:
+        return(
+              <>
+                    <Sidebar/>
+                    <div className="client-area">
+                        <div className="client-title">
+                            Fitness
+                        </div>
+                        <div className="client-sub">
+                            Clients
+                        </div>
+                        
+                        <div style={{display: 'flex', flexDirection: 'row', paddingLeft: '3%'}}>
+                            <ClientSearch/>
+                            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <DatePicker
+                                label="Select Date"
+                                value={value}
+                                onChange={(newValue) => {
+                                setValue(newValue);
+                                }}
+                                renderInput={(params) => <TextField {...params} />}
+                            />
+                            </LocalizationProvider>
+                        </div>
+                        
+                        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'flex-end', paddingRight: '1%'}}>
+                            <span>Sort by Recent</span>
+                            <IconButton style={{float: 'right'}} color="black" aria-label="View Profile" component="span">
+                                <FilterList/>
+                            </IconButton>
+                        </div>
 
-                <div className="client-grid">
-                {Object.keys(fullProfiles).map((key, index) => {
-                  return fullProfiles[key]["value"].map(iter => {
-                    return(
-
-                      <h1>sdfd</h1>
-                      );
-                    });
-                  })}
-                </div>
-            </div>
-            </div>
-    )
-}
+                        <div className="client-grid">
+                        {Array.from(fullProfiles).map((client, index) => (
+                          <Box sx={{
+                            width: 242,
+                              height: 200,
+                              borderRadius: '10px',
+                              padding: '1%',
+                              backgroundColor: '#D6D6D6',
+                              '&:hover': {
+                                backgroundColor: '#D6D6D6',
+                                opacity: [0.9, 0.8, 0.7],
+                              },
+                            }}
+                            data-index={index}>
+                          <Link to = {
+                              {
+                                  pathname: "/trainer/fitness",
+                                  clientProp: client[1]
+                              }
+                          }
+                          style={{textDecoration:'none'}}>
+                              <IconButton style={{float: 'right', margin: '-5%'}} color="black" aria-label="View Profile" component="span">
+                                  <MoreVert/>
+                              </IconButton>
+                          </Link>
+                          <div className="client-info">
+                              <span><img style={{height: '60px', width: '60px', borderRadius: '50%'}} src={BlankProfile}/></span>
+                              <span>{client[1].first_name} {client[1].last_name}</span>
+                              <span>{client[1].gender} {client[1].dob}</span>
+                              <span>{client[1].address}</span>
+                          </div>
+                          
+                          </Box>
+                        ))}
+                        </div>
+                    </div>
+                </>
+            )        
+      }}
+      ; 
 
 export default Clients
