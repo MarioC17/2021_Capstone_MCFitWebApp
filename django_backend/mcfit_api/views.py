@@ -19,7 +19,7 @@ from rest_framework.generics import (
     ListCreateAPIView,
     RetrieveDestroyAPIView
 )
-from .serializers import ExercisetableSerializer,ProfilesSerializer,WorkoutsSerializer,SocialAccountSerializer, NutritionsSerializer
+from .serializers import ExercisetableSerializer,ProfilesSerializer,WorkoutsSerializer,SocialAccountSerializer, NutritionsSerializer,AuthUserSerializer
 
 fat_secret_url ="https://oauth.fatsecret.com/connect/token"
 fat_secret_client_id = "e2f7d0ccecf64cc79ee7dbdf1e128efe"
@@ -45,7 +45,9 @@ class ProfileList(generics.ListCreateAPIView):
     serializer_class = ProfilesSerializer
     queryset = Profiles.objects.all()
 
-
+class AuthDetail(generics.RetrieveAPIView):
+    queryset = AuthUser.objects.all()   
+    serializer_class = AuthUserSerializer
 
 #Find profile by user id
 class ProfileDetail(generics.RetrieveDestroyAPIView):
