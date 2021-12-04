@@ -19,6 +19,8 @@ const Clients = () => {
     const [loading, setLoading] = useState(true);
     const [profiles,setProfiles] = useState([]);
     const [clientList,setClients] = useState([]);
+    const [data, setData] = useState(false)
+    const [data2, setData2] = useState('default value for first render')
     //const fullProfiles = new Map()
     const [fullProfiles,setfullProfiles] = useState(new Map());
     function prof() {
@@ -47,12 +49,10 @@ const Clients = () => {
       }
     };
 
-    useEffect(() => {
-      getProfileData();
-    }, []);
 
     
     const getClientData = async () => {
+      setLoading(true)
       try {
         const client = await axios.get(
           "http://localhost:8000/api/clients"
@@ -63,9 +63,6 @@ const Clients = () => {
       }
     };
   
-      useEffect(() => {
-        getClientData();
-      }, []);
 
     function getAge(dateString) {
       var today = new Date();
@@ -110,23 +107,18 @@ const Clients = () => {
         fullProfiles.set(item.user,fullProf);
       })
     }
-    //Puts full profile data into a dictionary of profile objects. Using the user_id as the key  
-    const getfullProfileData = async () => {
-      await loadProfileInfo()
-      loadClientInfo()
-      setLoading(false);
-      console.log(loading)
-    }
+
     
-    useEffect(() => {
-      getfullProfileData();
-    }, []);
+    useEffect(async () => {
+      await getClientData().then(await getProfileData()).then(await loadProfileInfo()).then(await loadClientInfo());
+      setLoading(false)
+    },[loading,data2]);
 
-
+    console.log(loading)
     switch(loading) {
-      case loading === true:
-        <h1>sdsds</h1>
-      case loading === false:
+      case true:
+        <Loading></Loading>
+      case false:
         return(
               <>
                     <Sidebar/>
