@@ -82,47 +82,51 @@ const Clients = () => {
 
     const loadClientInfo = () => {
       clientList.forEach(client => {
-        let current_client = JSON.parse(client.extra_data);
-        let fullProf = new prof();
-        fullProf.first_name = current_client.given_name;
-        fullProf.last_name = current_client.family_name;
-        fullProf.email = current_client.email;
-        fullProfiles.set(client.user,fullProf);
-      //setClients(clientList)
+        if (fullProfiles.get(client.user) !== undefined)
+        {
+          let current_client = JSON.parse(client.extra_data);
+          let current_profile = fullProfiles.get(client.user)
+          current_profile.first_name = current_client.given_name;
+          current_profile.last_name = current_client.family_name;
+          current_profile.email = current_client.email;
+          }
+
       })
     }
 
     const loadProfileInfo = () => {
       profiles.forEach(item => {
-        let current_profile = fullProfiles.get(item.user)
+        let fullProf = new prof();
         let age = getAge(item.dob)
-        current_profile.gender = item.gender;
-        current_profile.address = item.address;
-        current_profile.fitness_goal = item.fitness_goal;
-        current_profile.emergency_contact = item.emergency_contact;
-        current_profile.phone_num = item.phone_num;
-        current_profile.height = item.height;
-        current_profile.weight = item.weight;
-        current_profile.dob = age;
-        current_profile.id = item.user;
+        fullProf.gender = item.gender;
+        fullProf.address = item.address;
+        fullProf.fitness_goal = item.fitness_goal;
+        fullProf.emergency_contact = item.emergency_contact;
+        fullProf.phone_num = item.phone_num;
+        fullProf.height = item.height;
+        fullProf.weight = item.weight;
+        fullProf.dob = age;
+        fullProf.id = item.user;
+        fullProfiles.set(item.user,fullProf);
       })
     }
     //Puts full profile data into a dictionary of profile objects. Using the user_id as the key  
     const getfullProfileData = async () => {
-      await loadClientInfo()
       await loadProfileInfo()
+      loadClientInfo()
       setLoading(false);
       console.log(loading)
     }
-  
+    
     useEffect(() => {
       getfullProfileData();
-    });
-      
+    }, []);
+
+
     switch(loading) {
-      case loading===true:
-          return <Loading></Loading>
-        case loading===false:
+      case loading === true:
+        <h1>sdsds</h1>
+      case loading === false:
         return(
               <>
                     <Sidebar/>
@@ -194,6 +198,6 @@ const Clients = () => {
                 </>
             )        
       }}
-      ; 
+      
 
-export default Clients
+export default Clients;
