@@ -57,12 +57,16 @@ const Login = () => {
       method: 'GET',
       url: `http://127.0.0.1:8000/api/Auth/${user}/`,
     }).then(response => {
-      console.log("Is Staff")
-      console.log(response);
-      return history.push("/trainer/clients");
+      if (response.data.is_staff) {
+        console.log("Is Staff")
+        return history.push("/trainer/clients");
+      }
+      else {
+        console.log("Not Staff")
+        return history.push("/home")
+      }
     }).catch(e => {
-      console.log("Not Staff")
-      return history.push("/home")
+      console.log("error")
     })
   }
 
