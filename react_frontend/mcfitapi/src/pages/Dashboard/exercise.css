@@ -1,0 +1,54 @@
+@import '../../styleguide.css';
+@import '../../globals.css';
+
+.exercise-container {
+    margin-left: 100px; /*REQUIRED WHEN USING SIDEBAR*/
+    padding-left: 100px;
+    display: grid;
+    grid-template-columns: 0.8fr 1.5fr;
+    grid-template-rows: 0.3fr 1fr 0.3fr;
+    grid-auto-columns: 1fr;
+    gap: 0px 8px;
+    color: black;
+    font-family: var(--font-family-source_sans_pro);
+    grid-auto-flow: row;
+    grid-template-areas:
+      "exercise-title exercise-title"
+      "exercise-description exercise-video"
+      "exercise-description exercise-video";
+  }
+  
+  .exercise-title { grid-area: exercise-title; 
+    margin-top: 2%;
+    flex: 1;
+    font-family: var(--font-family-source_sans_pro);
+    font-size: 60px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 80px;}
+  
+  .exercise-video { grid-area: exercise-video; 
+    }
+  
+  .exercise-description {
+    grid-area: exercise-description;
+  }
+
+  .exercise-title-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 3%;
+    font-size: 30px;
+    font-weight: 600;
+    color: white;
+    background-color: black;
+    border-radius: 15px;
+  }
+
+  .exercise-explanation {
+    margin-top: 3%;
+    margin-left: 3%;
+    font-size: 24px;
+    font-weight: 500;
+  }
