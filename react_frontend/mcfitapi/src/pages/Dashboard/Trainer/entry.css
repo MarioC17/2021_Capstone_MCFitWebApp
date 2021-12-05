@@ -38,7 +38,7 @@ justify-content: space-between;}
     color: black;}
   
   .mini-calendar { grid-area: mini-calendar; 
-    text-align: right;}
+    text-align: left;}
   
   .macro-title { grid-area: macro-title; 
     font-size: 30px;
@@ -83,13 +83,6 @@ text-align: right;}
       flex-direction: row;
       justify-content: space-between;
   }
-
-.meal-text {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: black;
-}
 
 .nutrient-box {
     display: flex;

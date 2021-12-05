@@ -1,18 +1,14 @@
 import React, { Component, useState,useEffect} from 'react'
 import ExerciseSearch from './ExerciseSearch';
-
-import '../pages/Dashboard/Trainer/entry.css';
+import Input from '@mui/material/Input';
 
   const ExerciseSearchBar = (props) => {
     const onChange = e => props.setFormData({...props.formData,[e.target.name]: e.target.value});
       //have to change the class names to make css for this
         return (
-          <div class="meal-row">
-            <div class="meal-input">
+          <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginRight: '2%'}}>
             <ExerciseSearch  formData= {props.formData} data = {props.data} setFormData={props.setFormData} />
-            </div>
-            <div class="meal-stats">
-              <input
+              <Input
                 id="reps"
                 name="reps"
                 sx={{ m: 1, width: '15ch' }}
@@ -22,7 +18,7 @@ import '../pages/Dashboard/Trainer/entry.css';
                 aria-describedby="filled-weight-helper-text"
 
               />
-              <input
+              <Input
                 id="sets"
                 name="sets"
                 sx={{ m: 1, width: '15ch' }}
@@ -32,7 +28,7 @@ import '../pages/Dashboard/Trainer/entry.css';
                 aria-describedby="filled-weight-helper-text"
 
               />
-              <input
+              <Input
                 id="load"
                 name="load"
                 placeholder = "Load"
@@ -43,7 +39,7 @@ import '../pages/Dashboard/Trainer/entry.css';
 
               />
 
-              <input
+              <Input
                 id="rir"
                 name="rir"
                 placeholder = "RIR"
@@ -55,7 +51,7 @@ import '../pages/Dashboard/Trainer/entry.css';
               />
 
                             
-              <input
+              <Input
                 id="rest"
                 name="rest"
                 placeholder = "Rest"
@@ -66,7 +62,7 @@ import '../pages/Dashboard/Trainer/entry.css';
 
               />
 
-              <input
+              <Input
                 id="notes"
                 name="notes"
                 placeholder = "Notes"
@@ -76,7 +72,6 @@ import '../pages/Dashboard/Trainer/entry.css';
                 aria-describedby="filled-weight-helper-text"
 
               />
-            </div>
           </div>
         )
     }
