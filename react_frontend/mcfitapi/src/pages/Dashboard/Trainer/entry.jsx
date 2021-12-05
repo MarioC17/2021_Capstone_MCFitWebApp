@@ -27,6 +27,8 @@ const style = {
   };
 
   export default function Entry(props) {
+    //   console.log(`${props.date.getFullYear()}-${('0'+(props.date.getMonth()+1)).slice(-2)}-${('0'+props.date.getDate()).slice(-2)}`);
+
     const addNewWorkout = async (formData) => {
         
         await axios({
@@ -55,7 +57,8 @@ const style = {
     const {user,exercise,reps,sets,rest,rir,load,date,notes} = formData;
     const [exercises, setexercise] = useState([]);
     const [selectedDate, handleDateChange] = useState(null);
-    
+    const [exerciseNames, setExerciseNames] = useState(new Map());
+
 
     const onAdd = e => {
         e.preventDefault();
@@ -73,7 +76,12 @@ const style = {
         const data = await axios.get(
             "http://localhost:8000/api/exercises"
         );
+        var result = data.data.reduce(function(map, obj) {
+            map[obj.exercise_id] = obj.name;
+        return map;}, {});
         setexercise(data.data);
+        console.log(result);
+        setExerciseNames(result);
         } catch (e) {
         console.log(e);
         }
@@ -92,12 +100,29 @@ const style = {
         },
       });
 
-
-  
       //saved modal
       const [open, setOpen] = React.useState(false);
       const handleClose = () => setOpen(false);
 
+    
+      const [workouts, setWorkouts] = useState([]);
+
+      const getWorkoutData = async () => {
+  
+          try {
+          const data = await axios.get(
+              `http://127.0.0.1:8000/api/workout/user/${props.user}/`
+          );
+          setWorkouts(data.data);
+          } catch (e) {
+          console.log(e);
+          }
+      };
+  
+      useEffect(async () => {
+          await getWorkoutData();
+      }, []);  
+  
     return (
         <div>
         <div className="mini-calendar">
@@ -148,6 +173,36 @@ const style = {
                     </Modal>
                 </div>
                 <hr/>
+
+                <div className="workout-container">
+                    <div>
+                        <span style={{position: 'absolute', marginLeft: '16%', fontWeight: '700'}}>Reps</span>
+                        <span style={{position: 'absolute', marginLeft: '26%', fontWeight: '700'}}>Sets</span>
+                        <span style={{position: 'absolute', marginLeft: '36%', fontWeight: '700'}}>Rests</span>
+                    </div>
+                    {workouts.map((exercise) => {
+                        if (exercise.date === `${props.date.getFullYear()}-${('0'+(props.date.getMonth()+1)).slice(-2)}-${('0'+props.date.getDate()).slice(-2)}`) {
+                            return [
+                                <div className="workout-card">
+                                    <span className='workout-content'>{exerciseNames[exercise.exercise]}</span>
+                                    <span style={{position: 'absolute', marginLeft: '15.5%', fontSize: '24px'}}>{exercise.reps}</span>
+                                    <span style={{position: 'absolute', marginLeft: '25.5%', fontSize: '24px'}}>{exercise.sets}</span>
+                                    <span style={{position: 'absolute', marginLeft: '35.5%', fontSize: '24px'}}>{exercise.rest}</span>
+                                    <ThemeProvider theme={theme}>
+                                        <Link to = {
+                                            {
+                                                pathname: "/fitness/exercise",
+                                                clientProp: exercise.exercise
+                                            }}>    
+                                            <Button className="workout-button" variant="contained" color="neutral" style={{width: '150px'}}>
+                                                View
+                                            </Button>
+                                        </Link>
+                                    </ThemeProvider>
+                                </div>]
+                        }
+                    })}
+                </div>
             </div> 
         </div>
     </div>

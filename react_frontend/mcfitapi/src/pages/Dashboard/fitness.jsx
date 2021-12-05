@@ -144,9 +144,9 @@ export default function Fitness() {
                             return [
                                 <div className="workout-card">
                                     <span className='workout-content'>{exerciseNames[exercise.exercise]}</span>
-                                    <span style={{position: 'absolute', marginLeft: '15%'}}>{exercise.reps}</span>
-                                    <span style={{position: 'absolute', marginLeft: '25%'}}>{exercise.sets}</span>
-                                    <span style={{position: 'absolute', marginLeft: '35%'}}>{exercise.rest}</span>
+                                    <span style={{position: 'absolute', marginLeft: '15.5%', fontSize: '24px'}}>{exercise.reps}</span>
+                                    <span style={{position: 'absolute', marginLeft: '25.5%', fontSize: '24px'}}>{exercise.sets}</span>
+                                    <span style={{position: 'absolute', marginLeft: '35.5%', fontSize: '24px'}}>{exercise.rest}</span>
                                     <ThemeProvider theme={theme}>
                                         <Link to = {
                                             {
