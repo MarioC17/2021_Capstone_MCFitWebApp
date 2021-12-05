@@ -32,10 +32,6 @@ const createLoginCookies = async (profile) => {
   cookies.set('first_name', profile.givenName, { path: '/' ,maxAge:10800});
   cookies.set('last_name', profile.familyName, { path: '/' ,maxAge:10800});
   cookies.set('email', profile.email, { path: '/' ,maxAge:10800});
-  // console.log(cookies.get('user_id')); 
-  // console.log(response)
-  // console.log(profile)
-  // console.log(document.cookies)
 })
 
 }

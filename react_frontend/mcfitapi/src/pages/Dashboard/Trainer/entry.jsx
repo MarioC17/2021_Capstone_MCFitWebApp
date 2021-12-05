@@ -13,7 +13,7 @@ import Cookies from 'universal-cookie';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 //Stylesheet
 import './entry.css';
-
+const cookies = new Cookies() 
 const style = {
     position: 'absolute',
     top: '50%',
@@ -89,6 +89,7 @@ const style = {
 
     useEffect(() => {
         getexerciseData();
+        setFormData({...formData,['date']: selectedDate.toISOString().split('T')[0]});
     }, []);  
 
     const theme = createTheme({
@@ -102,7 +103,11 @@ const style = {
 
       //saved modal
       const [open, setOpen] = React.useState(false);
-      const handleClose = () => setOpen(false);
+      const handleClose = () => {
+          setOpen(false);
+          window.location.reload(false);
+          
+        }
 
     
       const [workouts, setWorkouts] = useState([]);
@@ -168,6 +173,7 @@ const style = {
                         <Typography id="modal-modal-title" variant="h6" component="h2" style={{textAlign: 'center'}}>
                         Exercise Added!
                         </Typography>
+                        
                     </Box>
                     </Modal>
                 </div>
