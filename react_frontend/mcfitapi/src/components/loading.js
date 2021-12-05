@@ -27,7 +27,6 @@ export default function Loading(props) {
   }
 
   const getProfileData = async () => {
-    console.log("getprofdata")
     try {
       const profiles = await axios.get(
         "http://localhost:8000/api/profile"
@@ -41,7 +40,6 @@ export default function Loading(props) {
 
   
   const getClientData = async () => {
-    console.log("getclientdata")
     try {
       const client = await axios.get(
         "http://localhost:8000/api/clients"
@@ -72,7 +70,6 @@ export default function Loading(props) {
     clientList.forEach(client => {
       if (data.get(client.user) !== undefined)
       {
-        console.log("loading client")
         let current_client = JSON.parse(client.extra_data);
         let current_profile = data.get(client.user)
         current_profile.first_name = current_client.given_name;
@@ -80,12 +77,10 @@ export default function Loading(props) {
         current_profile.email = current_client.email;
         }
     })
-    console.log("CLIETN LOADED")
     props.setfullProfiles(Array.from(data))
   }
 
   const loadProfileInfo = () => {
-    console.log("loadprof")
     profiles.forEach(item => {
       let fullProf = new prof();
       let age = getAge(item.dob)
