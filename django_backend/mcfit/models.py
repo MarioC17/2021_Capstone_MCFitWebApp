@@ -96,6 +96,7 @@ class Nutritions(models.Model):
     carbs = models.FloatField(blank=True, null=True)
     fats = models.FloatField(blank=True, null=True)
     proteins = models.FloatField(blank=True, null=True)
+    created_at = models.DateField(blank=True, null=True)
 
     class Meta:
         managed = False

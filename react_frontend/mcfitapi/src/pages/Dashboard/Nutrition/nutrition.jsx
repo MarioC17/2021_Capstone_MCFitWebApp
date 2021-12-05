@@ -14,10 +14,15 @@ import { fetchFood } from '../../../actions/fat-secret';
 import './nutrition.css';
 
 const Nutrition = (props) => {
-    const [value, setValue] = React.useState(null);
+    const [value, setValue] = React.useState(props.selectedDate);
+
+    const updateSelectedDate = (value) => {
+        setValue(value);
+        props.fetchFood(value.toISOString().split("T")[0]);
+    }
 
     useEffect(() => {
-        props.fetchFood();
+        props.fetchFood(props.selectedDate);
     }, []);
 
     const BreakFastComponent = () => {
@@ -184,9 +189,7 @@ const Nutrition = (props) => {
                     <DatePicker
                         label="Select Date"
                         value={value}
-                        onChange={(newValue) => {
-                        setValue(newValue);
-                        }}
+                        onChange={(e) => updateSelectedDate(e) }
                         renderInput={(params) => <TextField {...params} />}
                     />
                 </LocalizationProvider>
@@ -271,6 +274,7 @@ const mapStateToProps = (state) => {
         carbsData: state.fatSecret.carbsData,
         fatsData: state.fatSecret.fatsData,
         proteinsData: state.fatSecret.proteinsData,
+        selectedDate: state.fatSecret.selectedDate,
     };
 };
 export default connect(mapStateToProps, { fetchFood })(Nutrition);

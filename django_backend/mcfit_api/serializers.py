@@ -24,7 +24,7 @@ class SocialAccountSerializer(serializers.ModelSerializer):
 class NutritionsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Nutritions
-        fields = ('nutrition_id','user','food_id','food_name','food_type','count','calories','carbs','fats','proteins')
+        fields = ('nutrition_id','user','food_id','food_name','food_type','count','calories','carbs','fats','proteins','created_at')
 
 class AuthUserSerializer(serializers.ModelSerializer):
     class Meta:

@@ -26,6 +26,6 @@ urlpatterns = [
     path('fatsecret/token', FatSecretAPIToken.as_view()),
     path('fatsecret/food/search/<str:search_exp>/', FatSecretAPIFoodSearch.as_view()),
     # Nutrition
-    path('nutritions/<int:user_id>', NutritionList.as_view(), name='nutritionlist'),
-    path('nutritions/add', NutritionListCreate.as_view(), name='nutritionlistcreate'),
+    path('nutritions/<int:user_id>/<str:date>', NutritionList.as_view(), name='nutritionlist'),
+    path('nutritions/<str:date>/add', NutritionListCreate.as_view(), name='nutritionlistcreate'),
 ]
