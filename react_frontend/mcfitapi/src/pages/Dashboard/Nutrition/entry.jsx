@@ -30,8 +30,13 @@ const style = {
 
     const history = useHistory();
 
-    const [value, setValue] = React.useState(null);
+    const [value, setValue] = React.useState(props.selectedDate);
 
+    const updateSelectedDate = (value) => {
+        setValue(value);
+        props.fetchFood(value.toISOString().split("T")[0]);
+    }
+    
     const breakfastComponent = {
         calories: 0,
         carbs: 0,
@@ -78,7 +83,7 @@ const style = {
 
     useEffect(() => {
         props.load_token();
-        props.fetchFood();
+        props.fetchFood(props.selectedDate);
     }, []);
 
     useEffect(() => {
@@ -177,18 +182,18 @@ const style = {
 
       useEffect(() => {
         if(!props.nutritionsLoading) {
-            if(props.breakfastData.length > 0) {
+            // if(props.breakfastData.length > 0) {
                 setBComponents([...props.breakfastData, breakfastComponent]);
-            }
-            if(props.snackData.length > 0) {
+            // }
+            // if(props.snackData.length > 0) {
                 setSComponents([...props.snackData, snackComponent]); 
-            }
-            if(props.lunchData.length > 0) {
+            // }
+            // if(props.lunchData.length > 0) {
                 setLComponents([...props.lunchData, lunchComponent]);
-            }
-            if(props.dinnerData.length > 0) {
+            // }
+            // if(props.dinnerData.length > 0) {
                 setDComponents([...props.dinnerData, dinnerComponent]);
-            }
+            // }
         }
     }, [props.nutritionsLoading]);
     
@@ -204,7 +209,8 @@ const style = {
                 caloriesData: props.caloriesData, 
                 carbsData: props.carbsData, 
                 fatsData: props.fatsData,
-                proteinsData: props.proteinsData
+                proteinsData: props.proteinsData,
+                selectedDate: props.selectedDate
             });
         };
       const handleClose = () => setOpen(false);
@@ -275,9 +281,7 @@ const style = {
                     <DatePicker
                         label="Select Date"
                         value={value}
-                        onChange={(newValue) => {
-                        setValue(newValue);
-                        }}
+                        onChange={(e) => updateSelectedDate(e) }
                         renderInput={(params) => <TextField {...params} />}
                     />
                 </LocalizationProvider>
@@ -429,6 +433,7 @@ const mapStateToProps = (state) => {
         carbsData: state.fatSecret.carbsData,
         fatsData: state.fatSecret.fatsData,
         proteinsData: state.fatSecret.proteinsData,
+        selectedDate: state.fatSecret.selectedDate,
     };
 };
 export default connect(mapStateToProps,{load_token, foodSave, fetchFood, updateBreakfast, updateSnackData, updateLunchData, updateDinnerData, updateMacroNutrients}) (Entry); 

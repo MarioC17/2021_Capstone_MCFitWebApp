@@ -20,6 +20,7 @@ from rest_framework.generics import (
     RetrieveDestroyAPIView
 )
 from .serializers import ExercisetableSerializer,ProfilesSerializer,WorkoutsSerializer,SocialAccountSerializer, NutritionsSerializer,AuthUserSerializer
+import datetime
 
 fat_secret_url ="https://oauth.fatsecret.com/connect/token"
 fat_secret_client_id = "e2f7d0ccecf64cc79ee7dbdf1e128efe"
@@ -133,7 +134,8 @@ class NutritionList(generics.ListCreateAPIView):
 
     def get_queryset(self):
         user_id = self.kwargs['user_id']
-        return Nutritions.objects.filter(user=user_id)
+        date    = self.kwargs['date']
+        return Nutritions.objects.filter(user=user_id).filter(created_at=date)
 
 class NutritionListCreate(generics.ListCreateAPIView):
     serializer_class = NutritionsSerializer(many=True)
@@ -141,10 +143,11 @@ class NutritionListCreate(generics.ListCreateAPIView):
         
     def post(self, request, *args, **kwargs):
         user_id = request.data.get('user_id', None)
+        date    = self.kwargs['date']
         nutritions_data = request.data.get('nutritions', [])
 
         # first delete all entries
-        nutritions_preferences_obj = Nutritions.objects.filter(user=user_id)
+        nutritions_preferences_obj = Nutritions.objects.filter(user=user_id).filter(created_at=date)
         nutritions_preferences_obj.delete()
         
         for nutrition_data in nutritions_data:
@@ -157,7 +160,8 @@ class NutritionListCreate(generics.ListCreateAPIView):
                 calories = nutrition_data['calories'],
                 carbs = nutrition_data['carbs'],
                 fats = nutrition_data['fats'],
-                proteins = nutrition_data['proteins']
+                proteins = nutrition_data['proteins'],
+                created_at = date
             )
         return Response({"status": "success"})
 #view classes docs    

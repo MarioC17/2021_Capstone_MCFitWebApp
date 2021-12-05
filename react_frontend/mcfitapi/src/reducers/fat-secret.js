@@ -34,6 +34,7 @@ const initialState = {
   carbsData: 0,
   fatsData: 0,
   proteinsData: 0,
+  selectedDate: new Date().toISOString().split("T")[0],
   // nutritions data
   nutritionsLoading: false,
 };
@@ -93,6 +94,7 @@ export default function (state = initialState, action) {
         carbsData: payload.carbsData,
         fatsData: payload.fatsData,
         proteinsData: payload.proteinsData,
+        selectedDate: payload.selectedDate,
         adding: false,
       };
     case FAT_SECRET_FOOD_DATA_FAILED:
@@ -104,6 +106,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         nutritionsLoading: true,
+        selectedDate: payload,
       };
     case NUTRITIONS_DATA_SUCCESS:
       return {
