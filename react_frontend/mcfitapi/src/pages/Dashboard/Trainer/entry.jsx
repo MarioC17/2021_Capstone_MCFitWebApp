@@ -125,7 +125,8 @@ const style = {
   
     return (
         <div>
-        <div className="mini-calendar">
+        <div className="macro-title">Assign Exercises</div>
+        <div className="mini-calendar" style={{marginRight: '2%'}}>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DesktopDatePicker
                     autoOk
@@ -136,13 +137,11 @@ const style = {
                 />
         </LocalizationProvider>
         </div>
-        <div className="macro-title">Assign Exercises</div>
         <div className="meal-entry">
             <div>
                 <div className="meal-row">
                     <div className="meal-input">
                         <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}> 
-                            <span className="meal-text">Exercises</span>
                             <ThemeProvider theme={theme}>
                             </ThemeProvider>
                         </div>
@@ -153,7 +152,7 @@ const style = {
                     <ThemeProvider theme={theme}>
                         <Button variant="contained" 
                         color="neutral" 
-                        style={{marginBotton: '5%', minWidth: '100px', fontSize: '15px'}}
+                        style={{marginTop: '2%', marginBotton: '5%', marginRight: '2%', minWidth: '100px', padding: '10px', fontSize: '15px'}}
                         onClick={e => onAdd(e)}>
                         Add Workout
                         </Button>
@@ -172,6 +171,7 @@ const style = {
                     </Box>
                     </Modal>
                 </div>
+                <div style={{marginTop: '3%'}} className="macro-title">Workout Summary</div>
                 <hr/>
 
                 <div className="workout-container">
