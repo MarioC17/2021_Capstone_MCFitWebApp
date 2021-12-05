@@ -13,7 +13,7 @@ import Cookies from 'universal-cookie';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 //Stylesheet
 import './entry.css';
-
+const cookies = new Cookies() 
 const style = {
     position: 'absolute',
     top: '50%',
@@ -106,6 +106,7 @@ const style = {
       const handleClose = () => {
           setOpen(false);
           window.location.reload(false);
+          
         }
 
     
