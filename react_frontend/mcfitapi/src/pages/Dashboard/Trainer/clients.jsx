@@ -13,14 +13,14 @@ import { IconButton } from '@material-ui/core';
 import { style } from '@mui/system';
 import axios from "axios";
 import Loading from '../../../components/loading';
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 const Clients = () => {
     const [value, setValue] = React.useState(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = React.useState(true);
     const [profiles,setProfiles] = useState([]);
     const [clientList,setClients] = useState([]);
-    const [data, setData] = useState(false)
-    const [data2, setData2] = useState('default value for first render')
     //const fullProfiles = new Map()
     const [fullProfiles,setfullProfiles] = useState(new Map());
     function prof() {
@@ -39,6 +39,7 @@ const Clients = () => {
     }
 
     const getProfileData = async () => {
+      console.log("getprofdata")
       try {
         const profiles = await axios.get(
           "http://localhost:8000/api/profile"
@@ -52,7 +53,7 @@ const Clients = () => {
 
     
     const getClientData = async () => {
-      setLoading(true)
+      console.log("getclientdata")
       try {
         const client = await axios.get(
           "http://localhost:8000/api/clients"
@@ -63,6 +64,10 @@ const Clients = () => {
       }
     };
   
+    function setload(){
+      console.log("setting loading")
+      setLoading(false);
+    }
 
     function getAge(dateString) {
       var today = new Date();
@@ -78,6 +83,7 @@ const Clients = () => {
   }
 
     const loadClientInfo = () => {
+      console.log("loadclient")
       clientList.forEach(client => {
         if (fullProfiles.get(client.user) !== undefined)
         {
@@ -87,11 +93,12 @@ const Clients = () => {
           current_profile.last_name = current_client.family_name;
           current_profile.email = current_client.email;
           }
-
+      
       })
     }
 
     const loadProfileInfo = () => {
+      console.log("loadprof")
       profiles.forEach(item => {
         let fullProf = new prof();
         let age = getAge(item.dob)
@@ -108,17 +115,21 @@ const Clients = () => {
       })
     }
 
-    
-    useEffect(async () => {
-      await getClientData().then(await getProfileData()).then(await loadProfileInfo()).then(await loadClientInfo());
-      setLoading(false)
-    },[loading,data2]);
 
-    console.log(loading)
+    useEffect(async () => {
+      
+      await getClientData().then(await getProfileData()).then(await loadProfileInfo()).then(await loadClientInfo()).then(await setload());
+
+    },[loading]);
+
     switch(loading) {
       case true:
-        <Loading></Loading>
-      case false:
+        return(
+          <Box sx={{ display: 'flex' }}>
+          <CircularProgress />
+          </Box>
+        )
+      case false: 
         return(
               <>
                     <Sidebar/>
@@ -128,27 +139,6 @@ const Clients = () => {
                         </div>
                         <div className="client-sub">
                             Clients
-                        </div>
-                        
-                        <div style={{display: 'flex', flexDirection: 'row', paddingLeft: '3%'}}>
-                            <ClientSearch/>
-                            <LocalizationProvider dateAdapter={AdapterDateFns}>
-                            <DatePicker
-                                label="Select Date"
-                                value={value}
-                                onChange={(newValue) => {
-                                setValue(newValue);
-                                }}
-                                renderInput={(params) => <TextField {...params} />}
-                            />
-                            </LocalizationProvider>
-                        </div>
-                        
-                        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'flex-end', paddingRight: '1%'}}>
-                            <span>Sort by Recent</span>
-                            <IconButton style={{float: 'right'}} color="black" aria-label="View Profile" component="span">
-                                <FilterList/>
-                            </IconButton>
                         </div>
 
                         <div className="client-grid">
@@ -165,6 +155,7 @@ const Clients = () => {
                               },
                             }}
                             data-index={index}>
+
                           <Link to = {
                               {
                                   pathname: "/trainer/fitness",
