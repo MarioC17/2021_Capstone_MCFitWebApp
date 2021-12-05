@@ -37,7 +37,9 @@ const headCells = [
 ];
 
 export default function Fitness(props) { 
-    
+    const [value, setValue] = React.useState(new Date());
+    const [stringValue, setStringValue] = React.useState([]);
+
     function getAge(dateString) {
         var today = new Date();
         var birthDate = new Date(dateString);
@@ -109,8 +111,20 @@ export default function Fitness(props) {
                 </div>
             
             <div className="assign">
-                <Entry user={props.location.clientProp.id}/>
-                <ShowWorkouts/>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <DatePicker
+                        views={['day', 'month', 'year']}
+                        minDate={new Date('2021-01-01')}
+                        maxDate={new Date('2031-12-31')}
+                        value={value}
+                        onChange={(newValue) => {
+                            setValue(newValue);
+                            setStringValue(`${value.getFullYear()}-${('0'+(value.getMonth()+1)).slice(-2)}-${('0'+value.getDate()).slice(-2)}`)
+                        }}
+                        renderInput={(params) => <TextField {...params} helperText={null} />}
+                        />
+                    </LocalizationProvider>
+                <Entry user={props.location.clientProp.id} date={value}/>
             </div>
     </div>
     </>
