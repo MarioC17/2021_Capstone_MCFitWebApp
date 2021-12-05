@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import FullCalendar from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import timeGridPlugin from '@fullcalendar/timegrid'
@@ -13,7 +14,8 @@ import './booking.css'
 import interactionPlugin from '@fullcalendar/interaction'
 import { AccessTimeFilled, Description, Event, LocationOn } from '@mui/icons-material/';
 import Cookies from 'universal-cookie';
-
+import axios from 'axios';
+import { fetchFood, getFood } from '../../actions/fat-secret'; 
 
 var myToken;
     
@@ -55,6 +57,7 @@ constructor(props) {
     openSuccess: false,
     openError: false,
     openEventView: false,
+    openSummary: false,
     weekend: true,
     events: [],
     date: {},
@@ -66,7 +69,11 @@ constructor(props) {
     location: "Online",
     email: "",
     firstName: "",
-    lastName: ""
+    lastName: "",
+    workouts: [],
+    dailyWorkouts: [],
+    exerciseData: [],
+    dailyFood: []
   }
   this.handleOpen = this.handleOpen.bind(this);
   this.handleClose = this.handleClose.bind(this);
@@ -76,14 +83,15 @@ constructor(props) {
   this.handleCloseError = this.handleCloseError.bind(this);
   this.handleOpenEventView = this.handleOpenEventView.bind(this);
   this.handleCloseEventView = this.handleCloseEventView.bind(this);
+  this.handleOpenSummary = this.handleOpenSummary.bind(this);
+  this.handleCloseSummary = this.handleCloseSummary.bind(this);
+  this.getWorkoutData = this.getWorkoutData.bind(this);
+  this.getExerciseData = this.getExerciseData.bind(this);
 }
 
-async handleOpen(eventInfo) {
+async handleOpen() {
 //  this.state.bookingOptions = ["Test 1","Test 2","Test 3",eventInfo.dateStr];
-  this.state.dateDisplay = eventInfo.date.toString().substring(0,15); //Used for user facing popup
-  this.state.date = eventInfo.dateStr //Used for API call, YYYY-MM-DD format
-  this.state.bookingOptions = await getBookableTimes(this.state.date,this.state.date);
-  this.state.description = "No description provided"
+
   console.log(this.state.date)
   console.log(this.state.bookingOptions)
   this.setState({ open: true})
@@ -103,6 +111,7 @@ handleCloseSuccess()
 {
   this.setState({openSuccess: false})
   this.setState({selectedEvent: null})
+  document.location.reload();
 }
 
 handleOpenError()
@@ -123,6 +132,75 @@ handleOpenEventView()
 handleCloseEventView()
 {
   this.setState({openEventView: false});
+}
+
+async getWorkoutData()
+{
+        var cookie = new Cookies();
+        let user = cookie.get("user_id")
+        try {
+        const data = await axios.get(
+            `http://127.0.0.1:8000/api/workout/user/${user}/`
+        );
+        console.log(data)
+        return data;
+        } catch (e) {
+        console.log(e);
+        return null;
+        }
+}
+
+async getExerciseData(){
+      try {
+        const data = await axios.get(
+          "http://localhost:8000/api/exercises"
+        );
+        var result = data.data.reduce(function(map, obj) {
+            map[obj.exercise_id] = obj.name;
+            return map;
+        }, {});
+        return result;
+        
+      } catch (e) {
+        console.log(e);
+      }
+    };
+
+async handleOpenSummary(eventInfo)
+
+{
+  this.state.dateDisplay = eventInfo.date.toString().substring(0,15); //Used for user facing popup
+  this.state.date = eventInfo.dateStr //Used for API call, YYYY-MM-DD format
+  var workoutList = [];
+  for(let i = 0;i < this.state.workouts.length;i++) //Using because forEach has issues with async
+  {
+    if(this.state.workouts[i].date === this.state.date)
+    {
+      await workoutList.push(this.state.workouts[i])
+      //console.log(this.state.exerciseData[this.state.workouts[i].exercise])
+    }
+  }
+  await this.setState({dailyWorkouts: workoutList})
+//  console.log(this.state.dailyWorkouts)
+  var nextDate = await new Date(new Date(this.state.date).getTime() + 2*24*60*60*1000); //The nutrition date on the nutrition page and the one in the database don't match.  This fixes it for now.
+  var foodYear = nextDate.getFullYear();
+  var foodMonth = nextDate.getMonth() + 1;
+  var foodDay = nextDate.getDate();
+  var foodDate = `${foodYear}-${foodMonth}-${foodDay}`;
+  var cookies = new Cookies();
+  var user = cookies.get('user_id')
+  var food = await axios.get(`http://localhost:8000/api/nutritions/${user}/${foodDate}`)
+  console.log(food)
+  this.state.bookingOptions = await getBookableTimes(this.state.date,this.state.date);
+  this.state.description = "No description provided"
+  await this.setState({dailyFood: food.data});
+  await this.setState({openSummary: true});
+
+}
+
+handleCloseSummary()
+{
+  this.setState({openSummary: false});
 }
     
   render() {
@@ -167,7 +245,7 @@ handleCloseEventView()
           weekends={this.state.weekend}
           events={this.state.events}
           eventClick={this.handleEventClick}
-          dateClick={this.handleOpen}
+          dateClick={this.handleOpenSummary}
         />
         </div>
         <Modal
@@ -182,7 +260,7 @@ handleCloseEventView()
               <div className="book-popup-ico2"><AccessTimeFilled/></div>
               <div className="book-popup-ico3"><LocationOn/></div>
               <div className="book-popup-ico4"><Description/></div>
-              <div className="book-popup-ico5"><Event/></div>
+              
               <div className="book-popup-title">
                   Book Appointment
               </div>
@@ -207,11 +285,7 @@ handleCloseEventView()
               <div className="book-popup-location"><TextField label="Location" onChange={
               (entered)=>(this.setState({location:entered.target.value}))
               }/></div>
-              <div className="book-popup-event"><Select>
-                <MenuItem value="1">1 day before</MenuItem>
-                <MenuItem value="2">2 days before</MenuItem>
-                <MenuItem value="3">3 days before</MenuItem>
-                </Select></div>
+              
             </div>
             <div style={{textAlign: 'right'}}>
               <ThemeProvider theme={theme}>
@@ -279,7 +353,7 @@ handleCloseEventView()
               <div className="book-popup-ico2"><AccessTimeFilled/></div>
               <div className="book-popup-ico3"><LocationOn/></div>
               <div className="book-popup-ico4"><Description/></div>
-              <div className="book-popup-ico5"><Event/></div>
+              
               <div className="book-popup-title">
                   Appointment Details
               </div>
@@ -288,7 +362,7 @@ handleCloseEventView()
               </div>
               <div className="book-popup-desc">{this.state.description}</div>
               <div className="book-popup-location">{this.state.location}</div>
-              <div className="book-popup-event"></div>
+              
             </div>
             <div style={{textAlign: 'right'}}>
               <ThemeProvider theme={theme}>
@@ -307,6 +381,77 @@ handleCloseEventView()
                 Cancel
                 </Button>
               </ThemeProvider>
+            </div>
+          </Box>
+        </Modal>
+        <Modal
+          open={this.state.openSummary}
+          onClose={this.handleCloseSummary}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+          >
+          <Box sx={style}>
+          <div>
+          {this.state.dateDisplay}
+          {/*Jasper please help with this*/}
+            <div>
+              <b>
+                Assigned Exercises
+              </b>
+            
+                {this.state.dailyWorkouts.map((workout)=>(<p>{this.state.exerciseData[workout.exercise]}</p>))}
+              <ThemeProvider theme={theme}>
+                <Link to={
+                  {
+                    pathname: "/fitness"
+                  }
+                }>
+                <Button variant="contained" 
+                  color="neutral" 
+                  style={{marginBotton: '5%', minWidth: '150px', fontSize: '20px'}}
+                  
+                  >
+                  Exercises
+                </Button>
+              </Link>
+            </ThemeProvider>
+            </div>
+            <div>
+              <b>
+                Logged food intake
+              </b>
+                {this.state.dailyFood.map((food)=>(<p>{food.food_name}: {food.count}</p>))}
+                <ThemeProvider theme={theme}>
+              <Link to={
+                {
+                  pathname: "/nutrition"
+                }
+              }>
+              <Button variant="contained" 
+                color="neutral" 
+                style={{marginBotton: '5%', minWidth: '150px', fontSize: '20px'}}
+                
+                >
+                Food logging
+              </Button>
+              </Link>
+            </ThemeProvider>
+            </div>
+            <div>
+            <ThemeProvider theme={theme}>
+              <Button variant="contained" 
+                color="neutral" 
+                style={{marginBotton: '5%', minWidth: '150px', fontSize: '20px'}}
+                onClick={async()=>{
+                  this.handleCloseSummary();
+                  this.handleOpen();
+                  
+                }}
+                >
+                Book a training session
+              </Button>
+            </ThemeProvider>
+            </div>
             </div>
           </Box>
         </Modal>
@@ -365,6 +510,11 @@ handleCloseEventView()
     }
     this.setState({weekend: true})
     this.setState({events: times})
+    var workoutsAssigned = await this.getWorkoutData();
+    this.setState({workouts: workoutsAssigned.data})
+    var exerciseList = await this.getExerciseData();
+    await this.setState({exerciseData: exerciseList});
+    //console.log(this.state.exerciseData);
   }
   
   
@@ -385,9 +535,4 @@ handleCloseEventView()
     this.handleOpenEventView();
   }
   
-  handleDateSelect = (selectInfo) =>
-  {
-    
-    console.log("Date: " + selectInfo.dateStr)
-  }
 }
