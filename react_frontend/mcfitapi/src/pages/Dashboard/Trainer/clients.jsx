@@ -13,112 +13,20 @@ import { IconButton } from '@material-ui/core';
 import { style } from '@mui/system';
 import axios from "axios";
 import Loading from '../../../components/loading';
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 const Clients = () => {
-    const [value, setValue] = React.useState(null);
-    const [loading, setLoading] = useState(true);
-    const [profiles,setProfiles] = useState([]);
-    const [clientList,setClients] = useState([]);
-    const [data, setData] = useState(false)
-    const [data2, setData2] = useState('default value for first render')
-    //const fullProfiles = new Map()
-    const [fullProfiles,setfullProfiles] = useState(new Map());
-    function prof() {
-      this.first_name = 'N/A';
-      this.id = 'N/A';
-      this.last_name = 'N/A';
-      this.dob = 'N/A';
-      this.email = 'N/A';
-      this.gender = 'N/A';
-      this.address = 'N/A';
-      this.fitness_goal = 'N/A';
-      this.emergency_contact = 'N/A';
-      this.phone_num = 'N/A';
-      this.height = 'N/A';
-      this.weight = 'N/A';
-    }
-
-    const getProfileData = async () => {
-      try {
-        const profiles = await axios.get(
-          "http://localhost:8000/api/profile"
-        );
-        setProfiles(profiles.data)
-      } catch (e) {
-        console.log(e);
-      }
-    };
-
-
-    
-    const getClientData = async () => {
-      setLoading(true)
-      try {
-        const client = await axios.get(
-          "http://localhost:8000/api/clients"
-        );
-        setClients(client.data)
-      } catch (e) {
-        console.log(e);
-      }
-    };
+  const [fullProfiles,setfullProfiles] = useState([]);
+  const [loading, setLoading] = React.useState(true);
+  const [temp,setTemp] = useState(new Map());
   
-
-    function getAge(dateString) {
-      var today = new Date();
-      var birthDate = new Date(dateString);
-      var yearGap = today.getFullYear() - birthDate.getFullYear();
-      var monthGap = today.getMonth() - birthDate.getMonth();
-      var dayGap = today.getDate() < birthDate.getDate();
-      if (monthGap < 0 || (monthGap == 0 && dayGap == true)) {
-          yearGap--;
-      }
-
-      return yearGap;
-  }
-
-    const loadClientInfo = () => {
-      clientList.forEach(client => {
-        if (fullProfiles.get(client.user) !== undefined)
-        {
-          let current_client = JSON.parse(client.extra_data);
-          let current_profile = fullProfiles.get(client.user)
-          current_profile.first_name = current_client.given_name;
-          current_profile.last_name = current_client.family_name;
-          current_profile.email = current_client.email;
-          }
-
-      })
-    }
-
-    const loadProfileInfo = () => {
-      profiles.forEach(item => {
-        let fullProf = new prof();
-        let age = getAge(item.dob)
-        fullProf.gender = item.gender;
-        fullProf.address = item.address;
-        fullProf.fitness_goal = item.fitness_goal;
-        fullProf.emergency_contact = item.emergency_contact;
-        fullProf.phone_num = item.phone_num;
-        fullProf.height = item.height;
-        fullProf.weight = item.weight;
-        fullProf.dob = age;
-        fullProf.id = item.user;
-        fullProfiles.set(item.user,fullProf);
-      })
-    }
-
-    
-    useEffect(async () => {
-      await getClientData().then(await getProfileData()).then(await loadProfileInfo()).then(await loadClientInfo());
-      setLoading(false)
-    },[loading,data2]);
-
-    console.log(loading)
     switch(loading) {
       case true:
-        <Loading></Loading>
-      case false:
+        return(
+          <Loading loading = {loading} data={temp} setLoading = {setLoading} setfullProfiles={setfullProfiles} fullProfiles={fullProfiles}></Loading>
+        )
+      case false: 
         return(
               <>
                     <Sidebar/>
@@ -129,30 +37,9 @@ const Clients = () => {
                         <div className="client-sub">
                             Clients
                         </div>
-                        
-                        <div style={{display: 'flex', flexDirection: 'row', paddingLeft: '3%'}}>
-                            <ClientSearch/>
-                            <LocalizationProvider dateAdapter={AdapterDateFns}>
-                            <DatePicker
-                                label="Select Date"
-                                value={value}
-                                onChange={(newValue) => {
-                                setValue(newValue);
-                                }}
-                                renderInput={(params) => <TextField {...params} />}
-                            />
-                            </LocalizationProvider>
-                        </div>
-                        
-                        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'flex-end', paddingRight: '1%'}}>
-                            <span>Sort by Recent</span>
-                            <IconButton style={{float: 'right'}} color="black" aria-label="View Profile" component="span">
-                                <FilterList/>
-                            </IconButton>
-                        </div>
 
                         <div className="client-grid">
-                        {Array.from(fullProfiles).map((client, index) => (
+                        {fullProfiles.map((client, index) => (
                           <Box sx={{
                             width: 242,
                               height: 200,
@@ -165,6 +52,7 @@ const Clients = () => {
                               },
                             }}
                             data-index={index}>
+
                           <Link to = {
                               {
                                   pathname: "/trainer/fitness",

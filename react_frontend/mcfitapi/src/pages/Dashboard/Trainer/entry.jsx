@@ -56,7 +56,7 @@ const style = {
 
     const {user,exercise,reps,sets,rest,rir,load,date,notes} = formData;
     const [exercises, setexercise] = useState([]);
-    const [selectedDate, handleDateChange] = useState(null);
+    const [selectedDate, handleDateChange] = useState(new Date());
     const [exerciseNames, setExerciseNames] = useState(new Map());
 
 
@@ -181,7 +181,7 @@ const style = {
                         <span style={{position: 'absolute', marginLeft: '36%', fontWeight: '700'}}>Rests</span>
                     </div>
                     {workouts.map((exercise) => {
-                        if (exercise.date === `${props.date.getFullYear()}-${('0'+(props.date.getMonth()+1)).slice(-2)}-${('0'+props.date.getDate()).slice(-2)}`) {
+                        if (exercise.date === selectedDate.toISOString().split('T')[0]) {  
                             return [
                                 <div className="workout-card">
                                     <span className='workout-content'>{exerciseNames[exercise.exercise]}</span>
