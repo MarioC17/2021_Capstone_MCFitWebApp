@@ -1,18 +1,18 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { createTheme } from '@mui/material/styles';
 import Sidebar from '../../../components/TrainerSidebar';
-import CircleIcon from '@mui/icons-material/Circle';
+
 import BlankProfile from '../../../static/img/blankprofile.jpg';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DatePicker from '@mui/lab/DatePicker';
-import { Box, TextField } from '@mui/material/';
 import Entry from './entry';
-import axios from "axios";
-import ShowWorkouts from "../../../components/ShowWorkouts"
 //import { TableHead, TableRow, TableCell, TableSortLabel } from '@material-ui/core/'
 //Stylesheet
+
+/*
+Bug where when page is refreshed the currently selected client disappears 
+*/
 import './fitness.css';
+import Cookies from 'universal-cookie';
+const cookies = new Cookies() 
 const theme = createTheme({
     palette: {
       neutral: {
@@ -37,33 +37,45 @@ const headCells = [
 ];
 
 export default function Fitness(props) { 
+    
+    const setCookies = () => {
+        cookies.set('address', props.location.clientProp.address, { path: '/' ,maxAge:10800});
+        cookies.set('gender', props.location.clientProp.gender, { path: '/' ,maxAge:10800});
 
-    function getAge(dateString) {
-        var today = new Date();
-        var birthDate = new Date(dateString);
-        var yearGap = today.getFullYear() - birthDate.getFullYear();
-        var monthGap = today.getMonth() - birthDate.getMonth();
-        var dayGap = today.getDate() < birthDate.getDate();
-        if (monthGap < 0 || (monthGap == 0 && dayGap == true)) {
-            yearGap--;
-        }
+        cookies.set('age', props.location.clientProp.dob, { path: '/' ,maxAge:10800});
 
-        return yearGap;
+        cookies.set('fitness_goal', props.location.clientProp.fitness_goal, { path: '/' ,maxAge:10800});
+    
+        cookies.set('first_name', props.location.clientProp.first_name, { path: '/' ,maxAge:10800});
+
+        cookies.set('last_name', props.location.clientProp.last_name, { path: '/' ,maxAge:10800});
+
+        cookies.set('client_id', props.location.clientProp.id, { path: '/' ,maxAge:10800});
     }
-    let birthday = 'N/A'
 
     if (props.location.clientProp == undefined) {
         console.log("No profile selected")
         props.location.clientProp = {
             'profilepic': <img style={{height: '60px', width: '60px', borderRadius: '50%'}} src={BlankProfile}/>,
-            'name': '',
-            'age': 'N/A',
+            'first_name': '',
+            'last_name':'',
+            'dob': 'N/A',
             'gender': 'N/A', 
-            'location': 'N/A'
+            'fitness_goal': 'N/A',
+            'id':'N/A',
+            'address':'N/A',
+            
         };
+
+        props.location.clientProp.address = cookies.get('address');
+        props.location.clientProp.gender = cookies.get('gender');
+        props.location.clientProp.dob = cookies.get('age');
+        props.location.clientProp.fitness_goal = cookies.get('fitness_goal');
+        props.location.clientProp.first_name = cookies.get('first_name');
+        props.location.clientProp.last_name = cookies.get('last_name');
+        props.location.clientProp.id = cookies.get('client_id');
     }
     else {
-        console.log("Profile selected")
         if (props.location.clientProp.location == null) {
             props.location.clientProp.location = 'N/A'
         }
@@ -73,12 +85,18 @@ export default function Fitness(props) {
         else if (props.location.clientProp.address == null) {
             props.location.clientProp.address = 'N/A'
         }
-        else if (props.location.clientProp.dob != null) {
-            birthday = getAge(props.location.clientProp.dob)
-        }
-        
+
+        setCookies()
+        props.location.clientProp.address = cookies.get('address');
+        props.location.clientProp.gender = cookies.get('gender');
+        props.location.clientProp.dob = cookies.get('age');
+        props.location.clientProp.fitness_goal = cookies.get('fitness_goal');
+        props.location.clientProp.first_name = cookies.get('first_name');
+        props.location.clientProp.last_name = cookies.get('last_name');
+        props.location.clientProp.id = cookies.get('client_id');
     }
 
+    
     return (
         <>
         <Sidebar/> 
@@ -94,7 +112,7 @@ export default function Fitness(props) {
                     <span className="small-title">Info.</span>
                     <div className="profile-info">
                         <div style={{display: 'flex', flexDirection: 'row', alignContent: 'space-between'}}>
-                            <span>Age: {birthday}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span>Age: {props.location.clientProp.dob}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <span>Sex: {props.location.clientProp.gender}</span>
                         </div>
                         <span>Address: {props.location.clientProp.address}</span> 
