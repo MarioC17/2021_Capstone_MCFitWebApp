@@ -91,4 +91,15 @@ color: #5c5c5c;}
   .book-popup-event { grid-area: book-popup-event; 
     display: flex;
     align-items: center;}
+
+    .new-modal {
+      font-family: var(--font-family-source_sans_pro);
+      text-align: center;
+    }
   
+    .new-modal-inputs {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
