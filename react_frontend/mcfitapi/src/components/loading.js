@@ -101,21 +101,20 @@ export default function Loading(props) {
       data.set(item.user,fullProf);
     })
   }
+  
 
+  useEffect(() => {
+    getClientData();
+    getProfileData();
+    },[]);
 
-  useEffect(async () => {
-      
-    await getClientData().then(await getProfileData()).then(await loadProfileInfo()).then(await loadClientInfo());
-
-    if(props.fullProfiles.length > 0){
+  useEffect(() => {
+    loadProfileInfo()
+    loadClientInfo()
+    if ((props.fullProfiles.length > 0) && (props.fullProfiles[props.fullProfiles.length-1][1].first_name !== "N/A")){
       props.setLoading(false)
     }
     },[props.fullProfiles]);
-
-
-    console.log(props.fullProfiles[1])
-
-
 
   return (
 <>

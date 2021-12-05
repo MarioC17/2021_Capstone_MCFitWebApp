@@ -19,11 +19,12 @@ import CircularProgress from '@mui/material/CircularProgress';
 const Clients = () => {
   const [fullProfiles,setfullProfiles] = useState([]);
   const [loading, setLoading] = React.useState(true);
-
+  const [temp,setTemp] = useState(new Map());
+  
     switch(loading) {
       case true:
         return(
-          <Loading loading = {loading} setLoading = {setLoading} setfullProfiles={setfullProfiles} fullProfiles={fullProfiles}></Loading>
+          <Loading loading = {loading} data={temp} setLoading = {setLoading} setfullProfiles={setfullProfiles} fullProfiles={fullProfiles}></Loading>
         )
       case false: 
         return(
