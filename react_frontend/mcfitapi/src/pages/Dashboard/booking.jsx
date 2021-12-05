@@ -385,73 +385,69 @@ handleCloseSummary()
           </Box>
         </Modal>
         <Modal
+          className="new-modal"
           open={this.state.openSummary}
           onClose={this.handleCloseSummary}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
           >
           <Box sx={style}>
-          <div>
-          {this.state.dateDisplay}
-          {/*Jasper please help with this*/}
             <div>
-              <b>
-                Assigned Exercises
-              </b>
-            
-                {this.state.dailyWorkouts.map((workout)=>(<p>{this.state.exerciseData[workout.exercise]}</p>))}
-              <ThemeProvider theme={theme}>
-                <Link to={
-                  {
-                    pathname: "/fitness"
-                  }
-                }>
-                <Button variant="contained" 
-                  color="neutral" 
-                  style={{marginBotton: '5%', minWidth: '150px', fontSize: '20px'}}
-                  
-                  >
-                  Exercises
-                </Button>
-              </Link>
-            </ThemeProvider>
-            </div>
-            <div>
-              <b>
-                Logged food intake
-              </b>
-                {this.state.dailyFood.map((food)=>(<p>{food.food_name}: {food.count}</p>))}
-                <ThemeProvider theme={theme}>
-              <Link to={
-                {
-                  pathname: "/nutrition"
-                }
-              }>
-              <Button variant="contained" 
-                color="neutral" 
-                style={{marginBotton: '5%', minWidth: '150px', fontSize: '20px'}}
-                
-                >
-                Food logging
-              </Button>
-              </Link>
-            </ThemeProvider>
-            </div>
-            <div>
-            <ThemeProvider theme={theme}>
-              <Button variant="contained" 
-                color="neutral" 
-                style={{marginBotton: '5%', minWidth: '150px', fontSize: '20px'}}
-                onClick={async()=>{
-                  this.handleCloseSummary();
-                  this.handleOpen();
-                  
-                }}
-                >
-                Book a training session
-              </Button>
-            </ThemeProvider>
-            </div>
+            <span style={{fontWeight: '700', fontSize: '24px'}}>{this.state.dateDisplay}</span><hr/>
+              <div className="new-modal-inputs">
+                <div>
+                  {this.state.dailyWorkouts.map((workout)=>(<p>{this.state.exerciseData[workout.exercise]}</p>))}
+                  <ThemeProvider theme={theme}>
+                    <Link to={
+                      {
+                        pathname: "/fitness"
+                      }
+                    }>
+                      <Button variant="contained" 
+                        color="neutral" 
+                        style={{marginBotton: '5%', minWidth: '150px', fontSize: '20px'}}
+                        >
+                        Assigned Exercises
+                      </Button>
+                    </Link>
+                  </ThemeProvider>
+                </div>
+
+                <div>
+                    {this.state.dailyFood.map((food)=>(<p>{food.food_name}: {food.count}</p>))}
+                    <ThemeProvider theme={theme}>
+                  <Link to={
+                    {
+                      pathname: "/nutrition"
+                    }
+                  }>
+                  <Button variant="contained" 
+                    color="neutral" 
+                    style={{marginBotton: '5%', minWidth: '150px', fontSize: '20px'}}
+                    
+                    >
+                    Logged Food Intake
+                  </Button>
+                  </Link>
+                </ThemeProvider>
+                </div>
+
+                <div>
+                  <ThemeProvider theme={theme}>
+                    <Button variant="contained" 
+                      color="neutral" 
+                      style={{marginBotton: '5%', minWidth: '150px', fontSize: '20px'}}
+                      onClick={async()=>{
+                        this.handleCloseSummary();
+                        this.handleOpen();
+                        
+                      }}
+                      >
+                      Book a training session
+                    </Button>
+                  </ThemeProvider>
+                </div>
+              </div>
             </div>
           </Box>
         </Modal>
