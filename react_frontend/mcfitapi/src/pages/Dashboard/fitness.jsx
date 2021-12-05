@@ -148,10 +148,16 @@ export default function Fitness() {
                                     <span style={{position: 'absolute', marginLeft: '25%'}}>{exercise.sets}</span>
                                     <span style={{position: 'absolute', marginLeft: '35%'}}>{exercise.rest}</span>
                                     <ThemeProvider theme={theme}>
-                                    <Button className="workout-button" variant="contained" color="neutral" style={{width: '150px'}}>
-                                        View
-                                    </Button>
-                                </ThemeProvider>
+                                        <Link to = {
+                                            {
+                                                pathname: "/fitness/exercise",
+                                                clientProp: exercise.exercise
+                                            }}>    
+                                            <Button className="workout-button" variant="contained" color="neutral" style={{width: '150px'}}>
+                                                View
+                                            </Button>
+                                        </Link>
+                                    </ThemeProvider>
                                 </div>]
                         }
                     })}
