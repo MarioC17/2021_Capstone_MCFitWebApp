@@ -25,6 +25,9 @@ const theme = createTheme({
   });
 
   export default function Fitness(props) {
+    const print = () => {
+        window.print()
+    }
     const [workoutDesc, setworkoutDesc] = useState([]);
     const getWorkoutDesc = async () => {
         let workout = props.location.clientProp
@@ -89,7 +92,7 @@ const theme = createTheme({
             <div className='exercise-description'>
                 <div className='exercise-title-card'>
                     <span>{workoutDesc.name}</span>
-                    <PrintIcon style={{fontSize: "35px"}}/>
+                    <PrintIcon style={{fontSize: "35px"}} onClick={e => print(e)}/>
                 </div>
                 <div className="exercise-explanation">
                     <span style={{fontWeight: '700'}}>Targeted area: &nbsp;</span>{workoutDesc.muscle} <br/><br/>
