@@ -34,8 +34,17 @@ const theme = createTheme({
     },
   });
 const cookie = new Cookies()
-export default function Fitness() {
-    const [value, setValue] = React.useState(new Date());
+export default function Fitness(props) {
+    var startDate;
+    if(props.location.selectedDate !== undefined)
+        startDate = new Date(props.location.selectedDate);
+    else
+        startDate = new Date();
+    const [value, setValue] = React.useState(startDate);
+    console.log(value)
+    console.log(props)
+    
+    console.log(value)
     const [stringValue, setStringValue] = React.useState([]);
     const [exerciseNames, setExerciseNames] = useState(new Map());
   

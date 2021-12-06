@@ -73,7 +73,8 @@ constructor(props) {
     workouts: [],
     dailyWorkouts: [],
     exerciseData: [],
-    dailyFood: []
+    dailyFood: [],
+    tomorrow: ""
   }
   this.handleOpen = this.handleOpen.bind(this);
   this.handleClose = this.handleClose.bind(this);
@@ -185,8 +186,13 @@ async handleOpenSummary(eventInfo)
   var nextDate = await new Date(new Date(this.state.date).getTime() + 2*24*60*60*1000); //The nutrition date on the nutrition page and the one in the database don't match.  This fixes it for now.
   var foodYear = nextDate.getFullYear();
   var foodMonth = nextDate.getMonth() + 1;
+  if(foodMonth < 10)
+    foodMonth = "0" + foodMonth
   var foodDay = nextDate.getDate();
+  if(foodDay < 10)
+    foodDay = "0" + foodDay
   var foodDate = `${foodYear}-${foodMonth}-${foodDay}`;
+  console.log(foodDate)
   var cookies = new Cookies();
   var user = cookies.get('user_id')
   var food = await axios.get(`http://localhost:8000/api/nutritions/${user}/${foodDate}`)
@@ -195,7 +201,7 @@ async handleOpenSummary(eventInfo)
   this.state.description = "No description provided"
   await this.setState({dailyFood: food.data});
   await this.setState({openSummary: true});
-
+  await this.setState({tomorrow: foodDate})
 }
 
 handleCloseSummary()
@@ -396,11 +402,12 @@ handleCloseSummary()
             <span style={{fontWeight: '700', fontSize: '24px'}}>{this.state.dateDisplay}</span><hr/>
               <div className="new-modal-inputs">
                 <div>
-                  {this.state.dailyWorkouts.map((workout)=>(<p>{this.state.exerciseData[workout.exercise]}</p>))}
+                  
                   <ThemeProvider theme={theme}>
                     <Link to={
                       {
-                        pathname: "/fitness"
+                        pathname: "/fitness",
+                        selectedDate: this.state.tomorrow
                       }
                     }>
                       <Button variant="contained" 
@@ -411,14 +418,16 @@ handleCloseSummary()
                       </Button>
                     </Link>
                   </ThemeProvider>
+                  {this.state.dailyWorkouts.map((workout)=>(<p>{this.state.exerciseData[workout.exercise]}</p>))}
                 </div>
 
                 <div>
-                    {this.state.dailyFood.map((food)=>(<p>{food.food_name}: {food.count}</p>))}
+                    
                     <ThemeProvider theme={theme}>
                   <Link to={
                     {
-                      pathname: "/nutrition"
+                      pathname: "/nutrition",
+                      selectedDate: this.state.tomorrow
                     }
                   }>
                   <Button variant="contained" 
@@ -430,6 +439,7 @@ handleCloseSummary()
                   </Button>
                   </Link>
                 </ThemeProvider>
+                {this.state.dailyFood.map((food)=>(<p>{food.food_name}: {food.count}</p>))}
                 </div>
 
                 <div>
