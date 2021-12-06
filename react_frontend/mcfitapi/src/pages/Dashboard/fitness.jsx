@@ -41,10 +41,6 @@ export default function Fitness(props) {
     else
         startDate = new Date();
     const [value, setValue] = React.useState(startDate);
-    console.log(value)
-    console.log(props)
-    
-    console.log(value)
     const [stringValue, setStringValue] = React.useState([]);
     const [exerciseNames, setExerciseNames] = useState(new Map());
   
