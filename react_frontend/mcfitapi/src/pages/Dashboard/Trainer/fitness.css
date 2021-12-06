@@ -25,7 +25,7 @@
     letter-spacing: 0;
     line-height: 80px;}
   
-  .assign { grid-area: assign;
+  .assign { grid-area: assign; 
     }
 
   .profile { grid-area: profile;

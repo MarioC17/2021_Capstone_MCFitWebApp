@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-import { Button } from '@mui/material';
+import { Button, IconButton } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ExerciseSearchBar from '../../../components/exerciseBar';
 import { Box, Modal, Typography, TextField } from '@mui/material/';
@@ -11,6 +11,10 @@ import CheckIcon from '@mui/icons-material/Check';
 import axios from 'axios'
 import Cookies from 'universal-cookie';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import { styled } from '@mui/material/styles';
+import StickyNote2Icon from '@mui/icons-material/StickyNote2';
+
 //Stylesheet
 import './entry.css';
 import EditableExerciseCard from '../../../components/editWorkout';
@@ -187,7 +191,17 @@ const handleUnassignClick = async (event,workout) => {
       useEffect(async () => {
           await getWorkoutData();
       }, []);  
-
+      
+      const NoteTooltip = styled(({ className, ...props }) => (
+        <Tooltip {...props} classes={{ popper: className }} />
+        ))(({ theme }) => ({
+        [`& .${tooltipClasses.tooltip}`]: {
+            backgroundColor: theme.palette.common.white,
+            color: 'rgba(0, 0, 0, 0.87)',
+            boxShadow: theme.shadows[1],
+            fontSize: 11,
+        },
+        }));
     return (
         <div>
         <div className="macro-title">Assign Exercises</div>
@@ -242,9 +256,11 @@ const handleUnassignClick = async (event,workout) => {
 
                 <div className="workout-container">
                     <div>
-                        <span style={{position: 'absolute', marginLeft: '16%', fontWeight: '700'}}>Reps</span>
+                        <span style={{position: 'absolute', marginLeft: '20%', fontWeight: '700'}}>Reps</span>
                         <span style={{position: 'absolute', marginLeft: '26%', fontWeight: '700'}}>Sets</span>
-                        <span style={{position: 'absolute', marginLeft: '36%', fontWeight: '700'}}>Rests</span>
+                        <span style={{position: 'absolute', marginLeft: '32%', fontWeight: '700'}}>Load</span>
+                        <span style={{position: 'absolute', marginLeft: '38%', fontWeight: '700'}}>RIR</span>
+                        <span style={{position: 'absolute', marginLeft: '44%', fontWeight: '700'}}>Rests</span>
                     </div>
                     {workouts.map((exercise) => {
                         if (exercise.date === selectedDate.toISOString().split('T')[0]) {  
@@ -254,9 +270,13 @@ const handleUnassignClick = async (event,workout) => {
                                       deleteExercise === exercise.workout_id ? null : (
                                         <div className="workout-card">
                                         <span className='workout-content'>{exerciseNames[exercise.exercise]}</span>
-                                        <span style={{position: 'absolute', marginLeft: '15.5%', fontSize: '24px'}}>{exercise.reps}</span>
+                                        <span style={{position: 'absolute', marginLeft: '19.5%', fontSize: '24px'}}>{exercise.reps}</span>
                                         <span style={{position: 'absolute', marginLeft: '25.5%', fontSize: '24px'}}>{exercise.sets}</span>
-                                        <span style={{position: 'absolute', marginLeft: '35.5%', fontSize: '24px'}}>{exercise.rest}</span>
+                                        <span style={{position: 'absolute', marginLeft: '31.5%', fontSize: '24px'}}>{exercise.load}</span>
+                                        <span style={{position: 'absolute', marginLeft: '37.5%', fontSize: '24px'}}>{exercise.rir}</span>
+                                        <span style={{position: 'absolute', marginLeft: '43.5%', fontSize: '24px'}}>{exercise.rest}</span>
+                                        <span style={{position: 'absolute', marginLeft: '47.5%', fontSize: '24px'}}><NoteTooltip title={exercise.notes}>
+                                        <IconButton><StickyNote2Icon/></IconButton></NoteTooltip></span>
     
                                         <ThemeProvider theme={theme}>
                                             <span>
