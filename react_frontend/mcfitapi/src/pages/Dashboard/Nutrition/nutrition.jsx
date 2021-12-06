@@ -14,16 +14,19 @@ import { fetchFood } from '../../../actions/fat-secret';
 import './nutrition.css';
 
 const Nutrition = (props) => {
-    const [value, setValue] = React.useState(props.selectedDate);
-
+    const [value, setValue] = React.useState(props.location.selectedDate);
+    if(value === undefined)
+        setValue(props.selectedDate)
+    console.log(value)
+    console.log(props)
     const updateSelectedDate = (value) => {
         setValue(value);
         props.fetchFood(value.toISOString().split("T")[0]);
     }
 
     useEffect(() => {
-        props.fetchFood(props.selectedDate);
-    }, []);
+        props.fetchFood(value);
+    }, [value]);
 
     const BreakFastComponent = () => {
         return props.breakfastData.length > 0 ? (
