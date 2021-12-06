@@ -3,11 +3,14 @@ import { render } from 'react-dom';
 import { Link } from "react-router-dom";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Sidebar from '../../components/Sidebar';
+import StaffSidebar from '../../components/TrainerSidebar';
 import Cookies from 'universal-cookie';
 import PrintIcon from '@mui/icons-material/Print';
 import axios from 'axios';
 //Stylesheet
 import './exercise.css';
+const cookies = new Cookies();
+let is_staff = cookies.get('is_staff');
 
 const cookies = new Cookies()
 
@@ -66,8 +69,7 @@ const theme = createTheme({
     console.log(workoutDesc.video)
     return (
         <>
-        <Sidebar/> 
-        
+        {is_staff == 'true' ? <StaffSidebar/> : <Sidebar/>}
         <div style={{backgroundColor: "#f4f4f4", minHeight: "100vh" }} className="exercise-container">
         
             <div className="exercise-title">

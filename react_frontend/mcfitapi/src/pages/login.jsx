@@ -55,10 +55,12 @@ const Login = () => {
     }).then(response => {
       if (response.data.is_staff) {
         console.log("Is Staff")
+        cookies.set('is_staff', true);
         return history.push("/trainer/clients");
       }
       else {
         console.log("Not Staff")
+        cookies.set('is_staff', false);
         return history.push("/home")
       }
     }).catch(e => {
