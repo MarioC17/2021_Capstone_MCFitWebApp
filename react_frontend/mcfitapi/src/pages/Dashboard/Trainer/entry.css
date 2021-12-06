@@ -120,4 +120,37 @@ text-align: right;}
 margin-top: 20px;}
   
   .meal-stats { grid-area: meal-stats; }
+
+  .entry-container {
+    display: grid;
+    margin-left: 100px; /*REQUIRED WHEN USING SIDEBAR*/
+    font-family: var(--font-family-source_sans_pro);
+    font-weight: 700;
+    padding-left: 30px;
+    padding-right: 30px;
+    grid-template-columns: 1fr 1fr .5fr;
+    grid-template-rows: 0.33fr 0.3fr 0.44fr 3.4fr 0.4fr;
+    grid-auto-columns: 1fr;
+    gap: 0px 50px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "nutrition-title . ."
+      ". . ."
+      "entry-title mini-calendar macro-title"
+      "meal-entry meal-entry progress-breakdown"
+      ". . nutrition-save";
+  }
+  
+  button {
+    display: block;
+    color: white;
+    margin: 5px;
+    padding: 7px 35px;
+    background: black;
+    border: 3px solid black;
+    cursor: pointer;
+    min-width: auto;
+    width: auto;
+    align-content: center;
+  } 
   
