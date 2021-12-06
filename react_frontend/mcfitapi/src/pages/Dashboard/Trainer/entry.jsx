@@ -11,6 +11,11 @@ import CheckIcon from '@mui/icons-material/Check';
 import axios from 'axios'
 import Cookies from 'universal-cookie';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import { styled } from '@mui/material/styles';
+import StickyNote2Icon from '@mui/icons-material/StickyNote2';
+import IconButton from '@mui/material/IconButton';
+
 //Stylesheet
 import './entry.css';
 const cookies = new Cookies() 
@@ -127,6 +132,17 @@ const style = {
       useEffect(async () => {
           await getWorkoutData();
       }, []);  
+
+    const NoteTooltip = styled(({ className, ...props }) => (
+    <Tooltip {...props} classes={{ popper: className }} />
+    ))(({ theme }) => ({
+    [`& .${tooltipClasses.tooltip}`]: {
+        backgroundColor: theme.palette.common.white,
+        color: 'rgba(0, 0, 0, 0.87)',
+        boxShadow: theme.shadows[1],
+        fontSize: 11,
+    },
+    }));
   
     return (
         <div>
@@ -153,7 +169,7 @@ const style = {
                     </div>
                 </div>
                 <ExerciseSearchBar data={exercises} setFormData = {setFormData} formData = {formData} user = {user} reps={reps} sets={sets} rest={rest} rir={rir} load={load} notes={notes}/>
-                        <div style={{textAlign: 'right'}}>
+                <div style={{textAlign: 'right'}}>
                     <ThemeProvider theme={theme}>
                         <Button variant="contained" 
                         color="neutral" 
@@ -182,18 +198,24 @@ const style = {
 
                 <div className="workout-container">
                     <div>
-                        <span style={{position: 'absolute', marginLeft: '16%', fontWeight: '700'}}>Reps</span>
+                        <span style={{position: 'absolute', marginLeft: '20%', fontWeight: '700'}}>Reps</span>
                         <span style={{position: 'absolute', marginLeft: '26%', fontWeight: '700'}}>Sets</span>
-                        <span style={{position: 'absolute', marginLeft: '36%', fontWeight: '700'}}>Rests</span>
+                        <span style={{position: 'absolute', marginLeft: '32%', fontWeight: '700'}}>Load</span>
+                        <span style={{position: 'absolute', marginLeft: '38%', fontWeight: '700'}}>RIR</span>
+                        <span style={{position: 'absolute', marginLeft: '44%', fontWeight: '700'}}>Rests</span>
                     </div>
                     {workouts.map((exercise) => {
                         if (exercise.date === selectedDate.toISOString().split('T')[0]) {  
                             return [
                                 <div className="workout-card">
                                     <span className='workout-content'>{exerciseNames[exercise.exercise]}</span>
-                                    <span style={{position: 'absolute', marginLeft: '15.5%', fontSize: '24px'}}>{exercise.reps}</span>
+                                    <span style={{position: 'absolute', marginLeft: '19.5%', fontSize: '24px'}}>{exercise.reps}</span>
                                     <span style={{position: 'absolute', marginLeft: '25.5%', fontSize: '24px'}}>{exercise.sets}</span>
-                                    <span style={{position: 'absolute', marginLeft: '35.5%', fontSize: '24px'}}>{exercise.rest}</span>
+                                    <span style={{position: 'absolute', marginLeft: '31.5%', fontSize: '24px'}}>{exercise.load}</span>
+                                    <span style={{position: 'absolute', marginLeft: '37.5%', fontSize: '24px'}}>{exercise.rir}</span>
+                                    <span style={{position: 'absolute', marginLeft: '43.5%', fontSize: '24px'}}>{exercise.rest}</span>
+                                    <span style={{position: 'absolute', marginLeft: '47.5%', fontSize: '24px'}}><NoteTooltip title={exercise.notes}>
+                                        <IconButton><StickyNote2Icon/></IconButton></NoteTooltip></span>
                                     <ThemeProvider theme={theme}>
                                         <Link to = {
                                             {

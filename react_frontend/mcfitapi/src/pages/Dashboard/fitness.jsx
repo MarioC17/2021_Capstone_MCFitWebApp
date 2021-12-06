@@ -11,6 +11,9 @@ import DatePicker from '@mui/lab/DesktopDatePicker';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import TextField from '@mui/material/TextField';
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import { styled } from '@mui/material/styles';
+import StickyNote2Icon from '@mui/icons-material/StickyNote2';
 
 //Stylesheet
 import './fitness.css';
@@ -90,6 +93,17 @@ export default function Fitness(props) {
 
     //The list of workouts for a given user is stored in an array of workouts sorted by date
 
+    const NoteTooltip = styled(({ className, ...props }) => (
+        <Tooltip {...props} classes={{ popper: className }} />
+        ))(({ theme }) => ({
+        [`& .${tooltipClasses.tooltip}`]: {
+            backgroundColor: theme.palette.common.white,
+            color: 'rgba(0, 0, 0, 0.87)',
+            boxShadow: theme.shadows[1],
+            fontSize: 11,
+        },
+        }));
+
     return (
         <>
         <Sidebar/> 
@@ -140,18 +154,24 @@ export default function Fitness(props) {
                 </span><br/><br/>
                 <div className="workout-container">
                     <div>
-                        <span style={{position: 'absolute', marginLeft: '16%', fontWeight: '700'}}>Reps</span>
+                        <span style={{position: 'absolute', marginLeft: '20%', fontWeight: '700'}}>Reps</span>
                         <span style={{position: 'absolute', marginLeft: '26%', fontWeight: '700'}}>Sets</span>
-                        <span style={{position: 'absolute', marginLeft: '36%', fontWeight: '700'}}>Rests</span>
+                        <span style={{position: 'absolute', marginLeft: '32%', fontWeight: '700'}}>Load</span>
+                        <span style={{position: 'absolute', marginLeft: '38%', fontWeight: '700'}}>RIR</span>
+                        <span style={{position: 'absolute', marginLeft: '44%', fontWeight: '700'}}>Rests</span>
                     </div>
                     {workouts.map((exercise) => {
                         if (exercise.date === `${value.getFullYear()}-${('0'+(value.getMonth()+1)).slice(-2)}-${('0'+value.getDate()).slice(-2)}`) {
                             return [
                                 <div className="workout-card">
                                     <span className='workout-content'>{exerciseNames[exercise.exercise]}</span>
-                                    <span style={{position: 'absolute', marginLeft: '15.5%', fontSize: '24px'}}>{exercise.reps}</span>
+                                    <span style={{position: 'absolute', marginLeft: '19.5%', fontSize: '24px'}}>{exercise.reps}</span>
                                     <span style={{position: 'absolute', marginLeft: '25.5%', fontSize: '24px'}}>{exercise.sets}</span>
-                                    <span style={{position: 'absolute', marginLeft: '35.5%', fontSize: '24px'}}>{exercise.rest}</span>
+                                    <span style={{position: 'absolute', marginLeft: '31.5%', fontSize: '24px'}}>{exercise.load}</span>
+                                    <span style={{position: 'absolute', marginLeft: '37.5%', fontSize: '24px'}}>{exercise.rir}</span>
+                                    <span style={{position: 'absolute', marginLeft: '43.5%', fontSize: '24px'}}>{exercise.rest}</span>
+                                    <span style={{position: 'absolute', marginLeft: '47.5%', fontSize: '24px'}}><NoteTooltip title={exercise.notes}>
+                                        <IconButton><StickyNote2Icon/></IconButton></NoteTooltip></span>
                                     <ThemeProvider theme={theme}>
                                         <Link to = {
                                             {
