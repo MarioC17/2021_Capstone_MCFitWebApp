@@ -1,11 +1,13 @@
 import React, { Component, useState,useEffect} from 'react'
 import ExerciseSearch from './ExerciseSearch';
 import Input from '@mui/material/Input';
+import TextField from '@mui/material/TextField';
 
   const ExerciseSearchBar = (props) => {
     const onChange = e => props.setFormData({...props.formData,[e.target.name]: e.target.value});
       //have to change the class names to make css for this
         return (
+          <>
           <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginRight: '2%'}}>
             <ExerciseSearch  formData= {props.formData} data = {props.data} setFormData={props.setFormData} />
               <Input
@@ -61,18 +63,24 @@ import Input from '@mui/material/Input';
                 aria-describedby="filled-weight-helper-text"
 
               />
-
-              <Input
-                id="notes"
-                name="notes"
-                placeholder = "Notes"
-                sx={{ m: 1, width: '10ch' }}
-                value={props.notes}
-                onChange={e => onChange(e)}
-                aria-describedby="filled-weight-helper-text"
-
-              />
           </div>
+          <div style={{textAlign: 'right', zIndex: -1}}>
+            <Input
+            style={{width: '58%', marginRight: '2%', marginTop: '2%'}}
+            id="notes"
+            name="notes"
+            label="notes"
+            placeholder = "notes"
+            multiline
+            rows={4}
+            defaultValue=""
+            value={props.notes}
+            onChange={e => onChange(e)}
+            aria-describedby="filled-weight-helper-text"
+          />
+          </div>
+          
+          </>
         )
     }
 
