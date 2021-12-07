@@ -12,8 +12,6 @@ import './exercise.css';
 const cookies = new Cookies();
 let is_staff = cookies.get('is_staff');
 
-const cookies = new Cookies()
-
 const theme = createTheme({
     palette: {
       neutral: {
