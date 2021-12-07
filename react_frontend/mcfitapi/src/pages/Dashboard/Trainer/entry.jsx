@@ -131,8 +131,8 @@ const handleUnassignClick = async (event,workout) => {
         }
 
     const onDateChange = e => {
-        setFormData({...formData,['date']: e.toISOString().split('T')[0]});
-        handleDateChange(e)
+        setFormData({...formData,['date']: e.getFullYear()+'-'+('0'+(e.getMonth()+1)).slice(-2)+'-'+('0'+(e.getDate()))});
+        handleDateChange(e);
     }
 
     const getexerciseData = async () => {
@@ -153,7 +153,7 @@ const handleUnassignClick = async (event,workout) => {
 
     useEffect(() => {
         getexerciseData();
-        setFormData({...formData,['date']: selectedDate.toISOString().split('T')[0]});
+        setFormData({...formData,['date']: selectedDate.getFullYear()+'-'+('0'+(selectedDate.getMonth()+1)).slice(-2)+'-'+('0'+(selectedDate.getDate()))});
     }, []);  
 
     const theme = createTheme({
@@ -263,7 +263,7 @@ const handleUnassignClick = async (event,workout) => {
                         <span style={{position: 'absolute', marginLeft: '44%', fontWeight: '700'}}>Rests</span>
                     </div>
                     {workouts.map((exercise) => {
-                        if (exercise.date === selectedDate.toISOString().split('T')[0]) {  
+                        if (exercise.date === selectedDate.getFullYear()+'-'+('0'+(selectedDate.getMonth()+1)).slice(-2)+'-'+('0'+(selectedDate.getDate()))) {  
                             return [
                                 <Fragment>
                                   {editExercise === exercise.workout_id ? <EditableExerciseCard exerciseNames={exerciseNames} exercise={exercise}/> : (

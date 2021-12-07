@@ -55,10 +55,12 @@ const Login = () => {
     }).then(response => {
       if (response.data.is_staff) {
         console.log("Is Staff")
+        cookies.set('is_staff', true);
         return history.push("/trainer/clients");
       }
       else {
         console.log("Not Staff")
+        cookies.set('is_staff', false);
         return history.push("/home")
       }
     }).catch(e => {
@@ -74,7 +76,7 @@ const Login = () => {
     }).then(response => {
       console.log("PROFILE FOUND");
       console.log(response);
-      
+      cookies.set('fitness_goal', response.data.fitness_goal);
       return checkStaff(user_id)
     }).catch(e => {
       console.log("PROFILE NOT FOUND");
