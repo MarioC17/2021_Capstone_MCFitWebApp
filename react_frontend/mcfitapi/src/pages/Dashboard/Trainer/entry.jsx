@@ -264,7 +264,9 @@ const handleUnassignClick = async (event,workout) => {
                         <span style={{position: 'absolute', marginLeft: '44%', fontWeight: '700'}}>Rests</span>
                     </div>
                     {workouts.map((exercise) => {
-                        if (exercise.date === selectedDate.getFullYear()+'-'+('0'+(selectedDate.getMonth()+1)).slice(-2)+'-'+('0'+(selectedDate.getDate()))) {  
+                        console.log(exercise.date)                        
+                        console.log(selectedDate.getFullYear()+'-'+('0'+(selectedDate.getMonth()+1)).slice(-2)+'-'+('0'+(selectedDate.getDate())).slice(-2));
+                        if (exercise.date === selectedDate.getFullYear()+'-'+('0'+(selectedDate.getMonth()+1)).slice(-2)+'-'+('0'+(selectedDate.getDate())).slice(-2)) {  
                             return [
                                 <Fragment>
                                   {editExercise === exercise.workout_id ? <EditableExerciseCard exerciseNames={exerciseNames} exercise={exercise}/> : (
