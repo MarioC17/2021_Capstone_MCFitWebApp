@@ -32,7 +32,7 @@ const theme = createTheme({
     const [workoutDesc, setworkoutDesc] = useState([]);
     const getWorkoutDesc = async () => {
         let workout = props.location.clientProp
-        if (workout === undefined || workout === null) {
+        if (workout === undefined || workout === null || workout === "") {
             workout = cookies.get("workout_desc_id")
         }
         else{
@@ -61,10 +61,11 @@ const theme = createTheme({
         }
     }
 
+
     useEffect(async () => {
         await getWorkoutDesc();
     }, []);  
-    console.log(workoutDesc.video)
+
     return (
         <>
         {is_staff == 'true' ? <StaffSidebar/> : <Sidebar/>}
@@ -97,7 +98,9 @@ const theme = createTheme({
                 <div className="exercise-explanation">
                     <span style={{fontWeight: '700'}}>Targeted area: &nbsp;</span>{workoutDesc.muscle} <br/><br/>
                     <span style={{fontWeight: '700'}}>How to do this exercise: &nbsp;</span>
-                    {workoutDesc.instructions} <br/><br/>
+                    
+                    {workoutDesc.instructions === "" || workoutDesc.instructions === undefined ? null : (
+                    workoutDesc.instructions.replace(/\\n/g, '').replace(/(?:\\(.))/g, '') )} <br/><br/>
                 </div>
             </div>
             
