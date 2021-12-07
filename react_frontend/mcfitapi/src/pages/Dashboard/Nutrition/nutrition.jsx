@@ -9,9 +9,13 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 import { connect } from "react-redux";
 import { fetchFood } from '../../../actions/fat-secret'; 
+import Cookies from 'universal-cookie';
 
 //Stylesheet
 import './nutrition.css';
+const cookies = new Cookies();
+
+let fGoal = cookies.get('fitness_goal');
 
 const Nutrition = (props) => {
     const [value, setValue] = React.useState(props.location.selectedDate);
@@ -248,8 +252,7 @@ const Nutrition = (props) => {
             <div className="overall-breakdown">
                 <div className="overall-progress-card">
                     <span className='sub-title'>Goals</span><br/><br/>
-                    {/* change value */}
-                    Weightloss, Strength, Toning
+                    {fGoal}
                 </div>
                 <div className="overall-progress-card">
                     <span className='sub-title'>Weight</span><br/><br/>

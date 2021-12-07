@@ -6,11 +6,10 @@ import { IconButton } from '@mui/material/';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Cookies from 'universal-cookie';
 
-
-
 function home() {
     let cookies = new Cookies();
     let fName = cookies.get('first_name');
+    let fGoal = cookies.get('fitness_goal');
 
     let monthNumber = (new Date().getMonth()+1);
     let monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -82,6 +81,7 @@ function home() {
                     </div>
                     <div className='home-card'>
                         <span style={{fontWeight: '700'}}>FITNESS GOALS</span><br/>
+                        {fGoal}
                     </div>
                     <div className='home-card'>
                         <span style={{fontWeight: '700'}}>UPCOMING APPOINTMENTS</span><br/>
