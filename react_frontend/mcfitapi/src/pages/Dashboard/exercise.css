@@ -28,6 +28,10 @@
     line-height: 80px;}
   
   .exercise-video { grid-area: exercise-video; 
+    width:500px;
+    margin:50px ;
+    float:right;
+    top:-40px;
     }
   
   .exercise-description {
