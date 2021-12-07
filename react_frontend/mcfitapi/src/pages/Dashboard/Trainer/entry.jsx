@@ -34,6 +34,7 @@ const style = {
   export default function Entry(props) {
     const [editExercise, setEditExercise] = useState(0);
     const [deleteExercise,setDeleteExercise] = useState(null)
+    const [comparisonDate,setComparisonDate] = useState(new Date())
     //   console.log(`${props.date.getFullYear()}-${('0'+(props.date.getMonth()+1)).slice(-2)}-${('0'+props.date.getDate()).slice(-2)}`);
 
     const addNewWorkout = async (formData) => {
@@ -131,7 +132,7 @@ const handleUnassignClick = async (event,workout) => {
         }
 
     const onDateChange = e => {
-        setFormData({...formData,['date']: e.getFullYear()+'-'+('0'+(e.getMonth()+1)).slice(-2)+'-'+('0'+(e.getDate()))});
+        setFormData({...formData,['date']: e.getFullYear()+'-'+((e.getMonth()+1))+'-'+((e.getDate()))});
         handleDateChange(e);
     }
 
@@ -153,7 +154,7 @@ const handleUnassignClick = async (event,workout) => {
 
     useEffect(() => {
         getexerciseData();
-        setFormData({...formData,['date']: selectedDate.getFullYear()+'-'+('0'+(selectedDate.getMonth()+1)).slice(-2)+'-'+('0'+(selectedDate.getDate()))});
+        setFormData({...formData,['date']: selectedDate.getFullYear()+'-'+((selectedDate.getMonth()+1))+'-'+((selectedDate.getDate()))});
     }, []);  
 
     const theme = createTheme({
