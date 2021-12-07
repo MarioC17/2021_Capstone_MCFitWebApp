@@ -76,7 +76,7 @@ const Login = () => {
     }).then(response => {
       console.log("PROFILE FOUND");
       console.log(response);
-      
+      cookies.set('fitness_goal', response.data.fitness_goal);
       return checkStaff(user_id)
     }).catch(e => {
       console.log("PROFILE NOT FOUND");

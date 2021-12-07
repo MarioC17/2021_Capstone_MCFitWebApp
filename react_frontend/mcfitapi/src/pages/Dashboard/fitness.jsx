@@ -37,6 +37,8 @@ const theme = createTheme({
     },
   });
 const cookie = new Cookies()
+let fGoal = cookie.get('fitness_goal');
+
 export default function Fitness(props) {
     var startDate;
     if(props.location.selectedDate !== undefined)
@@ -116,7 +118,8 @@ export default function Fitness(props) {
                 <div className="analytic-container">
                     <div className="analytic-card" >
                         <span className="analytic-title">Goals</span>
-                        <span className="analytic-content">Weightloss</span>
+                        
+                        <span className="analytic-content">{fGoal}</span>
                     </div>
                     <div className="analytic-card" >
                         <span className="analytic-title">Weight</span>
