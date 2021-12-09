@@ -1,8 +1,8 @@
 import React from "react";
-import "../App.css";
-import { SidebarData } from './SidebarData';
 import { useHistory } from 'react-router-dom';
 import Cookies from 'universal-cookie';
+import "../App.css";
+import { SidebarData } from './SidebarData';
 
 const Sidebar = () => {
   const history = useHistory();

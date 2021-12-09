@@ -1,10 +1,7 @@
-import React from 'react'
 import FullCalendar from '@fullcalendar/react' // must go before plugins
-import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import timeGridPlugin from '@fullcalendar/timegrid'
-import { generateSagendaToken } from '../components/booking'
-import { getBookableTimes } from '../components/booking'
-import { bookEvent } from '../components/booking'
+import React from 'react'
+import { bookEvent, getBookableTimes } from '../components/booking'
 
 var myToken;
     

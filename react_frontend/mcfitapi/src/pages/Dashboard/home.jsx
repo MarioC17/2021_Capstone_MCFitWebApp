@@ -1,10 +1,10 @@
-import React from 'react'
-import Sidebar from '../../components/Sidebar';
-import './home.css'
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { IconButton } from '@mui/material/';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { IconButton } from '@mui/material/';
+import { createTheme } from '@mui/material/styles';
+import React from 'react';
 import Cookies from 'universal-cookie';
+import Sidebar from '../../components/Sidebar';
+import './home.css';
 
 function home() {
     let cookies = new Cookies();

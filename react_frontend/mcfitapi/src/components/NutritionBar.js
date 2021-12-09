@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { styled, alpha } from "@mui/material/styles";
-import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
-import TextField from "@mui/material/TextField";
 import FilledInput from "@mui/material/FilledInput";
 import InputAdornment from "@mui/material/InputAdornment";
+import InputBase from "@mui/material/InputBase";
+import { alpha, styled } from "@mui/material/styles";
+import TextField from "@mui/material/TextField";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { foodSearch } from "../actions/fat-secret";
-
 //Stylesheet
 import "./NutritionBar.css";
+
 
 //Search const is modified template from MUI
 const Search = styled("div")(({ theme }) => ({

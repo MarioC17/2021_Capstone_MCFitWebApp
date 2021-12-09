@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
-import './signup.css'
-import { Link } from "react-router-dom";
 import { Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 //Components
-import Header from '../../components/HeaderW'
+import Header from '../../components/HeaderW';
+import './signup.css';
 
 const theme = createTheme({
     palette: {

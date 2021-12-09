@@ -1,16 +1,15 @@
-import { Button } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import React, { Fragment, useEffect, useState } from 'react';
-import GoogleLogin from 'react-google-login';
-import { Link, Redirect, useHistory } from 'react-router-dom';
+import { createTheme } from '@mui/material/styles';
 import axios from 'axios';
-import Cookies from 'universal-cookie'
-
+import React, { useState } from 'react';
+import GoogleLogin from 'react-google-login';
+import { useHistory } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 //Components
 import Header from '../components/Header';
+import googleLogin from "../services/googleLogin";
 //style
 import "./login.css";
-import googleLogin from "../services/googleLogin";
+
 
 const theme = createTheme({
   palette: {

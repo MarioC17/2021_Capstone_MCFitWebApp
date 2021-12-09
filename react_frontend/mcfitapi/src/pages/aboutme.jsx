@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
+import Footer from '../components/FooterW'
 //Components
 import Header from '../components/HeaderW'
-import Footer from '../components/FooterW'
 import img from "../static/img/mikebw@1x.png"
 import sig from "../static/img/signature.png"
 //Style sheet

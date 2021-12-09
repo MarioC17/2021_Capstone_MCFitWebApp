@@ -1,9 +1,6 @@
 import {
-    LOGIN_SUCCESS,
-    LOGIN_FAIL,
-    USER_LOADED_SUCCESS,
-    USER_LOADED_FAIL
-    } from '../actions/types'
+    LOGIN_FAIL, LOGIN_SUCCESS, USER_LOADED_FAIL, USER_LOADED_SUCCESS
+} from '../actions/types';
 
     const initialState = {
         access: localStorage.getItem('access'),

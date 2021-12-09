@@ -1,12 +1,10 @@
-import React, { Component, useState, useEffect, Fragment} from 'react';
-import { render } from 'react-dom';
-import { Link } from "react-router-dom";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import PrintIcon from '@mui/icons-material/Print';
+import { createTheme } from '@mui/material/styles';
+import axios from 'axios';
+import React, { Fragment, useEffect, useState } from 'react';
+import Cookies from 'universal-cookie';
 import Sidebar from '../../components/Sidebar';
 import StaffSidebar from '../../components/TrainerSidebar';
-import Cookies from 'universal-cookie';
-import PrintIcon from '@mui/icons-material/Print';
-import axios from 'axios';
 //Stylesheet
 import './exercise.css';
 const cookies = new Cookies();

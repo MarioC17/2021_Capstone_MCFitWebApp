@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useHistory } from "react-router-dom";
+import CheckIcon from '@mui/icons-material/Check';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import DatePicker from '@mui/lab/DatePicker';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { Button } from '@mui/material';
+import { Box, Modal, TextField, Typography } from '@mui/material/';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { useHistory } from "react-router-dom";
+import { fetchFood, foodSave, load_token, updateBreakfast, updateDinnerData, updateLunchData, updateMacroNutrients, updateSnackData } from '../../../actions/fat-secret';
 import NutritionBar from '../../../components/NutritionBar';
 import Sidebar from '../../../components/Sidebar';
-import { Box, Modal, Typography, TextField } from '@mui/material/';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DatePicker from '@mui/lab/DatePicker';
-import CheckIcon from '@mui/icons-material/Check';
-import { connect } from 'react-redux';
-import { load_token, foodSave, fetchFood, updateBreakfast, updateSnackData, updateLunchData, updateDinnerData, updateMacroNutrients } from '../../../actions/fat-secret'; 
 //Stylesheet
 import './entry.css';
 

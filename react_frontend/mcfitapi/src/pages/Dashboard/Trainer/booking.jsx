@@ -1,18 +1,18 @@
-import React from 'react'
-import FullCalendar from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
-import timeGridPlugin from '@fullcalendar/timegrid'
-import listPlugin from '@fullcalendar/list'
-import { Button, Modal, Box, Typography, Select, MenuItem, TextField } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { getBookableTimes, bookEvent, getBookings, cancelBooking, getBookingsByUser, blockTimeSlot } from '../../../components/booking'
-import Sidebar from '../../../components/TrainerSidebar';
-import Sagenda from '../../../static/img/sagenda.png';
-import MiniCalendar from '../../../components/MiniCalendar';
-import './booking.css'
 import interactionPlugin from '@fullcalendar/interaction'
-import { AccessTimeFilled, Description, Event, LocationOn, Person } from '@mui/icons-material/';
-import axios from "axios";
+import listPlugin from '@fullcalendar/list'
+import FullCalendar from '@fullcalendar/react' // must go before plugins
+import timeGridPlugin from '@fullcalendar/timegrid'
+import { AccessTimeFilled, Description, LocationOn, Person } from '@mui/icons-material/'
+import { Box, Button, MenuItem, Modal, Select, TextField } from '@mui/material'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+import axios from "axios"
+import React from 'react'
+import { blockTimeSlot, bookEvent, cancelBooking, getBookableTimes, getBookings } from '../../../components/booking'
+import MiniCalendar from '../../../components/MiniCalendar'
+import Sidebar from '../../../components/TrainerSidebar'
+import Sagenda from '../../../static/img/sagenda.png'
+import './booking.css'
 var myToken;
     
 const theme = createTheme({

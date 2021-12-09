@@ -1,12 +1,11 @@
-import React, { Component } from 'react'
-import './signup.css'
-import { Link } from "react-router-dom";
 import { Button } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import React from 'react';
 //Components
-import Header from '../../components/HeaderW'
+import Header from '../../components/HeaderW';
+import './signup.css';
 
 const theme = createTheme({
     palette: {

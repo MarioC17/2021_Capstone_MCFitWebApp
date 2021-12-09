@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
-import Header from '../components/Header'
-
+import React, { Component } from 'react';
+import Header from '../components/Header';
+import "../globals.css";
 import Arrow from "../static/img/icon-awesome-arrow-alt-circle-right-1@1x.png";
-import "./memberships.css"
-import "../globals.css"
-import "../styleguide.css"
+import "../styleguide.css";
+import "./memberships.css";
+
 
 export class memberships extends Component {
   render() {

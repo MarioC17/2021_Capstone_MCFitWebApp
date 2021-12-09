@@ -1,18 +1,18 @@
-import React, { Component, useState, useEffect} from 'react'
-import { Link } from "react-router-dom";
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import DatePicker from '@mui/lab/DatePicker';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Sidebar from '../../../components/Sidebar';
 import TextField from '@mui/material/TextField';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DatePicker from '@mui/lab/DatePicker';
+import React, { useEffect } from 'react';
 import { connect } from "react-redux";
-import { fetchFood } from '../../../actions/fat-secret'; 
+import { Link } from "react-router-dom";
 import Cookies from 'universal-cookie';
-
+import { fetchFood } from '../../../actions/fat-secret';
+import Sidebar from '../../../components/Sidebar';
 //Stylesheet
 import './nutrition.css';
+
 const cookies = new Cookies();
 
 let fGoal = cookies.get('fitness_goal');

@@ -1,40 +1,14 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import { createTheme } from '@mui/material/styles';
+import React from 'react';
+import Cookies from 'universal-cookie';
 import Sidebar from '../../../components/TrainerSidebar';
-
 import BlankProfile from '../../../static/img/blankprofile.jpg';
 import Entry from './entry';
-//import { TableHead, TableRow, TableCell, TableSortLabel } from '@material-ui/core/'
-//Stylesheet
 
-/*
-Bug where when page is refreshed the currently selected client disappears 
-*/
 import './fitness.css';
-import Cookies from 'universal-cookie';
-const cookies = new Cookies() 
-const theme = createTheme({
-    palette: {
-      neutral: {
-        main: '#000000',
-        contrastText: '#ffffff',
-      },
-      reverse: {
-        main: '#ffffff',
-        contrastText: '#000000',
-      }
-    },
-  });
 
-const headCells = [
-{ id: 'name', numeric: false, disablePadding: true, label: 'Exercise'},
-{ id: 'reps', numeric: false, disablePadding: false, label: 'Reps' },
-{ id: 'sets', numeric: false, disablePadding: false, label: 'Sets' },
-{ id: 'rest', numeric: false, disablePadding: false, label: 'Rest' },
-{ id: 'RIR', numeric: false, disablePadding: false, label: 'RIR' },
-{ id: 'Load', numeric: false, disablePadding: false, label: 'Load' },
-{ id: 'Notes', numeric: false, disablePadding: false, label: 'Notes' },
-];
+const cookies = new Cookies() 
+
+
 
 export default function Fitness(props) { 
     

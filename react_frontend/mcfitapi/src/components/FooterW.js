@@ -1,15 +1,14 @@
-import React from 'react';
+import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
-import Box from '@material-ui/core/Box';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import { Avatar, Button } from '@mui/material/';
+import React from 'react';
+import socialIconInstagram from "../static/img/instagram.png";
+import socialIconLinkedIn from "../static/img/linkedin.png";
 import img from "../static/img/LogoB.png";
-import socialIconLinkedIn from "../static/img/linkedin.png"
-import socialIconInstagram from "../static/img/instagram.png"
-import { height, width } from '@mui/system';
 
 const useStyles = makeStyles((theme) => ({
 	footer: {

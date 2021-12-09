@@ -1,23 +1,21 @@
+import CheckIcon from '@mui/icons-material/Check';
+import StickyNote2Icon from '@mui/icons-material/StickyNote2';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { Button, IconButton } from '@mui/material';
+import { Box, Modal, TextField, Typography } from '@mui/material/';
+import { createTheme, styled, ThemeProvider } from '@mui/material/styles';
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-import { Button, IconButton } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import ExerciseSearchBar from '../../../components/exerciseBar';
-import { Box, Modal, Typography, TextField } from '@mui/material/';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DatePicker from '@mui/lab/DatePicker';
-import CheckIcon from '@mui/icons-material/Check';
-import axios from 'axios'
 import Cookies from 'universal-cookie';
-import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
-import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
-import { styled } from '@mui/material/styles';
-import StickyNote2Icon from '@mui/icons-material/StickyNote2';
-
+import EditableExerciseCard from '../../../components/editWorkout';
+import ExerciseSearchBar from '../../../components/exerciseBar';
 //Stylesheet
 import './entry.css';
-import EditableExerciseCard from '../../../components/editWorkout';
+
 const cookies = new Cookies() 
 const style = {
     position: 'absolute',
@@ -35,7 +33,7 @@ const style = {
     const [editExercise, setEditExercise] = useState(0);
     const [deleteExercise,setDeleteExercise] = useState(null)
     const [comparisonDate,setComparisonDate] = useState(new Date())
-    //   console.log(`${props.date.getFullYear()}-${('0'+(props.date.getMonth()+1)).slice(-2)}-${('0'+props.date.getDate()).slice(-2)}`);
+
 
     const addNewWorkout = async (formData) => {
         
@@ -49,42 +47,6 @@ const style = {
             console.log(e)
         })
     }
-/*
-    const updateExercise = async (event,row) => {
-        setEditing("1")
-        event.preventDefault()
-        let formField = new FormData()
-        formField.append('name',name)
-        formField.append('muscle',muscle)
-        formField.append('equipment',equipment)
-        formField.append('description',description)
-        formField.append('benefits',benefits)
-        formField.append('instructions',instructions)
-        formField.append('video',video)
-    
-        row.muscle = muscle
-        row.name = name
-        row.equipment = equipment
-        row.description = description
-        row.benefits = benefits
-        row.instructions = instructions
-        row.video = video
-        
-        await axios({
-            method: 'Put',
-            url: `http://localhost:8000/api/exercise/edit/${row.exercise_id}/`,
-            data: formField
-        }).then(response => {
-            console.log(response.data)
-            setEditing(null);
-        })
-    }
-    
-      const handleEditClick = (event,exercise) => {
-    event.preventDefault();
-    setEditExerciseId(exercise.exercise_id)
-  };
-*/
 
 const handleUnassignClick = async (event,workout) => {
     event.preventDefault()
@@ -292,11 +254,6 @@ const handleUnassignClick = async (event,workout) => {
                                                     View
                                                 </Button>
                                             </Link>
-                                                {/*     Edit still in progress. Not ready for demo
-                                                <Button class="button" variant="contained" color="neutral" onClick= {e => onEditClick(e,exercise.exercise)}>
-                                                        Edit
-                                                </Button>
-                                                */}
                                                 <Button class="button" variant="contained" color="neutral" onClick= {e => handleUnassignClick(e,exercise)}>
                                                         Unassign
                                                 </Button>

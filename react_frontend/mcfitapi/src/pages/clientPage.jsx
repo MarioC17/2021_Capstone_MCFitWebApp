@@ -1,12 +1,10 @@
-import React, { Component, useState} from 'react'
-import { Link } from "react-router-dom";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Avatar, Button, IconButton } from '@mui/material/';
+import { createTheme } from '@mui/material/styles';
+import React from 'react';
 import Sidebar from '../components/Sidebar';
-
-
 //Stylesheet
 import './profile.css';
+
+
 
 
 const theme = createTheme({

@@ -1,28 +1,20 @@
-import React, { Component, useState, useEffect} from 'react';
-import { render } from 'react-dom';
-import { Link } from "react-router-dom";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Avatar, Button, IconButton } from '@mui/material/';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import Sidebar from '../../components/Sidebar';
-import axios from 'axios';
-import Cookies from 'universal-cookie';
+import StickyNote2Icon from '@mui/icons-material/StickyNote2';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import DatePicker from '@mui/lab/DesktopDatePicker';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import { Button, IconButton } from '@mui/material/';
+import { createTheme, styled, ThemeProvider } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
-import { styled } from '@mui/material/styles';
-import StickyNote2Icon from '@mui/icons-material/StickyNote2';
-
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
+import Cookies from 'universal-cookie';
+import Sidebar from '../../components/Sidebar';
 //Stylesheet
 import './fitness.css';
-import target from '../../static/img/target.png'
-import scale from '../../static/img/weight-scale.png'
-import running from '../../static/img/running.png'
-import steps from '../../static/img/steps.png'
-import wakeup from '../../static/img/wakeup.png'
-import weights from '../../static/img/weights.png'
+
 
 const theme = createTheme({
     palette: {

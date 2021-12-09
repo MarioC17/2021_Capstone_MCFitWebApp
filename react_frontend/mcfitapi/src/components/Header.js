@@ -1,7 +1,7 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
 import { Box, Button } from '@mui/material';
+import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
+import * as React from 'react';
 import { Link } from "react-router-dom";
 import img from "../static/img/Logo.png";
 import SearchBar from './SearchBar';

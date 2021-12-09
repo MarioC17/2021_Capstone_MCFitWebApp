@@ -1,22 +1,20 @@
-import React, { Component,useState } from "react";
-import './signup.css'
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputAdornment from '@mui/material/InputAdornment';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormControl from '@mui/material/FormControl';
-import { Avatar, Button } from '@mui/material';
-import TextField from '@mui/material/TextField';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
-import { Link } from "react-router-dom";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { Button } from '@mui/material';
 import Box from "@mui/material/Box";
+import FormControl from '@mui/material/FormControl';
+import FormHelperText from '@mui/material/FormHelperText';
+import InputAdornment from '@mui/material/InputAdornment';
 import LinearProgress from "@mui/material/LinearProgress";
-
+import OutlinedInput from '@mui/material/OutlinedInput';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import TextField from '@mui/material/TextField';
+import React, { useState } from "react";
 //Components
-import Header from '../../components/HeaderW'
-import Arrow from "../../static/img/icon-awesome-arrow-alt-circle-right-1@1x.png";
+import Header from '../../components/HeaderW';
+import './signup.css';
+
 
 
 const theme = createTheme({

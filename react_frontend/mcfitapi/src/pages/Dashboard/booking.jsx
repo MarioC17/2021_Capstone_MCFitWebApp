@@ -1,21 +1,19 @@
+import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
+import interactionPlugin from '@fullcalendar/interaction'
+import listPlugin from '@fullcalendar/list'
+import FullCalendar from '@fullcalendar/react' // must go before plugins
+import { AccessTimeFilled, Description, LocationOn } from '@mui/icons-material/'
+import { Box, Button, MenuItem, Modal, Select, TextField } from '@mui/material'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+import axios from 'axios'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import FullCalendar from '@fullcalendar/react' // must go before plugins
-import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
-import timeGridPlugin from '@fullcalendar/timegrid'
-import listPlugin from '@fullcalendar/list'
-import { Button, Modal, Box, Typography, Select, MenuItem, TextField } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { getBookableTimes, bookEvent, getBookings, cancelBooking, getBookingsByUser } from '../../components/booking'
-import Sidebar from '../../components/Sidebar';
-import Sagenda from '../../static/img/sagenda.png';
-import MiniCalendar from '../../components/MiniCalendar';
+import Cookies from 'universal-cookie'
+import { bookEvent, cancelBooking, getBookableTimes, getBookingsByUser } from '../../components/booking'
+import MiniCalendar from '../../components/MiniCalendar'
+import Sidebar from '../../components/Sidebar'
+import Sagenda from '../../static/img/sagenda.png'
 import './booking.css'
-import interactionPlugin from '@fullcalendar/interaction'
-import { AccessTimeFilled, Description, Event, LocationOn } from '@mui/icons-material/';
-import Cookies from 'universal-cookie';
-import axios from 'axios';
-import { fetchFood, getFood } from '../../actions/fat-secret'; 
 
 var myToken;
     
@@ -91,7 +89,7 @@ constructor(props) {
 }
 
 async handleOpen() {
-//  this.state.bookingOptions = ["Test 1","Test 2","Test 3",eventInfo.dateStr];
+
 
   console.log(this.state.date)
   console.log(this.state.bookingOptions)
@@ -99,7 +97,7 @@ async handleOpen() {
 }
 handleClose() {
   this.setState({ open: false})
-  //this.setState({selectedEvent: null})
+
   this.state.description = "No description provided"
 }
 
@@ -178,11 +176,11 @@ async handleOpenSummary(eventInfo)
     if(this.state.workouts[i].date === this.state.date)
     {
       await workoutList.push(this.state.workouts[i])
-      //console.log(this.state.exerciseData[this.state.workouts[i].exercise])
+
     }
   }
   await this.setState({dailyWorkouts: workoutList})
-//  console.log(this.state.dailyWorkouts)
+
   var nextDate = await new Date(new Date(this.state.date).getTime() + 2*24*60*60*1000); //The nutrition date on the nutrition page and the one in the database don't match.  This fixes it for now.
   var foodYear = nextDate.getFullYear();
   var foodMonth = nextDate.getMonth() + 1;

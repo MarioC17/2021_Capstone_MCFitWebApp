@@ -1,7 +1,5 @@
 import { createTheme } from '@mui/material/styles';
 import React, { useState } from "react";
-import axios from 'axios';
-import Cookies from 'universal-cookie'
 //Stylesheet
 import './signup.css';
 import Signup1 from './signup1';

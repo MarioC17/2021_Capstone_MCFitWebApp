@@ -1,16 +1,14 @@
 
 import { Button } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import React, { useState } from "react";
-import { Link, Redirect } from 'react-router-dom';
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
-import axios from 'axios';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import React from "react";
+import Cookies from 'universal-cookie';
 //Components
 import Header from '../../components/HeaderW';
 //Stylesheet
 import './signup.css';
-import Cookies from 'universal-cookie'
 
 const theme = createTheme({
     palette: {

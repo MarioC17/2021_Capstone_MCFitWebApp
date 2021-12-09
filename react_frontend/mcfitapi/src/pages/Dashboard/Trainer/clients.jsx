@@ -1,19 +1,12 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Sidebar from '../../../components/TrainerSidebar';
-import './clients.css'
-import ClientSearch from '../../../components/ClientSearch';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DatePicker from '@mui/lab/DatePicker';
-import { Box, TextField } from '@mui/material/';
-import { FilterList, MoreVert } from '@mui/icons-material/';
-import BlankProfile from '../../../static/img/blankprofile.jpg'
 import { IconButton } from '@material-ui/core';
-import { style } from '@mui/system';
-import axios from "axios";
+import { MoreVert } from '@mui/icons-material/';
+import { Box } from '@mui/material/';
+import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 import Loading from '../../../components/loading';
-import CircularProgress from '@mui/material/CircularProgress';
+import Sidebar from '../../../components/TrainerSidebar';
+import BlankProfile from '../../../static/img/blankprofile.jpg';
+import './clients.css';
 
 
 const Clients = () => {

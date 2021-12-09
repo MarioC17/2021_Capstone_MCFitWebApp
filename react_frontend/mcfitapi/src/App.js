@@ -1,30 +1,30 @@
 import React, { Component } from "react";
+import { Provider } from "react-redux";
 import {
   BrowserRouter as Router,
   Redirect,
   Route,
-  Switch,
+  Switch
 } from "react-router-dom";
 //Pages
 import NotFoundPage from "./pages/404";
-import Login from "./pages/login";
-import Forms from "./pages/forms";
-import Home from "./pages/Dashboard/home";
-import Exercise from "./pages/Dashboard/exercise";
-import Signup from "./pages/Signup/signup";
-import Fitness from "./pages/Dashboard/fitness";
-import TrainerFitness from "./pages/Dashboard/Trainer/fitness";
-import TrainerClients from "./pages/Dashboard/Trainer/clients";
-import Nutrition from "./pages/Dashboard/Nutrition/nutrition";
-import Entry from "./pages/Dashboard/Nutrition/entry";
-import Memberships from "./pages/memberships";
 import AboutMe from "./pages/aboutme";
-import Policy from "./pages/policy";
-import Booking from "./pages/Dashboard/booking";
-import TrainerBooking from "./pages/Dashboard/Trainer/booking";
 import Profile from "./pages/clientPage";
+import Booking from "./pages/Dashboard/booking";
+import Exercise from "./pages/Dashboard/exercise";
+import Fitness from "./pages/Dashboard/fitness";
+import Home from "./pages/Dashboard/home";
+import Entry from "./pages/Dashboard/Nutrition/entry";
+import Nutrition from "./pages/Dashboard/Nutrition/nutrition";
+import TrainerBooking from "./pages/Dashboard/Trainer/booking";
+import TrainerClients from "./pages/Dashboard/Trainer/clients";
+import TrainerFitness from "./pages/Dashboard/Trainer/fitness";
+import Forms from "./pages/forms";
+import Login from "./pages/login";
+import Memberships from "./pages/memberships";
+import Policy from "./pages/policy";
+import Signup from "./pages/Signup/signup";
 import store from "./store";
-import { Provider } from "react-redux";
 
 class App extends Component {
   render() {
