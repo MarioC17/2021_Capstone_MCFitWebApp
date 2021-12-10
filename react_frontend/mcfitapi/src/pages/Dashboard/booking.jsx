@@ -91,15 +91,10 @@ constructor(props) {
 }
 
 async handleOpen() {
-//  this.state.bookingOptions = ["Test 1","Test 2","Test 3",eventInfo.dateStr];
-
-  console.log(this.state.date)
-  console.log(this.state.bookingOptions)
   this.setState({ open: true})
 }
 handleClose() {
   this.setState({ open: false})
-  //this.setState({selectedEvent: null})
   this.state.description = "No description provided"
 }
 
@@ -140,14 +135,14 @@ async getWorkoutData()
         var cookie = new Cookies();
         let user = cookie.get("user_id")
         try {
-        const data = await axios.get(
+          const data = await axios.get(
             `http://127.0.0.1:8000/api/workout/user/${user}/`
-        );
-        console.log(data)
-        return data;
-        } catch (e) {
-        console.log(e);
-        return null;
+          );
+          return data;
+        } 
+        catch (e) {
+          console.log(e);
+          return null;
         }
 }
 
@@ -178,11 +173,9 @@ async handleOpenSummary(eventInfo)
     if(this.state.workouts[i].date === this.state.date)
     {
       await workoutList.push(this.state.workouts[i])
-      //console.log(this.state.exerciseData[this.state.workouts[i].exercise])
     }
   }
   await this.setState({dailyWorkouts: workoutList})
-//  console.log(this.state.dailyWorkouts)
   var nextDate = await new Date(new Date(this.state.date).getTime() + 2*24*60*60*1000); //The nutrition date on the nutrition page and the one in the database don't match.  This fixes it for now.
   var foodYear = nextDate.getFullYear();
   var foodMonth = nextDate.getMonth() + 1;
@@ -270,7 +263,6 @@ handleCloseSummary()
               <div className="book-popup-title">
                   Book Appointment
               </div>
-              {/* add content here curt */}
               <div className="book-popup-date">{this.state.dateDisplay}
               <Select 
                 id="time" 
@@ -302,9 +294,7 @@ handleCloseSummary()
                   if(this.state.selectedEvent != null)
                   {
                     var apiDescription = `${this.state.location}\n${this.state.description}` //API doesn't track location separately, including in description field
-                    console.log(apiDescription)
                     var success = await bookEvent(this.state.selectedEvent,this.state.firstName,this.state.lastName,this.state.email,apiDescription)
-                    console.log(success)
                     if(success)
                     {
                       this.handleClose();
@@ -333,7 +323,7 @@ handleCloseSummary()
           <Box sx={style}>
             <h1>Thank you</h1>
             <p>Your request has been approved.  You will receive a booking confirmation via email.</p>
-            <p>Appointment</p>
+            <p>Appointment:</p>
             <p>{this.state.dateDisplay} {this.state.selectedTime}</p>
           </Box>
         </Modal>
@@ -363,7 +353,6 @@ handleCloseSummary()
               <div className="book-popup-title">
                   Appointment Details
               </div>
-              {/* add content here curt */}
               <div className="book-popup-date">{this.state.dateDisplay} {this.state.selectedTime}
               </div>
               <div className="book-popup-desc">{this.state.description}</div>
@@ -472,13 +461,11 @@ handleCloseSummary()
     var fName = cookies.get('first_name')
     var lName = cookies.get('last_name')
     var userEmail = cookies.get('email')
-    console.log(fName);
     await this.setState({
       email: userEmail,
       firstName: fName,
       lastName: lName
     });
-    console.log(this.state);
     const d = new Date();
     var year = d.getFullYear();
     var month = d.getMonth() + 1;
@@ -500,9 +487,6 @@ handleCloseSummary()
       day = 28; //Handles varying month lengths.  Don't need exactly 3 months, so this should work
       
     var futureDate = `${year}-${month}-${day}`
-    console.log(futureDate)
-    
-    console.log(currentDate)
     var times = await getBookingsByUser(currentDate,futureDate,this.state.firstName,this.state.lastName);
     for(let i = 0;i < times.length;i++)
     {
@@ -520,13 +504,11 @@ handleCloseSummary()
     this.setState({workouts: workoutsAssigned.data})
     var exerciseList = await this.getExerciseData();
     await this.setState({exerciseData: exerciseList});
-    //console.log(this.state.exerciseData);
   }
   
   
   handleEventClick = (clickInfo) => 
   {
-    console.log(clickInfo.event._def.extendedProps.location)
     var dateSplit = clickInfo.event._def.extendedProps.from.substring(0,10).split('-');
     var year = dateSplit[0];
     var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
