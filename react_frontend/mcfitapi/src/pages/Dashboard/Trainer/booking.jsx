@@ -290,7 +290,13 @@ handleCloseEventView()
       </>
     )
   }
-  
+  /*
+  componentDidMount()
+  PURPOSE: Loads in booking data from API after React calendar component renders
+  PARAMS: None
+  RETURNS: None
+  PRE: The calendar components are loaded in, the state had been initialized by the constructor, the user login cookies have been set
+  */
   async componentDidMount()
   {
     const d = new Date();

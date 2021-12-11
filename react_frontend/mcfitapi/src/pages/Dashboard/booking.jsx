@@ -93,6 +93,7 @@ constructor(props) {
 async handleOpen() {
   this.setState({ open: true})
 }
+
 handleClose() {
   this.setState({ open: false})
   this.state.description = "No description provided"
@@ -130,6 +131,13 @@ handleCloseEventView()
   this.setState({openEventView: false});
 }
 
+/*
+getWorkoutData()
+PURPOSE: Gets the workout data for a particular user
+RETURNS: The user's workout data
+PARAMS: None
+PRE: The user_id cookie is set
+*/
 async getWorkoutData()
 {
         var cookie = new Cookies();
@@ -145,7 +153,12 @@ async getWorkoutData()
           return null;
         }
 }
-
+/*
+getExerciseData()
+PURPOSE: Get a list of exercises
+RETURNS: The list of exercises
+PARAMS: None
+*/
 async getExerciseData(){
       try {
         const data = await axios.get(
@@ -161,7 +174,13 @@ async getExerciseData(){
         console.log(e);
       }
     };
-
+/*
+handleOpenSummary()
+PURPOSE: Loads in the exercise/nutrition data for a given user and handles the popup view
+PARAMS: eventInfo: The date clicked by the user
+RETURNS: None
+PRE: The user_id cookie is set
+*/
 async handleOpenSummary(eventInfo)
 
 {
@@ -185,11 +204,9 @@ async handleOpenSummary(eventInfo)
   if(foodDay < 10)
     foodDay = "0" + foodDay
   var foodDate = `${foodYear}-${foodMonth}-${foodDay}`;
-  console.log(foodDate)
   var cookies = new Cookies();
   var user = cookies.get('user_id')
   var food = await axios.get(`http://localhost:8000/api/nutritions/${user}/${foodDate}`)
-  console.log(food)
   this.state.bookingOptions = await getBookableTimes(this.state.date,this.state.date);
   this.state.description = "No description provided"
   await this.setState({dailyFood: food.data});
@@ -454,7 +471,13 @@ handleCloseSummary()
       </>
     )
   }
-  
+  /*
+  componentDidMount()
+  PURPOSE: Loads in booking data from API after React calendar component renders
+  PARAMS: None
+  RETURNS: None
+  PRE: The calendar components are loaded in, the state had been initialized by the constructor, the user login cookies have been set
+  */
   async componentDidMount()
   {
     var cookies = new Cookies();
@@ -493,17 +516,16 @@ handleCloseSummary()
       times[i]['title'] = times[i]['members'][0]['description'].split('\n')[1];
       times[i]['location'] = times[i]['members'][0]['description'].split('\n')[0];
       times[i]['start'] = times[i]['from'].substring(0,times[i]['from'].length-1)+":00";
-      times[i]['end'] = times[i]['to'].substring(0,times[i]['to'].length-1)+":00";
+      times[i]['end'] = times[i]['to'].substring(0,times[i]['to'].length-1)+":00"; //Need time in specific format to allow rendering to happen properly
       times[i]['backgroundColor'] = '#a0a0a0';
       times[i]['borderColor'] = '#888888';
-      times[i]['textColor'] = '#101010' //Placeholders due to CSS issues
+      times[i]['textColor'] = '#101010' //This part has issuess with CSS, so need to set manually
     }
-    this.setState({weekend: true})
     this.setState({events: times})
     var workoutsAssigned = await this.getWorkoutData();
     this.setState({workouts: workoutsAssigned.data})
     var exerciseList = await this.getExerciseData();
-    await this.setState({exerciseData: exerciseList});
+    await this.setState({exerciseData: exerciseList}); //Set exercise data now to allow quicker popup time later
   }
   
   
