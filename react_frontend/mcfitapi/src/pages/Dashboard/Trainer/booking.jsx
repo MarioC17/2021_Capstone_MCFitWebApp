@@ -75,14 +75,10 @@ constructor(props) {
 }
 
 async handleOpen(eventInfo) {
-  console.log(eventInfo)
-//  this.state.bookingOptions = ["Test 1","Test 2","Test 3",eventInfo.dateStr];
   this.state.dateDisplay = eventInfo.date.toString().substring(0,15); //Used for user facing popup
   this.state.date = eventInfo.dateStr //Used for API call, YYYY-MM-DD format
   this.state.bookingOptions = await getBookableTimes(this.state.date,this.state.date);
   this.state.description = "No description provided";
-  console.log(this.state.date)
-  console.log(this.state.bookingOptions)
   this.setState({ open: true})
 }
 handleClose() {
@@ -172,7 +168,6 @@ handleCloseEventView()
               <div className="book-popup-title">
                   Book Appointment
               </div>
-              {/* add content here curt */}
               <div className="book-popup-date">{this.state.dateDisplay}
               <Select 
                 id="time" 
@@ -190,7 +185,6 @@ handleCloseEventView()
                   this.setState({selectedUserEmail: selection.target.value.split(' ')[0]})
                   this.setState({selectedUserFirst: selection.target.value.split(' ')[1]})
                   this.setState({selectedUserLast: selection.target.value.split(' ')[2]})
-                  console.log(selection.target.value)
                 }}>
                 {this.state.clientList.map((user)=>(<MenuItem value={user.selectString}>{user.name}</MenuItem>))}
                 </Select>
@@ -265,7 +259,6 @@ handleCloseEventView()
               <div className="book-popup-title">
                   Appointment Details
               </div>
-              {/* add content here curt */}
               <div className="book-popup-date">{this.state.dateDisplay} {this.state.selectedTime}
               </div>
               <div className="book-popup-desc">{this.state.description}</div>
@@ -297,10 +290,15 @@ handleCloseEventView()
       </>
     )
   }
-  
+  /*
+  componentDidMount()
+  PURPOSE: Loads in booking data from API after React calendar component renders
+  PARAMS: None
+  RETURNS: None
+  PRE: The calendar components are loaded in, the state had been initialized by the constructor, the user login cookies have been set
+  */
   async componentDidMount()
   {
-    console.log(this.state)
     const d = new Date();
     var year = d.getFullYear();
     var month = d.getMonth() + 1;
@@ -325,8 +323,6 @@ handleCloseEventView()
     var times = await getBookings(currentDate,futureDate); //Will select dates automatically later
     for(let i = 0;i < times.length;i++)
     {
-    
-      console.log(times[i])
       times[i]['title'] = times[i]['members'][0]['firstName'] + " " + times[i]['members'][0]['lastName'];
       times[i]['location'] = times[i]['members'][0]['description'].split('\n')[0];
       times[i]['start'] = times[i]['from'].substring(0,times[i]['from'].length-1)+":00";
@@ -337,24 +333,18 @@ handleCloseEventView()
     }
     this.setState({events: times})
     var clients = await axios.get('http://localhost:8000/api/clients')
-    console.log(clients.data[0].extra_data)
-    console.log(JSON.parse(clients.data[0].extra_data))
     var clientsInfo = [];
-    console.log(clients.data.length)
     for(let i = 0;i < clients.data.length;i++)
     {
       var currentClient = JSON.parse(clients.data[i].extra_data)
       currentClient.selectString = `${currentClient.email} ${currentClient.given_name} ${currentClient.family_name}`
-      console.log(currentClient)
       clientsInfo.push(currentClient);
     }
     await this.setState({clientList: clientsInfo});
   }
   
-  
   handleEventClick = (clickInfo) => 
   {
-    console.log(clickInfo.event._def.extendedProps.location)
     var dateSplit = clickInfo.event._def.extendedProps.from.substring(0,10).split('-');
     var year = dateSplit[0];
     var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -371,10 +361,4 @@ handleCloseEventView()
     this.setState({selectedUserLast: clickInfo.event._def.extendedProps.members[0].lastName})
   }
  
-  
-  handleDateSelect = (selectInfo) =>
-  {
-    
-    console.log("Date: " + selectInfo.dateStr)
-  }
 }
