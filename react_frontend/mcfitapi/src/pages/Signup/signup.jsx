@@ -51,7 +51,7 @@ const Signup = () => {
   const {phone_num,address,emergency_contact,fitness_goal,gender,weight,dob,height,physical_activity,diet} = formData;
 
   
-
+  // Switching the step the user is on changes the state of the page. Each step represents a part of the sign up process
   switch(step) {
     case 1:
       return(

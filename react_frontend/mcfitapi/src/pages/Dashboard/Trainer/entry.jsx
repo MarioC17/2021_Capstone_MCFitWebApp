@@ -48,6 +48,12 @@ const style = {
         })
     }
 
+    /*
+    PURPOSE: Unassigns an exercise from a client in both the back end and front end so the user sees the deletion in real time
+    PARAMS: None
+    RETURNS: None
+    PRE: None
+    */
 const handleUnassignClick = async (event,workout) => {
     event.preventDefault()
     setDeleteExercise(workout.workout_id)

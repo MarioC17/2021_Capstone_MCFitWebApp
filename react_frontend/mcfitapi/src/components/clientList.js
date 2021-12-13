@@ -6,6 +6,12 @@ import { Link } from "react-router-dom";
 import '../pages/Dashboard/Trainer/clients.css';
 import BlankProfile from '../static/img/blankprofile.jpg';
 
+    /*
+    PURPOSE: Renders all the client cards on the trainer client page
+    PARAMS: Props - has the full list of client profiles
+    RETURNS: Client profiles as cards on the client page
+    PRE: None
+    */
 function ClientList(props) {
     return (
         <div className="client-grid">

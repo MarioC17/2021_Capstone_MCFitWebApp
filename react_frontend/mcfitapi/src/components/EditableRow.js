@@ -5,7 +5,12 @@ import React, {useState, useEffect} from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import ReadOnlyRow from "./ReadOnlyRow";
 
-
+    /*
+    PURPOSE: Make an exercise editable in the data table
+    PARAMS: Row
+    RETURNS: Editable row representing a single exercise
+    PRE: None
+    */
 const EditableRow = ({ row}) => {
 
   let history = useHistory();

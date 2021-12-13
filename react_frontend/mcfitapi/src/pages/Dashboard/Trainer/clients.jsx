@@ -19,6 +19,7 @@ const Clients = () => {
         return(
           <Loading loading = {loading} data={temp} setLoading = {setLoading} setfullProfiles={setfullProfiles} fullProfiles={fullProfiles}></Loading>
         )
+      // Full populated client page displays if all client data is loaded in
       case false: 
         return(
               <>

@@ -11,7 +11,10 @@ const cookies = new Cookies()
 
 
 export default function Fitness(props) { 
-    
+    /*
+    PURPOSE: Puts the selected users information in cookies for easy retrieval on refresh
+    RETURNS: None
+    */
     const setCookies = () => {
         cookies.set('address', props.location.clientProp.address, { path: '/' ,maxAge:10800});
         cookies.set('gender', props.location.clientProp.gender, { path: '/' ,maxAge:10800});

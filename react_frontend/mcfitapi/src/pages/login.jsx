@@ -38,7 +38,6 @@ const Login = () => {
   const responseGoogle = async(response) => {
     let googleResponse  = await googleLogin(response.accessToken)
     //Storing required information in cookies
-    //console.log(response)
     await createLoginCookies(response.profileObj); //Stores user info in cookie
     let user_id = cookies.get('user_id')
     await checkProfile(user_id)

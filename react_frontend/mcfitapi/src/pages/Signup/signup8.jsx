@@ -31,6 +31,12 @@ const theme = createTheme({
 
     const cookies = new Cookies();
 
+    /*
+    PURPOSE: On sign up completion a post request is sent to the database in order to add the user to the back-end of the server
+    PARAMS: event
+    RETURNS: Redirection to newly created home page for the signed up user on success and a error log on failure
+    PRE: All forms are complete
+    */
     const createProfile = async (e) => {
         e.preventDefault()
         await axios({

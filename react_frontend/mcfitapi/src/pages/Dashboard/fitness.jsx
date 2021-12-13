@@ -41,6 +41,8 @@ export default function Fitness(props) {
     const [stringValue, setStringValue] = React.useState([]);
     const [exerciseNames, setExerciseNames] = useState(new Map());
   
+
+    //Retrieving exercise data from the database using django rest api
     const getexerciseData = async () => {
       try {
         const data = await axios.get(
@@ -64,7 +66,8 @@ export default function Fitness(props) {
   
 
     const [workouts, setWorkouts] = useState([]);
-
+    
+     //Retrieving workout information for the logged in user
     const getWorkoutData = async () => {
 
 

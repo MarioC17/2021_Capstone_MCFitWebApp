@@ -3,6 +3,12 @@ import ExerciseSearch from './ExerciseSearch';
 import Input from '@mui/material/Input';
 import TextField from '@mui/material/TextField';
 
+    /*
+    PURPOSE: Creates a component that handles the form filling of a new workout to be assigned to a client and a search bar for finding exercises in the database
+    PARAMS: Client form data
+    RETURNS: Search bar
+    PRE: None
+    */
   const ExerciseSearchBar = (props) => {
     const onChange = e => props.setFormData({...props.formData,[e.target.name]: e.target.value});
       //have to change the class names to make css for this
